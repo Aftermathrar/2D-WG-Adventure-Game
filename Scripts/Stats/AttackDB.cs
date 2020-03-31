@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Button.Stats
+
+namespace ButtonGame.Stats
 {
     [CreateAssetMenu(fileName = "AttackDB", menuName = "Stats/AttackDB", order = 0)]
     public class AttackDB : ScriptableObject
     {
         [SerializeField] DBAttackType[] attackTypeDB = null;
 
-        Dictionary<AttackType, Dictionary<AttackStat, string>> lookupTable = null;
+        Dictionary<AttackType, Dictionary<AttackStat, string[]>> lookupTable = null;
 
-        public string GetAttackStat(AttackStat stat, AttackType attackType)
+        public string[] GetAttackStat(AttackStat stat, AttackType attackType)
         {
             BuildLookup();
             
@@ -21,15 +22,15 @@ namespace Button.Stats
         {
             if(lookupTable != null) return;
 
-            lookupTable = new Dictionary<AttackType, Dictionary<AttackStat, string>>();
+            lookupTable = new Dictionary<AttackType, Dictionary<AttackStat, string[]>>();
             
             foreach (DBAttackType atkDB in attackTypeDB)
             {
-                var statLookupTable = new Dictionary<AttackStat, string>();
+                var statLookupTable = new Dictionary<AttackStat, string[]>();
 
                 foreach (AttackTypeStats atkStats in atkDB.attackStats)
                 {
-                    statLookupTable[atkStats.stat] = atkStats.value.ToString();
+                    statLookupTable[atkStats.stat] = atkStats.value;
                 }
 
                 lookupTable[atkDB.attackType] = statLookupTable;
@@ -48,7 +49,7 @@ namespace Button.Stats
         class AttackTypeStats
         {
             public AttackStat stat;
-            public string value;
+            public string[] value;
         }
     }
 }

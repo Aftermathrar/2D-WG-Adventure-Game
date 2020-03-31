@@ -1,13 +1,28 @@
-﻿namespace Button.Stats
+namespace ButtonGame.Stats
 {
     public enum AttackStat
     {
         Name,
+        Description,
         ID,
+        Cost,
         Cooldown,
-        Windup,
-        TimeToHit,
+        CDStart,
+        AnimLock,
+        SkillLock,
+        TotalTime,
+        Priority,
+        InvulnTime,
+        ASpdScaling,
+        Block,
+        EffectID,
+        EffectTarget,
+        ApplyEffect,
         HitCount,
-        Damage
+        TimeToHit,
+        Power,
+        CritMod,
+        Bloodlust,
+        StaggerValue
     }
 }

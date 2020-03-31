@@ -1,11 +1,18 @@
-﻿namespace Button.Stats
+namespace ButtonGame.Stats
 {
     public enum AttackType
     {
-        Attack1,
-        Attack2,
-        Attack3,
-        Attack4,
-        Attack5
+        Punch,
+        Punch2,
+        Punch3,
+        Punch4,
+        AuraBlast,
+        Haymaker,
+        RapidPunch,
+        SpinKick,
+        Stomp,
+        Counter,
+        DodgeRoll,
+        Guard
     }
 }

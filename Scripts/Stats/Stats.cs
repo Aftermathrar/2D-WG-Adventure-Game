@@ -1,0 +1,30 @@
+namespace ButtonGame.Stats
+{
+    public enum Stat
+    {
+        Name,
+        Health,
+        Mana,
+        ManaRegen,
+        Attack,
+        Defense,
+        EnrageDefense,
+        AttackSpeed,
+        BlockAmount,
+        CritFactor,
+        CritDamage,
+        CritResist,
+        EnrageCritDamage,
+        CooldownReduction,
+        DynamicCDR,
+        HealingReceived,
+        Description,
+        IdleTime,
+        DamageReduction,
+        IsBoss,
+        IsEnraged,
+        DropTier,
+        DropChance,
+        TimeLimit
+    }
+}
