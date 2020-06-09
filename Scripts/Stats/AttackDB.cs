@@ -14,7 +14,7 @@ namespace ButtonGame.Stats
         public string[] GetAttackStat(AttackStat stat, AttackType attackType)
         {
             BuildLookup();
-            
+
             return lookupTable[attackType][stat];
         }
 
@@ -32,7 +32,6 @@ namespace ButtonGame.Stats
                 {
                     statLookupTable[atkStats.stat] = atkStats.value;
                 }
-
                 lookupTable[atkDB.attackType] = statLookupTable;
             }
 

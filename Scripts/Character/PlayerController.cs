@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using System;
 using TMPro;
 using ButtonGame.Resources;
 using ButtonGame.Combat;
@@ -14,12 +11,15 @@ namespace ButtonGame.Character
         [SerializeField] TextMeshProUGUI animText = null;
         [SerializeField] RectTransform animOverlay = null;
         [SerializeField] Image overlayImage = null;
+        [SerializeField] TextMeshProUGUI dpsText = null;
         [SerializeField] EnemyController enemy = null;
         Fighter fighter;
         float animTime;
         float animLock;
         float skillLock;
         float totalLock;
+        float timeInBattle;
+        float totalDamage;
 
         // Naturally regen mana every 5s
         float manaRegenTime = 0;
@@ -39,11 +39,38 @@ namespace ButtonGame.Character
             fighter.activeAttack += RegenMana;
         }
 
+        public void SetEnemy(EnemyController enemyController)
+        {
+            enemy = enemyController;
+        }
+
         // Update is called once per frame
         void Update()
         {
             animTime += Time.deltaTime;
             UpdateAnimText();
+            timeInBattle += Time.deltaTime;
+            UpdateDPSText();
+        }
+
+        public bool CanAttack(float skillPriority)
+        {
+            if(enemy == null)
+            {
+                return false;
+            }
+            if (animTime >= skillLock)
+            {
+                return true;
+            }
+            else if (skillPriority > 0 && animTime >= animLock)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void StartAttack(float[] skillLockTimes)
@@ -52,22 +79,6 @@ namespace ButtonGame.Character
             skillLock = skillLockTimes[1];
             totalLock = skillLockTimes[2];
             animTime = 0;
-        }
-
-        public bool CanAttack(float skillPriority)
-        {
-            if (animTime >= skillLock)
-            {
-                return true;
-            }
-            else if(skillPriority > 0 && animTime >= animLock)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 
         private void UpdateAnimText()
@@ -99,11 +110,23 @@ namespace ButtonGame.Character
             animOverlay.localScale = new Vector3(animPercent, 1, 1);
         }
 
-        public void DealDamage(float damage, bool isCrit = false)
+        public void UpdateDPSText()
         {
-            //print("Getting health component");
-            Health target = enemy.transform.GetComponent<Health>();
-            target.TakeDamage(damage, isCrit);
+            int dps;
+            if(timeInBattle == 0)
+            {
+                dps = 0;
+            }
+            else
+            {
+                dps = Mathf.CeilToInt(totalDamage / timeInBattle);
+            }
+            dpsText.text = "DPS: " + dps;
+        }
+
+        public void DamageDealt(float damage)
+        {
+            totalDamage += damage;
         }
 
         public void RegenMana()

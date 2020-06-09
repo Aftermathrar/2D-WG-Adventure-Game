@@ -68,9 +68,9 @@ public class GuardController : MonoBehaviour
         }
     }
     
-    public bool IsBlocking()
+    public bool IsBlocking(bool shouldReflect = true)
     {
-        if(isBlocking)
+        if(isBlocking && shouldReflect)
         {
             GuardSuccess();
         }
@@ -88,7 +88,6 @@ public class GuardController : MonoBehaviour
         {
             blockingAtkBtn.CalculateReflectDamage();
             justGuardEffect.Play();
-            Debug.Log(justGuardEffect.isPlaying);
             guardSuccess.Invoke(true);
         }
     }

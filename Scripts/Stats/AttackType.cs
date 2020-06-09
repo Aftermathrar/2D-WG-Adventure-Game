@@ -2,7 +2,7 @@ namespace ButtonGame.Stats
 {
     public enum AttackType
     {
-        Punch,
+        Punch1,
         Punch2,
         Punch3,
         Punch4,

@@ -3,6 +3,8 @@ namespace ButtonGame.Stats
     public enum CharacterClass
     {
         Player,
-        Test
+        Test,
+        Slime,
+        Fox
     }
 }

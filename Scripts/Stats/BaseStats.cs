@@ -24,6 +24,11 @@ namespace ButtonGame.Stats
             return float.Parse(baseStatDB.GetStat(characterClass, stat));
         }
 
+        public string GetClass()
+        {
+            return characterClass.ToString();
+        }
+
         private float GetAdditiveModifier(Stat stat)
         {
             float total = 0;

@@ -6,7 +6,7 @@ namespace ButtonGame.Stats
         Health,
         Mana,
         ManaRegen,
-        Attack,
+        AttackPower,
         Defense,
         EnrageDefense,
         AttackSpeed,
@@ -22,7 +22,6 @@ namespace ButtonGame.Stats
         IdleTime,
         DamageReduction,
         IsBoss,
-        IsEnraged,
         DropTier,
         DropChance,
         TimeLimit

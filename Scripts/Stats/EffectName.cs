@@ -8,6 +8,8 @@ namespace ButtonGame.Stats
         DefDown,
         MPRegen,
         HPRegen,
-        Bleed
+        Bleed,
+        Powerlink,
+        PowerBoost
     }
 }

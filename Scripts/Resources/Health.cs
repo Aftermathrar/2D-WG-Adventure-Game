@@ -10,7 +10,6 @@ namespace ButtonGame.Resources
 {
     public class Health : MonoBehaviour
     {
-        [SerializeField] bool displayDamageTaken = false;
         [SerializeField] bool checkForBlock = false;
         [SerializeField] TakeDamageEvent takeDamage;
 
@@ -52,14 +51,14 @@ namespace ButtonGame.Resources
             isInvulnerable = !isInvulnerable;
         }
 
-        public void TakeDamage(float damage, bool isCrit = false)
+        public bool TakeDamage(float damage, bool isCrit = false, bool isBlockable = true)
         {
-            if(isInvulnerable) return;
+            if(isInvulnerable) return false;
             
             if(checkForBlock && guard != null)
             {
                 // check if player is blocking
-                if (guard.IsBlocking())
+                if (IsBlocking(isBlockable) && isBlockable)
                 {
                     // reduce damage, GuardController displays guard message and reflect damage
                     float damageReduction = GetComponent<BaseStats>().GetStat(Stat.BlockAmount);
@@ -68,7 +67,7 @@ namespace ButtonGame.Resources
             }
             healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
 
-            if (displayDamageTaken) 
+            if (damage > 0) 
             {
                 takeDamage.Invoke(damage, isCrit);
             }
@@ -78,6 +77,8 @@ namespace ButtonGame.Resources
                 Die();
                 // Do stuff to end the battle
             }
+
+            return (damage > 0);
         }
 
         public void GainHealth(float heal)
@@ -90,6 +91,13 @@ namespace ButtonGame.Resources
             if(isDead) { return; }
             isDead = true;
             GetComponent<ActionScheduler>().CancelCurrentAction();
+            LevelManager levelManager = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<LevelManager>();
+            levelManager.BattleEnd();
+        }
+
+        public bool IsBlocking(bool shouldReflect = true)
+        {
+            return guard.IsBlocking(shouldReflect);
         }
 
         public float GetPercentage()

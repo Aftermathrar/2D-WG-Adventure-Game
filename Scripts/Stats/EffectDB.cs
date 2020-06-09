@@ -10,7 +10,6 @@ namespace ButtonGame.Stats
         [SerializeField] DBEffectName[] effectNameDB = null;
 
         Dictionary<EffectName, Dictionary<EffectStat, string>> effectLookup = null;
-        Dictionary<float, EffectName> fxNameByID = null;
 
         public string GetEffectStat(EffectStat stat, EffectName effectName)
         {
@@ -19,19 +18,11 @@ namespace ButtonGame.Stats
             return effectLookup[effectName][stat];
         }
 
-        public EffectName GetEffectName(float id)
-        {
-            BuildLookup();
-
-            return fxNameByID[id];
-        }
-
         private void BuildLookup()
         {
             if(effectLookup != null) return;
 
             effectLookup = new Dictionary<EffectName, Dictionary<EffectStat, string>>();
-            fxNameByID = new Dictionary<float, EffectName>();
 
             foreach(DBEffectName fxName in effectNameDB)
             {
@@ -39,10 +30,6 @@ namespace ButtonGame.Stats
 
                 foreach(EffectNameStats fxStats in fxName.effectStats)
                 {
-                    if(fxStats.stat.ToString() == "ID")
-                    {
-                        fxNameByID[float.Parse(fxStats.value)] = fxName.effectName;
-                    }
                     statLookupTable[fxStats.stat] = fxStats.value;
                 }
 
