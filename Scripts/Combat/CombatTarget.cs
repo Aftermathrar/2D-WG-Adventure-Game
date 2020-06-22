@@ -1,4 +1,4 @@
-using ButtonGame.Resources;
+using ButtonGame.Attributes;
 using UnityEngine;
 
 namespace ButtonGame.Combat
@@ -6,9 +6,16 @@ namespace ButtonGame.Combat
     [RequireComponent(typeof(Health))]
     public class CombatTarget : MonoBehaviour, ITargetable
     {
-        public void HandleAttack(AtkBtnScript callingScript)
+        Health myHealth = null;
+        
+        private void Awake() 
         {
-            callingScript.SetTarget(gameObject);
+            myHealth = GetComponent<Health>();
+        }
+        
+        public void HandleAttack(IAtkSkill callingScript)
+        {
+            callingScript.SetTarget(myHealth);
         }
     }
 }

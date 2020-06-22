@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using ButtonGame.Resources;
+using ButtonGame.Attributes;
 using ButtonGame.Combat;
 
 namespace ButtonGame.Character
@@ -9,11 +9,9 @@ namespace ButtonGame.Character
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI animText = null;
-        [SerializeField] RectTransform animOverlay = null;
-        [SerializeField] Image overlayImage = null;
+        [SerializeField] Image statusOverlay = null;
         [SerializeField] TextMeshProUGUI dpsText = null;
         [SerializeField] EnemyController enemy = null;
-        Fighter fighter;
         float animTime;
         float animLock;
         float skillLock;
@@ -27,21 +25,20 @@ namespace ButtonGame.Character
         void Start()
         {
             animTime = Mathf.Infinity;
-            foreach (AtkBtnScript atk in GetComponentsInChildren<AtkBtnScript>())
-            {
-                ITargetable[] targetCandidates = enemy.transform.GetComponents<ITargetable>();
-                foreach (ITargetable targetable in targetCandidates)
-                {
-                    targetable.HandleAttack(atk);
-                }
-            }
-            fighter = GetComponent<Fighter>();
-            fighter.activeAttack += RegenMana;
         }
 
         public void SetEnemy(EnemyController enemyController)
         {
             enemy = enemyController;
+            
+            ITargetable targetCandidate = enemy.transform.GetComponent<ITargetable>();
+            foreach (IAtkSkill atk in GetComponentsInChildren<IAtkSkill>())
+            {
+                targetCandidate.HandleAttack(atk);
+            }
+
+            timeInBattle = 0f;
+            totalDamage = 0f;
         }
 
         // Update is called once per frame
@@ -51,6 +48,7 @@ namespace ButtonGame.Character
             UpdateAnimText();
             timeInBattle += Time.deltaTime;
             UpdateDPSText();
+            RegenMana();
         }
 
         public bool CanAttack(float skillPriority)
@@ -59,6 +57,7 @@ namespace ButtonGame.Character
             {
                 return false;
             }
+            
             if (animTime >= skillLock)
             {
                 return true;
@@ -87,7 +86,7 @@ namespace ButtonGame.Character
             if (animTime >= totalLock)
             {
                 animText.text = "Ready";
-                overlayImage.color = new Color32(255, 255, 255, 255);
+                statusOverlay.color = new Color32(255, 255, 255, 255);
             }
 
 
@@ -95,29 +94,25 @@ namespace ButtonGame.Character
             if(animTime < animLock)
             {
                 animText.text = string.Format("{0} {1:0.00}", "Preparing:", (totalLock - animTime));
-                overlayImage.color = new Color32(155, 25, 255, 255);
+                statusOverlay.color = new Color32(229, 60, 36, 255);
             }
             else if(animTime < skillLock)
             {
                 animText.text = string.Format("{0} {1:0.00}", "Attacking:", (totalLock - animTime));
-                overlayImage.color = new Color32(25, 175, 255, 255);
+                statusOverlay.color = new Color32(229, 179, 36, 255);
             }
             else if(animTime < totalLock)
             {
                 animText.text = string.Format("{0} {1:0.00}", "Recovery:", (totalLock - animTime));
-                overlayImage.color = new Color32(230, 230, 230, 255);
+                statusOverlay.color = new Color32(102, 229, 106, 255);
             }
-            animOverlay.localScale = new Vector3(animPercent, 1, 1);
+            statusOverlay.fillAmount = animPercent;
         }
 
         public void UpdateDPSText()
         {
-            int dps;
-            if(timeInBattle == 0)
-            {
-                dps = 0;
-            }
-            else
+            int dps = 0;
+            if(timeInBattle > 0)
             {
                 dps = Mathf.CeilToInt(totalDamage / timeInBattle);
             }
@@ -139,5 +134,4 @@ namespace ButtonGame.Character
             }
         }
     }
-
 }

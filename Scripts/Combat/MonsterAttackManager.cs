@@ -12,9 +12,9 @@ namespace ButtonGame.Combat
         [SerializeField] MonAtkName atkTrigger;
         [SerializeField] List<float> timeTriggers;
 
-        public List<MonAtkName> GetAttackPattern()
+        public Queue<MonAtkName> GetAttackPattern()
         {
-            var atkPattern = new List<MonAtkName>();
+            var atkPattern = new Queue<MonAtkName>();
             var sourceAtk = new List<MonAtkName>();
             foreach (MonAtkName atk in atkMoveset)
             {
@@ -24,7 +24,7 @@ namespace ButtonGame.Combat
             do
             {
                 int randIndex = Random.Range(0, sourceAtk.Count);
-                atkPattern.Add(sourceAtk[randIndex]);
+                atkPattern.Enqueue(sourceAtk[randIndex]);
                 sourceAtk.RemoveAt(randIndex);
             } while (sourceAtk.Count > 0);
 

@@ -1,60 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 using ButtonGame.Stats;
 using ButtonGame.Character;
-using System;
+using ButtonGame.Combat;
 
 namespace ButtonGame.Core
 {
-    public class LevelManager : MonoBehaviour, IBattleState
+    public class LevelManager : MonoBehaviour
     {
         // Pause Control
         public static bool isPaused;
         private bool isBattleActive = false;
         [SerializeField] GameObject pauseScreen;
-
-        // Battle state control
-        public event Action StartCurrentBattle;
-        public event Action EndCurrentBattle;
+        [SerializeField] GameObject introScreen;
+        [SerializeField] GameObject outroScreen;
+        [SerializeField] GameObject buttonContainer;
+        [SerializeField] GameObject rewardWindow;
 
         // Battle setup
         [SerializeField] Transform battleCanvas;
-        [SerializeField] PlayerController playerController;
-        [SerializeField] EnemyController enemyController;
-        [SerializeField] BaseStats[] enemyStats;
+        [SerializeField] BaseStats[] enemyPrefabs;
         [SerializeField] float timeScale;
+        [SerializeField] UnityEvent battleStart;
+        GameObject playerGO;
+        GameObject enemyGO;
 
-        // Combat log
-        [SerializeField] int maxMessages = 25;
-        [SerializeField] GameObject chatPanel;
-        [SerializeField] GameObject textObject;
-        [SerializeField] List<Message> messageList = new List<Message>();
-        Color32 defaultColor = new Color32(195, 165, 93, 255);
-
-        private void Start() 
+        private void Start()
         {
-            // Choose random enemy from list
-            int randomEnemyIndex;
-            randomEnemyIndex = UnityEngine.Random.Range(0, enemyStats.Length);
-            BaseStats selectedEnemy;
-            selectedEnemy = enemyStats[randomEnemyIndex];
-
-            // Spawn enemy
-            GameObject enemyGO = Instantiate(selectedEnemy, battleCanvas).gameObject;
-            enemyGO.transform.SetAsFirstSibling();
-            enemyController = enemyGO.GetComponent<EnemyController>();
-
-            // Assign opponent to scripts
-            enemyController.GetComponent<CombatEffects>().SetTarget(playerController.gameObject);
-            playerController.SetEnemy(enemyController);
-            playerController.GetComponent<CombatEffects>().SetTarget(enemyController.gameObject);
-
-            // Activate battle
-            StartCurrentBattle += StartBattle;
-            EndCurrentBattle += EndBattle;
-            StartCoroutine(BeginBattle());
+            BattleSetup();
         }
 
         private void Update() 
@@ -72,16 +47,67 @@ namespace ButtonGame.Core
             }
         }
 
+        private void BattleSetup()
+        {
+            // Choose random enemy from list
+            int randomEnemyIndex;
+            randomEnemyIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
+            BaseStats selectedEnemy;
+            selectedEnemy = enemyPrefabs[randomEnemyIndex];
+
+            // Spawn player
+            playerGO = GameObject.FindGameObjectWithTag("Player");
+            PlayerController playerController = playerGO.GetComponent<PlayerController>();
+
+            // Spawn enemy
+            enemyGO = Instantiate(selectedEnemy, battleCanvas).gameObject;
+            enemyGO.transform.SetAsFirstSibling();
+
+            // Assign opponent to scripts
+            enemyGO.GetComponent<CombatEffects>().SetTarget(playerGO);
+            enemyGO.GetComponent<EnemyAI>().SetTarget(playerController);
+            playerController.SetEnemy(enemyGO.GetComponent<EnemyController>());
+            playerGO.GetComponent<CombatEffects>().SetTarget(enemyGO);
+
+            // Activate battle
+            StartCoroutine(BeginBattle());
+        }
+
         private IEnumerator BeginBattle()
         {
-            yield return new WaitForSeconds(0f);
-            BattleStart();
+            Time.timeScale = 1f;
+            introScreen.SetActive(true);
+            IntroFader introFader = introScreen.GetComponent<IntroFader>();
+            yield return introFader.BattleIntro(1.5f);
+            StartBattle();
+            yield return introFader.FadeIntroOverlay();
+            introScreen.SetActive(false);
+        }
+
+        private void RestartBattle()
+        {
+            Destroy(enemyGO);
+            outroScreen.SetActive(false);
+            rewardWindow.SetActive(false);
+            buttonContainer.SetActive(false);
+            BattleSetup();
+        }
+
+        private IEnumerator BattleRewards()
+        {
+            outroScreen.SetActive(true);
+            yield return new WaitForSecondsRealtime(1f);
+            yield return outroScreen.GetComponent<OutroFader>().BattleOutro();
+            yield return new WaitForSecondsRealtime(2f);
+            rewardWindow.SetActive(true);
+            buttonContainer.SetActive(true);
         }
 
         private void PauseGame()
         {
             Time.timeScale = 0;
             pauseScreen.SetActive(true);
+            buttonContainer.SetActive(true);
             isPaused = !isPaused;
         }
 
@@ -89,88 +115,41 @@ namespace ButtonGame.Core
         {
             Time.timeScale = 1f;
             pauseScreen.SetActive(false);
+            buttonContainer.SetActive(false);
             isPaused = !isPaused;
         }
 
-        public void SendMessageToChat(string text, Color32 color)
+        public void ResumeRestart()
         {
-            if(messageList.Count >= maxMessages)
+            if(isBattleActive)
             {
-                Destroy(messageList[0].textObject.gameObject);
-                messageList.Remove(messageList[0]);
-            }
-
-            Message newMessage = new Message();
-            newMessage.text = text;
-
-            GameObject newText = Instantiate(textObject, chatPanel.transform);
-            newMessage.textObject = newText.GetComponent<Text>();
-            newMessage.textObject.text = newMessage.text;
-            newMessage.textObject.color = color;
-
-            messageList.Add(newMessage);
-        }
-
-        public void DamageTakenCombatLog(float damage, bool isCrit)
-        {
-            Message damageMessage = new Message();
-            Color32 messageColor = defaultColor;
-            if(isCrit)
-            {
-                damageMessage.text = "Critical hit! You took " + damage + " damage!";
-                messageColor = new Color32(219, 126, 90, 255);
+                UnpauseGame();
             }
             else
             {
-                damageMessage.text = "Hit taken for " + damage + " damage!";
+                RestartBattle();
             }
-
-            SendMessageToChat(damageMessage.text, messageColor);
-        }
-
-        public void BlockSuccessCombatLog(bool isPerfect)
-        {
-            Message guardMessage = new Message();
-            Color32 messageColor = defaultColor;
-            if(isPerfect)
-            {
-                guardMessage.text = "Perfect block! Attack has been reflected!";
-                messageColor = new Color32(219, 204, 90, 255);
-            }
-            else
-            {
-                guardMessage.text = "Blocked! Damage has been reduced.";
-            }
-
-            SendMessageToChat(guardMessage.text, messageColor);
-        }
-
-        public void BattleStart()
-        {
-            StartCurrentBattle?.Invoke();
-        }
-
-        public void BattleEnd()
-        {
-            EndCurrentBattle?.Invoke();
         }
 
         public void StartBattle()
         {
             isBattleActive = true;
+            isPaused = false;
+            battleStart.Invoke();
         }
 
-        public void EndBattle()
+        public void EndBattle(string tag)
         {
             isBattleActive = false;
             Time.timeScale = 0.3f;
+            if (tag != "Player")
+            {
+                StartCoroutine(BattleRewards());
+            }
+            else
+            {
+                // Coroutine for losing screen
+            }
         }
-    }
-
-    [System.Serializable]
-    public class Message
-    {
-        public string text;
-        public Text textObject;
     }
 }

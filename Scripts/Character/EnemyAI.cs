@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using ButtonGame.Combat;
 using ButtonGame.Core;
-using UnityEngine;
-using ButtonGame.Resources;
+using ButtonGame.Attributes;
 using ButtonGame.Stats;
-using System;
+using TMPro;
 
 namespace ButtonGame.Character
 {
     public class EnemyAI : MonoBehaviour, IAction, IBattleState
     {
         [SerializeField] MonAtkDB monAtkDB;
-        [SerializeField] LevelManager levelManager;
+        [SerializeField] MonAtkIconDB monAtkIconDB;
+        [SerializeField] TextMeshProUGUI nameText;
         MonsterAttacks monAttacks;
         EnemyController enemy;
         MonsterAttackManager attackManager;
@@ -37,7 +38,7 @@ namespace ButtonGame.Character
         [SerializeField] Health target;
         [SerializeField] HitTimer hitTimer;
         List<HitTimer> hitTimers = new List<HitTimer>();
-        [SerializeField] List<MonAtkName> atkQueue = new List<MonAtkName>();
+        [SerializeField] Queue<MonAtkName> atkQueue = new Queue<MonAtkName>();
 
         private bool isBattleActive;
 
@@ -53,21 +54,20 @@ namespace ButtonGame.Character
 
         private void Start()
         {
-            if (target == null)
-            {
-                target = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
-            }
             AssignSkillVariables();
             StartIdle();
             enemy.enemyAttack += TryAttack;
-            levelManager = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<LevelManager>();
-            levelManager.StartCurrentBattle += StartBattle;
-            levelManager.EndCurrentBattle += EndBattle;
+        }
+
+        public void SetTarget(PlayerController player)
+        {
+            target = player.GetComponent<Health>();
         }
 
         private void AssignSkillVariables()
         {
-            myName = baseStats.GetClass() + " ";
+            myName = baseStats.GetStatText(Stat.Name) + " ";
+            nameText.text = myName;
             timeSinceLastAttack = 0;
             idleTimeBetweenHits = baseStats.GetStat(Stat.IdleTime);
         }
@@ -82,7 +82,8 @@ namespace ButtonGame.Character
             MonAtkName triggerAtkName = attackManager.CheckHPTrigger(health.GetPercentage());
             if (triggerAtkName != MonAtkName.None)
             {
-                atkQueue.Insert(0, triggerAtkName);
+                atkQueue.Clear();
+                atkQueue.Enqueue(triggerAtkName);
             }
 
             if (timeSinceLastAttack >= idleTimeBetweenHits && enemy.CanAttack())
@@ -93,14 +94,16 @@ namespace ButtonGame.Character
                 }
                 else
                 {
-                    curAtk = atkQueue[0];
-                    atkQueue.RemoveAt(0);
+                    curAtk = atkQueue.Dequeue();
                     timeSinceAttackStarted = 0;
                     float atkSpeed = baseStats.GetStat(Stat.AttackSpeed);
                     atkSpeed = 1 / atkSpeed * 100;
                     totalAtkTime = GetAttackStat(MonAtkStat.TotalTime, 0) * atkSpeed;
                     atkLeadTime = GetAttackStat(MonAtkStat.LeadTime, 0) * atkSpeed;
                     maxHitCount = GetAttackStat(MonAtkStat.HitCount, 0);
+                    Sprite[] sprites = monAtkIconDB.GetSprite(curAtk);
+                    GetComponentInParent<ActionScheduler>().StartAction(this);
+
                     if(maxHitCount >=1)
                     {
                         int maxEffectCount = monAtkDB.GetAttackStat(MonAtkStat.EffectID, curAtk).Length;
@@ -109,6 +112,19 @@ namespace ButtonGame.Character
                         {
                             string[] fxApply = monAtkDB.GetAttackStat(MonAtkStat.ApplyEffect, curAtk);
                             isEffectOnHit[i] = fxApply[i] == "OnHit";
+                        }
+
+                        for (int i = 0; i < maxHitCount; i++)
+                        {
+                            float newPosX = -300 + (i * 80);
+                            HitTimer instance = Instantiate(hitTimer, new Vector3(newPosX, -160, 0), Quaternion.identity);
+                            instance.transform.SetParent(enemy.transform, false);
+                            hitTimers.Add(instance);
+
+                            instance.SetSprite(sprites[i]);
+
+                            Color32 atkColor = new Color32(254, 195, 30, 255);
+                            StartCoroutine(instance.EnemyBorderFill(atkLeadTime, atkColor));
                         }
                     }
                     // Set attack stats and start attack action
@@ -137,7 +153,6 @@ namespace ButtonGame.Character
             float atkSpeed = baseStats.GetStat(Stat.AttackSpeed);
             atkSpeed = 1 / atkSpeed * 100;
 
-            GetComponentInParent<ActionScheduler>().StartAction(this);
             CheckEffectActivation(false);
 
             if (GetAttackStat(MonAtkStat.InvulnTime, 0) > 0)
@@ -151,17 +166,10 @@ namespace ButtonGame.Character
                 fighter.activeAttack += UpdateTimeToHit;
                 string s = monAtkDB.GetAttackStat(MonAtkStat.AttackText, curAtk)[currentHitCount];
                 enemy.SetNewStatus(myName + s, maxTimeToHit[0] * atkSpeed);
-
-                for (int i = 0; i < maxHitCount; i++)
-                {
-                    float newPosX = -130 + (i * 50);
-                    HitTimer myObjectInstance = Instantiate(hitTimer, new Vector3(newPosX, 20, 0), Quaternion.identity);
-                    myObjectInstance.transform.SetParent(enemy.transform, false);
-                    hitTimers.Add(myObjectInstance);
-
-                    maxTimeToHit[i] = maxTimeToHit[i] * atkSpeed;
-                    myObjectInstance.SetFillTime(maxTimeToHit[i], i);
-                }
+                maxTimeToHit[0] = maxTimeToHit[0] * atkSpeed;
+                
+                hitTimers[0].SetFighter(fighter);
+                hitTimers[0].SetFillTime(maxTimeToHit[0]);
             }
         }
 
@@ -195,7 +203,7 @@ namespace ButtonGame.Character
                 }
                 bool isUnblockable = bool.Parse(monAtkDB.GetAttackStat(MonAtkStat.Unblockable, curAtk)[0].ToString());
                 bool isHit = target.TakeDamage(damage, isCrit, !isUnblockable);
-                if(isHit) CheckEffectActivation(true);
+                if(isHit || isUnblockable) CheckEffectActivation(true);
                 currentHitCount += 1;
 
                 if (currentHitCount >= maxHitCount)
@@ -212,8 +220,12 @@ namespace ButtonGame.Character
                     {
                         string s = monAtkDB.GetAttackStat(MonAtkStat.AttackText, curAtk)[currentHitCount];
                         enemy.SetNewStatus(myName + s, maxTimeToHit[currentHitCount]);
+                        hitTimers[i].SetFighter(fighter);
                         hitTimers[i].SetMoveTime(.2f);
-                        hitTimers[i].SetFillTime(maxTimeToHit[currentHitCount], i);
+                    }
+                    if(hitTimers.Count > 0)
+                    {
+                        hitTimers[0].SetFillTime(maxTimeToHit[currentHitCount]);
                     }
                 }
             }
@@ -297,13 +309,17 @@ namespace ButtonGame.Character
         public void StartBattle()
         {
             isBattleActive = true;
-            enemy.UpdateBattleStatus(isBattleActive);
+            
+            if (target == null)
+            {
+                target = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+            }
         }
 
         public void EndBattle()
         {
             isBattleActive = false;
-            enemy.UpdateBattleStatus(isBattleActive);
+            Cancel();
             if(target.IsDead())
             {
                 enemy.SetNewStatus(myName + "is victorious!", 1f);

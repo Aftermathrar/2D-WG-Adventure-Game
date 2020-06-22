@@ -1,5 +1,5 @@
 ﻿using System;
-using ButtonGame.Resources;
+using ButtonGame.Attributes;
 using UnityEngine;
 
 namespace ButtonGame.Combat
@@ -23,7 +23,6 @@ namespace ButtonGame.Combat
         {
             effects = GetComponent<CombatEffects>();
             target = effects.GetTarget();
-            activeAttack += effects.BuffTimer;
         }
 
         private void Update() 
@@ -55,13 +54,11 @@ namespace ButtonGame.Combat
             {
                 if(effectTarget == "Self")
                 {
-                    Color32 fxIconColor = new Color32(148, 200, 112, 255);
-                    effects.BuffSelf(ID, fxIconColor);
+                    effects.BuffSelf(ID);
                 }
                 else
                 {
-                    Color32 fxIconColor = new Color32(200, 148, 85, 255);
-                    effects.DebuffTarget(ID, fxIconColor);
+                    effects.DebuffTarget(ID);
                 }
             }
         }

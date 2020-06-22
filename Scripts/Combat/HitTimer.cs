@@ -1,18 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ButtonGame.Character;
-using ButtonGame.UI;
 using UnityEngine.UI;
 using ButtonGame.Core;
-using System;
 
 namespace ButtonGame.Combat
 {
     public class HitTimer : MonoBehaviour, IAction
     {
         [SerializeField] private Fighter fighter;
-        [SerializeField] Color32 finishColor;
         private float maxFillTime;
         private float currentFillTime;
         private float t;
@@ -26,7 +22,7 @@ namespace ButtonGame.Combat
 
         private bool isAttackComplete = false;
 
-        [SerializeField] RectTransform fillOverlay;
+        [SerializeField] Image fillOverlay;
         [SerializeField] Image[] myImage;
 
         private void Awake() 
@@ -46,26 +42,51 @@ namespace ButtonGame.Combat
                 xOffset = -50f;
                 yOffset = -10f;
             }
+            if (fighter == null)
+            {
+                GetFighterComponent();
+            }
+
         }
 
-        public void SetFillTime(float windupTime, int i)
+        private void GetFighterComponent()
+        {
+            fighter = GetComponentInParent<Fighter>();
+        }
+
+        public void SetFighter(Fighter _fighter)
+        {
+            fighter = _fighter;
+        }
+
+        public void SetSprite(Sprite sprite)
+        {
+            for(int i = 0; i < 2; i++)
+            {
+                myImage[i].sprite = sprite;
+            }
+        }
+
+        public void SetFillTime(float windupTime)
         {
             if (fighter == null)
             {
-                fighter = GetComponentInParent<Fighter>();
+                GetFighterComponent();
             }
 
             maxFillTime = windupTime;
             currentFillTime = 0;
 
-            if(i == 0)
-            {
-                fighter.activeAttack += UpdateBoxFill;
-            }
+            fighter.activeAttack += UpdateBoxFill;
         }
 
         public void SetMoveTime(float timeToHit)
         {
+            if (fighter == null)
+            {
+                GetFighterComponent();
+            }
+
             fighter.activeAttack += MoveHorizontally;
             t = 0;
             timeToMoveHoriz = timeToHit;
@@ -88,13 +109,12 @@ namespace ButtonGame.Combat
                 targetPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + yOffset, 0);
 
                 isAttackComplete = true;
-                myImage[1].color = finishColor;
             }
             else
             {
                 fillPercent = 1 - Mathf.Clamp01((maxFillTime - currentFillTime) / maxFillTime);
             }
-            fillOverlay.localScale = new Vector3(1, fillPercent, 1);
+            fillOverlay.fillAmount = fillPercent;
         }
 
         private void MoveVertically()
@@ -108,9 +128,26 @@ namespace ButtonGame.Combat
             transform.localPosition = Vector3.Lerp(startPosition, targetPosition, tVert/timeToMoveVert);
         }
 
+        public IEnumerator EnemyBorderFill(float leadTime, Color32 color)
+        {
+            float t = 0;
+            myImage[2].color = color;
+            do
+            {
+                float tPercent = Mathf.Clamp01(t/leadTime);
+                myImage[2].fillAmount = tPercent;
+                myImage[3].fillAmount = 1-tPercent;
+                t += Time.deltaTime;
+                yield return null;
+            } while (t < leadTime && !isAttackComplete);
+
+            myImage[2].fillAmount = 1f;
+            myImage[3].fillAmount = 0;
+        }
+
         IEnumerator FadeOutOverTime(float timeToFade)
         {
-            // Image[] myImage = fillOverlay.parent.parent.GetComponentsInChildren<Image>();
+            isAttackComplete = true;
             for (float tCurrent = 0; tCurrent < timeToFade; tCurrent+=Time.deltaTime)
             {
                 float normalizedTime = 1 - tCurrent/timeToFade;
@@ -142,6 +179,10 @@ namespace ButtonGame.Combat
         {
             if(!isAttackComplete)
             {
+                if (fighter == null)
+                {
+                    GetFighterComponent();
+                }
                 fighter.activeAttack -= UpdateBoxFill;
                 fighter.activeAttack -= MoveHorizontally;
                 // fighter.activeAttack -= MoveVertically;

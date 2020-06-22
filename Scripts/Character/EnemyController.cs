@@ -10,7 +10,7 @@ namespace ButtonGame.Character
     public class EnemyController : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI statusText;
-        [SerializeField] RectTransform statusOverlay;
+        [SerializeField] Image statusOverlay;
         float actionTimer;  
         float actionLockTime;
         float statusOverlayTime;
@@ -50,6 +50,7 @@ namespace ButtonGame.Character
             actionLockTime = 0f;
             statusOverlayTime = idleTime;
             actionTimer = 0;
+            UpdateStatusText();
         }
 
         public bool CanAttack()
@@ -79,7 +80,7 @@ namespace ButtonGame.Character
             statusText.text = curStatus;
             statusPercent = Mathf.Clamp01((statusOverlayTime - actionTimer) / statusOverlayTime);
         
-            statusOverlay.localScale = new Vector3(statusPercent, 1, 1);
+            statusOverlay.fillAmount = statusPercent;
         }
 
         public void UpdateBattleStatus(bool isActive)
