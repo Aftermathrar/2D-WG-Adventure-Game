@@ -9,13 +9,12 @@ namespace ButtonGame.UI.EffectIcon
         [SerializeField] EffectIconImage fxIcon = null;
         Dictionary<string, EffectIconImage> iconInstances = new Dictionary<string, EffectIconImage>();
 
-        public void Spawn(string id, int count, Sprite sprite, Color32 color)
+        public void Spawn(string id, int count, Sprite sprite)
         {
             float spawnPosX = transform.position.x + (50f * count);
             Vector3 spawnPos = new Vector3(spawnPosX, transform.position.y, transform.position.z);
             EffectIconImage instance = Instantiate<EffectIconImage>(fxIcon, spawnPos, Quaternion.identity, transform);
             instance.SetIcon(sprite);
-            instance.SetColor(color);
             iconInstances[id] = instance;
         }
 
@@ -37,12 +36,12 @@ namespace ButtonGame.UI.EffectIcon
             }
         }
 
-        public void UpdateIconFill(string id, float fillPercent)
+        public void UpdateIconFill(string id, float fillPercent, float timeRemaining)
         {
             if (iconInstances.ContainsKey(id))
             {
                 EffectIconImage instance = iconInstances[id];
-                instance.UpdateIconFill(fillPercent);
+                instance.UpdateIconFill(fillPercent, timeRemaining);
             }
         }
 

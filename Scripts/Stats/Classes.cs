@@ -5,6 +5,9 @@ namespace ButtonGame.Stats
         Player,
         Test,
         Slime,
-        Fox
+        Fox,
+        Treant,
+        Boar,
+        SmallBat
     }
 }

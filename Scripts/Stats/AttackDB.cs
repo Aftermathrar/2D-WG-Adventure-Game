@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ButtonGame.Stats
 {
-    [CreateAssetMenu(fileName = "AttackDB", menuName = "Stats/AttackDB", order = 0)]
+    [CreateAssetMenu(fileName = "AttackDB", menuName = "Stats/AttackDB", order = 1)]
     public class AttackDB : ScriptableObject
     {
         [SerializeField] DBAttackType[] attackTypeDB = null;
@@ -34,22 +34,21 @@ namespace ButtonGame.Stats
                 }
                 lookupTable[atkDB.attackType] = statLookupTable;
             }
-
         }
+    }
 
-        [System.Serializable]
-        class DBAttackType
-        { 
-            public AttackType attackType;
-            public AttackTypeStats[] attackStats;
-        }
+    [System.Serializable]
+    class DBAttackType
+    { 
+        public AttackType attackType;
+        public AttackTypeStats[] attackStats;
+    }
 
-        [System.Serializable]
-        class AttackTypeStats
-        {
-            public AttackStat stat;
-            public string[] value;
-        }
+    [System.Serializable]
+    class AttackTypeStats
+    {
+        public AttackStat stat;
+        public string[] value;
     }
 }
 

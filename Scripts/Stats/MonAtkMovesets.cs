@@ -6,6 +6,10 @@ namespace ButtonGame.Stats
         Basic4Leg,
         Basic2Leg,
         Slime,
-        TestAttack
+        TestAttack,
+        None,
+        Buff,
+        Tree,
+        Flying
     }
 }

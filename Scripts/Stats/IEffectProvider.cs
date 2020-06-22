@@ -4,7 +4,6 @@ namespace ButtonGame.Stats
 {
     public interface IEffectProvider
     {
-        IEnumerable<float> GetAddivitiveModifiers(Stat stat);
-        IEnumerable<float> GetPercentageModifiers(Stat stat);
+        IEnumerable<float[]> GetStatEffectModifiers(Stat stat);
     }
 }

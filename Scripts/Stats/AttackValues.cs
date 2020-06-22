@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace ButtonGame.Stats
             float[] total = new float[s.Length];
             for (int i = 0; i < s.Length; i++)
             {
-                total[i] = (float.Parse(s[i]) + GetAdditiveModifier(stat, attackType)) * (1 + GetPercentageModifier(stat, attackType)/100);
+                total[i] = (float.Parse(s[i]) + GetAtkStatModifiers(stat, attackType)[1]) * (1 + GetAtkStatModifiers(stat, attackType)[0] / 100);
             }
             
             return total;
@@ -25,7 +26,8 @@ namespace ButtonGame.Stats
             string[] s = GetBaseAttackStat(stat, attackType);
             float total = 0;
 
-            total = (float.Parse(s[i]) + GetAdditiveModifier(stat, attackType)) * (1 + GetPercentageModifier(stat, attackType) / 100);
+            // For stat modifiers, 0 is Additive, 1 is Percentage. From .asset values
+            total = (float.Parse(s[i]) + GetAtkStatModifiers(stat, attackType)[1]) *(1 + GetAtkStatModifiers(stat, attackType)[0] / 100);
 
             return total;
         }
@@ -35,27 +37,15 @@ namespace ButtonGame.Stats
             return attackDB.GetAttackStat(stat, attackType);
         }
 
-        private float GetAdditiveModifier(AttackStat stat, AttackType attackType)
+        private float[] GetAtkStatModifiers(AttackStat stat, AttackType attackType)
         {
-            float total = 0;
+            float[] total = new float[] {0, 0};
             foreach (IAttackEffectProvider fxProvider in GetComponents<IAttackEffectProvider>())
             {
-                foreach (float modifier in fxProvider.GetAtkAddivitiveModifiers(attackType, stat))
+                foreach (float[] modifier in fxProvider.GetAtkStatModifiers(attackType, stat))
                 {
-                    total += modifier;
-                }
-            }
-            return total;
-        }
-
-        private float GetPercentageModifier(AttackStat stat, AttackType attackType)
-        {
-            float total = 0;
-            foreach (IAttackEffectProvider fxProvider in GetComponents<IAttackEffectProvider>())
-            {
-                foreach (float modifier in fxProvider.GetAtkPercentageModifiers(attackType, stat))
-                {
-                    total += modifier;
+                    total[0] += modifier[0];
+                    total[1] += modifier[1];
                 }
             }
             return total;

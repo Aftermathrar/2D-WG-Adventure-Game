@@ -12,6 +12,11 @@ namespace ButtonGame.Stats
         BleedTest,
         SlimeWhip,
         ClawCombo,
-        PowerUp
+        PowerUp,
+        BodySlam,
+        TreeWhip,
+        Swoop,
+        Bloodsuck,
+        WingSmash
     }
 }

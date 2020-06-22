@@ -32,7 +32,6 @@ namespace ButtonGame.Stats
                 {
                     statLookupTable[fxStats.stat] = fxStats.value;
                 }
-
                 effectLookup[fxName.effectName] = statLookupTable;
             }
         }

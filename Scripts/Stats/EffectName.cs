@@ -10,6 +10,8 @@ namespace ButtonGame.Stats
         HPRegen,
         Bleed,
         Powerlink,
-        PowerBoost
+        PowerBoost,
+        SpiritSurge,
+        LifeLeech
     }
 }

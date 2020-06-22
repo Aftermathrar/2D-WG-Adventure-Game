@@ -13,7 +13,6 @@ namespace ButtonGame.Stats
 
         public string GetStat(CharacterClass characterClass, Stat stat)
         {
-
             BuildLookup();
 
             return lookupTable[characterClass][stat];

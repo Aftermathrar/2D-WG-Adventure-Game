@@ -16,7 +16,9 @@ namespace ButtonGame.Stats
 
         public float GetStat(Stat stat)
         {
-            return (GetBaseStat(stat) + GetAdditiveModifier(stat)) * (1 + GetPercentageModifier(stat)/100);
+            // For stat modifiers, 0 is Additive, 1 is Percentage. From .asset values
+            return (GetBaseStat(stat) + GetStatModifiers(stat)[1]) * (1 + GetStatModifiers(stat)[0] / 100);
+            // return (GetBaseStat(stat) + GetAdditiveModifier(stat)) * (1 + GetPercentageModifier(stat)/100);
         }
 
         private float GetBaseStat(Stat stat)
@@ -29,27 +31,15 @@ namespace ButtonGame.Stats
             return characterClass.ToString();
         }
 
-        private float GetAdditiveModifier(Stat stat)
+        private float[] GetStatModifiers(Stat stat)
         {
-            float total = 0;
+            float[] total = new float[] {0, 0};
             foreach (IEffectProvider fxProvider in GetComponents<IEffectProvider>())
             {
-                foreach (float modifier in fxProvider.GetAddivitiveModifiers(stat))
+                foreach (float[] modifier in fxProvider.GetStatEffectModifiers(stat))
                 {
-                    total += modifier;
-                }
-            }
-            return total;
-        }
-
-        private float GetPercentageModifier(Stat stat)
-        {
-            float total = 0;
-            foreach (IEffectProvider fxProvider in GetComponents<IEffectProvider>())
-            {
-                foreach (float modifier in fxProvider.GetPercentageModifiers(stat))
-                {
-                    total += modifier;
+                    total[0] += modifier[0];
+                    total[1] += modifier[1];
                 }
             }
             return total;
