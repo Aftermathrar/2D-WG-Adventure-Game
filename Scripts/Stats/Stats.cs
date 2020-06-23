@@ -21,6 +21,7 @@ namespace ButtonGame.Stats
         Description,
         IdleTime,
         DamageReduction,
+        EnrageDamageReduction,
         IsBoss,
         DropTier,
         DropChance,

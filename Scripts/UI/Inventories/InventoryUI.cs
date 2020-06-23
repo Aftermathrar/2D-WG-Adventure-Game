@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ButtonGame.Inventories;
-using ButtonGame.Core.UI.Dragging;
 
 namespace ButtonGame.UI.Inventories
 {
@@ -17,6 +16,7 @@ namespace ButtonGame.UI.Inventories
 
         // CACHE
         Inventory playerInventory;
+        Equipment playerEquipment;
         int playerInventorySize;
         Dictionary<int, InventorySlotUI> inventorySlotCache;
 
@@ -25,6 +25,7 @@ namespace ButtonGame.UI.Inventories
         private void Awake() 
         {
             playerInventory = Inventory.GetPlayerInventory();
+            playerEquipment = Equipment.GetPlayerEquipment();
             playerInventory.inventoryUpdated += Redraw;
         }
 
@@ -55,7 +56,7 @@ namespace ButtonGame.UI.Inventories
                 {
                     var itemUI = Instantiate(InventoryItemPrefab, transform);
                     inventorySlotCache[i] = itemUI;
-                    itemUI.Setup(playerInventory, i);
+                    itemUI.Setup(playerInventory, playerEquipment, i);
                 }
 
                 // Set content window to show top row
@@ -66,7 +67,7 @@ namespace ButtonGame.UI.Inventories
                 foreach (KeyValuePair<int, InventorySlotUI> inventorySlot in inventorySlotCache)
                 {
                     var itemUI = inventorySlot.Value;
-                    itemUI.Setup(playerInventory, inventorySlot.Key);
+                    itemUI.Setup(playerInventory, playerEquipment, inventorySlot.Key);
                 }
             }
         }

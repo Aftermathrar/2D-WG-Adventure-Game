@@ -40,6 +40,11 @@ namespace ButtonGame.Inventories
             return item;
         }
 
+        public int GetNumber()
+        {
+            return number;
+        }
+
         public int PickupItem()
         {
             bool foundSlot = inventory.AddToFirstEmptySlot(item, number);

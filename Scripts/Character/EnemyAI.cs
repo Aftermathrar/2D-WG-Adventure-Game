@@ -20,6 +20,8 @@ namespace ButtonGame.Character
         BaseStats baseStats;
         Health health;
         Fighter fighter;
+        Health target;
+        BaseStats targetStats;
         
         MonAtkName curAtk;
         float timeSinceLastAttack = 0;
@@ -35,7 +37,6 @@ namespace ButtonGame.Character
         bool[] isEffectOnHit;
         string myName;
 
-        [SerializeField] Health target;
         [SerializeField] HitTimer hitTimer;
         List<HitTimer> hitTimers = new List<HitTimer>();
         [SerializeField] Queue<MonAtkName> atkQueue = new Queue<MonAtkName>();
@@ -62,6 +63,7 @@ namespace ButtonGame.Character
         public void SetTarget(PlayerController player)
         {
             target = player.GetComponent<Health>();
+            targetStats = player.GetComponent<BaseStats>();
         }
 
         private void AssignSkillVariables()
@@ -237,8 +239,9 @@ namespace ButtonGame.Character
             // Debug.Log("Base Attack: " + atkPower);
             atkPower *= GetAttackStat(MonAtkStat.Power, currentHitCount);
 
-            float enemyDef = target.GetComponentInParent<BaseStats>().GetStat(Stat.Defense);
-            total = Mathf.Ceil(atkPower / enemyDef);
+            float enemyDef = targetStats.GetStat(Stat.Defense);
+            float enemyReduction = targetStats.GetStat(Stat.DamageReduction) / 100;
+            total = Mathf.Ceil(atkPower / enemyDef) * (1 - enemyReduction);
 
             if (CalculateCriticalHit())
             {
@@ -257,7 +260,7 @@ namespace ButtonGame.Character
 
             float skillCritMod = GetAttackStat(MonAtkStat.CritMod, currentHitCount);
             float critFactor = baseStats.GetStat(Stat.CritFactor);
-            float targetCritResist = target.GetComponentInParent<BaseStats>().GetStat(Stat.CritResist);
+            float targetCritResist = targetStats.GetStat(Stat.CritResist);
             // Need glyph factor bonus to be added
             baseCritChance = (1.2f * skillCritMod * critFactor) / (10f * targetCritResist);
 

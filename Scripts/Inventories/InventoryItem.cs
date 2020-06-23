@@ -20,7 +20,7 @@ namespace ButtonGame.Inventories
         [Tooltip("Item name to be displayed in UI.")]
         [SerializeField] string displayName = null;
         [Tooltip("Category name to be displayed in UI.")]
-        [SerializeField] string categoryName = null;
+        [SerializeField] ItemCategories categoryName = ItemCategories.Material;
         [Tooltip("Item description to be displayed in UI.")]
         [SerializeField] ItemDescriptionField[] description = null;
         [Tooltip("The UI icon to represent this item in the inventory.")]
@@ -103,7 +103,7 @@ namespace ButtonGame.Inventories
 
         public string GetCategoryName()
         {
-            return categoryName;
+            return categoryName.ToString();
         }
 
         public float GetValue()

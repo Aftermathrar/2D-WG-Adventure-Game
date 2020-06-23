@@ -168,12 +168,24 @@ namespace ButtonGame.Inventories
             slots = new InventorySlot[inventorySize];
             slots[0].item = InventoryItem.GetFromID("80d319c7-6b3f-4f74-8525-2635f8320532");
             slots[0].number = 1;
-            slots[1].item = InventoryItem.GetFromID("10f908f6-4533-4f41-9219-71622626fac4");
-            slots[1].number = 2;
+            slots[1].item = InventoryItem.GetFromID("0017758c-658d-4d95-aba3-1e124bfe5767");
+            slots[1].number = 1;
             slots[2].item = InventoryItem.GetFromID("161a4c8d-f1c5-48ff-8322-680671f5b0c1");
             slots[2].number = 40;
-            slots[4].item = InventoryItem.GetFromID("494cb8ac-3d50-4b76-9491-c34ea2ce66a2");
+            slots[4].item = InventoryItem.GetFromID("843bfc27-cea2-4119-9aac-ea2f404739d7");
             slots[4].number = 1;
+            slots[5].item = InventoryItem.GetFromID("d008dd4c-14b2-4591-87ed-7c717ddf32b7");
+            slots[5].number = 2;
+            slots[6].item = InventoryItem.GetFromID("116ccfc9-2af7-4130-afb5-a776d6b8c16f");
+            slots[6].number = 2;
+            slots[7].item = InventoryItem.GetFromID("eb5baec2-35e0-47c6-9b67-fbf5c7fec541");
+            slots[7].number = 5;
+            slots[8].item = InventoryItem.GetFromID("3f8b14ad-a59a-40a6-ae78-0d4665220ff2");
+            slots[8].number = 5;
+            slots[9].item = InventoryItem.GetFromID("c942f2ed-9441-4a9e-a268-c7b6293ee1fd");
+            slots[9].number = 1;
+            slots[11].item = InventoryItem.GetFromID("12ff2f88-dc29-4ce6-a46a-2695265b4df1");
+            slots[11].number = 1;
         }
 
         /// <summary>
@@ -228,7 +240,7 @@ namespace ButtonGame.Inventories
         }
 
         [System.Serializable]
-        private struct InventoryRecord
+        private struct InventorySlotRecord
         {
             public string itemID;
             public int number;
@@ -236,25 +248,25 @@ namespace ButtonGame.Inventories
 
         object ISaveable.CaptureState()
         {
-            var slotStrings = new InventoryRecord[inventorySize];
+            var slotRecords = new InventorySlotRecord[inventorySize];
             for (int i = 0; i < inventorySize; i++)
             {
                 if (slots[i].item != null)
                 {
-                    slotStrings[i].itemID = slots[i].item.GetItemID();
-                    slotStrings[i].number = slots[i].number;
+                    slotRecords[i].itemID = slots[i].item.GetItemID();
+                    slotRecords[i].number = slots[i].number;
                 }
             }
-            return slotStrings;
+            return slotRecords;
         }
 
         void ISaveable.RestoreState(object state)
         {
-            var slotStrings = (InventoryRecord[])state;
+            var slotRecords = (InventorySlotRecord[])state;
             for (int i = 0; i < inventorySize; i++)
             {
-                slots[i].item = InventoryItem.GetFromID(slotStrings[i].itemID);
-                slots[i].number = slotStrings[i].number;
+                slots[i].item = InventoryItem.GetFromID(slotRecords[i].itemID);
+                slots[i].number = slotRecords[i].number;
             }
 
             if (inventoryUpdated != null)

@@ -18,9 +18,10 @@ namespace ButtonGame.Combat
         AttackValues attackValues = null;
         PlayerController player = null;
         GuardController guard = null;
-        Health target;
         Mana mana;
         BaseStats baseStats;
+        Health target;
+        BaseStats targetStats;
         Fighter fighter;
         Button thisButton;
         Sprite atkIcon = null;
@@ -76,7 +77,6 @@ namespace ButtonGame.Combat
         {
             manaCost = GetStat(AttackStat.Cost, 0);
             maxHitCount = GetStat(AttackStat.HitCount, 0);
-            maxCooldown = GetStat(AttackStat.Cooldown, 0);
             skillPriority = GetStat(AttackStat.Priority, 0);
             int maxEffectCount = attackDB.GetAttackStat(AttackStat.EffectID, attackType).Length;
             isEffectOnHit = new bool[maxEffectCount];
@@ -297,8 +297,9 @@ namespace ButtonGame.Combat
                 atkPower *= (mult / 100);
             }
 
-            float enemyDef = target.GetComponentInParent<BaseStats>().GetStat(Stat.Defense);
-            total = Mathf.Ceil(atkPower / enemyDef);
+            float enemyDef = targetStats.GetStat(Stat.Defense);
+            float enemyReduction = targetStats.GetStat(Stat.DamageReduction) / 100;
+            total = Mathf.Ceil(atkPower / enemyDef) * (1 - enemyReduction);
 
             if (CalculateCriticalHit())
             {
@@ -316,7 +317,7 @@ namespace ButtonGame.Combat
 
             float skillCritMod = GetStat(AttackStat.CritMod, currentHitCount);
             float critFactor = baseStats.GetStat(Stat.CritFactor);
-            float targetCritResist = target.GetComponentInParent<BaseStats>().GetStat(Stat.CritResist);
+            float targetCritResist = targetStats.GetStat(Stat.CritResist);
             // Need glyph factor bonus to be added
             baseCritChance = (1.2f * skillCritMod * critFactor) / (10f * targetCritResist);
 
@@ -360,8 +361,9 @@ namespace ButtonGame.Combat
                 atkPower *= (mult / 100);
             }
 
-            float enemyDef = target.GetComponentInParent<BaseStats>().GetStat(Stat.Defense);
-            total = Mathf.Ceil(atkPower / enemyDef);
+            float enemyDef = targetStats.GetStat(Stat.Defense);
+            float enemyReduction = targetStats.GetStat(Stat.DamageReduction) / 100;
+            total = Mathf.Ceil(atkPower / enemyDef) * (1 - enemyReduction);
 
             // Reflect always crits
             float critPower = baseStats.GetStat(Stat.CritDamage) / 100;
@@ -403,6 +405,7 @@ namespace ButtonGame.Combat
         public void SetTarget(Health _target)
         {
             target = _target;
+            targetStats = target.GetComponentInParent<BaseStats>();
         }
 
         public float GetStat(AttackStat stat, int index)
