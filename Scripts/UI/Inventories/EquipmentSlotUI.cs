@@ -86,7 +86,8 @@ namespace ButtonGame.UI.Inventories
             //If right click, unequip to inventory
             if (eventData.pointerId == -2)
             {
-                if (inventory.AddToFirstEmptySlot(playerEquipment.GetItemInSlot(equipLocation, index), 1))
+                InventoryItem item = playerEquipment.GetItemInSlot(equipLocation, index);
+                if(item != null && inventory.AddToFirstEmptySlot(item, 1))
                 {
                     playerEquipment.RemoveItem(equipLocation, index);
                 }

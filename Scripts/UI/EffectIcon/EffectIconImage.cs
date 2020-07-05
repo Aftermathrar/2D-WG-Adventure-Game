@@ -32,7 +32,13 @@ namespace ButtonGame.UI.EffectIcon
         public void UpdateIconFill(float fillPercent, float t)
         {
             timerOverlay.fillAmount = fillPercent;
-            timerText.text = string.Format("{0:0}", Mathf.CeilToInt(t));
+            string s = null;
+            if(t >= 60)
+            {
+                s = "m";
+                t /= 60;
+            }
+            timerText.text = string.Format("{0:0}{1}", Mathf.CeilToInt(t), s);
         }
 
         public IEnumerator MoveHorizontal()

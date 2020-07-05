@@ -22,10 +22,10 @@ namespace ButtonGame.Core
         // Battle setup
         [SerializeField] Transform battleCanvas;
         [SerializeField] BaseStats[] enemyPrefabs;
-        [SerializeField] float timeScale;
         [SerializeField] UnityEvent battleStart;
         GameObject playerGO;
         GameObject enemyGO;
+        GameObject followerGO;
 
         private void Start()
         {
@@ -55,7 +55,7 @@ namespace ButtonGame.Core
             BaseStats selectedEnemy;
             selectedEnemy = enemyPrefabs[randomEnemyIndex];
 
-            // Spawn player
+            // Find player
             playerGO = GameObject.FindGameObjectWithTag("Player");
             PlayerController playerController = playerGO.GetComponent<PlayerController>();
 
@@ -63,11 +63,19 @@ namespace ButtonGame.Core
             enemyGO = Instantiate(selectedEnemy, battleCanvas).gameObject;
             enemyGO.transform.SetAsFirstSibling();
 
+            // Spawn Follower
+            followerGO = GameObject.FindGameObjectWithTag("Follower");
+
             // Assign opponent to scripts
             enemyGO.GetComponent<CombatEffects>().SetTarget(playerGO);
             enemyGO.GetComponent<EnemyAI>().SetTarget(playerController);
             playerController.SetEnemy(enemyGO.GetComponent<EnemyController>());
             playerGO.GetComponent<CombatEffects>().SetTarget(enemyGO);
+            if(followerGO != null) 
+            {
+                followerGO.GetComponent<FollowerAI>().SetTarget(playerGO, enemyGO);
+                followerGO.GetComponent<CombatEffects>().SetTarget(enemyGO);
+            }
 
             // Activate battle
             StartCoroutine(BeginBattle());

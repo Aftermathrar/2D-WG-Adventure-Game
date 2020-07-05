@@ -16,18 +16,18 @@ namespace ButtonGame.UI.Inventories
         [SerializeField] TextMeshProUGUI rightTitleText = null;
         [SerializeField] GameObject tooltipContainer = null;
         [SerializeField] GameObject tooltipPrefab = null;
-        ItemDescriptionField[] descriptionFields;
+        TooltipDescriptionField[] descriptionFields;
 
         List<GameObject> tooltips = new List<GameObject>();
 
         // PUBLIC
 
-        public void Setup(InventoryItem item)
+        public void Setup(ITooltipProvider item)
         {
             leftTitleText.text = item.GetDisplayName();
             rightTitleText.text = item.GetCategoryName();
-            descriptionFields = item.GetDescription();
-            foreach (ItemDescriptionField itemDescription in descriptionFields)
+            descriptionFields = item.GetDescriptionFields();
+            foreach (TooltipDescriptionField itemDescription in descriptionFields)
             {
                 GameObject tooltipGO = Instantiate(tooltipPrefab, tooltipContainer.transform);
                 TooltipIconText tooltip = tooltipGO.GetComponent<TooltipIconText>();
@@ -55,6 +55,11 @@ namespace ButtonGame.UI.Inventories
                 Destroy(obj);
             }
             tooltips.Clear();
+        }
+
+        public Transform GetTooltipContainer()
+        {
+            return tooltipContainer.transform;
         }
     }
 }

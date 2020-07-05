@@ -16,7 +16,7 @@ namespace ButtonGame.Attributes
         {
             if (manaText != null)
             {
-                manaText.text = string.Format("{0:0}/{1,0}", mana.GetMana(), mana.GetMaxMana());
+                manaText.text = string.Format("{0:0}/{1,0}", mana.GetAttributeValue(), mana.GetMaxAttributeValue());
             }
             imgOverlay.fillAmount = mana.GetFraction();
         }

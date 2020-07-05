@@ -16,7 +16,7 @@ namespace ButtonGame.Attributes
         {
             if (healthText != null)
             {
-                healthText.text = string.Format("{0:0}/{1,0}", health.GetHealthPoints(), health.GetMaxHealthPoints());
+                healthText.text = string.Format("{0:0}/{1,0}", health.GetAttributeValue(), health.GetMaxAttributeValue());
             }
             imgOverlay.fillAmount = health.GetFraction();
         }

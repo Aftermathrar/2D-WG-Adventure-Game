@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ButtonGame.Stats;
+using ButtonGame.Stats.Enums;
 
 namespace ButtonGame.Combat
 {

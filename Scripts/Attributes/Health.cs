@@ -7,10 +7,11 @@ using GameDevTV.Utils;
 using ButtonGame.Core;
 using ButtonGame.Combat;
 using ButtonGame.Saving;
+using ButtonGame.Stats.Enums;
 
 namespace ButtonGame.Attributes
 {
-    public class Health : MonoBehaviour, ISaveable
+    public class Health : MonoBehaviour, ISaveable, IAttribute
     {
         [SerializeField] bool checkForBlock = false;
         [SerializeField] TakeDamageEvent takeDamage;
@@ -24,6 +25,7 @@ namespace ButtonGame.Attributes
 
         // float missingHealthPoints = 70;
         LazyValue<float> healthPoints;
+        float maxHealth;
         BaseStats baseStats;
         GuardController guard = null;
         bool isDead = false;
@@ -47,6 +49,12 @@ namespace ButtonGame.Attributes
             {
                 guard = GetComponent<GuardController>();
             }
+            maxHealth = baseStats.GetStat(Stat.Health);
+        }
+
+        public void RecalculateMaxHealth()
+        {
+            maxHealth = baseStats.GetStat(Stat.Health);
         }
 
         public bool IsDead()
@@ -89,9 +97,9 @@ namespace ButtonGame.Attributes
             return (damage > 0);
         }
 
-        public void GainHealth(float heal)
+        public void GainAttribute(float amount)
         {
-            healthPoints.value = Mathf.Min(healthPoints.value + heal, baseStats.GetStat(Stat.Health));
+            healthPoints.value = Mathf.Min(healthPoints.value + amount, maxHealth);
         }
 
         private void Die()
@@ -114,17 +122,17 @@ namespace ButtonGame.Attributes
 
         public float GetFraction()
         {
-            return healthPoints.value / baseStats.GetStat(Stat.Health);
+            return healthPoints.value / maxHealth;
         }
 
-        public float GetHealthPoints()
+        public float GetAttributeValue()
         {
             return healthPoints.value;
         }
 
-        public float GetMaxHealthPoints()
+        public float GetMaxAttributeValue()
         {
-            return baseStats.GetStat(Stat.Health);
+            return maxHealth;
         }
 
         public object CaptureState()
@@ -135,7 +143,6 @@ namespace ButtonGame.Attributes
         public void RestoreState(object state)
         {
             healthPoints.value = (float)state;
-            // Debug.Log("health is " + (float)state);
             if(healthPoints.value <= 0)
             {
                 print("Player dead, reviving to 1HP");

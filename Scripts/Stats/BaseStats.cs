@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ButtonGame.Stats.Enums;
 using UnityEngine;
 
 namespace ButtonGame.Stats
@@ -34,13 +35,11 @@ namespace ButtonGame.Stats
         private float[] GetStatModifiers(Stat stat)
         {
             float[] total = new float[] {0, 0};
-            foreach (IEffectProvider fxProvider in GetComponents<IEffectProvider>())
+            foreach (IStatModifier fxProvider in GetComponents<IStatModifier>())
             {
-                foreach (float[] modifier in fxProvider.GetStatEffectModifiers(stat))
-                {
-                    total[0] += modifier[0];
-                    total[1] += modifier[1];
-                }
+                float[] result = fxProvider.GetStatEffectModifiers(stat);
+                total[0] += result[0];
+                total[1] += result[1];
             }
             return total;
         }

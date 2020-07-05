@@ -34,25 +34,10 @@ namespace ButtonGame.UI.Inventories
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            // var parentCanvas = GetComponentInParent<Canvas>();
-
-            // foreach (GameObject tooltip in tooltips)
-            // {
-            //     if (tooltip && !CanCreateTooltip())
-            //     {
-            //         ClearTooltip();
-            //     }
-
-                // if (!tooltip && CanCreateTooltip())
-                // {
-                //     GameObject tooltipInstance = Instantiate(tooltipPrefab, parentCanvas.transform);
-                // }
-
-                if (CanCreateTooltip())
-                {
-                    UpdateTooltip();
-                }
-            // }
+            if (CanCreateTooltip())
+            {
+                UpdateTooltip();
+            }
         }
 
         protected override void ClearTooltip()

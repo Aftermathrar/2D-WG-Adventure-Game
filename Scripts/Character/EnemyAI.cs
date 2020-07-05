@@ -6,6 +6,7 @@ using ButtonGame.Core;
 using ButtonGame.Attributes;
 using ButtonGame.Stats;
 using TMPro;
+using ButtonGame.Stats.Enums;
 
 namespace ButtonGame.Character
 {
@@ -98,7 +99,7 @@ namespace ButtonGame.Character
                 {
                     curAtk = atkQueue.Dequeue();
                     timeSinceAttackStarted = 0;
-                    float atkSpeed = baseStats.GetStat(Stat.AttackSpeed);
+                    float atkSpeed = fighter.GetStat(Stat.AttackSpeed);
                     atkSpeed = 1 / atkSpeed * 100;
                     totalAtkTime = GetAttackStat(MonAtkStat.TotalTime, 0) * atkSpeed;
                     atkLeadTime = GetAttackStat(MonAtkStat.LeadTime, 0) * atkSpeed;
@@ -152,7 +153,7 @@ namespace ButtonGame.Character
             timeSinceLastAttack = 0;
             timeSinceLastHit = 0;
             currentHitCount = 0;
-            float atkSpeed = baseStats.GetStat(Stat.AttackSpeed);
+            float atkSpeed = fighter.GetStat(Stat.AttackSpeed);
             atkSpeed = 1 / atkSpeed * 100;
 
             CheckEffectActivation(false);
@@ -235,8 +236,7 @@ namespace ButtonGame.Character
         private float CalculateDamage()
         {
             float total = 0;
-            float atkPower = baseStats.GetStat(Stat.AttackPower);
-            // Debug.Log("Base Attack: " + atkPower);
+            float atkPower = fighter.GetStat(Stat.AttackPower);
             atkPower *= GetAttackStat(MonAtkStat.Power, currentHitCount);
 
             float enemyDef = targetStats.GetStat(Stat.Defense);
@@ -246,7 +246,7 @@ namespace ButtonGame.Character
             if (CalculateCriticalHit())
             {
                 // Monsters don't have crit damage stat, subbing in 2x damage for now
-                float critPower = 2f; // baseStats.GetStat(Stat.CritDamage) / 100;
+                float critPower = 2f; // fighter.GetStat(Stat.CritDamage) / 100;
                 total *= critPower;
             }
 
@@ -259,7 +259,7 @@ namespace ButtonGame.Character
             isCrit = false;
 
             float skillCritMod = GetAttackStat(MonAtkStat.CritMod, currentHitCount);
-            float critFactor = baseStats.GetStat(Stat.CritFactor);
+            float critFactor = fighter.GetStat(Stat.CritFactor);
             float targetCritResist = targetStats.GetStat(Stat.CritResist);
             // Need glyph factor bonus to be added
             baseCritChance = (1.2f * skillCritMod * critFactor) / (10f * targetCritResist);

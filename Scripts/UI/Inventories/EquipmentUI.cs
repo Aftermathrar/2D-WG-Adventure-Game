@@ -7,7 +7,8 @@ namespace ButtonGame.UI.Inventories
 {
     public class EquipmentUI : MonoBehaviour
     {
-        
+
+        // Get player references to set up equipment slots and assign index numbers to each slot
         private void Awake()
         {
             Inventory playerInventory = Inventory.GetPlayerInventory();
@@ -29,8 +30,6 @@ namespace ButtonGame.UI.Inventories
 
                 slot.Setup(playerInventory, playerEquipment, equipSlotLookup[key]);
             }
-
-            playerEquipment.DefineEquipmentSlots(equipSlotLookup);
         }
     }
 }

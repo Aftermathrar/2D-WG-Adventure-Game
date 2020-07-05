@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace ButtonGame.Inventories
@@ -13,7 +14,7 @@ namespace ButtonGame.Inventories
     /// `EquipableItem`.
     /// </remarks>
     [CreateAssetMenu(menuName = ("Inventory/Item"))]
-    public class InventoryItem : ScriptableObject, ISerializationCallbackReceiver    {
+    public class InventoryItem : ScriptableObject, ISerializationCallbackReceiver, ITooltipProvider    {
         // CONFIG DATA
         [Tooltip("Auto-generated UUID for saving/loading. Clear this field if you want to generate a new one.")]
         [SerializeField] string itemID = null;
@@ -22,7 +23,7 @@ namespace ButtonGame.Inventories
         [Tooltip("Category name to be displayed in UI.")]
         [SerializeField] ItemCategories categoryName = ItemCategories.Material;
         [Tooltip("Item description to be displayed in UI.")]
-        [SerializeField] ItemDescriptionField[] description = null;
+        [SerializeField] TooltipDescriptionField[] description = null;
         [Tooltip("The UI icon to represent this item in the inventory.")]
         [SerializeField] Sprite icon = null;
         [Tooltip("Sale value to be displayed in UI.")]
@@ -111,7 +112,7 @@ namespace ButtonGame.Inventories
             return value;
         }
 
-        public ItemDescriptionField[] GetDescription()
+        public TooltipDescriptionField[] GetDescriptionFields()
         {
             return description;
         }

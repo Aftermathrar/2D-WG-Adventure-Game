@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ButtonGame.Stats;
+using ButtonGame.Stats.Enums;
 using ButtonGame.Character;
 using ButtonGame.Core;
 using ButtonGame.Attributes;
@@ -15,18 +16,17 @@ namespace ButtonGame.Combat
         [SerializeField] AttackType attackType;
         [SerializeField] KeyCode keyCode;
         [SerializeField] AttackDB attackDB = null;
-        AttackValues attackValues = null;
-        PlayerController player = null;
-        GuardController guard = null;
-        Mana mana;
-        BaseStats baseStats;
-        Health target;
+        protected BaseAttackStats attackValues = null;
+        protected PlayerController player = null;
+        protected GuardController guard = null;
+        protected Mana mana;
+        protected Health target;
         BaseStats targetStats;
-        Fighter fighter;
-        Button thisButton;
-        Sprite atkIcon = null;
+        protected Fighter fighter;
+        protected Button thisButton;
+        protected Sprite atkIcon = null;
 
-        [SerializeField] TextMeshProUGUI atkCooldownText = null;
+        [SerializeField] protected TextMeshProUGUI atkCooldownText = null;
         [SerializeField] Image atkCooldownOverlay = null;
         [SerializeField] ParticleSystem clickEffect = null;
         [SerializeField] ParticleSystem ResetEffect = null;
@@ -35,35 +35,40 @@ namespace ButtonGame.Combat
         [SerializeField] CanvasGroup cdResetOverlay = null;
 
         Coroutine spawnHitTimer = null;
-        float timeSinceAtkOnCooldown = Mathf.Infinity;
-        float timeSinceAtkStart = Mathf.Infinity;
-        float timeSinceLastHit = Mathf.Infinity;
-        int currentHitCount;
-        float cooldownDelay;
+        protected float timeSinceAtkOnCooldown = Mathf.Infinity;
+        protected float timeSinceAtkStart = Mathf.Infinity;
+        protected float timeSinceLastHit = Mathf.Infinity;
+        protected int currentHitCount;
+        protected float cooldownDelay;
         float maxCooldown;
-        float maxTimeToHit;
+        protected float maxTimeToHit;
         float skillPriority;
-        float maxHitCount;
+        protected float maxHitCount;
         float manaCost;
-        bool isCrit = false;
+        protected bool isCrit = false;
         bool[] isEffectOnHit;
-        bool isBattleActive;
+        protected bool isBattleActive;
 
-        [SerializeField] HitTimer hitTimer;
+        [SerializeField] protected HitTimer hitTimer;
         private const float xOffset = -45f;
         private const float yOffset = 135f;
-        List<HitTimer> hitTimers = new List<HitTimer>();
+        protected List<HitTimer> hitTimers = new List<HitTimer>();
 
-        private void Awake()
+        public void SetTarget(Health _target)
+        {
+            target = _target;
+            targetStats = target.GetComponentInParent<BaseStats>();
+        }
+
+        protected virtual void Awake()
         {
             thisButton = GetComponent<Button>();
             atkIcon = GetComponent<Image>().sprite;
             player = GetComponentInParent<PlayerController>();
             guard = player.GetComponent<GuardController>();
             mana = player.GetComponent<Mana>();
-            baseStats = player.GetComponent<BaseStats>();
             fighter = player.GetComponent<Fighter>();
-            attackValues = player.GetComponent<AttackValues>();
+            attackValues = player.GetComponent<BaseAttackStats>();
         }
 
         private void Start()
@@ -114,17 +119,17 @@ namespace ButtonGame.Combat
                 timeSinceAtkStart = 0;
                 timeSinceLastHit = 0;
                 currentHitCount = 0;
-                float atkSpeed = baseStats.GetStat(Stat.AttackSpeed);
+                float atkSpeed = fighter.GetStat(Stat.AttackSpeed);
                 atkSpeed = 1 / atkSpeed * 100;
                 cooldownDelay = GetStat(AttackStat.CDStart, 0) * atkSpeed;
-                maxCooldown = GetStat(AttackStat.Cooldown, 0);
+                maxCooldown = GetStat(AttackStat.Cooldown, 0) * (1 - fighter.GetStat(Stat.CooldownReduction)/100);
                 clickEffect.Stop();
                 var main = clickEffect.main;
                 if (clickEffect.isStopped) main.duration = Mathf.Max(0.1f, cooldownDelay);
                 clickEffect.Play();
 
                 mana.UseMana(manaCost);
-                float[] skillTimes = GetSkillTimes();
+                float[] skillTimes = GetSkillTimes(atkSpeed);
                 player.StartAttack(skillTimes);
                 CheckEffectActivation(false);
 
@@ -152,7 +157,7 @@ namespace ButtonGame.Combat
 
         private IEnumerator SpawnHitTimer(float atkSpeed)
         {
-            maxTimeToHit = GetStat(Stats.AttackStat.TimeToHit, 0);
+            maxTimeToHit = GetStat(AttackStat.TimeToHit, 0);
             fighter.activeAttack += UpdateTimeToHit;
             float newPosX = xOffset;
             HitTimer myObjectInstance = Instantiate(hitTimer, new Vector3(newPosX, yOffset, 0), Quaternion.identity);
@@ -178,7 +183,7 @@ namespace ButtonGame.Combat
             yield return null;
         }
 
-        private void UpdateTimeToHit()
+        protected virtual void UpdateTimeToHit()
         {
             timeSinceLastHit += Time.deltaTime;
 
@@ -215,8 +220,8 @@ namespace ButtonGame.Combat
                         hitTimers[i].SetMoveTime(.2f);
                     }
 
-                    maxTimeToHit = GetStat(Stats.AttackStat.TimeToHit, currentHitCount);
-                    float atkSpeed = baseStats.GetStat(Stat.AttackSpeed);
+                    maxTimeToHit = GetStat(AttackStat.TimeToHit, currentHitCount);
+                    float atkSpeed = fighter.GetStat(Stat.AttackSpeed);
                     atkSpeed = 1 / atkSpeed * 100;
                     maxTimeToHit *= atkSpeed;
 
@@ -236,7 +241,7 @@ namespace ButtonGame.Combat
 
         public bool HasEnoughMana()
         {
-            float curMana = mana.GetMana();
+            float curMana = mana.GetAttributeValue();
             if (curMana < manaCost)
             {
                 return false;
@@ -244,12 +249,132 @@ namespace ButtonGame.Combat
             return true;
         }
 
-        public void ResetButton()
+        protected void ResetButton()
         {
             atkCooldownText.gameObject.SetActive(false);
             thisButton.targetGraphic.CrossFadeColor(thisButton.colors.normalColor, thisButton.colors.fadeDuration, true, true);
             atkCooldownOverlay.fillAmount = 0;
             fighter.activeAttack -= UpdateTimer;
+        }
+
+        protected float CalculateDamage()
+        {
+            float total = 0;
+            float atkPower = fighter.GetStat(Stat.AttackPower);
+            atkPower *= GetStat(AttackStat.Power, currentHitCount);
+
+            if (GetStatBool(AttackStat.Bloodlust, currentHitCount))
+            {
+                float hPercent = target.GetPercentage();
+                float mult = 100;
+                if (hPercent < 50)
+                {
+                    mult += 78 - Mathf.Floor(hPercent / 5) * 4;
+                }
+                else if (hPercent < 95)
+                {
+                    mult += 76 - Mathf.Floor(hPercent / 5) * 4;
+                }
+                atkPower *= (mult / 100);
+            }
+
+            float enemyDef = targetStats.GetStat(Stat.Defense);
+            float enemyReduction = targetStats.GetStat(Stat.DamageReduction) / 100;
+            total = Mathf.Ceil(atkPower / enemyDef) * (1 - enemyReduction);
+
+            if (CalculateCriticalHit())
+            {
+                float critPower = fighter.GetStat(Stat.CritDamage) / 100;
+                total *= critPower;
+            }
+
+            return total;
+        }
+
+        private bool CalculateCriticalHit()
+        {
+            float baseCritChance = 0;
+            isCrit = false;
+
+            float skillCritMod = GetStat(AttackStat.CritMod, currentHitCount);
+            float critFactor = fighter.GetStat(Stat.CritFactor);
+            float targetCritResist = targetStats.GetStat(Stat.CritResist);
+            // Need glyph factor bonus to be added
+            baseCritChance = (1.2f * skillCritMod * critFactor) / (10f * targetCritResist);
+
+            if (baseCritChance >= 1)
+            {
+                isCrit = true;
+            }
+
+            float critChance = 0;
+            // Add glyph multiplier bonus later
+            float glyphBonusMult = 1f;
+
+            critChance = baseCritChance + glyphBonusMult * baseCritChance * (1 - baseCritChance);
+            if (critChance >= 1 || Random.Range(0f, 1f) <= critChance)
+            {
+                isCrit = true;
+            }
+
+            return isCrit;
+        }
+
+        public void CalculateReflectDamage()
+        {
+            float total = 0;
+            float atkPower = fighter.GetStat(Stat.AttackPower);
+            float lastHitPower = GetStat(AttackStat.Power, (int)maxHitCount - 1);
+            atkPower *= lastHitPower;
+
+            if (GetStatBool(AttackStat.Bloodlust, (int)maxHitCount - 1))
+            {
+                float hPercent = target.GetPercentage();
+                float mult = 100;
+                if (hPercent < 50)
+                {
+                    mult += 78 - Mathf.Floor(hPercent / 5) * 4;
+                }
+                else if (hPercent < 95)
+                {
+                    mult += 76 - Mathf.Floor(hPercent / 5) * 4;
+                }
+                atkPower *= (mult / 100);
+            }
+
+            float enemyDef = targetStats.GetStat(Stat.Defense);
+            float enemyReduction = targetStats.GetStat(Stat.DamageReduction) / 100;
+            total = Mathf.Ceil(atkPower / enemyDef) * (1 - enemyReduction);
+
+            // Reflect always crits
+            float critPower = fighter.GetStat(Stat.CritDamage) / 100;
+            total *= critPower;
+
+            //Reflect is 40% damage
+            total *= 0.4f;
+
+            target.TakeDamage(total, true);
+            player.DamageDealt(total);
+        }
+
+        private float[] GetSkillTimes(float atkSpeed)
+        {
+            float[] skillTimes = new float[3];
+            skillTimes[0] = GetStat(AttackStat.AnimLock, 0) * atkSpeed;
+            skillTimes[1] = GetStat(AttackStat.SkillLock, 0) * atkSpeed;
+            skillTimes[2] = GetStat(AttackStat.TotalTime, 0) * atkSpeed;
+            return skillTimes;
+        }
+
+        protected void CheckEffectActivation(bool isHit)
+        {
+            string[] atkFXid = attackDB.GetAttackStat(AttackStat.EffectID, attackType);
+            string[] atkFXTarget = attackDB.GetAttackStat(AttackStat.EffectTarget, attackType);
+            for (int i = 0; i < isEffectOnHit.Length; i++)
+            {
+                if (isEffectOnHit[i] == isHit)
+                    fighter.PassEffect(atkFXid[i], atkFXTarget[i]);
+            }
         }
 
         private void AssignSkillInfoText()
@@ -276,138 +401,6 @@ namespace ButtonGame.Combat
             }
         }
 
-        private float CalculateDamage()
-        {
-            float total = 0;
-            float atkPower = baseStats.GetStat(Stat.AttackPower);
-            atkPower *= GetStat(AttackStat.Power, currentHitCount);
-
-            if (GetStatBool(AttackStat.Bloodlust, currentHitCount))
-            {
-                float hPercent = target.GetPercentage();
-                float mult = 100;
-                if (hPercent < 50)
-                {
-                    mult += 78 - Mathf.Floor(hPercent / 5) * 4;
-                }
-                else if (hPercent < 95)
-                {
-                    mult += 76 - Mathf.Floor(hPercent / 5) * 4;
-                }
-                atkPower *= (mult / 100);
-            }
-
-            float enemyDef = targetStats.GetStat(Stat.Defense);
-            float enemyReduction = targetStats.GetStat(Stat.DamageReduction) / 100;
-            total = Mathf.Ceil(atkPower / enemyDef) * (1 - enemyReduction);
-
-            if (CalculateCriticalHit())
-            {
-                float critPower = baseStats.GetStat(Stat.CritDamage) / 100;
-                total *= critPower;
-            }
-
-            return total;
-        }
-
-        private bool CalculateCriticalHit()
-        {
-            float baseCritChance = 0;
-            isCrit = false;
-
-            float skillCritMod = GetStat(AttackStat.CritMod, currentHitCount);
-            float critFactor = baseStats.GetStat(Stat.CritFactor);
-            float targetCritResist = targetStats.GetStat(Stat.CritResist);
-            // Need glyph factor bonus to be added
-            baseCritChance = (1.2f * skillCritMod * critFactor) / (10f * targetCritResist);
-
-            if (baseCritChance >= 1)
-            {
-                isCrit = true;
-            }
-
-            float critChance = 0;
-            // Add glyph multiplier bonus later
-            float glyphBonusMult = 1f;
-
-            critChance = baseCritChance + glyphBonusMult * baseCritChance * (1 - baseCritChance);
-            if (critChance >= 1 || Random.Range(0f, 1f) <= critChance)
-            {
-                isCrit = true;
-            }
-
-            return isCrit;
-        }
-
-        public void CalculateReflectDamage()
-        {
-            float total = 0;
-            float atkPower = baseStats.GetStat(Stat.AttackPower);
-            float lastHitPower = GetStat(AttackStat.Power, (int)maxHitCount - 1);
-            atkPower *= lastHitPower;
-
-            if (GetStatBool(AttackStat.Bloodlust, (int)maxHitCount - 1))
-            {
-                float hPercent = target.GetPercentage();
-                float mult = 100;
-                if (hPercent < 50)
-                {
-                    mult += 78 - Mathf.Floor(hPercent / 5) * 4;
-                }
-                else if (hPercent < 95)
-                {
-                    mult += 76 - Mathf.Floor(hPercent / 5) * 4;
-                }
-                atkPower *= (mult / 100);
-            }
-
-            float enemyDef = targetStats.GetStat(Stat.Defense);
-            float enemyReduction = targetStats.GetStat(Stat.DamageReduction) / 100;
-            total = Mathf.Ceil(atkPower / enemyDef) * (1 - enemyReduction);
-
-            // Reflect always crits
-            float critPower = baseStats.GetStat(Stat.CritDamage) / 100;
-            total *= critPower;
-
-            //Reflect is 40% damage
-            total *= 0.4f;
-
-            target.TakeDamage(total, true);
-            player.DamageDealt(total);
-        }
-
-        private float[] GetSkillTimes()
-        {
-            float[] skillTimes = new float[3];
-            float atkSpeed = baseStats.GetStat(Stat.AttackSpeed);
-            atkSpeed = 1 / atkSpeed * 100;
-            skillTimes[0] = GetStat(AttackStat.AnimLock, 0);
-            skillTimes[1] = GetStat(AttackStat.SkillLock, 0);
-            skillTimes[2] = GetStat(AttackStat.TotalTime, 0);
-            for (int i = 0; i < skillTimes.Length; i++)
-            {
-                skillTimes[i] = skillTimes[i] * atkSpeed;
-            }
-            return skillTimes;
-        }
-
-        private void CheckEffectActivation(bool isHit)
-        {
-            string[] atkFXid = attackDB.GetAttackStat(AttackStat.EffectID, attackType);
-            string[] atkFXTarget = attackDB.GetAttackStat(AttackStat.EffectTarget, attackType);
-            for (int i = 0; i < isEffectOnHit.Length; i++)
-            {
-                if (isEffectOnHit[i] == isHit)
-                    fighter.PassEffect(atkFXid[i], atkFXTarget[i]);
-            }
-        }
-
-        public void SetTarget(Health _target)
-        {
-            target = _target;
-            targetStats = target.GetComponentInParent<BaseStats>();
-        }
-
         public float GetStat(AttackStat stat, int index)
         {
             float value = attackValues.GetAttackStat(stat, attackType, index);
@@ -431,7 +424,7 @@ namespace ButtonGame.Combat
             return attackDB.GetAttackStat(stat, attackType)[0];
         }
 
-        public void StartCooldown()
+        public virtual void StartCooldown()
         {
             timeSinceAtkStart += Time.deltaTime;
             if (timeSinceAtkStart >= cooldownDelay)
@@ -495,6 +488,9 @@ namespace ButtonGame.Combat
 
         public void StartBattle()
         {
+            StopAttack();
+            timeSinceAtkStart = Mathf.Infinity;
+            timeSinceAtkOnCooldown = Mathf.Infinity;
             isBattleActive = true;
         }
 

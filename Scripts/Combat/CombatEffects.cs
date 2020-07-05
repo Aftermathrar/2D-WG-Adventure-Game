@@ -6,30 +6,33 @@ using ButtonGame.Stats;
 using ButtonGame.UI.EffectIcon;
 using UnityEngine;
 using ButtonGame.Saving;
+using UnityEngine.Events;
+using ButtonGame.Stats.Enums;
 
 namespace ButtonGame.Combat
 {
-    public class CombatEffects : MonoBehaviour, ISaveable, IEffectProvider, IAttackEffectProvider, IMonAtkEffectProvider
+    public abstract class CombatEffects : MonoBehaviour, ISaveable, IStatModifier
     {
-        [SerializeField] EffectDB effectDB;
+        [SerializeField] protected EffectDB effectDB;
         [SerializeField] EffectIconDB fxIconDB;
         [SerializeField] EffectIconSpawner fxIconSpawner;
 
-        BaseStats selfStats;
+        protected BaseStats selfStats;
+        protected Health selfHealth;
+        protected Health targetHealth;
 
-        Health selfHealth;
-        Health targetHealth;
-        Mana selfMana;
-
-        EffectStat fxStat;
-        EffectName fxName;
-        string fxID;
+        protected EffectStat fxStat;
+        protected EffectName fxName;
+        protected string fxID;
         int fxIconCount;
-        bool isBattleActive;
-        
-        Dictionary<string, float[]> buffList = new Dictionary<string, float[]>();
+        protected bool isBattleActive;
+
+        protected Dictionary<string, float[]> buffList = new Dictionary<string, float[]>();
+        protected List<string> removeIDs = new List<string>();
         //[SerializeField] List<Sprite> fxIcons = new List<Sprite>();
         Sprite fxIcon = null;
+
+        public UnityEvent EffectsUpdated;
 
         private void Awake() 
         {
@@ -37,18 +40,15 @@ namespace ButtonGame.Combat
             selfHealth = GetComponent<Health>();
         }
 
-        private void Start()
-        {
-            if (gameObject.tag == "Player")
-            {
-                selfMana = GetComponent<Mana>();
-            }
-        }
-
         private void Update() 
         {
             if (isBattleActive && buffList.Count > 0) 
                 BuffTimer();
+        }
+
+        private void LateUpdate() {
+            if(removeIDs.Count > 0)
+                RemoveBuffs();
         }
 
         public void SetTarget(GameObject target)
@@ -92,31 +92,26 @@ namespace ButtonGame.Combat
             enemyEffects.BuffSelf(ID);
         }
 
-        private void BuffStatOverTime()
+        public virtual void BuffPlayer(string ID) {}
+
+        protected virtual void BuffStatOverTime()
         {
             float buffDuration = float.Parse(effectDB.GetEffectStat(EffectStat.Duration, fxName));
             if (buffDuration == 0)
             {
-                if (effectDB.GetEffectStat(EffectStat.StatsAffected, fxName) == "Mana")
+                float healValue = float.Parse(effectDB.GetEffectStat(EffectStat.EffectValues, fxName));
+                if (int.Parse(effectDB.GetEffectStat(EffectStat.Additive, fxName)) == 0)
                 {
-                    selfMana.GainMana(float.Parse(effectDB.GetEffectStat(EffectStat.EffectValues, fxName)));
+                    healValue *= selfHealth.GetMaxAttributeValue() / 100;
+                }
+
+                if (healValue < 0)
+                {
+                    selfHealth.TakeDamage(Mathf.Abs(healValue), false, false);
                 }
                 else
                 {
-                    float healValue = float.Parse(effectDB.GetEffectStat(EffectStat.EffectValues, fxName));
-                    if (int.Parse(effectDB.GetEffectStat(EffectStat.Additive, fxName)) == 0)
-                    {
-                        healValue *= selfHealth.GetMaxHealthPoints() / 100;
-                    }
-
-                    if (healValue < 0)
-                    {
-                        selfHealth.TakeDamage(Mathf.Abs(healValue), false, false);
-                    }
-                    else
-                    {
-                        selfHealth.GainHealth(healValue);
-                    }
+                    selfHealth.GainAttribute(healValue);
                 }
                 return;
             }
@@ -130,7 +125,7 @@ namespace ButtonGame.Combat
             }
         }
 
-        private IEnumerator BuffOverTime(float buffDuration)
+        protected virtual IEnumerator BuffOverTime(float buffDuration)
         {
             float tickRate = float.Parse(effectDB.GetEffectStat(EffectStat.TickRate, fxName));
             string stat = effectDB.GetEffectStat(EffectStat.StatsAffected, fxName);
@@ -141,35 +136,22 @@ namespace ButtonGame.Combat
             {
                 // Effect strength times stack count
                 float fxValResult = fxValue * buffList[fxNameOverTime][0];
-                if (stat == "Mana")
+                if (isPercent)
                 {
-                    if (isPercent)
-                    {
-                        fxValResult = (fxValue / 100) * selfMana.GetMaxMana();
-                    }
-                    selfMana.GainMana(fxValResult);
+                    fxValResult = (fxValue / 100) * selfHealth.GetMaxAttributeValue();
+                }
+                if (fxValResult >= 0)
+                {
+                    selfHealth.GainAttribute(fxValResult);
                 }
                 else
                 {
-                    if (isPercent)
-                    {
-                        fxValResult = (fxValue / 100) * selfHealth.GetMaxHealthPoints();
-                    }
-                    if (fxValResult >= 0)
-                    {
-                        selfHealth.GainHealth(fxValResult);
-                    }
-                    else
-                    {
-                        selfHealth.TakeDamage(Mathf.Abs(fxValResult), false, false);
-                    }
+                    selfHealth.TakeDamage(Mathf.Abs(fxValResult), false, false);
                 }
                 yield return new WaitForSeconds(tickRate);
             } while(buffList[fxNameOverTime][1] <= buffDuration && isBattleActive);
 
-            List<string> removeIDs = new List<string>();
             removeIDs.Add(fxNameOverTime);
-            RemoveBuffs(removeIDs);
 
             yield return null;
         }
@@ -187,9 +169,10 @@ namespace ButtonGame.Combat
             float[] currentFXInfo = GetCurrentFXInfo();
 
             buffList[fxID] = currentFXInfo;
+            EffectsUpdated.Invoke();
         }
 
-        private float[] GetCurrentFXInfo()
+        protected float[] GetCurrentFXInfo()
         {
             float fxStacks = 0;
             float curFXTime = 0;
@@ -202,12 +185,8 @@ namespace ButtonGame.Combat
             }
             else
             {
-                int iconSelect = int.Parse(effectDB.GetEffectStat(EffectStat.Icon, fxName));
-                if (iconSelect > 0)
-                {
-                    fxIconSpawner.Spawn(fxID.ToString(), fxIconCount, fxIconDB.GetSprite(fxName));
-                    fxIconCount += 1;
-                }
+                fxIconSpawner.Spawn(fxID.ToString(), fxIconCount, fxIconDB.GetSprite(fxName));
+                fxIconCount += 1;
             }
 
             if (fxStacks < maxStacks)
@@ -233,7 +212,6 @@ namespace ButtonGame.Combat
         public void BuffTimer()
         {
             EffectName effectName;
-            List<string> removeIDs = new List<String>();
             foreach (string id in buffList.Keys)
             {
                 buffList[id][1] += Time.deltaTime;
@@ -251,7 +229,6 @@ namespace ButtonGame.Combat
                     fxIconSpawner.UpdateIconFill(id, fillPercent, timeRemaining);
                 }
             }
-            RemoveBuffs(removeIDs);
         }
 
         private void RestoreIcons()
@@ -277,7 +254,7 @@ namespace ButtonGame.Combat
             }
         }
 
-        private void RemoveBuffs(List<string> removeIDs)
+        private void RemoveBuffs()
         {
             foreach (string id in removeIDs)
             {
@@ -288,6 +265,21 @@ namespace ButtonGame.Combat
                     fxIconSpawner.Destroy(id);
                 }
             }
+
+            removeIDs.Clear();
+            EffectsUpdated.Invoke();
+        }
+
+        private void RemoveTemporaryBuffs()
+        {
+            foreach (var key in buffList.Keys)
+            {
+                fxName = (EffectName)Enum.Parse(typeof(EffectName), key);
+                if(float.Parse(effectDB.GetEffectStat(EffectStat.Persistent, fxName)) < 1)
+                {
+                    removeIDs.Add(key);
+                }
+            }
         }
 
         public Health GetTarget()
@@ -295,12 +287,16 @@ namespace ButtonGame.Combat
             return targetHealth;
         }
 
-        public IEnumerable<float[]> GetStatEffectModifiers(Stat stat)
+        public bool HasEffect(string ID)
         {
-            if (buffList.Count == 0) yield return new float[] {0, 0};
+            return buffList.ContainsKey(ID);
+        }
+
+        public float[] GetStatEffectModifiers(Stat stat)
+        {
+            if (buffList.Count == 0) return new float[] {0, 0};
 
             float[] result = new float[] {0, 0};
-            List<string> removeIDs = new List<string>();
             //Run through each active buff
             foreach (string id in buffList.Keys)
             {
@@ -331,181 +327,7 @@ namespace ButtonGame.Combat
                 }
             }
 
-            RemoveBuffs(removeIDs);
-
-            yield return result;
-        }
-
-        public IEnumerable<float[]> GetAtkStatModifiers(AttackType atkType, AttackStat attackStat)
-        {
-            if (buffList.Count == 0) yield return new float[] {0, 0};
-
-            float[] result = new float[] {0, 0};
-            List<string> removeIDs = new List<string>();
-            //Run through each active buff
-            foreach (string id in buffList.Keys)
-            {
-                EffectName effect = (EffectName)Enum.Parse(typeof(EffectName), id);
-
-                // Check if effect type boosts Attack, otherwise desired EffectStats aren't assigned
-                if (effectDB.GetEffectStat(EffectStat.EffectType, effect) == "Atk Boost")
-                {
-                    // Skip if buff value is a bool
-                    int modType = int.Parse(effectDB.GetEffectStat(EffectStat.Additive, effect));
-                    if (modType == 2) continue;
-
-                    // Get affected skill list and compare with the provided AtkType
-                    string fxAttackTypes = effectDB.GetEffectStat(EffectStat.AtkTypesAffected, effect);
-                    if (fxAttackTypes == "All" || fxAttackTypes.Contains(atkType.ToString()))
-                    {
-                        string fxAttackStats = effectDB.GetEffectStat(EffectStat.AtkStatsAffected, effect);
-                        // Compare the Effect stat to the provided stat
-                        if (fxAttackStats.Contains(attackStat.ToString()))
-                        {
-                            // Check and assign value, then check if buff is consumed on activation
-                            result[modType] += float.Parse(effectDB.GetEffectStat(EffectStat.AtkEffectValues, effect));
-                            if (int.Parse(effectDB.GetEffectStat(EffectStat.Consumed, effect)) == 1 && !removeIDs.Contains(id))
-                            {
-                                removeIDs.Add(id);
-                            }
-                        }
-                    }
-                }
-            }
-            
-
-            RemoveBuffs(removeIDs);
-
-            yield return result;
-        }
-
-        public IEnumerable<bool> GetAtkBooleanModifiers(AttackType atkType, AttackStat attackStat)
-        {
-            if (buffList.Count == 0) yield return false;
-
-            bool result = false;
-            List<string> removeIDs = new List<string>();
-            //Run through each active buff
-            foreach (string id in buffList.Keys)
-            {
-                EffectName effect = (EffectName)Enum.Parse(typeof(EffectName), id);
-                // Check if effect type boosts Attack, otherwise desired EffectStats aren't assigned
-                if (effectDB.GetEffectStat(EffectStat.EffectType, effect) == "Atk Boost")
-                {
-                    // Skip if not a boolean buff value
-                    if (int.Parse(effectDB.GetEffectStat(EffectStat.Additive, effect)) != 2) continue;
-
-                    // Get affected skill list and compare with the provided AtkType
-                    string fxAttackTypes = effectDB.GetEffectStat(EffectStat.AtkTypesAffected, effect);
-                    if (fxAttackTypes == "All" || fxAttackTypes.Contains(atkType.ToString()))
-                    {
-                        string fxAttackStats = effectDB.GetEffectStat(EffectStat.AtkStatsAffected, effect);
-                        // Compare the Effect stat to the provided stat
-                        if (fxAttackStats.Contains(attackStat.ToString()))
-                        {
-                            // Check and assign value, then check if buff is consumed on activation
-                            if (effectDB.GetEffectStat(EffectStat.AtkEffectValues, effect).ToLower() == "true")
-                            {
-                                result = true;
-                            }
-                            if (int.Parse(effectDB.GetEffectStat(EffectStat.Consumed, effect)) == 1)
-                            {
-                                removeIDs.Add(id);
-                            }
-                        }
-                    }
-                }
-            }
-
-            RemoveBuffs(removeIDs);
-
-            yield return result;
-        }
-
-        public IEnumerable<float[]> GetMonAtkStatModifiers(MonAtkName atkName, MonAtkStat attackStat)
-        {
-            if (buffList.Count == 0) yield return new float[] { 0, 0 };
-
-            float[] result = new float[] { 0, 0 };
-            List<string> removeIDs = new List<string>();
-            //Run through each active buff
-            foreach (string id in buffList.Keys)
-            {
-                EffectName effect = (EffectName)Enum.Parse(typeof(EffectName), id);
-
-                // Check if effect type boosts Attack, otherwise desired EffectStats aren't assigned
-                if (effectDB.GetEffectStat(EffectStat.EffectType, effect) == "Atk Boost")
-                {
-                    // Skip if buff value is a bool
-                    int modType = int.Parse(effectDB.GetEffectStat(EffectStat.Additive, effect));
-                    if (modType == 2) continue;
-
-                    // Get affected skill list and compare with the provided AtkType
-                    string fxAttackTypes = effectDB.GetEffectStat(EffectStat.AtkTypesAffected, effect);
-                    if (fxAttackTypes == "All" || fxAttackTypes.Contains(atkName.ToString()))
-                    {
-                        string fxAttackStats = effectDB.GetEffectStat(EffectStat.AtkStatsAffected, effect);
-                        // Compare the Effect stat to the provided stat
-                        if (fxAttackStats.Contains(attackStat.ToString()))
-                        {
-                            // Check and assign value, then check if buff is consumed on activation
-                            result[modType] += float.Parse(effectDB.GetEffectStat(EffectStat.AtkEffectValues, effect));
-                            if (int.Parse(effectDB.GetEffectStat(EffectStat.Consumed, effect)) == 1 && !removeIDs.Contains(id))
-                            {
-                                removeIDs.Add(id);
-                            }
-                        }
-                    }
-                }
-            }
-
-
-            RemoveBuffs(removeIDs);
-
-            yield return result;
-        }
-
-        public IEnumerable<bool> GetMonAtkBooleanModifiers(MonAtkName atkName, MonAtkStat attackStat)
-        {
-            if (buffList.Count == 0) yield return false;
-
-            bool result = false;
-            List<string> removeIDs = new List<string>();
-            //Run through each active buff
-            foreach (string id in buffList.Keys)
-            {
-                EffectName effect = (EffectName)Enum.Parse(typeof(EffectName), id);
-                // Check if effect type boosts Attack, otherwise desired EffectStats aren't assigned
-                if (effectDB.GetEffectStat(EffectStat.EffectType, effect) == "Atk Boost")
-                {
-                    // Skip if not a boolean buff value
-                    if (int.Parse(effectDB.GetEffectStat(EffectStat.Additive, effect)) != 2) continue;
-
-                    // Get affected skill list and compare with the provided AtkType
-                    string fxAttackTypes = effectDB.GetEffectStat(EffectStat.AtkTypesAffected, effect);
-                    if (fxAttackTypes == "All" || fxAttackTypes.Contains(atkName.ToString()))
-                    {
-                        string fxAttackStats = effectDB.GetEffectStat(EffectStat.AtkStatsAffected, effect);
-                        // Compare the Effect stat to the provided stat
-                        if (fxAttackStats.Contains(attackStat.ToString()))
-                        {
-                            // Check and assign value, then check if buff is consumed on activation
-                            if (effectDB.GetEffectStat(EffectStat.AtkEffectValues, effect).ToLower() == "true")
-                            {
-                                result = true;
-                            }
-                            if (int.Parse(effectDB.GetEffectStat(EffectStat.Consumed, effect)) == 1)
-                            {
-                                removeIDs.Add(id);
-                            }
-                        }
-                    }
-                }
-            }
-
-            RemoveBuffs(removeIDs);
-
-            yield return result;
+            return result;
         }
 
         public void StartBattle()
@@ -516,6 +338,8 @@ namespace ButtonGame.Combat
         public void EndBattle()
         {
             isBattleActive = false;
+            StopAllCoroutines();
+            RemoveTemporaryBuffs();
         }
 
         public object CaptureState()

@@ -56,23 +56,25 @@ namespace ButtonGame.UI.Inventories
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if(equipment == null || eventData.pointerId != -2) return;
+            if(eventData.pointerId != -2) return;
 
-            InventoryItem item = inventory.GetItemInSlot(index);
-            int equipIndex = equipment.TryAddItem(item);
+            EquipableItem equipableItem = inventory.GetItemInSlot(index) as EquipableItem;
+            if(equipment == null || equipableItem == null) return;
+
+            int equipIndex = equipment.TryAddItem(equipableItem);
             if(equipIndex >= 0)
             {
-                EquipableItem equipableItem = item as EquipableItem;
                 EquipLocation equipLocation = equipableItem.GetAllowedEquipLocation();
 
                 EquipableItem takebackItem = equipment.GetItemInSlot(equipLocation, equipIndex);
 
-                equipment.AddItem(equipLocation, equipableItem, equipIndex);
                 RemoveItems(1);
                 if(takebackItem != null)
                 {
+                    equipment.RemoveItem(equipLocation, equipIndex);
                     AddItems(takebackItem, 1);
                 }
+                equipment.AddItem(equipLocation, equipableItem, equipIndex);
             }
         }
     }

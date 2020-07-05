@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ButtonGame.Stats.Enums;
 using UnityEngine;
 
 namespace ButtonGame.Stats

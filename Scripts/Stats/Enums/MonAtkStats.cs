@@ -1,0 +1,31 @@
+namespace ButtonGame.Stats.Enums
+{
+    public enum MonAtkStat
+    {
+        Name,
+        Description,
+        ID,
+        TotalTime,
+        LeadTime,
+        LeadText,
+        BigAttack,
+        InvulnTime,
+        Shield,
+        ShieldHealth,
+        ShieldTime,
+        ShieldBreak,
+        ShieldFail,
+        Moveset,
+        HitCount,
+        AttackText,
+        TimeToHit,
+        IsFlatDmg,
+        FlatDamage,
+        Power,
+        CritMod,
+        Unblockable,
+        EffectID,
+        EffectTarget,
+        ApplyEffect
+    }
+}

@@ -129,7 +129,7 @@ namespace ButtonGame.Character
             manaRegenTime += Time.deltaTime;
             if(manaRegenTime >= 5f)
             {
-                GetComponent<Mana>().GainMana();
+                GetComponent<Mana>().GainAttribute();
                 manaRegenTime = 0;
             }
         }

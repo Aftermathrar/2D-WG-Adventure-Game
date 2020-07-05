@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ButtonGame.Saving;
+using ButtonGame.Stats;
+using UnityEngine.Events;
+using ButtonGame.Stats.Enums;
 
 namespace ButtonGame.Inventories
 {
@@ -9,10 +12,33 @@ namespace ButtonGame.Inventories
     /// Provides a store for the items equipped to a player. Items are stored by
     /// their equip locations.
     /// </summary>
-    public class Equipment : MonoBehaviour, ISaveable
+    public class Equipment : MonoBehaviour, ISaveable, IStatModifier
     {
+        // CONFIG DATA
+        [Tooltip("Allowed size")]
+        [SerializeField] EquipmentLocationLimits[] slotLimits;
+
+        [System.Serializable]
+        public struct EquipmentLocationLimits
+        {
+            public EquipLocation equipType;
+            public int slotsAvailable;
+        }
+
         // STATE
-        Dictionary<EquipLocation, EquipableItem[]> equippedItems = new Dictionary<EquipLocation, EquipableItem[]>();
+        Dictionary<EquipLocation, EquipableItem[]> equippedItems;
+        Dictionary<Stat, float[]> equippedStats;
+
+        // Sets up dictionary for multiple slots per location
+        private void Awake() 
+        {
+            equippedItems = new Dictionary<EquipLocation, EquipableItem[]>();
+            equippedStats = new Dictionary<Stat, float[]>();
+            foreach (var slotLimit in slotLimits)
+            {
+                equippedItems[slotLimit.equipType] = new EquipableItem[slotLimit.slotsAvailable];
+            }
+        }
 
         // PUBLIC
 
@@ -20,6 +46,7 @@ namespace ButtonGame.Inventories
         /// Broadcasts when the items in the slots are added/removed.
         /// </summary>
         public event Action equipmentUpdated;
+        public UnityEvent equipmentEffectsUpdated;
 
         /// <summary>
         /// Convenience for getting the player's equipment.
@@ -35,20 +62,9 @@ namespace ButtonGame.Inventories
         /// </summary>
         public EquipableItem GetItemInSlot(EquipLocation equipLocation, int index)
         {
+            if(equippedItems[equipLocation] == null) return null;
+
             return equippedItems[equipLocation][index];
-        }
-
-        // Sets up equipment dictionary to store limits on number of equips of same type
-        public void DefineEquipmentSlots(Dictionary<EquipLocation, int> slotLimitTable)
-        {
-            if(equippedItems.Keys.Count > 0) return;
-
-            int slotLimit = 1;
-            foreach (var key in slotLimitTable.Keys)
-            {
-                slotLimit = slotLimitTable[key] + 1;
-                equippedItems[key] = new EquipableItem[slotLimit];
-            }
         }
 
         // Handles equipping via right click from inventory
@@ -84,10 +100,32 @@ namespace ButtonGame.Inventories
             Debug.Assert(item.GetAllowedEquipLocation() == slot);
 
             equippedItems[slot][index] = item;
+            
+            AddEquipmentStats(item);
 
             if (equipmentUpdated != null)
             {
                 equipmentUpdated();
+                equipmentEffectsUpdated.Invoke();
+            }
+        }
+
+        private void AddEquipmentStats(EquipableItem item)
+        {
+            if(item == null) return;
+            
+            Dictionary<Stat, float[]> equipDict = item.GetStatValues();
+            foreach (var pair in equipDict)
+            {
+                if (!equippedStats.ContainsKey(pair.Key))
+                {
+                    equippedStats[pair.Key] = pair.Value;
+                }
+                else
+                {
+                    equippedStats[pair.Key][0] += pair.Value[0];
+                    equippedStats[pair.Key][1] += pair.Value[1];
+                }
             }
         }
 
@@ -96,11 +134,21 @@ namespace ButtonGame.Inventories
         /// </summary>
         public void RemoveItem(EquipLocation slot, int index)
         {
+            // Remove stats from dictionary
+            Dictionary<Stat, float[]> equipDict = equippedItems[slot][index].GetStatValues();
+            foreach (var pair in equipDict)
+            {
+                equippedStats[pair.Key][0] -= pair.Value[0];
+                equippedStats[pair.Key][1] -= pair.Value[1];
+            }
+
+            // Remove item from inventory
             equippedItems[slot][index] = null;
 
             if (equipmentUpdated != null)
             {
                 equipmentUpdated();
+                equipmentEffectsUpdated.Invoke();
             }
         }
 
@@ -138,6 +186,7 @@ namespace ButtonGame.Inventories
         public void RestoreState(object state)
         {
             equippedItems = new Dictionary<EquipLocation, EquipableItem[]>();
+            equippedStats = new Dictionary<Stat, float[]>();
             
             var equippedItemsForSerialization = (Dictionary<EquipLocation, string[]>)state;
             
@@ -147,9 +196,20 @@ namespace ButtonGame.Inventories
                 for (int i = 0; i < items.Length; i++)
                 {
                     items[i] = (EquipableItem)InventoryItem.GetFromID(pair.Value[i]);
+                    AddEquipmentStats(items[i]);
                 }
                 equippedItems[pair.Key] = items;
             }
+        }
+
+        public float[] GetStatEffectModifiers(Stat stat)
+        {
+            // Short circuit on null check
+            if(equippedStats != null && equippedStats.ContainsKey(stat))
+            {
+                return equippedStats[stat];
+            }
+            return new float[] { 0, 0 };
         }
     }
 }

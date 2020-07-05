@@ -2,31 +2,34 @@
 using System.Collections.Generic;
 using ButtonGame.Saving;
 using ButtonGame.Stats;
+using ButtonGame.Stats.Enums;
 using GameDevTV.Utils;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace ButtonGame.Attributes
 {
-    public class Mana : MonoBehaviour, ISaveable
+    public class Mana : MonoBehaviour, ISaveable, IAttribute
     {
         [SerializeField] GainManaEvent gainMana;
 
         [System.Serializable]
         public class GainManaEvent : UnityEvent<float> {}
 
+        BaseStats baseStats;
         LazyValue<float> manaPoints;
         float maxMana;
         
         private void Awake() 
         {
+            baseStats = GetComponent<BaseStats>();
             manaPoints = new LazyValue<float>(GetInitialMana);
             maxMana = manaPoints.value;
         }
 
         private float GetInitialMana()
         {
-            return GetComponent<BaseStats>().GetStat(Stat.Mana);
+            return baseStats.GetStat(Stat.Mana);
         }
 
         private void Start() 
@@ -34,28 +37,33 @@ namespace ButtonGame.Attributes
             manaPoints.ForceInit();
         }
 
+        public void RecalculateMaxMana()
+        {
+            maxMana = baseStats.GetStat(Stat.Mana);
+        }
+
         public void UseMana(float mpCost)
         {
             manaPoints.value = Mathf.Max(manaPoints.value - mpCost, 0);
         }
 
-        public void GainMana(float mpGain = 0f)
+        public void GainAttribute(float amount = 0f)
         {
-            if(mpGain == 0)
+            if(amount == 0)
             {
-                mpGain = GetComponent<BaseStats>().GetStat(Stat.ManaRegen);
+                amount = baseStats.GetStat(Stat.ManaRegen);
             }
-            manaPoints.value = Mathf.Min(manaPoints.value + mpGain, GetMaxMana());
+            manaPoints.value = Mathf.Min(manaPoints.value + amount, GetMaxAttributeValue());
         }
 
-        public float GetMana()
+        public float GetAttributeValue()
         {
             return manaPoints.value;
         }
 
-        public float GetMaxMana()
+        public float GetMaxAttributeValue()
         {
-            return GetComponent<BaseStats>().GetStat(Stat.Mana);
+            return maxMana;
         }
 
         public float GetPercentage()
@@ -65,7 +73,7 @@ namespace ButtonGame.Attributes
 
         public float GetFraction()
         {
-            return manaPoints.value / GetMaxMana();
+            return manaPoints.value / maxMana;
         }
 
         public object CaptureState()
