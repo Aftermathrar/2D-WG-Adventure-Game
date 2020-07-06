@@ -81,7 +81,7 @@ namespace ButtonGame.Attributes
 
         public object CaptureState()
         {
-            return fullnessPoints;
+            return fullnessPoints.value;
         }
 
         public void RestoreState(object state)

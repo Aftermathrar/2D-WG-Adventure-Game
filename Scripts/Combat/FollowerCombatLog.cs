@@ -26,6 +26,7 @@ namespace ButtonGame.Combat
             newMessage.text = text;
 
             GameObject newText = Instantiate(textObject, chatPanel.transform);
+            newText.transform.SetAsFirstSibling();
             newMessage.textObject = newText.GetComponent<Text>();
             newMessage.textObject.text = newMessage.text;
             newMessage.textObject.color = defaultColor;

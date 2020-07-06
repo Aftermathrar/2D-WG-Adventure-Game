@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ButtonGame.Attributes;
 using ButtonGame.Combat;
 using ButtonGame.Core;
+using ButtonGame.Inventories;
 using ButtonGame.Stats;
 using ButtonGame.Stats.Enums;
 using ButtonGame.Stats.Follower;
@@ -17,6 +18,7 @@ namespace ButtonGame.Character
         [SerializeField] FollowerAttackDB followerAttackDB = null;
         [SerializeField] FollowerAttackIconDB followerAttackIconDB = null;
         [SerializeField] EffectDB effectDB = null;
+        [SerializeField] FollowerCombatLog combatLog = null;
         BaseStats baseStats;
         BaseFollowerAttackStats baseAttackStats;
         FollowerFighter fighter;
@@ -25,6 +27,7 @@ namespace ButtonGame.Character
         Health playerHealth;
         Mana playerMana;
         Health targetHealth;
+        Inventory inventory;
         IAttribute resourceType;
         [SerializeField] Image actBarOverlay = null;
 
@@ -43,6 +46,15 @@ namespace ButtonGame.Character
         bool isEffectOnHit;
         bool isAttackActive;
         bool isFromQueue;
+
+        // Hunger values
+        float greed;
+        float fatDesire;
+        float starveValue = 0;
+        float hungerValue = 20f;
+        float preferredFullness = 50f;
+        float maxFullness = 100f;
+        float overfullPenalty;
 
         [SerializeField] HitTimer hitTimer;
         [Range(1, 100)]
@@ -76,7 +88,33 @@ namespace ButtonGame.Character
             actionRecovery = attackSpeed * metabolism / 100;
             digestSpeed = metabolism / 24;
             manaConversion = metabolism * baseStats.GetStat(Stat.Spirit) / 10000;
+
+            // Hunger stats
+            // Preferred fullness is the min value to aim for when eating
+            // Max fullness is the max value to accept when eating
+            // Minimum "starve" value - overrides other actions
+            // Soft "hungry" value - eat if no other actions
+            greed = baseStats.GetStat(Stat.Greed);
+            fatDesire = baseStats.GetStat(Stat.FatDesire);
+            preferredFullness += fatDesire / 2;
+            maxFullness += greed / 4;
+            starveValue += greed / 2;
+            hungerValue = Mathf.Max(starveValue, (preferredFullness - starveValue) * 0.4f);
             StartingAttackQueue();
+        }
+
+        private void StartingAttackQueue()
+        {
+            if (!fighter.HasEffect(FollowerAttackName.DivineInfusion.ToString()))
+            {
+                atkQueue.Enqueue(FollowerAttackName.DivineInfusion);
+            }
+            atkQueue.Enqueue(FollowerAttackName.SpiritBoost);
+            atkQueue.Enqueue(FollowerAttackName.ExposeWeakness);
+            if (playerHealth.GetPercentage() < regenThreshold)
+            {
+                atkQueue.Enqueue(FollowerAttackName.SoothingWind);
+            }
         }
 
         public void SetTarget(GameObject player, GameObject enemy)
@@ -88,22 +126,22 @@ namespace ButtonGame.Character
 
         private void Update() 
         {
-            UpdateStats();
-            if(isBattleActive && CanAttack())
+            if(isBattleActive)
             {
+                if(isAttackActive)
+                {
+                    timeSinceAttackStart += Time.deltaTime;
+                    if (timeSinceAttackStart >= maxTimeToHit)
+                    {
+                        skillCooldown[currentAttack] = Time.time;
+                        CheckEffectActivation(true);
+                        isAttackActive = false;
+                    }
+                }
+
                 timeSinceLastAttack += (actionRecovery * actionModifier) * Time.deltaTime;
                 DecideNextAction();
                 UpdateActionBar();
-            }
-            else if(isBattleActive)
-            {
-                timeSinceAttackStart += Time.deltaTime;
-                if(timeSinceAttackStart >= maxTimeToHit)
-                {
-                    skillCooldown[currentAttack] = Time.time;
-                    CheckEffectActivation(true);
-                    isAttackActive = false;
-                }
             }
             editorAtkList = atkQueue.ToArray();
         }
@@ -115,14 +153,22 @@ namespace ButtonGame.Character
                 float foodValue = fullness.DigestFood(digestSpeed * actionModifier);
                 selfMana.GainAttribute(foodValue * manaConversion);
                 timeSinceLastAttack = 0;
+                string chatMessage = null;
 
-                if(AttackInQueue())
+                float fullPercent = fullness.GetPercentage();
+                // Check for hunger and whether inventory has consumable
+                if (fullPercent <= 0)
+                {
+                    // eat something yo
+                }
+                else if(AttackInQueue())
                 {
                     FollowerAttackStats attackStats = followerAttackDB.GetAttackStat(currentAttack);
 
                     // Check if have mana to cover attack cost
                     if (attackStats.Cost < selfMana.GetAttributeValue())
                     {
+                        attackSpeed = fighter.GetStat(Stat.AttackSpeed);
                         float atkSpeed = 1 / attackSpeed * 100;
                         maxTimeToHit = attackStats.CastTime * atkSpeed;
                         actionModifier = attackStats.ActionModifier;
@@ -145,14 +191,33 @@ namespace ButtonGame.Character
                             skillRecastRoutines[currentAttack] = StartCoroutine(SkillRecast(currentAttack, recastTime));
                             atkQueue.Dequeue();
                         }
-                        return;
+                        chatMessage = "Casting " + attackStats.Name;
                     }
-                    Debug.Log("None mana");
+                    else
+                    {
+                        chatMessage = "I'm OOMing!";
+                        actionModifier = 2f;
+                    }
+                }
+                // check if under soft cap 
+                else if(fullPercent <= hungerValue)
+                {
+                    // eat something too
+                }
+                else
+                {
+                    chatMessage = "Nothing to do?";
+                    actionModifier = 2f;
+                }
+
+                //Check if penalty should be applied
+                if(fullPercent > 100)
+                {
+                    float overfullPercent = (fullPercent - 100) / (maxFullness - 100);
+                    actionModifier *= 1 - (0.5f - fatDesire / 2) * overfullPercent;
                 }
                 
-                // If no attack or out of mana, check for hunger
-                actionModifier = 2f;
-
+                combatLog.SendMessageToChat(chatMessage);
             }
         }
 
@@ -206,6 +271,7 @@ namespace ButtonGame.Character
         {
             yield return new WaitForSeconds(timeToWait);
             // Run proficiency check for optimal timing, otherwise call for recheck after X seconds
+            combatLog.SendMessageToChat("Queuing up " + followerAttackDB.GetAttackStat(attackName).Name);
             atkQueue.Enqueue(attackName);
             skillRecastRoutines.Remove(attackName);
         }
@@ -215,7 +281,7 @@ namespace ButtonGame.Character
             if (skillCooldown.ContainsKey(attack))
             {
                 FollowerAttackStats attackStats = followerAttackDB.GetAttackStat(attack);
-                float cooldown = attackStats.Cooldown * (1 - baseStats.GetStat(Stat.CooldownReduction)/100);
+                float cooldown = attackStats.Cooldown * (1 - fighter.GetStat(Stat.CooldownReduction)/100);
                 if (skillCooldown[currentAttack] >= (Time.time - cooldown))
                 {
                     return true;
@@ -266,39 +332,10 @@ namespace ButtonGame.Character
             }
         }
 
-        private void UpdateStats()
-        {
-            attackSpeed = fighter.GetStat(Stat.AttackSpeed);
-            cooldownReduction = fighter.GetStat(Stat.CooldownReduction);
-        }
-
         private void UpdateActionBar()
         {
             float fill = Mathf.Clamp01(timeSinceLastAttack / timeBetweenAttacks);
             actBarOverlay.fillAmount = fill;
-        }
-
-        public bool CanAttack()
-        {
-            if(isAttackActive)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        private void StartingAttackQueue()
-        {
-            if(!fighter.HasEffect(FollowerAttackName.DivineInfusion.ToString()))
-            {
-                atkQueue.Enqueue(FollowerAttackName.DivineInfusion);
-            }
-            atkQueue.Enqueue(FollowerAttackName.SpiritBoost);
-            atkQueue.Enqueue(FollowerAttackName.ExposeWeakness);
-            if(playerHealth.GetPercentage() < regenThreshold)
-            {
-                atkQueue.Enqueue(FollowerAttackName.SoothingWind);
-            }
         }
 
         public void StartBattle()

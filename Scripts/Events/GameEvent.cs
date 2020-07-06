@@ -17,6 +17,22 @@ namespace ButtonGame.Events
             }
         }
 
+        public void RaiseEvent(string s)
+        {
+            for (int i = listeners.Count - 1; i >= 0; i--)
+            {
+                listeners[i].OnEventRaised(s);
+            }
+        }
+
+        public void RaiseEvent(float f, bool isTrue)
+        {
+            for (int i = listeners.Count - 1; i >= 0; i--)
+            {
+                listeners[i].OnEventRaised(f, isTrue);
+            }
+        }
+
         public void RegisterListener(GameEventListener listener)
         {
             listeners.Add(listener);

@@ -9,6 +9,10 @@ namespace ButtonGame.Events
     {
         public GameEvent gameEvent;
         public UnityEvent response;
+        public StringResponse stringResponse;
+        [System.Serializable]
+        public class StringResponse : UnityEvent<string> { }
+        public UnityEvent<float, bool> floatBoolResponse;
 
         private void OnEnable()
         {
@@ -23,6 +27,16 @@ namespace ButtonGame.Events
         public void OnEventRaised()
         {
             response.Invoke();
+        }
+
+        public void OnEventRaised(string s)
+        {
+            stringResponse.Invoke(s);
+        }
+
+        public void OnEventRaised(float i, bool isTrue)
+        {
+            floatBoolResponse.Invoke(i, isTrue);
         }
     }
 }

@@ -32,6 +32,7 @@ namespace ButtonGame.Stats.Enums
         Proficiency,
         Confidence,
         Greed,
+        FatDesire,
         Metabolism
     }
 }

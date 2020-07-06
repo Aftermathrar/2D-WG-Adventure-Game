@@ -14,6 +14,7 @@ namespace ButtonGame.Stats.Enums
         SpiritSurge,
         LifeLeech,
         DivineInfusion,
-        FindWeakness
+        FindWeakness,
+        AbsorbPower
     }
 }

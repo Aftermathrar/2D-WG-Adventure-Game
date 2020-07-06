@@ -21,7 +21,7 @@ namespace ButtonGame.Combat
         protected GuardController guard = null;
         protected Mana mana;
         protected Health target;
-        BaseStats targetStats;
+        protected BaseStats targetStats;
         protected Fighter fighter;
         protected Button thisButton;
         protected Sprite atkIcon = null;
@@ -320,7 +320,7 @@ namespace ButtonGame.Combat
             return isCrit;
         }
 
-        public void CalculateReflectDamage()
+        public virtual void CalculateReflectDamage()
         {
             float total = 0;
             float atkPower = fighter.GetStat(Stat.AttackPower);
