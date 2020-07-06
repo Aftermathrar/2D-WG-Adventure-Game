@@ -178,9 +178,9 @@ namespace ButtonGame.Inventories
             slots[5].number = 2;
             slots[6].item = InventoryItem.GetFromID("116ccfc9-2af7-4130-afb5-a776d6b8c16f");
             slots[6].number = 2;
-            slots[7].item = InventoryItem.GetFromID("eb5baec2-35e0-47c6-9b67-fbf5c7fec541");
+            slots[7].item = InventoryItem.GetFromID("963a13ad-9170-4398-ac4e-88256afb1a5b");
             slots[7].number = 5;
-            slots[8].item = InventoryItem.GetFromID("3f8b14ad-a59a-40a6-ae78-0d4665220ff2");
+            slots[8].item = InventoryItem.GetFromID("30419955-2fbb-4f89-ac80-0620e947de70");
             slots[8].number = 5;
             slots[9].item = InventoryItem.GetFromID("c942f2ed-9441-4a9e-a268-c7b6293ee1fd");
             slots[9].number = 1;

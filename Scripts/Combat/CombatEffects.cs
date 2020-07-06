@@ -29,7 +29,6 @@ namespace ButtonGame.Combat
 
         protected Dictionary<string, float[]> buffList = new Dictionary<string, float[]>();
         protected List<string> removeIDs = new List<string>();
-        //[SerializeField] List<Sprite> fxIcons = new List<Sprite>();
         Sprite fxIcon = null;
 
         public UnityEvent EffectsUpdated;
