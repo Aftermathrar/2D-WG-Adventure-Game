@@ -17,9 +17,14 @@ namespace ButtonGame.Stats
 
         public float GetStat(Stat stat)
         {
-            // For stat modifiers, 0 is Additive, 1 is Percentage. From .asset values
+            // For stat modifiers, 1 is Additive, 0 is Percentage. From .asset values
             return (GetBaseStat(stat) + GetStatModifiers(stat)[1]) * (1 + GetStatModifiers(stat)[0] / 100);
             // return (GetBaseStat(stat) + GetAdditiveModifier(stat)) * (1 + GetPercentageModifier(stat)/100);
+        }
+
+        public float GetRawStat(Stat stat)
+        {
+            return GetBaseStat(stat);
         }
 
         private float GetBaseStat(Stat stat)
@@ -27,7 +32,12 @@ namespace ButtonGame.Stats
             return float.Parse(baseStatDB.GetStat(characterClass, stat));
         }
 
-        public string GetClass()
+        public CharacterClass GetClass()
+        {
+            return characterClass;
+        }
+
+        public string GetClassString()
         {
             return characterClass.ToString();
         }

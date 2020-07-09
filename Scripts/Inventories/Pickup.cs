@@ -58,6 +58,7 @@ namespace ButtonGame.Inventories
 
         public bool CanBePickedUp()
         {
+            if(item == null) return false;
             return inventory.HasSpaceFor(item);
         }
     }

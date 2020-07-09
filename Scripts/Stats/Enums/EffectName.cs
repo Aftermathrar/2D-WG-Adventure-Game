@@ -15,6 +15,7 @@ namespace ButtonGame.Stats.Enums
         LifeLeech,
         DivineInfusion,
         FindWeakness,
-        AbsorbPower
+        AbsorbPower,
+        RegenPuddle
     }
 }

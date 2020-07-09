@@ -8,6 +8,7 @@ using ButtonGame.Character;
 using ButtonGame.Core;
 using ButtonGame.Attributes;
 using TMPro;
+using ButtonGame.UI;
 
 namespace ButtonGame.Combat
 {
@@ -34,7 +35,6 @@ namespace ButtonGame.Combat
         [SerializeField] TextMeshProUGUI atkPriorityText = null;
         [SerializeField] CanvasGroup cdResetOverlay = null;
 
-        Coroutine spawnHitTimer = null;
         protected float timeSinceAtkOnCooldown = Mathf.Infinity;
         protected float timeSinceAtkStart = Mathf.Infinity;
         protected float timeSinceLastHit = Mathf.Infinity;
@@ -49,9 +49,8 @@ namespace ButtonGame.Combat
         bool[] isEffectOnHit;
         protected bool isBattleActive;
 
-        [SerializeField] protected HitTimer hitTimer;
-        private const float xOffset = -45f;
-        private const float yOffset = 135f;
+        [SerializeField] HitTimerSpawner hitTimerSpawner = null;
+        Coroutine spawnHitTimer = null;
         protected List<HitTimer> hitTimers = new List<HitTimer>();
 
         public void SetTarget(Health _target)
@@ -159,23 +158,21 @@ namespace ButtonGame.Combat
         {
             maxTimeToHit = GetStat(AttackStat.TimeToHit, 0);
             fighter.activeAttack += UpdateTimeToHit;
-            float newPosX = xOffset;
-            HitTimer myObjectInstance = Instantiate(hitTimer, new Vector3(newPosX, yOffset, 0), Quaternion.identity);
-            myObjectInstance.transform.SetParent(player.transform, false);
-            hitTimers.Add(myObjectInstance);
-            myObjectInstance.SetSprite(atkIcon);
+            float newPosX = 0;
+            HitTimer hitTimerInstance = hitTimerSpawner.SpawnHitTimer(newPosX);
+            hitTimers.Add(hitTimerInstance);
+            hitTimerInstance.SetSprite(atkIcon);
 
             maxTimeToHit = maxTimeToHit * atkSpeed;
-            myObjectInstance.SetFighter(fighter);
-            myObjectInstance.SetFillTime(maxTimeToHit);
+            hitTimerInstance.SetFighter(fighter);
+            hitTimerInstance.SetFillTime(maxTimeToHit);
 
             for (int i = 1; i < maxHitCount; i++)
             {
                 newPosX -= 75;
-                myObjectInstance = Instantiate(hitTimer, new Vector3(newPosX, yOffset, 0), Quaternion.identity);
-                myObjectInstance.transform.SetParent(player.transform, false);
-                hitTimers.Add(myObjectInstance);
-                myObjectInstance.SetSprite(atkIcon);
+                hitTimerInstance = hitTimerSpawner.SpawnHitTimer(newPosX);
+                hitTimers.Add(hitTimerInstance);
+                hitTimerInstance.SetSprite(atkIcon);
 
                 yield return null;
             }

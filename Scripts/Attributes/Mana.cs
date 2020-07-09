@@ -11,11 +11,6 @@ namespace ButtonGame.Attributes
 {
     public class Mana : MonoBehaviour, ISaveable, IAttribute
     {
-        [SerializeField] GainManaEvent gainMana;
-
-        [System.Serializable]
-        public class GainManaEvent : UnityEvent<float> {}
-
         BaseStats baseStats;
         LazyValue<float> manaPoints;
         float maxMana;

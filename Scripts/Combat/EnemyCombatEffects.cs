@@ -4,11 +4,25 @@ using System.Collections.Generic;
 using ButtonGame.Stats;
 using ButtonGame.Stats.Enums;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ButtonGame.Combat
 {
     public class EnemyCombatEffects : CombatEffects, IMonAtkEffectProvider
     {
+        [SerializeField] OnDebuffEvent debuffTarget;
+        [System.Serializable]
+        public class OnDebuffEvent : UnityEvent<string> { }
+
+        public override void DebuffTarget(string ID)
+        {
+            if (targetHealth == null) { return; }
+
+            CombatEffects enemyEffects = targetHealth.GetComponent<CombatEffects>();
+            enemyEffects.BuffSelf(ID);
+            debuffTarget.Invoke(ID);
+        }
+
         public IEnumerable<float[]> GetMonAtkStatModifiers(MonAtkName atkName, MonAtkStat attackStat)
         {
             if (buffList.Count == 0) yield return new float[] { 0, 0 };

@@ -37,7 +37,7 @@ namespace ButtonGame.Attributes
 
         public void RecalculateMaxCapacity()
         {
-            maxCapacity = GetInitialFullness();
+            maxCapacity = Mathf.Round(GetComponent<BaseStats>().GetStat(Stat.Capacity));
         }
 
         public float DigestFood(float foodAmount)
@@ -59,6 +59,13 @@ namespace ButtonGame.Attributes
 
             float size = food.GetSize() * number;
             fullnessPoints.value += size;
+        }
+
+        public void IncreaseCapacity(float amount)
+        {
+            float modvalue = maxCapacity * amount;
+            bodyManager.ModifyStat(Stat.Capacity, modvalue, true);
+            RecalculateMaxCapacity();
         }
 
         public void GainAttribute(float amount)

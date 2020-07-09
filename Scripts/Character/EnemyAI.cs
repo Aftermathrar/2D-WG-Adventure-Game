@@ -7,6 +7,7 @@ using ButtonGame.Attributes;
 using ButtonGame.Stats;
 using TMPro;
 using ButtonGame.Stats.Enums;
+using ButtonGame.UI;
 
 namespace ButtonGame.Character
 {
@@ -38,7 +39,8 @@ namespace ButtonGame.Character
         bool[] isEffectOnHit;
         string myName;
 
-        [SerializeField] HitTimer hitTimer;
+        // [SerializeField] HitTimer hitTimer;
+        [SerializeField] HitTimerSpawner hitTimerSpawner = null;
         List<HitTimer> hitTimers = new List<HitTimer>();
         [SerializeField] Queue<MonAtkName> atkQueue = new Queue<MonAtkName>();
 
@@ -119,11 +121,9 @@ namespace ButtonGame.Character
 
                         for (int i = 0; i < maxHitCount; i++)
                         {
-                            float newPosX = -300 + (i * 80);
-                            HitTimer instance = Instantiate(hitTimer, new Vector3(newPosX, -160, 0), Quaternion.identity);
-                            instance.transform.SetParent(enemy.transform, false);
+                            float newPosX = (i * 80);
+                            HitTimer instance = hitTimerSpawner.SpawnHitTimer(newPosX);
                             hitTimers.Add(instance);
-
                             instance.SetSprite(sprites[i]);
 
                             Color32 atkColor = new Color32(254, 195, 30, 255);

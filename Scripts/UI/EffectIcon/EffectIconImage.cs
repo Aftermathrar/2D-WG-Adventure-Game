@@ -19,10 +19,10 @@ namespace ButtonGame.UI.EffectIcon
             timerOverlay.overrideSprite = sprite;
         }
 
-        // public void SetColor(Color32 color)
-        // {
-        //     iconImage.color = color;
-        // }
+        public void SetPosition(Vector3 pos)
+        {
+            transform.position = pos;
+        }
 
         public void UpdateStacks(string stack)
         {

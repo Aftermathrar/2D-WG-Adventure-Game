@@ -26,11 +26,6 @@ namespace ButtonGame.Combat
             }
         }
 
-        public override void BuffPlayer(string ID)
-        {
-            playerEffects.BuffSelf(ID);
-        }
-
         protected override void BuffStatOverTime()
         {
             float buffDuration = float.Parse(effectDB.GetEffectStat(EffectStat.Duration, fxName));

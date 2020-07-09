@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ButtonGame.Core;
+using ButtonGame.UI;
 
 namespace ButtonGame.Combat
 {
     public class HitTimer : MonoBehaviour, IAction
     {
-        [SerializeField] private Fighter fighter;
+        private Fighter fighter;
         private float maxFillTime;
         private float currentFillTime;
         private float t;
         private float tVert;
         private float timeToMoveHoriz;
-        private float timeToMoveVert;
+        private float timeToMoveVert = 0.2f;
         private float xOffset;
         private float yOffset;
         private Vector3 startPosition;
@@ -24,15 +25,14 @@ namespace ButtonGame.Combat
 
         [SerializeField] Image fillOverlay;
         [SerializeField] Image[] myImage;
+        [SerializeField] CanvasGroup canvas;
 
-        private void Awake() 
-        {
-            timeToMoveVert = 0.2f;
-        }
+        // Allows return to pool
+        public HitTimerSpawner Spawner;
 
         private void Start() 
         {
-            if (transform.parent.CompareTag("Player"))
+            if (transform.parent.parent.CompareTag("Player"))
             {
                 xOffset = 50f;
                 yOffset = 10f;
@@ -46,7 +46,18 @@ namespace ButtonGame.Combat
             {
                 GetFighterComponent();
             }
+        }
 
+        private void OnEnable() 
+        {
+            isAttackComplete = false;
+            fillOverlay.fillAmount = 0;
+            canvas.alpha = 1f;
+            if(myImage.Length >= 3)
+            {
+                myImage[2].fillAmount = 0;
+                myImage[3].fillAmount = 1f;
+            }
         }
 
         private void GetFighterComponent()
@@ -57,6 +68,11 @@ namespace ButtonGame.Combat
         public void SetFighter(Fighter _fighter)
         {
             fighter = _fighter;
+        }
+
+        public void SetPosition(Vector3 spawnPos)
+        {
+            transform.localPosition = spawnPos;
         }
 
         public void SetSprite(Sprite sprite)
@@ -92,7 +108,6 @@ namespace ButtonGame.Combat
             timeToMoveHoriz = timeToHit;
             startPosition = transform.localPosition;
             targetPosition = new Vector3(transform.localPosition.x + xOffset, transform.localPosition.y, 0);
-            // Debug.Log("start: " + startPosition + " - dest: " + target);
         }
 
         private void UpdateBoxFill()
@@ -119,7 +134,7 @@ namespace ButtonGame.Combat
 
         private void MoveVertically()
         {
-            if (tVert == 0) StartCoroutine(FadeOutOverTime(0.2f));
+            if (tVert == 0) StartCoroutine(FadeOutOverTime(timeToMoveVert));
             tVert += Time.deltaTime;
             if(tVert > timeToMoveVert)
             {
@@ -151,17 +166,12 @@ namespace ButtonGame.Combat
             for (float tCurrent = 0; tCurrent < timeToFade; tCurrent+=Time.deltaTime)
             {
                 float normalizedTime = 1 - tCurrent/timeToFade;
-                for (int i = 0; i < myImage.Length; i++)
-                {
-                    Color temp = myImage[i].color;
-                    temp.a = normalizedTime;
-                    myImage[i].color = temp;
-                    yield return null;
-                }
+                canvas.alpha = normalizedTime;
+                yield return null;
             }
 
             fighter.activeAttack -= MoveVertically;
-            Destroy(this.gameObject);
+            Spawner.ReturnToStack(this);
         }
 
         private void MoveHorizontally()
@@ -185,8 +195,6 @@ namespace ButtonGame.Combat
                 }
                 fighter.activeAttack -= UpdateBoxFill;
                 fighter.activeAttack -= MoveHorizontally;
-                // fighter.activeAttack -= MoveVertically;
-                // Destroy(this.gameObject);
 
                 tVert = 0;
                 startPosition = transform.localPosition;

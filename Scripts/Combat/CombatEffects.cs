@@ -28,6 +28,7 @@ namespace ButtonGame.Combat
         protected bool isBattleActive;
 
         protected Dictionary<string, float[]> buffList = new Dictionary<string, float[]>();
+        protected Dictionary<string, Coroutine> coBuffList = new Dictionary<string, Coroutine>();
         protected List<string> removeIDs = new List<string>();
         Sprite fxIcon = null;
 
@@ -83,15 +84,13 @@ namespace ButtonGame.Combat
             }
         }
 
-        public void DebuffTarget(string ID)
+        public virtual void DebuffTarget(string ID)
         {
             if (targetHealth == null) { return; }
 
             CombatEffects enemyEffects = targetHealth.GetComponent<CombatEffects>();
             enemyEffects.BuffSelf(ID);
         }
-
-        public virtual void BuffPlayer(string ID) {}
 
         protected virtual void BuffStatOverTime()
         {
@@ -120,7 +119,7 @@ namespace ButtonGame.Combat
             buffList[fxID] = currentFXInfo;
             if (!isCoRoutineActive)
             {
-                StartCoroutine(BuffOverTime(buffDuration));
+                coBuffList[fxID] = StartCoroutine(BuffOverTime(buffDuration));
             }
         }
 
@@ -246,7 +245,7 @@ namespace ButtonGame.Combat
 
                 if(effectDB.GetEffectStat(EffectStat.EffectType, fxName) == "Stat Over Time")
                 {
-                    StartCoroutine(BuffOverTime(fxDuration));
+                    coBuffList[fxID] = StartCoroutine(BuffOverTime(fxDuration));
                 }
 
                 fxIconCount += 1;
@@ -262,6 +261,9 @@ namespace ButtonGame.Combat
                     fxIconCount -= 1;
                     buffList.Remove(id);
                     fxIconSpawner.Destroy(id);
+
+                    if(coBuffList.ContainsKey(id)) 
+                        StopCoroutine(coBuffList[id]);
                 }
             }
 
@@ -289,6 +291,20 @@ namespace ButtonGame.Combat
         public bool HasEffect(string ID)
         {
             return buffList.ContainsKey(ID);
+        }
+
+        public float GetEffectElapsedTime(string ID)
+        {
+            if(buffList.ContainsKey(ID))
+            {
+                return buffList[ID][1];
+            }
+            return 0;
+        }
+
+        public void ClearEffect(string buffID)
+        {
+            removeIDs.Add(buffID);
         }
 
         public float[] GetStatEffectModifiers(Stat stat)

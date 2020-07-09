@@ -14,7 +14,7 @@ namespace ButtonGame.Combat
         // Get effect from atk to pass to CombatEffects
 
         protected CombatEffects effects;
-        Health target;
+        protected Health target;
 
         float invulnDuration = 0f;
         float invulnTimer = Mathf.Infinity;
@@ -34,7 +34,7 @@ namespace ButtonGame.Combat
             baseStats = GetComponent<BaseStats>();
         }
 
-        private void Start() 
+        protected virtual void Start() 
         {
             effects = GetComponent<CombatEffects>();
             target = effects.GetTarget();

@@ -7,15 +7,43 @@ namespace ButtonGame.Combat
 {
     public class FollowerFighter : Fighter
     {
+        CombatEffects playerEffects;
+
+        protected override void Start()
+        {
+            effects = GetComponent<CombatEffects>();
+            playerEffects = GameObject.FindGameObjectWithTag("Player").GetComponent<CombatEffects>();
+            target = effects.GetTarget();
+            RecalculateStats();
+        }
+
         public override void RecalculateStats()
         {
             cdr = baseStats.GetStat(Stat.CooldownReduction);
             atkSpeed = baseStats.GetStat(Stat.AttackSpeed);
         }
         
-        public bool HasEffect(string ID)
+        public bool HasEffect(string ID, bool lookAtPlayer)
         {
+            if(lookAtPlayer)
+            {
+                return playerEffects.HasEffect(ID);
+            }
             return effects.HasEffect(ID);
+        }
+
+        public float GetEffectElapsedTime(string ID, bool lookAtPlayer)
+        {
+            if (lookAtPlayer)
+            {
+                return playerEffects.GetEffectElapsedTime(ID);
+            }
+            return effects.GetEffectElapsedTime(ID);
+        }
+
+        public void ClearEffect(string debuffID)
+        {
+            playerEffects.ClearEffect(debuffID);
         }
 
         public void PassEffectEnemy(string ID)
@@ -30,13 +58,13 @@ namespace ButtonGame.Combat
 
         public void PassEffectPlayer(string ID)
         {
-            effects.BuffPlayer(ID);
+            playerEffects.BuffSelf(ID);
         }
 
         public void PassEffectParty(string ID)
         {
             effects.BuffSelf(ID);
-            effects.BuffPlayer(ID);
+            playerEffects.BuffSelf(ID);
         }
     }
 }
