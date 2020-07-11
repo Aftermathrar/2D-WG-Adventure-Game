@@ -30,14 +30,14 @@ namespace ButtonGame.Combat
 
         public event Action activeAttack;
         
-        private void Awake() 
+        protected virtual void Awake() 
         {
             baseStats = GetComponent<BaseStats>();
+            effects = GetComponent<CombatEffects>();
         }
 
         protected virtual void Start() 
         {
-            effects = GetComponent<CombatEffects>();
             target = effects.GetTarget();
             RecalculateStats();
         }

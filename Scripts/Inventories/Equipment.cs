@@ -76,6 +76,8 @@ namespace ButtonGame.Inventories
 
             // Get location and check number of slots. If 1, add or swap items
             EquipLocation equipLocation = equipableItem.GetAllowedEquipLocation();
+            if(!equippedItems.ContainsKey(equipLocation)) return -1;
+            
             if(equippedItems[equipLocation].Length == 1)
             {
                 return 0;

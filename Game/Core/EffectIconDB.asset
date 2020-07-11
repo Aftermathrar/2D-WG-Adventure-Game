@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffccb6e411c1f64693fe8730c487d48, type: 3}
+  m_Name: EffectIconDB
+  m_EditorClassIdentifier: 
+  effectIcons:
+  - effectName: 0
+    sprite: {fileID: 0}
+  - effectName: 1
+    sprite: {fileID: 21300000, guid: 2fa28923dde560f42862ed07c9914ed3, type: 3}
+  - effectName: 2
+    sprite: {fileID: 21300000, guid: 886537fa1df4b3d40a1dddfff58bb9f7, type: 3}
+  - effectName: 3
+    sprite: {fileID: 21300000, guid: 43fba47ddbb7c624895d075822dcd2ca, type: 3}
+  - effectName: 4
+    sprite: {fileID: 21300000, guid: fc1f05c661aaacc45ad354c369f8591d, type: 3}
+  - effectName: 5
+    sprite: {fileID: 21300000, guid: 7cf864940c7f7c648b5ef484e5bd3bd3, type: 3}
+  - effectName: 6
+    sprite: {fileID: 21300000, guid: 97df53eef5c75c7438bbe3d53bba6ea9, type: 3}
+  - effectName: 7
+    sprite: {fileID: 21300000, guid: 3a196db186f4f2d42842460a6a9e6e0c, type: 3}
+  - effectName: 8
+    sprite: {fileID: 21300000, guid: 5d54eea5d3d6b1f42ab2945b0d9289a8, type: 3}
+  - effectName: 9
+    sprite: {fileID: 21300000, guid: 26092cf86dbb6f84c924cc7c75fd18d1, type: 3}
+  - effectName: 10
+    sprite: {fileID: 21300000, guid: 328b803732096ce429911f8d62b2b796, type: 3}
+  - effectName: 11
+    sprite: {fileID: 21300000, guid: c9c2a08fb66032d4b88e4b46bbbcc6cd, type: 3}
+  - effectName: 12
+    sprite: {fileID: 21300000, guid: a6427327dd9520d42a75366e317b33bb, type: 3}
+  - effectName: 13
+    sprite: {fileID: 21300000, guid: a033cddd169f7f449a972a5df3b45db4, type: 3}
+  - effectName: 14
+    sprite: {fileID: 21300000, guid: 6196be22c047b4245a174d2ee25f9e30, type: 3}
+  - effectName: 15
+    sprite: {fileID: 21300000, guid: 59f7ccec2e116954c8733b46dae6950d, type: 3}
+  - effectName: 16
+    sprite: {fileID: 21300000, guid: ab2188ff785ab754189fc77267accf05, type: 3}
+  - effectName: 17
+    sprite: {fileID: 21300000, guid: a732a69327a5bb749a58122aa1c3c2c4, type: 3}
+  - effectName: 18
+    sprite: {fileID: 21300000, guid: 5e1699bea884a254f897bf8b3497975c, type: 3}
+  - effectName: 19
+    sprite: {fileID: 21300000, guid: c923b1293b6f58249aade24805c2468b, type: 3}
+  - effectName: 20
+    sprite: {fileID: 21300000, guid: 111f36e3526cb53439fc573e5f713149, type: 3}

@@ -1,0 +1,904 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483bb4bc9634e4643ab3b6ce56f15205, type: 3}
+  m_Name: AttackDB
+  m_EditorClassIdentifier: 
+  attackTypeDB:
+  - attackType: 0
+    attackStats:
+    - stat: 0
+      value:
+      - Punch
+    - stat: 1
+      value:
+      - Normal attack to regain 20 mana.
+    - stat: 2
+      value:
+      - 10000
+    - stat: 3
+      value:
+      - 0
+    - stat: 4
+      value:
+      - 0
+    - stat: 5
+      value:
+      - 0
+    - stat: 6
+      value:
+      - 0
+    - stat: 7
+      value:
+      - .3
+    - stat: 8
+      value:
+      - .5
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - True
+    - stat: 12
+      value:
+      - FALSE
+    - stat: 13
+      value:
+      - MPGain
+    - stat: 14
+      value:
+      - Self
+    - stat: 15
+      value:
+      - OnHit
+    - stat: 16
+      value:
+      - 1
+    - stat: 17
+      value:
+      - 0.2
+    - stat: 18
+      value:
+      - 100
+    - stat: 19
+      value:
+      - 1
+    - stat: 20
+      value:
+      - False
+    - stat: 21
+      value:
+      - 0
+  - attackType: 1
+    attackStats:
+    - stat: 0
+      value:
+      - Punch
+    - stat: 1
+      value:
+      - Normal attack to regain mana. 4 hit combo.
+    - stat: 2
+      value:
+      - 10001
+    - stat: 3
+      value:
+      - 0
+    - stat: 4
+      value:
+      - 0
+    - stat: 5
+      value:
+      - 0
+    - stat: 6
+      value:
+      - 0
+    - stat: 7
+      value:
+      - .3
+    - stat: 8
+      value:
+      - .5
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - TRUE
+    - stat: 12
+      value:
+      - FALSE
+    - stat: 13
+      value:
+      - MPGain
+    - stat: 14
+      value:
+      - Self
+    - stat: 15
+      value:
+      - OnHit
+    - stat: 16
+      value:
+      - 1
+    - stat: 17
+      value:
+      - 0.2
+    - stat: 18
+      value:
+      - 110
+    - stat: 19
+      value:
+      - 1
+    - stat: 20
+      value:
+      - FALSE
+    - stat: 21
+      value:
+      - 0
+  - attackType: 2
+    attackStats:
+    - stat: 0
+      value:
+      - Punch
+    - stat: 1
+      value:
+      - Normal attack to regain mana. 4 hit combo.
+    - stat: 2
+      value:
+      - 10002
+    - stat: 3
+      value:
+      - 0
+    - stat: 4
+      value:
+      - 0
+    - stat: 5
+      value:
+      - 0
+    - stat: 6
+      value:
+      - 0
+    - stat: 7
+      value:
+      - .3
+    - stat: 8
+      value:
+      - .5
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - TRUE
+    - stat: 12
+      value:
+      - FALSE
+    - stat: 13
+      value:
+      - MPGain
+    - stat: 14
+      value:
+      - Self
+    - stat: 15
+      value:
+      - OnHit
+    - stat: 16
+      value:
+      - 1
+    - stat: 17
+      value:
+      - 0.2
+    - stat: 18
+      value:
+      - 120
+    - stat: 19
+      value:
+      - 1
+    - stat: 20
+      value:
+      - FALSE
+    - stat: 21
+      value:
+      - 0
+  - attackType: 3
+    attackStats:
+    - stat: 0
+      value:
+      - Punch
+    - stat: 1
+      value:
+      - Normal attack to regain mana. 4 hit combo.
+    - stat: 2
+      value:
+      - 10003
+    - stat: 3
+      value:
+      - 0
+    - stat: 4
+      value:
+      - 0
+    - stat: 5
+      value:
+      - 0
+    - stat: 6
+      value:
+      - 0
+    - stat: 7
+      value:
+      - .75
+    - stat: 8
+      value:
+      - 1.25
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - TRUE
+    - stat: 12
+      value:
+      - FALSE
+    - stat: 13
+      value:
+      - MPGain
+    - stat: 14
+      value:
+      - Self
+    - stat: 15
+      value:
+      - OnHit
+    - stat: 16
+      value:
+      - 2
+    - stat: 17
+      value:
+      - 0.2
+      - 0.4
+    - stat: 18
+      value:
+      - 150
+      - 500
+    - stat: 19
+      value:
+      - 1
+      - 1
+    - stat: 20
+      value:
+      - FALSE
+      - False
+    - stat: 21
+      value:
+      - 0
+      - 0
+  - attackType: 4
+    attackStats:
+    - stat: 0
+      value:
+      - Aura Blast
+    - stat: 1
+      value:
+      - Channel your inner power into a quick attack.
+    - stat: 2
+      value:
+      - 10100
+    - stat: 3
+      value:
+      - 11
+    - stat: 4
+      value:
+      - 8
+    - stat: 5
+      value:
+      - 0.25
+    - stat: 6
+      value:
+      - 0.2
+    - stat: 7
+      value:
+      - .45
+    - stat: 8
+      value:
+      - .86
+    - stat: 9
+      value:
+      - 1
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - TRUE
+    - stat: 12
+      value:
+      - TRUE
+    - stat: 13
+      value:
+      - Aura
+      - Powerlink
+    - stat: 14
+      value:
+      - Self
+      - Self
+    - stat: 15
+      value:
+      - OnCast
+      - OnHit
+    - stat: 16
+      value:
+      - 1
+    - stat: 17
+      value:
+      - 0.25
+    - stat: 18
+      value:
+      - 2000
+    - stat: 19
+      value:
+      - 1
+    - stat: 20
+      value:
+      - FALSE
+    - stat: 21
+      value:
+      - 0
+  - attackType: 5
+    attackStats:
+    - stat: 0
+      value:
+      - Haymaker
+    - stat: 1
+      value:
+      - Focus a torrent of magical energy into a laser strike.
+    - stat: 2
+      value:
+      - 10300
+    - stat: 3
+      value:
+      - 17
+    - stat: 4
+      value:
+      - 10
+    - stat: 5
+      value:
+      - 1.3
+    - stat: 6
+      value:
+      - 0.5
+    - stat: 7
+      value:
+      - 1.6
+    - stat: 8
+      value:
+      - 2.85
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - TRUE
+    - stat: 12
+      value:
+      - FALSE
+    - stat: 13
+      value:
+      - None
+    - stat: 14
+      value:
+      - Self
+    - stat: 15
+      value:
+      - OnHit
+    - stat: 16
+      value:
+      - 1
+    - stat: 17
+      value:
+      - 1.3
+    - stat: 18
+      value:
+      - 3650
+    - stat: 19
+      value:
+      - 5
+    - stat: 20
+      value:
+      - TRUE
+    - stat: 21
+      value:
+      - 50
+  - attackType: 6
+    attackStats:
+    - stat: 0
+      value:
+      - Rapid Punch
+    - stat: 1
+      value:
+      - Flurry of jabs that lower enemy defense.
+    - stat: 2
+      value:
+      - 10400
+    - stat: 3
+      value:
+      - 10
+    - stat: 4
+      value:
+      - 6
+    - stat: 5
+      value:
+      - 0.415
+    - stat: 6
+      value:
+      - 0.2
+    - stat: 7
+      value:
+      - .75
+    - stat: 8
+      value:
+      - 1.54
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - FALSE
+    - stat: 12
+      value:
+      - FALSE
+    - stat: 13
+      value:
+      - DefDown
+    - stat: 14
+      value:
+      - Target
+    - stat: 15
+      value:
+      - OnHit
+    - stat: 16
+      value:
+      - 8
+    - stat: 17
+      value:
+      - 0.45
+      - 0.1
+      - 0.1
+      - 0.1
+      - 0.1
+      - 0.1
+      - 0.1
+      - 0.1
+    - stat: 18
+      value:
+      - 650
+      - 650
+      - 650
+      - 650
+      - 650
+      - 650
+      - 650
+      - 650
+    - stat: 19
+      value:
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+    - stat: 20
+      value:
+      - FALSE
+      - False
+      - False
+      - False
+      - False
+      - False
+      - False
+      - False
+    - stat: 21
+      value:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+  - attackType: 7
+    attackStats:
+    - stat: 0
+      value:
+      - Spin Kick
+    - stat: 1
+      value:
+      - Three small, quick shots followed by a final magic blast with an increased crit chance.
+    - stat: 2
+      value:
+      - 10500
+    - stat: 3
+      value:
+      - 12
+    - stat: 4
+      value:
+      - 9
+    - stat: 5
+      value:
+      - 0.16
+    - stat: 6
+      value:
+      - 0.5
+    - stat: 7
+      value:
+      - 1.2
+    - stat: 8
+      value:
+      - 1.95
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - FALSE
+    - stat: 12
+      value:
+      - FALSE
+    - stat: 13
+      value:
+      - None
+    - stat: 14
+      value:
+      - Self
+    - stat: 15
+      value:
+      - OnCast
+    - stat: 16
+      value:
+      - 4
+    - stat: 17
+      value:
+      - 0.2
+      - 0.1
+      - 0.1
+      - 0.5
+    - stat: 18
+      value:
+      - 800
+      - 800
+      - 800
+      - 2200
+    - stat: 19
+      value:
+      - 1
+      - 1
+      - 1
+      - 2
+    - stat: 20
+      value:
+      - FALSE
+      - False
+      - False
+      - False
+    - stat: 21
+      value:
+      - 0
+      - 0
+      - 0
+      - 0
+  - attackType: 8
+    attackStats:
+    - stat: 0
+      value:
+      - Stomp
+    - stat: 1
+      value:
+      - Creates a quake by stomping. Has block.
+    - stat: 2
+      value:
+      - 10600
+    - stat: 3
+      value:
+      - 31
+    - stat: 4
+      value:
+      - 12
+    - stat: 5
+      value:
+      - 0.525
+    - stat: 6
+      value:
+      - 1
+    - stat: 7
+      value:
+      - 2.3
+    - stat: 8
+      value:
+      - 3.23
+    - stat: 9
+      value:
+      - 1
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - TRUE
+    - stat: 12
+      value:
+      - TRUE
+    - stat: 13
+      value:
+      - None
+    - stat: 14
+      value:
+      - Self
+    - stat: 15
+      value:
+      - OnHit
+    - stat: 16
+      value:
+      - 3
+    - stat: 17
+      value:
+      - 0.5
+      - 1
+      - 0.6
+    - stat: 18
+      value:
+      - 2000
+      - 2300
+      - 2300
+    - stat: 19
+      value:
+      - 3
+      - 3
+      - 3
+    - stat: 20
+      value:
+      - FALSE
+      - False
+      - False
+    - stat: 21
+      value:
+      - 30
+      - 30
+      - 30
+  - attackType: 9
+    attackStats:
+    - stat: 0
+      value:
+      - Counter
+    - stat: 1
+      value:
+      - High crit skill available after blocking
+    - stat: 2
+      value:
+      - 10600
+    - stat: 3
+      value:
+      - 5
+    - stat: 4
+      value:
+      - 20
+    - stat: 5
+      value:
+      - 0.25
+    - stat: 6
+      value:
+      - 0.5
+    - stat: 7
+      value:
+      - 1
+    - stat: 8
+      value:
+      - 1.2
+    - stat: 9
+      value:
+      - 1
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - TRUE
+    - stat: 12
+      value:
+      - TRUE
+    - stat: 13
+      value:
+      - None
+    - stat: 14
+      value:
+      - Self
+    - stat: 15
+      value:
+      - OnHit
+    - stat: 16
+      value:
+      - 2
+    - stat: 17
+      value:
+      - 0.25
+      - 0.7
+    - stat: 18
+      value:
+      - 1000
+      - 2550
+    - stat: 19
+      value:
+      - 10
+      - 10
+    - stat: 20
+      value:
+      - FALSE
+      - False
+    - stat: 21
+      value:
+      - 0
+      - 0
+  - attackType: 10
+    attackStats:
+    - stat: 0
+      value:
+      - Dodge Roll
+    - stat: 1
+      value:
+      - Evade all damage with a quick roll
+    - stat: 2
+      value:
+      - 11000
+    - stat: 3
+      value:
+      - 0
+    - stat: 4
+      value:
+      - 5
+    - stat: 5
+      value:
+      - 0
+    - stat: 6
+      value:
+      - 1
+    - stat: 7
+      value:
+      - 1
+    - stat: 8
+      value:
+      - 1.5
+    - stat: 9
+      value:
+      - 1
+    - stat: 10
+      value:
+      - 1.5
+    - stat: 11
+      value:
+      - FALSE
+    - stat: 12
+      value:
+      - False
+    - stat: 13
+      value:
+      - None
+    - stat: 14
+      value:
+      - Self
+    - stat: 15
+      value:
+      - OnCast
+    - stat: 16
+      value:
+      - 0
+    - stat: 17
+      value:
+      - Guard
+    - stat: 18
+      value:
+      - Create a barrier to stop incoming attacks.
+    - stat: 19
+      value:
+      - 11100
+    - stat: 20
+      value:
+      - 11
+    - stat: 21
+      value:
+      - 0
+  - attackType: 11
+    attackStats:
+    - stat: 0
+      value:
+      - Guard
+    - stat: 1
+      value:
+      - Create a barrier to stop incoming attacks.
+    - stat: 2
+      value:
+      - 11100
+    - stat: 3
+      value:
+      - 11
+    - stat: 4
+      value:
+      - 0
+    - stat: 5
+      value:
+      - 0
+    - stat: 6
+      value:
+      - .3
+    - stat: 7
+      value:
+      - 1
+    - stat: 8
+      value:
+      - 1.2
+    - stat: 9
+      value:
+      - 1
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - FALSE
+    - stat: 12
+      value:
+      - TRUE
+    - stat: 13
+      value:
+      - None
+    - stat: 14
+      value:
+      - 0
+    - stat: 15
+      value:
+      - OnHit
+    - stat: 16
+      value:
+      - 1
+    - stat: 17
+      value:
+      - .3
+    - stat: 18
+      value:
+      - 200
+    - stat: 19
+      value:
+      - 1
+    - stat: 20
+      value:
+      - FALSE
+    - stat: 21
+      value:
+      - 0

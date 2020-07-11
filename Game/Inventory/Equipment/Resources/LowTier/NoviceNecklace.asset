@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16d92525ef9ce741add3b1c885a0082, type: 3}
+  m_Name: NoviceNecklace
+  m_EditorClassIdentifier: 
+  itemID: 03347a1a-175e-4e6b-89f8-0bc3f9eda1a6
+  displayName: Uebok Necklace
+  categoryName: 1
+  description:
+  - hasIcon: 0
+    iconImage: {fileID: 0}
+    description: Commonly produced Magic Necklace. Part of a larger set.
+  icon: {fileID: 21300000, guid: eaa0109d8c9afdd43acd3ec038496bbd, type: 3}
+  value: 0
+  stackable: 0
+  allowedEquipLocation: 7
+  equipmentStats:
+  - stat: 4
+    value: 7
+    isAdditive: 1
+  - stat: 2
+    value: 23
+    isAdditive: 1

@@ -301,18 +301,26 @@ namespace ButtonGame.Character
             float mana = playerMana.GetAttributeValue();
             if (hp <= healThreshold)
             {
-                attackAndCost = attackManager.GetAttackCost(FollowerAttackPool.HealBig);
-                if (!IsOnCooldown(attackAndCost.Key) && attackAndCost.Value <= mana)
+                FollowerAttackPool[] healSkills = new FollowerAttackPool[2]
                 {
-                    currentAttack = attackAndCost.Key;
-                    resourceTypes = new IAttribute[1];
-                    resourceTypes[0] = playerHealth as IAttribute;
-                    return true;
+                    FollowerAttackPool.HealBig,
+                    FollowerAttackPool.HealSmall
+                };
+                foreach (var heal in healSkills)
+                {
+                    attackAndCost = attackManager.GetAttackCost(heal);
+                    if (!IsOnCooldown(attackAndCost.Key) && attackAndCost.Value <= mana)
+                    {
+                        currentAttack = attackAndCost.Key;
+                        resourceTypes = new IAttribute[1];
+                        resourceTypes[0] = playerHealth as IAttribute;
+                        return true;
+                    }
                 }
             }
 
             // Check player mana
-            if(playerMana.GetPercentage() <= manaThreshold)
+            if(playerMana.GetPercentage() <= manaThreshold && attackManager.HasAttackInPool(FollowerAttackPool.ManaGain))
             {
                 attackAndCost = attackManager.GetAttackCost(FollowerAttackPool.ManaGain);
                 if (!IsOnCooldown(attackAndCost.Key))
@@ -329,7 +337,7 @@ namespace ButtonGame.Character
             if (hp < regenThreshold)
             {
                 attackAndCost = attackManager.GetAttackCost(FollowerAttackPool.HealOverTime);
-                if(!IsAttackQueued(attackAndCost.Key))
+                if(!IsOnCooldown(attackAndCost.Key) && !IsAttackQueued(attackAndCost.Key))
                 {
                     atkQueue.Enqueue(attackAndCost.Key);
                 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ButtonGame.Stats;
 using ButtonGame.Stats.Enums;
 using UnityEngine;
 
@@ -9,10 +10,16 @@ namespace ButtonGame.Combat
     {
         CombatEffects playerEffects;
 
-        protected override void Start()
+        protected override void Awake()
         {
+            baseStats = GetComponent<BaseStats>();
+            effects = GetComponent<CombatEffects>();
             effects = GetComponent<CombatEffects>();
             playerEffects = GameObject.FindGameObjectWithTag("Player").GetComponent<CombatEffects>();
+        }
+
+        protected override void Start()
+        {
             target = effects.GetTarget();
             RecalculateStats();
         }

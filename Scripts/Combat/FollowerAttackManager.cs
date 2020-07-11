@@ -23,10 +23,10 @@ namespace ButtonGame.Combat
             foreach (CharacterClass healingClass in healingClasses)
             {
                 var classMoveList = new Dictionary<FollowerAttackPool, FollowerAttackName>();
+                FollowerAttackStats attackStats = new FollowerAttackStats();
 
                 foreach (FollowerAttackName attack in Enum.GetValues(typeof(FollowerAttackName)))
                 {
-                    FollowerAttackStats attackStats = new FollowerAttackStats();
                     attackStats = attackDB.GetAttackStat(attack);
                     if(attackStats.HealingClass != healingClass) continue;
                     

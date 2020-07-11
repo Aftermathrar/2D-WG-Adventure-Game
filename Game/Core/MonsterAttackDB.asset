@@ -1,0 +1,1347 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550547ab3538e484e874d8a320baeb48, type: 3}
+  m_Name: MonsterAttackDB
+  m_EditorClassIdentifier: 
+  monsterAtkMovesetDB:
+  - monAtkName: 0
+    monAtkStats:
+    - stat: 0
+      value:
+      - None
+    - stat: 1
+      value:
+      - Empty
+    - stat: 2
+      value:
+      - 0
+    - stat: 3
+      value:
+      - 1
+    - stat: 4
+      value:
+      - 1
+    - stat: 5
+      value:
+      - placeholder
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - None
+    - stat: 14
+      value:
+      - 0
+  - monAtkName: 1
+    monAtkStats:
+    - stat: 0
+      value:
+      - BasicRam
+    - stat: 1
+      value:
+      - Simple one hit attack
+    - stat: 2
+      value:
+      - 10001
+    - stat: 3
+      value:
+      - 3
+    - stat: 4
+      value:
+      - 2
+    - stat: 5
+      value:
+      - prepares to charge
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Basic
+    - stat: 14
+      value:
+      - 1
+    - stat: 15
+      value:
+      - runs at you!
+    - stat: 16
+      value:
+      - 1
+    - stat: 17
+      value:
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+    - stat: 19
+      value:
+      - 1000
+    - stat: 20
+      value:
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+    - stat: 22
+      value:
+      - None
+    - stat: 23
+      value:
+      - Self
+    - stat: 24
+      value:
+      - OnHit
+  - monAtkName: 2
+    monAtkStats:
+    - stat: 0
+      value:
+      - BasicBite
+    - stat: 1
+      value:
+      - Quick bite using sharp teeth
+    - stat: 2
+      value:
+      - 10001
+    - stat: 3
+      value:
+      - 1.5
+    - stat: 4
+      value:
+      - 1
+    - stat: 5
+      value:
+      - starts drooling
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Basic
+    - stat: 14
+      value:
+      - 1
+    - stat: 15
+      value:
+      - bites at your legs
+    - stat: 16
+      value:
+      - .5
+    - stat: 17
+      value:
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+    - stat: 19
+      value:
+      - 1500
+    - stat: 20
+      value:
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+    - stat: 22
+      value:
+      - None
+    - stat: 23
+      value:
+      - Self
+    - stat: 24
+      value:
+      - OnHit
+  - monAtkName: 3
+    monAtkStats:
+    - stat: 0
+      value:
+      - BasicSwipe
+    - stat: 1
+      value:
+      - Two-hit swipe with claws
+    - stat: 2
+      value:
+      - 10002
+    - stat: 3
+      value:
+      - 3
+    - stat: 4
+      value:
+      - 2
+    - stat: 5
+      value:
+      - rears up for an attack
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Basic4Leg
+    - stat: 14
+      value:
+      - 2
+    - stat: 15
+      value:
+      - claws at your face
+      - claws at your face
+    - stat: 16
+      value:
+      - .5
+      - .5
+    - stat: 17
+      value:
+      - FALSE
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+      - 0
+    - stat: 19
+      value:
+      - 2200
+      - 1000
+    - stat: 20
+      value:
+      - 1
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+      - FALSE
+    - stat: 22
+      value:
+      - None
+      - None
+    - stat: 23
+      value:
+      - Self
+      - Self
+    - stat: 24
+      value:
+      - OnHit
+      - OnHit
+  - monAtkName: 4
+    monAtkStats:
+    - stat: 0
+      value:
+      - BasicSwipe2
+    - stat: 1
+      value:
+      - Two-hit swipe with claws
+    - stat: 2
+      value:
+      - 10003
+    - stat: 3
+      value:
+      - 3
+    - stat: 4
+      value:
+      - 2
+    - stat: 5
+      value:
+      - rushes in to attack
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Basic2Leg
+    - stat: 14
+      value:
+      - 2
+    - stat: 15
+      value:
+      - claws at your face
+      - claws at your face
+    - stat: 16
+      value:
+      - .5
+      - .5
+    - stat: 17
+      value:
+      - FALSE
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+      - 0
+    - stat: 19
+      value:
+      - 2200
+      - 2200
+    - stat: 20
+      value:
+      - 1
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+      - FALSE
+    - stat: 22
+      value:
+      - None
+      - None
+    - stat: 23
+      value:
+      - Self
+      - Self
+    - stat: 24
+      value:
+      - OnHit
+      - OnHit
+  - monAtkName: 5
+    monAtkStats:
+    - stat: 0
+      value:
+      - Spit
+    - stat: 1
+      value:
+      - Enemy lobs a bit of itself at you
+    - stat: 2
+      value:
+      - 10005
+    - stat: 3
+      value:
+      - 2
+    - stat: 4
+      value:
+      - 1
+    - stat: 5
+      value:
+      - wobbles back and forth
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Slime
+    - stat: 14
+      value:
+      - 1
+    - stat: 15
+      value:
+      - shoots a small orb at you
+    - stat: 16
+      value:
+      - 1
+    - stat: 17
+      value:
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+    - stat: 19
+      value:
+      - 1300
+    - stat: 20
+      value:
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+    - stat: 22
+      value:
+      - None
+    - stat: 23
+      value:
+      - Self
+    - stat: 24
+      value:
+      - OnHit
+  - monAtkName: 6
+    monAtkStats:
+    - stat: 0
+      value:
+      - Multispit
+    - stat: 1
+      value:
+      - rapid-fire spit shots
+    - stat: 2
+      value:
+      - 10006
+    - stat: 3
+      value:
+      - 3
+    - stat: 4
+      value:
+      - 1.5
+    - stat: 5
+      value:
+      - wobbles back and forth violently
+    - stat: 6
+      value:
+      - TRUE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Slime
+    - stat: 14
+      value:
+      - 5
+    - stat: 15
+      value:
+      - sprays you with slime bullets
+      - sprays you with slime bullets
+      - sprays you with slime bullets
+      - sprays you with slime bullets
+      - sprays you with slime bullets
+    - stat: 16
+      value:
+      - .3
+      - .3
+      - .3
+      - .3
+      - .3
+    - stat: 17
+      value:
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    - stat: 19
+      value:
+      - 1800
+      - 1800
+      - 1800
+      - 1800
+      - 1800
+    - stat: 20
+      value:
+      - 1
+      - 1
+      - 1
+      - 1
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+    - stat: 22
+      value:
+      - None
+      - None
+      - None
+      - None
+      - None
+    - stat: 23
+      value:
+      - Self
+      - Self
+      - Self
+      - Self
+      - Self
+    - stat: 24
+      value:
+      - OnHit
+      - OnHit
+      - OnHit
+      - OnHit
+      - OnHit
+  - monAtkName: 7
+    monAtkStats:
+    - stat: 0
+      value:
+      - BleedTest
+    - stat: 1
+      value:
+      - dummy attack to test stat over time
+    - stat: 2
+      value:
+      - 12000
+    - stat: 3
+      value:
+      - 10
+    - stat: 4
+      value:
+      - 0
+    - stat: 5
+      value:
+      - hyukhyuk
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - TestAttack
+    - stat: 14
+      value:
+      - 1
+    - stat: 15
+      value:
+      - Hyaa!
+    - stat: 16
+      value:
+      - .1
+    - stat: 17
+      value:
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+    - stat: 19
+      value:
+      - 500
+    - stat: 20
+      value:
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+    - stat: 22
+      value:
+      - Bleed
+    - stat: 23
+      value:
+      - Target
+    - stat: 24
+      value:
+      - OnHit
+  - monAtkName: 8
+    monAtkStats:
+    - stat: 0
+      value:
+      - SlimeWhip
+    - stat: 1
+      value:
+      - Slime whips a strand of its body
+    - stat: 2
+      value:
+      - 10007
+    - stat: 3
+      value:
+      - 2.5
+    - stat: 4
+      value:
+      - 1.5
+    - stat: 5
+      value:
+      - forms two whip-like appendages
+    - stat: 6
+      value:
+      - TRUE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Slime
+    - stat: 14
+      value:
+      - 2
+    - stat: 15
+      value:
+      - whips its arms at you
+      - whips its arms at you
+    - stat: 16
+      value:
+      - .5
+      - .5
+    - stat: 17
+      value:
+      - FALSE
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+      - 0
+    - stat: 19
+      value:
+      - 1200
+      - 1200
+    - stat: 20
+      value:
+      - 1
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+      - FALSE
+    - stat: 22
+      value:
+      - None
+      - None
+    - stat: 23
+      value:
+      - Self
+      - Self
+    - stat: 24
+      value:
+      - OnHit
+      - OnHit
+  - monAtkName: 9
+    monAtkStats:
+    - stat: 0
+      value:
+      - Claw Combo
+    - stat: 1
+      value:
+      - A clawing strike chained into a bite
+    - stat: 2
+      value:
+      - 10008
+    - stat: 3
+      value:
+      - 2.5
+    - stat: 4
+      value:
+      - 1
+    - stat: 5
+      value:
+      - runs in for a combo
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Basic4Leg
+    - stat: 14
+      value:
+      - 2
+    - stat: 15
+      value:
+      - swipes at you
+      - follows with a bite
+    - stat: 16
+      value:
+      - .6
+      - .9
+    - stat: 17
+      value:
+      - FALSE
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+      - 0
+    - stat: 19
+      value:
+      - 1200
+      - 1600
+    - stat: 20
+      value:
+      - 1
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+      - FALSE
+    - stat: 22
+      value:
+      - None
+      - Bleed
+    - stat: 23
+      value:
+      - Self
+      - Target
+    - stat: 24
+      value:
+      - OnHit
+      - OnHit
+  - monAtkName: 10
+    monAtkStats:
+    - stat: 0
+      value:
+      - Power Up
+    - stat: 1
+      value:
+      - Self-buff to Attack and Power
+    - stat: 2
+      value:
+      - 20000
+    - stat: 3
+      value:
+      - 1.5
+    - stat: 4
+      value:
+      - 0
+    - stat: 5
+      value:
+      - releases a loud roar!
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Buff
+    - stat: 14
+      value:
+      - 1
+    - stat: 15
+      value:
+      - releases a loud roar!
+    - stat: 16
+      value:
+      - 1.5
+    - stat: 17
+      value:
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+    - stat: 19
+      value:
+      - 0
+    - stat: 20
+      value:
+      - 1
+    - stat: 21
+      value:
+      - TRUE
+    - stat: 22
+      value:
+      - PowerBoost
+    - stat: 23
+      value:
+      - Self
+    - stat: 24
+      value:
+      - OnHit
+  - monAtkName: 11
+    monAtkStats:
+    - stat: 0
+      value:
+      - Body Slam
+    - stat: 1
+      value:
+      - Fall onto the enemy to crush them
+    - stat: 2
+      value:
+      - 10009
+    - stat: 3
+      value:
+      - 1.8
+    - stat: 4
+      value:
+      - 1
+    - stat: 5
+      value:
+      - moves closer
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Basic
+    - stat: 14
+      value:
+      - 1
+    - stat: 15
+      value:
+      - throws its body at you
+    - stat: 16
+      value:
+      - .8
+    - stat: 17
+      value:
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+    - stat: 19
+      value:
+      - 1600
+    - stat: 20
+      value:
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+    - stat: 22
+      value:
+      - None
+    - stat: 23
+      value:
+      - Self
+    - stat: 24
+      value:
+      - OnHit
+  - monAtkName: 12
+    monAtkStats:
+    - stat: 0
+      value:
+      - Tree Whip
+    - stat: 1
+      value:
+      - Tree whips its branches at you repeatedly
+    - stat: 2
+      value:
+      - 10010
+    - stat: 3
+      value:
+      - 3
+    - stat: 4
+      value:
+      - 1.5
+    - stat: 5
+      value:
+      - spins toward you
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Tree
+    - stat: 14
+      value:
+      - 3
+    - stat: 15
+      value:
+      - slaps you with its branches
+      - slaps you with its branches
+      - slaps you with its branches
+    - stat: 16
+      value:
+      - .5
+      - .5
+      - .5
+    - stat: 17
+      value:
+      - FALSE
+      - FALSE
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+      - 0
+      - 0
+    - stat: 19
+      value:
+      - 1200
+      - 1200
+      - 1200
+    - stat: 20
+      value:
+      - 1
+      - 1
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+      - FALSE
+      - FALSE
+    - stat: 22
+      value:
+      - None
+      - None
+      - None
+    - stat: 23
+      value:
+      - Self
+      - Self
+      - Self
+    - stat: 24
+      value:
+      - OnHit
+      - OnHit
+      - OnHit
+  - monAtkName: 13
+    monAtkStats:
+    - stat: 0
+      value:
+      - Swoop
+    - stat: 1
+      value:
+      - Flying enemy swoops in to claw
+    - stat: 2
+      value:
+      - 10011
+    - stat: 3
+      value:
+      - 1.8
+    - stat: 4
+      value:
+      - 1
+    - stat: 5
+      value:
+      - flies in low
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Flying
+    - stat: 14
+      value:
+      - 1
+    - stat: 15
+      value:
+      - strikes with their claws!
+    - stat: 16
+      value:
+      - 0.8
+    - stat: 17
+      value:
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+    - stat: 19
+      value:
+      - 1400
+    - stat: 20
+      value:
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+    - stat: 22
+      value:
+      - None
+    - stat: 23
+      value:
+      - Self
+    - stat: 24
+      value:
+      - OnHit
+  - monAtkName: 14
+    monAtkStats:
+    - stat: 0
+      value:
+      - Bloodsuck
+    - stat: 1
+      value:
+      - Sucks vitality from you
+    - stat: 2
+      value:
+      - 10012
+    - stat: 3
+      value:
+      - 3
+    - stat: 4
+      value:
+      - 1.5
+    - stat: 5
+      value:
+      - latches onto your arm
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Flying
+    - stat: 14
+      value:
+      - 4
+    - stat: 15
+      value:
+      - bites down hard!
+      - sucks your blood
+      - sucks your blood
+      - sucks your blood
+    - stat: 16
+      value:
+      - .5
+      - .3
+      - .3
+      - .4
+    - stat: 17
+      value:
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+      - 0
+      - 0
+      - 0
+    - stat: 19
+      value:
+      - 600
+      - 1800
+      - 1800
+      - 1600
+    - stat: 20
+      value:
+      - 1
+      - 1
+      - 1
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+      - FALSE
+      - FALSE
+      - FALSE
+    - stat: 22
+      value:
+      - Bleed
+      - LifeLeech
+      - LifeLeech
+      - LifeLeech
+    - stat: 23
+      value:
+      - Target
+      - Self
+      - Self
+      - Self
+    - stat: 24
+      value:
+      - OnHit
+      - OnHit
+      - OnHit
+      - OnHit
+  - monAtkName: 15
+    monAtkStats:
+    - stat: 0
+      value:
+      - Wing Smash
+    - stat: 1
+      value:
+      - Flies into target at high speed
+    - stat: 2
+      value:
+      - 10013
+    - stat: 3
+      value:
+      - 1.5
+    - stat: 4
+      value:
+      - 1
+    - stat: 5
+      value:
+      - start flapping wildly
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - Flying
+    - stat: 14
+      value:
+      - 1
+    - stat: 15
+      value:
+      - smashes into you!
+    - stat: 16
+      value:
+      - .5
+    - stat: 17
+      value:
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+    - stat: 19
+      value:
+      - 1800
+    - stat: 20
+      value:
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+    - stat: 22
+      value:
+      - None
+    - stat: 23
+      value:
+      - Self
+    - stat: 24
+      value:
+      - OnHit

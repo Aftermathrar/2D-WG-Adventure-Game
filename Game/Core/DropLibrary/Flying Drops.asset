@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c46f4ce6f044494f96fcfdee8729368, type: 3}
+  m_Name: Flying Drops
+  m_EditorClassIdentifier: 
+  potentialDrops:
+  - item:
+    - {fileID: 11400000, guid: 654edec6b081c364097255daa8523ebd, type: 2}
+    relativeChance:
+    - 5
+    minNumber: 01000000
+    maxNumber: 01000000
+  - item:
+    - {fileID: 11400000, guid: d2e25fa644c2f1c498e4eaa3b8b661b2, type: 2}
+    relativeChance:
+    - 10
+    minNumber: 01000000
+    maxNumber: 01000000
+  - item:
+    - {fileID: 11400000, guid: c9c5e66796c73474381639668f8e7e75, type: 2}
+    relativeChance:
+    - 10
+    minNumber: 01000000
+    maxNumber: 02000000
+  - item:
+    - {fileID: 11400000, guid: 6aac085aae80e1c4eaa7d649d39eb965, type: 2}
+    relativeChance:
+    - 10
+    minNumber: 01000000
+    maxNumber: 02000000
+  - item:
+    - {fileID: 11400000, guid: 78aac38fb83c8d447bd4cbc52a496948, type: 2}
+    relativeChance:
+    - 2
+    minNumber: 01000000
+    maxNumber: 01000000
+  dropChancePercentage:
+  - 40
+  minDrops: 06000000
+  maxDrops: 12000000

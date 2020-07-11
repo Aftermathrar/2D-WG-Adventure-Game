@@ -17,6 +17,11 @@ namespace ButtonGame.Stats.Enums
         FindWeakness,
         AbsorbPower,
         RegenPuddle,
-        SimpleMeal
+        SimpleMeal,
+        Berserk,
+        ShadowArmor,
+        Disease,
+        DarkBlessing,
+        RecoveryTotem
     }
 }

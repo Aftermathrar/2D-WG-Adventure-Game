@@ -37,6 +37,8 @@ namespace ButtonGame.Combat
         {
             Message damageMessage = new Message();
             Color32 messageColor = defaultColor;
+            // Round damage for display
+            damage = Mathf.Round(damage);
             if (isCrit)
             {
                 damageMessage.text = "Critical hit! You took " + damage + " damage!";

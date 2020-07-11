@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16d92525ef9ce741add3b1c885a0082, type: 3}
+  m_Name: NoviceHealNecklace
+  m_EditorClassIdentifier: 
+  itemID: 3b8fe92c-3307-41dc-96c2-0e5f839ac9f1
+  displayName: Blessed Necklace
+  categoryName: 1
+  description: []
+  icon: {fileID: 21300000, guid: 42f0bb9636a96fe4cab8f30c88aad31b, type: 3}
+  value: 0
+  stackable: 0
+  allowedEquipLocation: 7
+  equipmentStats:
+  - stat: 2
+    value: 12
+    isAdditive: 1
+  - stat: 8
+    value: 4
+    isAdditive: 0

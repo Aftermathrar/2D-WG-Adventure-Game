@@ -10,6 +10,14 @@ namespace ButtonGame.Stats.Follower
         ManaBoost,
         Heal,
         HealingLight,
-        Cleanse
+        Cleanse,
+        AuraOfTheBerserk,
+        Recover,
+        HealingWave,
+        TotemOfRecovery,
+        ShadowGuard,
+        ShadowInfection,
+        WitchBlessing,
+        VoodooTransfer
     }
 }

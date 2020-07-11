@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb6a52d4818cba841be09a2143289453, type: 3}
+  m_Name: FollowerAttackIconDB
+  m_EditorClassIdentifier: 
+  followerAttackIcon:
+  - attackName: 0
+    sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  - attackName: 1
+    sprite: {fileID: 21300000, guid: c6820a1aa812c34448860b4169924c92, type: 3}
+  - attackName: 2
+    sprite: {fileID: 21300000, guid: 0e5e95c7ec52d8d48941ef97e95c884b, type: 3}
+  - attackName: 3
+    sprite: {fileID: 21300000, guid: 48890e06b25d2cb4aa94039c4f59e693, type: 3}
+  - attackName: 4
+    sprite: {fileID: 21300000, guid: d742f30da86cdc54891300cb7f952748, type: 3}
+  - attackName: 5
+    sprite: {fileID: 21300000, guid: 4e336f33ac3d3e44fad6db5cd324a7b7, type: 3}
+  - attackName: 6
+    sprite: {fileID: 21300000, guid: 6e201a1e1e6efb241a8ca34456ff81cd, type: 3}
+  - attackName: 7
+    sprite: {fileID: 21300000, guid: e8ab6676899f8504a862989b66d40af1, type: 3}
+  - attackName: 8
+    sprite: {fileID: 21300000, guid: 6e201a1e1e6efb241a8ca34456ff81cd, type: 3}
+  - attackName: 9
+    sprite: {fileID: 21300000, guid: 3e445c7ab9c015048bc38565ebc524b7, type: 3}
+  - attackName: 10
+    sprite: {fileID: 21300000, guid: 04ea8171332651b449574dc52a4c8c63, type: 3}
+  - attackName: 11
+    sprite: {fileID: 21300000, guid: cf893c9266ce27649bc3c331464f3e17, type: 3}
+  - attackName: 12
+    sprite: {fileID: 21300000, guid: 957774d603e790a438670ca78aad528b, type: 3}
+  - attackName: 13
+    sprite: {fileID: 21300000, guid: 936d39e15d649df449f82d77730c040b, type: 3}
+  - attackName: 14
+    sprite: {fileID: 21300000, guid: c79e6789fc8edd64a8f169d8cd1812c5, type: 3}
+  - attackName: 15
+    sprite: {fileID: 21300000, guid: 10666db491ab4c3489596fcc697fee2f, type: 3}
+  - attackName: 16
+    sprite: {fileID: 21300000, guid: 0893d7a6fdfe64e44bd8e9621aefd8a5, type: 3}

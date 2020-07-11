@@ -1,0 +1,304 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4632de12abab0a4ca93fad7ec74698b, type: 3}
+  m_Name: FollowerAttackDB
+  m_EditorClassIdentifier: 
+  followerAttackDB:
+  - attackName: 0
+    attackStats:
+      HealingClass: 1
+      Name: None
+      Description: Empty
+      ID: 0
+      Cost: 0
+      Cooldown: 0
+      CastTime: 0
+      IsRecastSkill: 0
+      RecastTimer: 0
+      ActionModifier: 0
+      EffectID: 0
+      EffectTarget: 0
+      ApplyEffect: 0
+      Power: 0
+      MovePool: 0
+  - attackName: 1
+    attackStats:
+      HealingClass: 1
+      Name: Spirit Boost
+      Description: Boost spirit output to raise attack power and speed.
+      ID: 1
+      Cost: 20
+      Cooldown: 15
+      CastTime: 1
+      IsRecastSkill: 1
+      RecastTimer: 15
+      ActionModifier: 1
+      EffectID: 9
+      EffectTarget: 8
+      ApplyEffect: 1
+      Power: 0
+      MovePool: 5
+  - attackName: 2
+    attackStats:
+      HealingClass: 1
+      Name: Divine Infusion
+      Description: Infuse target with blessing to boost attack power and defense.
+      ID: 2
+      Cost: 30
+      Cooldown: 15
+      CastTime: 1
+      IsRecastSkill: 1
+      RecastTimer: 600
+      ActionModifier: 1
+      EffectID: 11
+      EffectTarget: 2
+      ApplyEffect: 1
+      Power: 0
+      MovePool: 0
+  - attackName: 3
+    attackStats:
+      HealingClass: 1
+      Name: Soothing Wind
+      Description: Spell to heal wounds over time
+      ID: 3
+      Cost: 30
+      Cooldown: 12
+      CastTime: 1
+      IsRecastSkill: 0
+      RecastTimer: 0
+      ActionModifier: 1
+      EffectID: 14
+      EffectTarget: 8
+      ApplyEffect: 1
+      Power: 0
+      MovePool: 3
+  - attackName: 4
+    attackStats:
+      HealingClass: 1
+      Name: Expose Weakness
+      Description: Invade target with spirit and lower defense
+      ID: 4
+      Cost: 8
+      Cooldown: 7
+      CastTime: .5
+      IsRecastSkill: 1
+      RecastTimer: 15
+      ActionModifier: 1
+      EffectID: 12
+      EffectTarget: 4
+      ApplyEffect: 1
+      Power: 0
+      MovePool: 6
+  - attackName: 5
+    attackStats:
+      HealingClass: 1
+      Name: Mana Boost
+      Description: Channel energy to restore mana to the party
+      ID: 5
+      Cost: 0
+      Cooldown: 34
+      CastTime: 3
+      IsRecastSkill: 0
+      RecastTimer: 0
+      ActionModifier: 1
+      EffectID: 0
+      EffectTarget: 0
+      ApplyEffect: 1
+      Power: 32
+      MovePool: 4
+  - attackName: 6
+    attackStats:
+      HealingClass: 1
+      Name: Heal
+      Description: Heals
+      ID: 6
+      Cost: 10
+      Cooldown: 6
+      CastTime: 1.5
+      IsRecastSkill: 0
+      RecastTimer: 0
+      ActionModifier: 1
+      EffectID: 0
+      EffectTarget: 0
+      ApplyEffect: 1
+      Power: 30
+      MovePool: 1
+  - attackName: 7
+    attackStats:
+      HealingClass: 1
+      Name: Healing Light
+      Description: Focused heal that restores a large portion of health
+      ID: 7
+      Cost: 15
+      Cooldown: 20
+      CastTime: 2
+      IsRecastSkill: 0
+      RecastTimer: 0
+      ActionModifier: 1
+      EffectID: 0
+      EffectTarget: 0
+      ApplyEffect: 1
+      Power: 60
+      MovePool: 2
+  - attackName: 8
+    attackStats:
+      HealingClass: 1
+      Name: Cleanse
+      Description: Removes harmful debuffs on the player
+      ID: 8
+      Cost: 5
+      Cooldown: 5
+      CastTime: 1
+      IsRecastSkill: 0
+      RecastTimer: 0
+      ActionModifier: 1
+      EffectID: 0
+      EffectTarget: 0
+      ApplyEffect: 1
+      Power: 0
+      MovePool: 8
+  - attackName: 9
+    attackStats:
+      HealingClass: 2
+      Name: Aura of the Berserk
+      Description: Magic to heighten the senses and induce fury. Raises attack power, speed, and crit factor.
+      ID: 10
+      Cost: 10
+      Cooldown: 15
+      CastTime: 2
+      IsRecastSkill: 0
+      RecastTimer: 590
+      ActionModifier: 1.2
+      EffectID: 16
+      EffectTarget: 2
+      ApplyEffect: 1
+      Power: 0
+      MovePool: 0
+  - attackName: 10
+    attackStats:
+      HealingClass: 2
+      Name: Recover
+      Description: Minor first aid magic to restore a small amount of health.
+      ID: 11
+      Cost: 12
+      Cooldown: 0
+      CastTime: 1.3
+      IsRecastSkill: 1
+      RecastTimer: 0
+      ActionModifier: 1.2
+      EffectID: 0
+      EffectTarget: 0
+      ApplyEffect: 1
+      Power: 20
+      MovePool: 1
+  - attackName: 11
+    attackStats:
+      HealingClass: 2
+      Name: Healing Wave
+      Description: Pulse of energy that restores a moderate amount of health.
+      ID: 12
+      Cost: 20
+      Cooldown: 8
+      CastTime: 1.3
+      IsRecastSkill: 1
+      RecastTimer: 0
+      ActionModifier: 1.2
+      EffectID: 0
+      EffectTarget: 0
+      ApplyEffect: 1
+      Power: 40
+      MovePool: 2
+  - attackName: 12
+    attackStats:
+      HealingClass: 2
+      Name: Totem of Recovery
+      Description: Places a totem that slowly heals over time
+      ID: 13
+      Cost: 18
+      Cooldown: 25
+      CastTime: 2
+      IsRecastSkill: 1
+      RecastTimer: 0
+      ActionModifier: 1.2
+      EffectID: 20
+      EffectTarget: 2
+      ApplyEffect: 1
+      Power: 0
+      MovePool: 3
+  - attackName: 13
+    attackStats:
+      HealingClass: 2
+      Name: Shadow Guard
+      Description: Places an armor of shadows onto the target, raising defense.
+      ID: 14
+      Cost: 18
+      Cooldown: 60
+      CastTime: 2
+      IsRecastSkill: 0
+      RecastTimer: 590
+      ActionModifier: 1.2
+      EffectID: 17
+      EffectTarget: 2
+      ApplyEffect: 1
+      Power: 0
+      MovePool: 5
+  - attackName: 14
+    attackStats:
+      HealingClass: 2
+      Name: Shadow Infection
+      Description: Send out negative energy to infect the target with a conjured disease.
+      ID: 15
+      Cost: 5
+      Cooldown: 5
+      CastTime: 1
+      IsRecastSkill: 0
+      RecastTimer: 15
+      ActionModifier: 1.2
+      EffectID: 18
+      EffectTarget: 4
+      ApplyEffect: 1
+      Power: 0
+      MovePool: 6
+  - attackName: 15
+    attackStats:
+      HealingClass: 2
+      Name: Witch's Blessing
+      Description: Grant a curse on the target in order to lower defense.
+      ID: 16
+      Cost: 20
+      Cooldown: 120
+      CastTime: 1.5
+      IsRecastSkill: 1
+      RecastTimer: 0
+      ActionModifier: 1.2
+      EffectID: 19
+      EffectTarget: 4
+      ApplyEffect: 1
+      Power: 0
+      MovePool: 7
+  - attackName: 16
+    attackStats:
+      HealingClass: 2
+      Name: Voodoo Transfer
+      Description: Cleanse negative effects by transferring them onto a voodoo doll.
+      ID: 17
+      Cost: 12
+      Cooldown: 2.5
+      CastTime: 2
+      IsRecastSkill: 1
+      RecastTimer: 0
+      ActionModifier: 1.2
+      EffectID: 0
+      EffectTarget: 2
+      ApplyEffect: 1
+      Power: 0
+      MovePool: 8

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16d92525ef9ce741add3b1c885a0082, type: 3}
+  m_Name: NoviceBoots
+  m_EditorClassIdentifier: 
+  itemID: 79417294-11f1-454c-9259-3c516a6aa6fc
+  displayName: Beginner's Boots
+  categoryName: 0
+  description:
+  - hasIcon: 0
+    iconImage: {fileID: 0}
+    description: Academy hiking boots bestowed to graduating students.
+  icon: {fileID: 21300000, guid: 284254067ee366f46a28114d82d90d2b, type: 3}
+  value: 0
+  stackable: 0
+  allowedEquipLocation: 3
+  equipmentStats:
+  - stat: 6
+    value: 26
+    isAdditive: 1

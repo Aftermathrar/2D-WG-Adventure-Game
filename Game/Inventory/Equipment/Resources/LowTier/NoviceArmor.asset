@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16d92525ef9ce741add3b1c885a0082, type: 3}
+  m_Name: NoviceArmor
+  m_EditorClassIdentifier: 
+  itemID: 79b11af6-d34b-4c42-bbed-0043c50966dc
+  displayName: Beginner's Armor
+  categoryName: 0
+  description:
+  - hasIcon: 0
+    iconImage: {fileID: 0}
+    description: Academy gear bestowed to graduating students.
+  icon: {fileID: 21300000, guid: d8e8f63d93e3fbb4fae86b2ef24aad65, type: 3}
+  value: 0
+  stackable: 0
+  allowedEquipLocation: 1
+  equipmentStats:
+  - stat: 6
+    value: 34
+    isAdditive: 1
+  - stat: 2
+    value: 77
+    isAdditive: 1

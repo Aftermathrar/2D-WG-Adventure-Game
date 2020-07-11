@@ -30,6 +30,7 @@ namespace ButtonGame.Attributes
         private void Start() 
         {
             manaPoints.ForceInit();
+            RecalculateMaxMana();
         }
 
         public void RecalculateMaxMana()
