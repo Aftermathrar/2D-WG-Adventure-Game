@@ -16,6 +16,7 @@ namespace ButtonGame.Stats.Enums
         DivineInfusion,
         FindWeakness,
         AbsorbPower,
-        RegenPuddle
+        RegenPuddle,
+        SimpleMeal
     }
 }

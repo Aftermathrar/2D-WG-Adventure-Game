@@ -6,11 +6,11 @@ namespace ButtonGame.UI.EffectIcon
 {
     public class EffectIconSpawner : MonoBehaviour
     {
-        [SerializeField] EffectIconImage fxIcon = null;
-        Dictionary<string, EffectIconImage> iconInstances = new Dictionary<string, EffectIconImage>();
-        Stack<EffectIconImage> fxIconStack = new Stack<EffectIconImage>();
+        [SerializeField] protected EffectIconImage fxIcon = null;
+        protected Dictionary<string, EffectIconImage> iconInstances = new Dictionary<string, EffectIconImage>();
+        protected Stack<EffectIconImage> fxIconStack = new Stack<EffectIconImage>();
 
-        public void Spawn(string id, int count, Sprite sprite)
+        public virtual void Spawn(string id, int count, Sprite sprite)
         {
             float spawnPosX = transform.position.x + (50f * count);
             Vector3 spawnPos = new Vector3(spawnPosX, transform.position.y, transform.position.z);
@@ -30,7 +30,7 @@ namespace ButtonGame.UI.EffectIcon
             iconInstances[id] = instance;
         }
 
-        public void Destroy(string id)
+        public virtual void ReturnToPool(string id)
         {
             if(iconInstances.ContainsKey(id))
             {

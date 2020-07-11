@@ -23,6 +23,7 @@ namespace ButtonGame.Combat
         protected BaseStats baseStats;
         protected float atkPower;
         protected float atkSpeed;
+        protected float damageMod;
         protected float cdr;
         protected float critFactor;
         protected float critPower;
@@ -68,6 +69,7 @@ namespace ButtonGame.Combat
         {
             atkPower = baseStats.GetStat(Stat.AttackPower);
             atkSpeed = baseStats.GetStat(Stat.AttackSpeed);
+            damageMod = baseStats.GetStat(Stat.Damage);
             critFactor = baseStats.GetStat(Stat.CritFactor);
             cdr = baseStats.GetStat(Stat.CooldownReduction);
             critPower = baseStats.GetStat(Stat.CritDamage);
@@ -83,6 +85,9 @@ namespace ButtonGame.Combat
                     break;
                 case Stat.AttackSpeed:
                     value = atkSpeed;
+                    break;
+                case Stat.Damage:
+                    value = damageMod;
                     break;
                 case Stat.CooldownReduction:
                     value = cdr;

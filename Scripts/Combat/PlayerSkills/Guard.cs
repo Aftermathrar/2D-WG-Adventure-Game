@@ -44,6 +44,10 @@ namespace ButtonGame.Combat.Skills
             float critPower = fighter.GetStat(Stat.CritDamage) / 100;
             total *= critPower;
 
+            // Get player damage modifier
+            float damageMod = 1 + fighter.GetStat(Stat.Damage) / 100;
+            total *= damageMod;
+
             //Reflect is 40% damage
             total *= 0.4f;
 

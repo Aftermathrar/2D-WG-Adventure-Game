@@ -61,35 +61,40 @@ namespace ButtonGame.Combat
         protected override IEnumerator BuffOverTime(float buffDuration)
         {
             float tickRate = float.Parse(effectDB.GetEffectStat(EffectStat.TickRate, fxName));
-            string stat = effectDB.GetEffectStat(EffectStat.StatsAffected, fxName);
-            bool isPercent = int.Parse(effectDB.GetEffectStat(EffectStat.Additive, fxName)) == 0;
-            float fxValue = float.Parse(effectDB.GetEffectStat(EffectStat.EffectValues, fxName));
+            string[] stat = effectDB.GetEffectStat(EffectStat.StatsAffected, fxName).Split(new char[] { ',' });
+            string[] fxAdditiveData = effectDB.GetEffectStat(EffectStat.Additive, fxName).Split(new char[] { ',' });
+            string[] fxValueData = effectDB.GetEffectStat(EffectStat.EffectValues, fxName).Split(new char[] { ',' });
             string fxNameOverTime = fxName.ToString();
             do
             {
-                // Effect strength times stack count
-                float fxValResult = fxValue * buffList[fxNameOverTime][0];
-                if (stat == "Mana")
+                for (int i = 0; i < fxAdditiveData.Length; i++)
                 {
-                    if (isPercent)
+                    bool isPercent = int.Parse(fxAdditiveData[i]) == 0;
+                    float fxValue = float.Parse(fxValueData[i]);
+                    // Effect strength times stack count
+                    float fxValResult = fxValue * buffList[fxNameOverTime][0];
+                    if (stat[i] == "Mana")
                     {
-                        fxValResult = (fxValue / 100) * selfMana.GetMaxAttributeValue();
-                    }
-                    selfMana.GainAttribute(fxValResult);
-                }
-                else
-                {
-                    if (isPercent)
-                    {
-                        fxValResult = (fxValue / 100) * selfHealth.GetMaxAttributeValue();
-                    }
-                    if (fxValResult >= 0)
-                    {
-                        selfHealth.GainAttribute(fxValResult);
+                        if (isPercent)
+                        {
+                            fxValResult = (fxValue / 100) * selfMana.GetMaxAttributeValue();
+                        }
+                        selfMana.GainAttribute(fxValResult);
                     }
                     else
                     {
-                        selfHealth.TakeDamage(Mathf.Abs(fxValResult), false, false);
+                        if (isPercent)
+                        {
+                            fxValResult = (fxValue / 100) * selfHealth.GetMaxAttributeValue();
+                        }
+                        if (fxValResult >= 0)
+                        {
+                            selfHealth.GainAttribute(fxValResult);
+                        }
+                        else
+                        {
+                            selfHealth.TakeDamage(Mathf.Abs(fxValResult), false, false);
+                        }
                     }
                 }
                 yield return new WaitForSeconds(tickRate);

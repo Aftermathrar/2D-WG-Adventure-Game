@@ -166,26 +166,6 @@ namespace ButtonGame.Inventories
         private void Awake()
         {
             slots = new InventorySlot[inventorySize];
-            // slots[0].item = InventoryItem.GetFromID("80d319c7-6b3f-4f74-8525-2635f8320532");
-            // slots[0].number = 1;
-            // slots[1].item = InventoryItem.GetFromID("0017758c-658d-4d95-aba3-1e124bfe5767");
-            // slots[1].number = 1;
-            // slots[2].item = InventoryItem.GetFromID("161a4c8d-f1c5-48ff-8322-680671f5b0c1");
-            // slots[2].number = 40;
-            // slots[4].item = InventoryItem.GetFromID("843bfc27-cea2-4119-9aac-ea2f404739d7");
-            // slots[4].number = 1;
-            // slots[5].item = InventoryItem.GetFromID("d008dd4c-14b2-4591-87ed-7c717ddf32b7");
-            // slots[5].number = 2;
-            // slots[6].item = InventoryItem.GetFromID("116ccfc9-2af7-4130-afb5-a776d6b8c16f");
-            // slots[6].number = 2;
-            // slots[7].item = InventoryItem.GetFromID("963a13ad-9170-4398-ac4e-88256afb1a5b");
-            // slots[7].number = 5;
-            // slots[8].item = InventoryItem.GetFromID("30419955-2fbb-4f89-ac80-0620e947de70");
-            // slots[8].number = 5;
-            // slots[9].item = InventoryItem.GetFromID("c942f2ed-9441-4a9e-a268-c7b6293ee1fd");
-            // slots[9].number = 1;
-            // slots[3].item = InventoryItem.GetFromID("12ff2f88-dc29-4ce6-a46a-2695265b4df1");
-            // slots[3].number = 1;
         }
 
         /// <summary>

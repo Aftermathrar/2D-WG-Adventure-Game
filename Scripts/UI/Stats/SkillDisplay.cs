@@ -35,7 +35,7 @@ namespace ButtonGame.UI.Stats
             return skillDescriptions.Length;
         }
 
-        public void GetAttackStat(Text skillText, int i)
+        public string GetAttackStat(int i)
         {
             float atkValue;
             string s = atkStats.GetAttackStatString(skillDescriptions[i].attackStat, atkName);
@@ -50,12 +50,10 @@ namespace ButtonGame.UI.Stats
                         atkValue += val;
                     }
                 }
-                skillText.text = skillDescriptions[i].prefix + " " + atkValue;
+                s = skillDescriptions[i].prefix + " " + atkValue;
             }
-            else
-            {
-                skillText.text = s;
-            }
+
+            return s;
         }
 
         public string GetDisplayName()

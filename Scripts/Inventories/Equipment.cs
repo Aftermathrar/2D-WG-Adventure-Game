@@ -51,10 +51,10 @@ namespace ButtonGame.Inventories
         /// <summary>
         /// Convenience for getting the player's equipment.
         /// </summary>
-        public static Equipment GetPlayerEquipment()
+        public static Equipment GetEntityEquipment(string tag)
         {
-            var player = GameObject.FindWithTag("Player");
-            return player.GetComponent<Equipment>();
+            var entity = GameObject.FindWithTag(tag);
+            return entity.GetComponent<Equipment>();
         }
 
         /// <summary>

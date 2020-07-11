@@ -25,7 +25,7 @@ namespace ButtonGame.UI.Inventories
         private void Awake() 
         {
             playerInventory = Inventory.GetPlayerInventory();
-            playerEquipment = Equipment.GetPlayerEquipment();
+            playerEquipment = Equipment.GetEntityEquipment("Player");
             playerInventory.inventoryUpdated += Redraw;
         }
 

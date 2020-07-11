@@ -64,6 +64,8 @@ namespace ButtonGame.Combat
 
         public void BuffSelf(string ID)
         {
+            if(!isBattleActive) return;
+            
             fxID = ID;
             fxName = (EffectName)Enum.Parse(typeof(EffectName), ID);
             string buffType = effectDB.GetEffectStat(EffectStat.EffectType, fxName);
@@ -126,25 +128,30 @@ namespace ButtonGame.Combat
         protected virtual IEnumerator BuffOverTime(float buffDuration)
         {
             float tickRate = float.Parse(effectDB.GetEffectStat(EffectStat.TickRate, fxName));
-            string stat = effectDB.GetEffectStat(EffectStat.StatsAffected, fxName);
-            bool isPercent = int.Parse(effectDB.GetEffectStat(EffectStat.Additive, fxName)) == 0;
-            float fxValue = float.Parse(effectDB.GetEffectStat(EffectStat.EffectValues, fxName));
+            string[] stat = effectDB.GetEffectStat(EffectStat.StatsAffected, fxName).Split(new char[] { ',' });
+            string[] fxAdditiveData = effectDB.GetEffectStat(EffectStat.Additive, fxName).Split(new char[] { ',' });
+            string[] fxValueData = effectDB.GetEffectStat(EffectStat.EffectValues, fxName).Split(new char[] { ',' });
             string fxNameOverTime = fxName.ToString();
             do
             {
-                // Effect strength times stack count
-                float fxValResult = fxValue * buffList[fxNameOverTime][0];
-                if (isPercent)
+                for (int i = 0; i < fxAdditiveData.Length; i++)
                 {
-                    fxValResult = (fxValue / 100) * selfHealth.GetMaxAttributeValue();
-                }
-                if (fxValResult >= 0)
-                {
-                    selfHealth.GainAttribute(fxValResult);
-                }
-                else
-                {
-                    selfHealth.TakeDamage(Mathf.Abs(fxValResult), false, false);
+                    bool isPercent = int.Parse(fxAdditiveData[i]) == 0;
+                    float fxValue = float.Parse(fxValueData[i]);
+                    // Effect strength times stack count
+                    float fxValResult = fxValue * buffList[fxNameOverTime][0];
+                    if (isPercent)
+                    {
+                        fxValResult = (fxValue / 100) * selfHealth.GetMaxAttributeValue();
+                    }
+                    if (fxValResult >= 0)
+                    {
+                        selfHealth.GainAttribute(fxValResult);
+                    }
+                    else
+                    {
+                        selfHealth.TakeDamage(Mathf.Abs(fxValResult), false, false);
+                    }
                 }
                 yield return new WaitForSeconds(tickRate);
             } while(buffList[fxNameOverTime][1] <= buffDuration && isBattleActive);
@@ -260,7 +267,7 @@ namespace ButtonGame.Combat
                 {
                     fxIconCount -= 1;
                     buffList.Remove(id);
-                    fxIconSpawner.Destroy(id);
+                    fxIconSpawner.ReturnToPool(id);
 
                     if(coBuffList.ContainsKey(id)) 
                         StopCoroutine(coBuffList[id]);
@@ -286,6 +293,11 @@ namespace ButtonGame.Combat
         public Health GetTarget()
         {
             return targetHealth;
+        }
+
+        public Dictionary<string, float[]> GetBuffDictionary()
+        {
+            return buffList;
         }
 
         public bool HasEffect(string ID)
@@ -321,15 +333,15 @@ namespace ButtonGame.Combat
 
                 // Split Additive entry based for mixed base boosts
                 string[] fxAdditiveData = effectDB.GetEffectStat(EffectStat.Additive, effect).Split(new char[] { ',' });
+                string[] fxBaseStats = effectDB.GetEffectStat(EffectStat.StatsAffected, effect).Split(new char[] { ',' });
+                string[] fxValueData = effectDB.GetEffectStat(EffectStat.EffectValues, effect).Split(new char[] { ',' });
 
                 for (int i = 0; i < fxAdditiveData.Length; i++)
                 {
-                    string[] fxBaseStats = effectDB.GetEffectStat(EffectStat.StatsAffected, effect).Split(new char[] { ',' });
                     // Compare the Effect stat to the provided stat
                     if (fxBaseStats[i] == stat.ToString())
                     {
                         // Check and assign value, then check if buff is consumed on activation
-                        string[] fxValueData = effectDB.GetEffectStat(EffectStat.EffectValues, effect).Split(new char[] { ',' });
                         float fxVal = float.Parse(fxValueData[i]);
                         fxVal *= buffList[id][0];
                         // Store result in percentage or additive slot of array
@@ -338,6 +350,7 @@ namespace ButtonGame.Combat
                         {
                             removeIDs.Add(id);
                         }
+                        break;
                     }
                 }
             }

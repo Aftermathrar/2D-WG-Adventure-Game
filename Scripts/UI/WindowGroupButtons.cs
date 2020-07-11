@@ -17,6 +17,18 @@ public class WindowGroupButtons : MonoBehaviour
         public Image buttonImage;
     }
 
+    private void OnEnable() 
+    {
+        foreach (var window in groupWindows)
+        {
+            if(window.window.activeSelf)
+            {
+                window.buttonImage.sprite = selectedSprite;
+                break;
+            }
+        }
+    }
+
     public void ShowWindow(GameObject obj)
     {
         foreach (var window in groupWindows)

@@ -1,29 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ButtonGame.Stats;
+using ButtonGame.Stats.Enums;
 using UnityEngine;
 
 namespace ButtonGame.Inventories
 {
-    [RequireComponent(typeof(Inventory))]
+    [RequireComponent(typeof(Inventory), typeof(BaseStats))]
     public class RandomDropper : MonoBehaviour
     {
-        [SerializeField] InventoryItem[] dropLibrary;
+        [SerializeField] DropLibrary dropLibrary;
         [SerializeField] Inventory inventory = null;
+        [SerializeField] BaseStats baseStats = null;
 
         private void Start() 
         {
             if(inventory == null)
                 inventory = GetComponent<Inventory>();
+
+            if(baseStats == null)
+                baseStats = GetComponent<BaseStats>();
         }
 
         public void RandomDrop()
         {
-            int dropAmount = Random.Range(1, 6);
-            for (int i = 0; i < dropAmount; i++)
+            var itemDrops = dropLibrary.GetRandomDrops(Mathf.RoundToInt(baseStats.GetRawStat(Stat.DropTier)));
+            
+            foreach (var drop in itemDrops)
             {
-                int index = Random.Range(0, dropLibrary.Length);
-                InventoryItem itemDrop = dropLibrary[index];
-                inventory.AddToFirstEmptySlot(itemDrop, 1);
+                inventory.AddToFirstEmptySlot(drop.item, drop.number);
             }
         }
     }

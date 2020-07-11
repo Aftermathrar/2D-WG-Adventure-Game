@@ -26,8 +26,10 @@ namespace ButtonGame.Combat
 
                 foreach (FollowerAttackName attack in Enum.GetValues(typeof(FollowerAttackName)))
                 {
-                    FollowerAttackStats attackStats = attackDB.GetAttackStat(attack);
+                    FollowerAttackStats attackStats = new FollowerAttackStats();
+                    attackStats = attackDB.GetAttackStat(attack);
                     if(attackStats.HealingClass != healingClass) continue;
+                    
                     statList[attack] = attackStats;
                     classMoveList[attackStats.movePool] = attack;
                 }

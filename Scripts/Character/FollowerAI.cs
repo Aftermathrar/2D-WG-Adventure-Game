@@ -44,7 +44,7 @@ namespace ButtonGame.Character
 
         // Action state info
         FollowerAttackName currentAttack;
-        IAttribute resourceType;
+        IAttribute[] resourceTypes;
         float timeSinceActionStart = 0f;
         float timeSinceLastAttack = Mathf.Infinity;
         float timeBetweenAttacks = 8000f;
@@ -70,6 +70,7 @@ namespace ButtonGame.Character
         [SerializeField] List<int> consumableIndex;
         ConsumableItem currentFood;
         int[] consumedItem;
+        bool isFoodListUpdated;
 
         // Attack Management
         [Range(1, 100)]
@@ -95,7 +96,18 @@ namespace ButtonGame.Character
             selfMana = GetComponent<Mana>();
         }
 
-        private void Start() 
+        // Called during battle setup from LevelManager
+        public void SetTarget(GameObject player, GameObject enemy)
+        {
+            playerHealth = player.GetComponent<Health>();
+            playerMana = player.GetComponent<Mana>();
+            inventory = player.GetComponent<Inventory>();
+            targetHealth = enemy.GetComponent<Health>();
+
+            FollowerSetup();
+        }
+
+        private void FollowerSetup() 
         {
             skillCooldown = new Dictionary<FollowerAttackName, float>();
             float metabolism = baseStats.GetStat(Stat.Metabolism);
@@ -106,7 +118,8 @@ namespace ButtonGame.Character
             manaConversion = metabolism * baseStats.GetStat(Stat.Spirit) / 10000;
 
             AssignHungerStats();
-            BuildConsumableList();
+            StartCoroutine(BuildConsumableList());
+            isFoodListUpdated = true;
 
             // Add basic buffs to queue
             StartingAttackQueue();
@@ -125,7 +138,7 @@ namespace ButtonGame.Character
             eatingSpeed = 50 / (1 + greed / 100);
         }
 
-        private void BuildConsumableList()
+        private IEnumerator BuildConsumableList()
         {
             float upperBound = fullness.GetMaxAttributeValue() * (maxFullness - hungerValue) / 100;
             int invSize = inventory.GetSize();
@@ -138,6 +151,8 @@ namespace ButtonGame.Character
                 {
                     consumableIndex.Add(i);
                 }
+
+                yield return null;
             }
         }
 
@@ -164,15 +179,6 @@ namespace ButtonGame.Character
                 attackFromPool = attackManager.GetAttackOfType(FollowerAttackPool.HealOverTime);
                 atkQueue.Enqueue(attackFromPool);
             }
-        }
-
-        // Called during battle setup from LevelManager
-        public void SetTarget(GameObject player, GameObject enemy)
-        {
-            playerHealth = player.GetComponent<Health>();
-            playerMana = player.GetComponent<Mana>();
-            inventory = player.GetComponent<Inventory>();
-            targetHealth = enemy.GetComponent<Health>();
         }
 
         private void Update() 
@@ -299,7 +305,8 @@ namespace ButtonGame.Character
                 if (!IsOnCooldown(attackAndCost.Key) && attackAndCost.Value <= mana)
                 {
                     currentAttack = attackAndCost.Key;
-                    resourceType = playerHealth as IAttribute;
+                    resourceTypes = new IAttribute[1];
+                    resourceTypes[0] = playerHealth as IAttribute;
                     return true;
                 }
             }
@@ -311,7 +318,9 @@ namespace ButtonGame.Character
                 if (!IsOnCooldown(attackAndCost.Key))
                 {
                     currentAttack = attackAndCost.Key;
-                    resourceType = playerMana as IAttribute;
+                    resourceTypes = new IAttribute[2];
+                    resourceTypes[0] = playerMana as IAttribute;
+                    resourceTypes[1] = selfMana as IAttribute;
                     return true;
                 }
             }
@@ -453,9 +462,12 @@ namespace ButtonGame.Character
                     }
                     else
                     {
-                        float healAmount = attackStats.Power / 100 * resourceType.GetMaxAttributeValue();
-                        // healAmount *= baseStats.GetStat(Stat.Spirit) / 100;
-                        resourceType.GainAttribute(healAmount);
+                        foreach (var resource in resourceTypes)
+                        {
+                            float recoveryAmount = attackStats.Power / 100 * resource.GetMaxAttributeValue();
+                            // healAmount *= baseStats.GetStat(Stat.Spirit) / 100;
+                            resource.GainAttribute(recoveryAmount);
+                        }
                     }
                     return;
                 }
@@ -510,6 +522,11 @@ namespace ButtonGame.Character
             {
                 StartingAttackQueue();
             }
+            if(!isFoodListUpdated)
+            {
+                StartCoroutine(BuildConsumableList());
+                isFoodListUpdated = true;
+            }
         }
 
         public void EndBattle()
@@ -517,7 +534,7 @@ namespace ButtonGame.Character
             isBattleActive = false;
             isAttackActive = false;
             isEatingActive = false;
-            skillCooldown = new Dictionary<FollowerAttackName, float>();
+            isFoodListUpdated = false;
             timeSinceLastAttack = Mathf.Infinity;
             if(skillRecastRoutines.Count > 0)
             {
@@ -526,6 +543,8 @@ namespace ButtonGame.Character
                     StopCoroutine(skillRecastRoutines[pair.Key]);
                 }
             }
+            skillRecastRoutines.Clear();
+            skillCooldown.Clear();
             atkQueue.Clear();
             Cancel();
         }

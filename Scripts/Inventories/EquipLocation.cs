@@ -6,7 +6,7 @@ namespace ButtonGame.Inventories
     {
         Weapon,
         Armor,
-        Glove,
+        Pants,
         Boot,
         Earring,
         Ring,
@@ -17,6 +17,8 @@ namespace ButtonGame.Inventories
         Belt,
         WeaponGem,
         ArmorGem,
-        AccessoryGem
+        AccessoryGem,
+        Staff,
+        Robe
     }   
 }

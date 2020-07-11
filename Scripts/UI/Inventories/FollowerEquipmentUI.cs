@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace ButtonGame.UI.Inventories
 {
-    public class EquipmentUI : MonoBehaviour
+    public class FollowerEquipmentUI : EquipmentUI
     {
-        // Get player references to set up equipment slots and assign index numbers to each slot
-        protected virtual void Awake()
+        // Get follower references to set up equipment slots and assign index numbers to each slot
+        protected override void Awake()
         {
             Inventory playerInventory = Inventory.GetPlayerInventory();
-            Equipment playerEquipment = Equipment.GetEntityEquipment("Player");
+            Equipment followerEquipment = Equipment.GetEntityEquipment("Follower");
             EquipmentSlotUI[] equipmentSlots = GetComponentsInChildren<EquipmentSlotUI>();
             Dictionary<EquipLocation, int> equipSlotLookup = new Dictionary<EquipLocation, int>();
 
@@ -27,7 +27,7 @@ namespace ButtonGame.UI.Inventories
                     equipSlotLookup[key] = 0;
                 }
 
-                slot.Setup(playerInventory, playerEquipment, equipSlotLookup[key]);
+                slot.Setup(playerInventory, followerEquipment, equipSlotLookup[key]);
             }
         }
     }

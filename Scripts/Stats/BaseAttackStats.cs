@@ -16,7 +16,8 @@ namespace ButtonGame.Stats
             float[] total = new float[s.Length];
             for (int i = 0; i < s.Length; i++)
             {
-                total[i] = (float.Parse(s[i]) + GetAtkStatModifiers(stat, attackType)[1]) * (1 + GetAtkStatModifiers(stat, attackType)[0] / 100);
+                float[] atkStatModifiers = GetAtkStatModifiers(stat, attackType);
+                total[i] = (float.Parse(s[i]) + atkStatModifiers[1]) * (1 + atkStatModifiers[0] / 100);
             }
             
             return total;
@@ -28,7 +29,8 @@ namespace ButtonGame.Stats
             float total = 0;
 
             // For stat modifiers, 0 is Additive, 1 is Percentage. From .asset values
-            total = (float.Parse(s[i]) + GetAtkStatModifiers(stat, attackType)[1]) *(1 + GetAtkStatModifiers(stat, attackType)[0] / 100);
+            float[] atkStatModifiers = GetAtkStatModifiers(stat, attackType);
+            total = (float.Parse(s[i]) + atkStatModifiers[1]) *(1 + atkStatModifiers[0] / 100);
 
             return total;
         }

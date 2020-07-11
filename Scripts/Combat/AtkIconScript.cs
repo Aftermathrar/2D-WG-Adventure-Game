@@ -121,7 +121,8 @@ namespace ButtonGame.Combat
                 float atkSpeed = fighter.GetStat(Stat.AttackSpeed);
                 atkSpeed = 1 / atkSpeed * 100;
                 cooldownDelay = GetStat(AttackStat.CDStart, 0) * atkSpeed;
-                maxCooldown = GetStat(AttackStat.Cooldown, 0) * (1 - fighter.GetStat(Stat.CooldownReduction)/100);
+                float cdr = fighter.GetStat(Stat.CooldownReduction) / 100;
+                maxCooldown = GetStat(AttackStat.Cooldown, 0) * (1 - cdr);
                 clickEffect.Stop();
                 var main = clickEffect.main;
                 if (clickEffect.isStopped) main.duration = Mathf.Max(0.1f, cooldownDelay);
@@ -275,9 +276,14 @@ namespace ButtonGame.Combat
                 atkPower *= (mult / 100);
             }
 
+            // Reduce by enemy defense
             float enemyDef = targetStats.GetStat(Stat.Defense);
             float enemyReduction = targetStats.GetStat(Stat.DamageReduction) / 100;
             total = Mathf.Ceil(atkPower / enemyDef) * (1 - enemyReduction);
+
+            // Get player damage modifier
+            float damageMod = 1 + fighter.GetStat(Stat.Damage) / 100;
+            total *= damageMod;
 
             if (CalculateCriticalHit())
             {
@@ -346,6 +352,10 @@ namespace ButtonGame.Combat
             // Reflect always crits
             float critPower = fighter.GetStat(Stat.CritDamage) / 100;
             total *= critPower;
+
+            // Get player damage modifier
+            float damageMod = 1 + fighter.GetStat(Stat.Damage) / 100;
+            total *= damageMod;
 
             //Reflect is 40% damage
             total *= 0.4f;
