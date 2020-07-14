@@ -30,9 +30,9 @@ namespace ButtonGame.Stats.Follower
         {
             calorieManager = new CalorieManager();
             modifiedStats = new Dictionary<Stat, float[]>();
-            modifiedStats[Stat.Capacity] = new float[] { 0, 100 };
-            modifiedStats[Stat.Greed] = new float[] { 0, 0 };
-            modifiedStats[Stat.FatDesire] = new float[] {0, 50 };
+            modifiedStats[Stat.Capacity] = new float[] { 0, Random.Range(-100, 200) };
+            modifiedStats[Stat.Greed] = new float[] { 0, Random.Range(0, 20) };
+            modifiedStats[Stat.FatDesire] = new float[] {0, Random.Range(0, 20) };
         }
 
         public void ModifyStat(Stat stat, float modValue, bool isAdditive)

@@ -16,19 +16,27 @@ namespace ButtonGame.Saving
             Dictionary<string, object> state = LoadFile(saveFile);
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
     
-            if(state.ContainsKey("lastSceneBuildIndex"))
+            if(buildIndex > 0)
             {
-                buildIndex = (int)state["lastSceneBuildIndex"];
+                if (state.ContainsKey("lastSceneBuildIndex"))
+                {
+                    buildIndex = (int)state["lastSceneBuildIndex"];
+                }
+                yield return SceneManager.LoadSceneAsync(buildIndex);
+                RestoreState(LoadFile(saveFile));
             }
-            yield return SceneManager.LoadSceneAsync(buildIndex);
-            RestoreState(LoadFile(saveFile));
         }
 
         public void Save(string saveFile)
         {
-            Dictionary<string, object> state = LoadFile(saveFile);
-            CaptureState(state);
-            SaveFile(saveFile, state);
+            int buildIndex = SceneManager.GetActiveScene().buildIndex;
+
+            if (buildIndex > 0)
+            {
+                Dictionary<string, object> state = LoadFile(saveFile);
+                CaptureState(state);
+                SaveFile(saveFile, state);
+            }
         }
 
         public IEnumerator Load(string saveFile)

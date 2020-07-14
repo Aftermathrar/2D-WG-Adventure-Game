@@ -9,6 +9,8 @@ using ButtonGame.Stats.Enums;
 using ButtonGame.Stats.Follower;
 using ButtonGame.Control;
 using ButtonGame.Saving;
+using TMPro;
+using ButtonGame.Inventories;
 
 namespace ButtonGame.Core
 {
@@ -87,16 +89,12 @@ namespace ButtonGame.Core
 
         private void BattleSetup()
         {
-            // Choose random enemy from list
-            int randomEnemyIndex= UnityEngine.Random.Range(0, enemyPrefabs.Length);
-            BaseStats selectedEnemy= enemyPrefabs[randomEnemyIndex];
-
             // Find player
             playerGO = GameObject.FindGameObjectWithTag("Player");
             PlayerController playerController = playerGO.GetComponent<PlayerController>();
 
             // Spawn enemy
-            enemyGO = Instantiate(selectedEnemy, battleCanvas).gameObject;
+            enemyGO = SpawnNewEnemy();
             enemyGO.transform.SetAsFirstSibling();
 
             // Assign opponent to scripts
@@ -112,6 +110,57 @@ namespace ButtonGame.Core
 
             // Activate battle
             StartCoroutine(BeginBattle());
+        }
+
+        private void BattleSetup(CharacterClass enemyName)
+        {
+            // Find player
+            playerGO = GameObject.FindGameObjectWithTag("Player");
+            PlayerController playerController = playerGO.GetComponent<PlayerController>();
+
+            // Spawn enemy
+            enemyGO = SpawnNewEnemy(enemyName);
+            enemyGO.transform.SetAsFirstSibling();
+
+            // Assign opponent to scripts
+            enemyGO.GetComponent<CombatEffects>().SetTarget(playerGO);
+            enemyGO.GetComponent<EnemyAI>().SetTarget(playerController);
+            playerController.SetEnemy(enemyGO.GetComponent<EnemyController>());
+            playerGO.GetComponent<CombatEffects>().SetTarget(enemyGO);
+            if (followerGO != null)
+            {
+                followerGO.GetComponent<FollowerAI>().SetTarget(playerGO, enemyGO);
+                followerGO.GetComponent<CombatEffects>().SetTarget(enemyGO);
+            }
+
+            // Activate battle
+            StartCoroutine(BeginBattle());
+        }
+
+        private GameObject SpawnNewEnemy()
+        {
+            // Choose random enemy from list
+            int randomEnemyIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
+            BaseStats selectedEnemy = enemyPrefabs[randomEnemyIndex];
+            return Instantiate(selectedEnemy, battleCanvas).gameObject;
+        }
+
+        private GameObject SpawnNewEnemy(CharacterClass enemyName)
+        {
+            // Find enemy type from list
+            foreach (var enemyPrefab in enemyPrefabs)
+            {
+                if(enemyPrefab.GetClass() == enemyName)
+                {
+                    return Instantiate(enemyPrefab, battleCanvas).gameObject;
+                }
+            }
+            Debug.Log("Enemy of type " + enemyName.ToString() + " not found! Spawning random enemy.");
+
+            // Choose random enemy from list
+            int randomEnemyIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
+            BaseStats selectedEnemy = enemyPrefabs[randomEnemyIndex];
+            return Instantiate(selectedEnemy, battleCanvas).gameObject;
         }
 
         private IEnumerator BeginBattle()
@@ -132,6 +181,15 @@ namespace ButtonGame.Core
             rewardWindow.SetActive(false);
             buttonContainer.SetActive(false);
             BattleSetup();
+        }
+
+        private void RestartBattle(CharacterClass enemyName)
+        {
+            Destroy(enemyGO);
+            outroScreen.SetActive(false);
+            rewardWindow.SetActive(false);
+            buttonContainer.SetActive(false);
+            BattleSetup(enemyName);
         }
 
         private IEnumerator BattleRewards()
@@ -172,6 +230,11 @@ namespace ButtonGame.Core
             }
         }
 
+        public void ResumeRestart(CharacterClass enemyName)
+        {
+            RestartBattle(enemyName);
+        }
+
         public void StartBattle()
         {
             isBattleActive = true;
@@ -190,7 +253,17 @@ namespace ButtonGame.Core
             else
             {
                 // Coroutine for losing screen
+                var outroText = outroScreen.GetComponentInChildren<TextMeshProUGUI>();
+                outroText.text = "DEFEATED";
+                Inventory inventory = enemyGO.GetComponent<Inventory>();
+                inventory.ClearInventory();
+                StartCoroutine(BattleRewards());
             }
+        }
+
+        public bool IsBattleActive()
+        {
+            return isBattleActive;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace ButtonGame.SceneManagement
@@ -8,10 +9,12 @@ namespace ButtonGame.SceneManagement
     public class ChangeSceneButton : MonoBehaviour
     {
         [SerializeField] int sceneToLoad = -1;
+        [SerializeField] UnityEvent onSceneChange;
 
         public void ChangeScene()
         {
             transform.parent = null;
+            onSceneChange?.Invoke();
             StartCoroutine(Transition());
         }
 

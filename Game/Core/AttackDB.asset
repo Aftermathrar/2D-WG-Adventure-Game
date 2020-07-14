@@ -365,7 +365,7 @@ MonoBehaviour:
     attackStats:
     - stat: 0
       value:
-      - Haymaker
+      - Wrath
     - stat: 1
       value:
       - Focus a torrent of magical energy into a laser strike.
@@ -433,10 +433,10 @@ MonoBehaviour:
     attackStats:
     - stat: 0
       value:
-      - Rapid Punch
+      - Magic Missiles
     - stat: 1
       value:
-      - Flurry of jabs that lower enemy defense.
+      - Flurry of magical missiles that lower enemy defense.
     - stat: 2
       value:
       - 10400
@@ -536,7 +536,7 @@ MonoBehaviour:
     attackStats:
     - stat: 0
       value:
-      - Spin Kick
+      - Spin Bolt
     - stat: 1
       value:
       - Three small, quick shots followed by a final magic blast with an increased crit chance.
@@ -619,7 +619,7 @@ MonoBehaviour:
     attackStats:
     - stat: 0
       value:
-      - Stomp
+      - Earthquake
     - stat: 1
       value:
       - Creates a quake by stomping. Has block.
@@ -697,10 +697,10 @@ MonoBehaviour:
     attackStats:
     - stat: 0
       value:
-      - Counter
+      - Psy Counter
     - stat: 1
       value:
-      - High crit skill available after blocking
+      - High crit skill available after blocking.
     - stat: 2
       value:
       - 10600
@@ -770,10 +770,10 @@ MonoBehaviour:
     attackStats:
     - stat: 0
       value:
-      - Dodge Roll
+      - Evasive Roll
     - stat: 1
       value:
-      - Evade all damage with a quick roll
+      - Evade all damage with a quick roll.
     - stat: 2
       value:
       - 11000
@@ -821,7 +821,7 @@ MonoBehaviour:
       - 0
     - stat: 17
       value:
-      - Guard
+      - Magic Shield
     - stat: 18
       value:
       - Create a barrier to stop incoming attacks.
@@ -838,7 +838,7 @@ MonoBehaviour:
     attackStats:
     - stat: 0
       value:
-      - Guard
+      - Magic Shield
     - stat: 1
       value:
       - Create a barrier to stop incoming attacks.

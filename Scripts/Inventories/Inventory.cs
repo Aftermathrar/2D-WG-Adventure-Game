@@ -161,6 +161,14 @@ namespace ButtonGame.Inventories
             return true;
         }
 
+        /// <summary>
+        /// Clears inventory
+        /// </summary>
+        public void ClearInventory()
+        {
+            slots = new InventorySlot[inventorySize];
+        }
+
         // PRIVATE
 
         private void Awake()

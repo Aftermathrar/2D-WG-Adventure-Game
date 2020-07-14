@@ -296,6 +296,7 @@ namespace ButtonGame.Combat
                     removeIDs.Add(key);
                 }
             }
+            RemoveBuffs();
         }
 
         public Health GetTarget()

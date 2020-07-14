@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using ButtonGame.Stats.Enums;
+using ButtonGame.UI;
 using UnityEngine;
 
 namespace ButtonGame.Combat.Skills
@@ -51,6 +52,9 @@ namespace ButtonGame.Combat.Skills
             //Reflect is 40% damage
             total *= 0.4f;
 
+
+            shaker = target.GetComponent<UIShake>();
+            StartCoroutine(shaker.Shake(0.2f, 7.5f, 3));
             target.TakeDamage(total, true);
             player.DamageDealt(total);
         }

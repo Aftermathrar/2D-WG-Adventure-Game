@@ -4,6 +4,7 @@ using ButtonGame.Saving;
 using ButtonGame.SceneManagement;
 using ButtonGame.Stats;
 using ButtonGame.Stats.Follower;
+using TMPro;
 using UnityEngine;
 
 namespace ButtonGame.Control
@@ -15,6 +16,14 @@ namespace ButtonGame.Control
 
         public void ChooseNewFollower()
         {
+            // Delete old save
+            SavingWrapper savingWrapper = (SavingWrapper)GameObject.FindObjectOfType(typeof(SavingWrapper));
+            if (savingWrapper != null)
+            {
+                savingWrapper.Delete();
+            }
+
+            // Create and register new follower
             FollowerRole followerRole = new FollowerRole();
             followerRole.FollowerClass = followerPrefab.GetComponent<BaseStats>().GetClass();
             followerRole.Identifier = followerPrefab.GenerateNewUniqueIdentifier();
