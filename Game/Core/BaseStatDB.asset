@@ -86,7 +86,7 @@ MonoBehaviour:
     - stat: 8
       value: 100
     - stat: 14
-      value: 100
+      value: 0
     - stat: 24
       value: 1000
     - stat: 25
@@ -138,11 +138,11 @@ MonoBehaviour:
     - stat: 0
       value: Slime
     - stat: 1
-      value: 1000
+      value: 10000
     - stat: 4
-      value: 0.25
+      value: 2.25
     - stat: 6
-      value: 800
+      value: 1200
     - stat: 8
       value: 70
     - stat: 10
@@ -166,11 +166,11 @@ MonoBehaviour:
     - stat: 0
       value: Fox
     - stat: 1
-      value: 700
+      value: 7000
     - stat: 4
-      value: 0.25
+      value: 3
     - stat: 6
-      value: 750
+      value: 1125
     - stat: 8
       value: 140
     - stat: 10
@@ -194,11 +194,11 @@ MonoBehaviour:
     - stat: 0
       value: Treant
     - stat: 1
-      value: 1000
+      value: 10000
     - stat: 4
-      value: 0.2
+      value: 1.6
     - stat: 6
-      value: 800
+      value: 1200
     - stat: 8
       value: 60
     - stat: 10
@@ -222,11 +222,11 @@ MonoBehaviour:
     - stat: 0
       value: Boar
     - stat: 1
-      value: 1100
+      value: 11000
     - stat: 4
-      value: 0.25
+      value: 3.5
     - stat: 6
-      value: 850
+      value: 1375
     - stat: 8
       value: 120
     - stat: 10
@@ -250,11 +250,11 @@ MonoBehaviour:
     - stat: 0
       value: Small Bat
     - stat: 1
-      value: 800
+      value: 8000
     - stat: 4
-      value: 0.25
+      value: 2.5
     - stat: 6
-      value: 800
+      value: 1200
     - stat: 8
       value: 110
     - stat: 10

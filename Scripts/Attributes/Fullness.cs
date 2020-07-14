@@ -33,11 +33,15 @@ namespace ButtonGame.Attributes
         private void Start() 
         {
             fullnessPoints.ForceInit();
+            RecalculateMaxCapacity();
         }
 
         public void RecalculateMaxCapacity()
         {
-            maxCapacity = Mathf.Round(GetComponent<BaseStats>().GetStat(Stat.Capacity));
+            float newMax = Mathf.Round(GetComponent<BaseStats>().GetStat(Stat.Capacity));
+            float difference = Mathf.Max(0, newMax - maxCapacity);
+            maxCapacity = newMax;
+            fullnessPoints.value = Mathf.Min(maxCapacity, fullnessPoints.value + difference);
         }
 
         public float DigestFood(float foodAmount)

@@ -10,27 +10,29 @@ namespace ButtonGame.UI.Stats
 {
     public class StatDisplay : MonoBehaviour
     {
-        Text[] textLines = null;
-        StatText[] statTextLines = null;
-        BaseStats playerStats = null;
-        Equipment playerEquipment = null;
+        [SerializeField] protected BaseStats characterStats = null;
+        [SerializeField] protected Equipment characterEquipment = null;
+        protected StatText[] statTextLines = null;
 
-        private void Start() 
+        protected virtual void Start()
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            playerStats = player.GetComponent<BaseStats>();
-            playerEquipment = player.GetComponent<Equipment>();
             statTextLines = GetComponentsInChildren<StatText>();
             RedrawStatDisplay();
 
-            playerEquipment.equipmentUpdated += RedrawStatDisplay;
+            characterEquipment.equipmentUpdated += RedrawStatDisplay;
         }
 
-        private void RedrawStatDisplay()
+        protected virtual void OnEnable() 
+        {
+            statTextLines = GetComponentsInChildren<StatText>();
+            RedrawStatDisplay();
+        }
+
+        protected void RedrawStatDisplay()
         {
             foreach (var statText in statTextLines)
             {
-                statText.SetValue(playerStats.GetStat(statText.GetStat()));
+                statText.SetValue(characterStats.GetStat(statText.GetStat()));
             }
         }
     }

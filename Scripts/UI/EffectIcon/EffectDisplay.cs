@@ -11,6 +11,7 @@ namespace ButtonGame.UI.EffectIcon
 {
     public class EffectDisplay : MonoBehaviour, ITooltipProvider
     {
+        [SerializeField] CharacterClass healingClass;
         [SerializeField] EffectDB effectDB;
         [SerializeField] EffectDescription[] effectDescriptions;
         [SerializeField] TooltipDescriptionField[] effectTooltips;
@@ -23,6 +24,14 @@ namespace ButtonGame.UI.EffectIcon
         {
             public string prefix;
             public EffectStat effectStat;
+        }
+
+        private void OnEnable() 
+        {
+            GameObject follower = GameObject.FindWithTag("Follower");
+            if(follower == null) return;
+
+            healingClass = follower.GetComponent<BaseStats>().GetClass();
         }
 
         public void SetEffectName(string id)

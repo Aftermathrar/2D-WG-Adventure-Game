@@ -17,20 +17,22 @@ namespace ButtonGame.UI.Inventories
         // CACHE
         Inventory playerInventory;
         Equipment playerEquipment;
+        Equipment followerEquipment = null;
         int playerInventorySize;
         Dictionary<int, InventorySlotUI> inventorySlotCache;
 
         // LIFECYCLE METHODS
 
-        private void Awake() 
+        private void Awake()
         {
             playerInventory = Inventory.GetPlayerInventory();
-            playerEquipment = Equipment.GetEntityEquipment("Player");
             playerInventory.inventoryUpdated += Redraw;
         }
 
         private void Start()
         {
+            playerEquipment = Equipment.GetEntityEquipment("Player");
+            followerEquipment = Equipment.GetEntityEquipment("Follower");
             Redraw();
         }
 
@@ -56,7 +58,7 @@ namespace ButtonGame.UI.Inventories
                 {
                     var itemUI = Instantiate(InventoryItemPrefab, transform);
                     inventorySlotCache[i] = itemUI;
-                    itemUI.Setup(playerInventory, playerEquipment, i);
+                    itemUI.Setup(playerInventory, playerEquipment, followerEquipment, i);
                 }
 
                 // Set content window to show top row
@@ -67,7 +69,7 @@ namespace ButtonGame.UI.Inventories
                 foreach (KeyValuePair<int, InventorySlotUI> inventorySlot in inventorySlotCache)
                 {
                     var itemUI = inventorySlot.Value;
-                    itemUI.Setup(playerInventory, playerEquipment, inventorySlot.Key);
+                    itemUI.Setup(playerInventory, playerEquipment, followerEquipment, inventorySlot.Key);
                 }
             }
         }

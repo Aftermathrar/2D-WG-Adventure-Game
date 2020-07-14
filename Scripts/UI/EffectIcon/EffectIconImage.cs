@@ -21,7 +21,7 @@ namespace ButtonGame.UI.EffectIcon
 
         public void SetPosition(Vector3 pos)
         {
-            transform.position = pos;
+            transform.localPosition = pos;
         }
 
         public void UpdateStacks(string stack)

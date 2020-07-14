@@ -13,7 +13,7 @@ namespace ButtonGame.Control
     {
         [SerializeField] EffectDB effectDB;
         [SerializeField] EffectIconDB fxIconDB;
-        [SerializeField] PlayerCombatEffects playerEffects = null;
+        [SerializeField] IBuffListProvider buffEffects = null;
         [SerializeField] EffectIconSpawner fxIconSpawner = null;
 
         int fxIconCount;
@@ -21,10 +21,10 @@ namespace ButtonGame.Control
 
         private void OnEnable() 
         {
-            if(playerEffects == null || fxIconSpawner == null)
+            if(buffEffects == null || fxIconSpawner == null)
                 return;
 
-            buffList = playerEffects.GetBuffDictionary();
+            buffList = buffEffects.GetBuffDictionary();
             RestoreIcons();
         }
 

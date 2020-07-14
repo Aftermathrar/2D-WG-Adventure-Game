@@ -17,14 +17,17 @@ public class WindowGroupButtons : MonoBehaviour
         public Image buttonImage;
     }
 
-    private void OnEnable() 
+    private void OnEnable()
     {
         foreach (var window in groupWindows)
         {
             if(window.window.activeSelf)
             {
                 window.buttonImage.sprite = selectedSprite;
-                break;
+            }
+            else
+            {
+                window.buttonImage.sprite = defaultSprite;
             }
         }
     }

@@ -16,6 +16,29 @@ namespace ButtonGame.Saving
             return uniqueIdentifier;
         }
 
+        public string GenerateNewUniqueIdentifier()
+        {
+            if(uniqueIdentifier != "") return uniqueIdentifier;
+
+            SerializedObject serializedObject = new SerializedObject(this);
+            SerializedProperty property = serializedObject.FindProperty("uniqueIdentifier");
+
+            if (string.IsNullOrEmpty(property.stringValue) || !IsUnique(property.stringValue))
+            {
+                property.stringValue = System.Guid.NewGuid().ToString();
+                serializedObject.ApplyModifiedProperties();
+            }
+
+            globalLookup[property.stringValue] = this;
+
+            return property.stringValue;
+        }
+
+        public void SetUniqueIdentifier(string newIdentifier)
+        {
+            uniqueIdentifier = newIdentifier;
+        }
+
         public object CaptureState()
         {
             Dictionary<string, object> state = new Dictionary<string, object>();
@@ -32,6 +55,7 @@ namespace ButtonGame.Saving
             foreach (ISaveable saveable in GetComponents<ISaveable>())
             {
                 string typeString = saveable.GetType().ToString();
+                // Debug.Log("Entity: " + GetUniqueIdentifier() + " Component Type: " + typeString + "Has state?: " + stateDict.ContainsKey(typeString).ToString());
                 if(stateDict.ContainsKey(typeString))
                 {
                     saveable.RestoreState(stateDict[typeString]);

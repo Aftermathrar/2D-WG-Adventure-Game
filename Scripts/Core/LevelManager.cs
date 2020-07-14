@@ -5,6 +5,10 @@ using UnityEngine.Events;
 using ButtonGame.Stats;
 using ButtonGame.Character;
 using ButtonGame.Combat;
+using ButtonGame.Stats.Enums;
+using ButtonGame.Stats.Follower;
+using ButtonGame.Control;
+using ButtonGame.Saving;
 
 namespace ButtonGame.Core
 {
@@ -20,12 +24,46 @@ namespace ButtonGame.Core
         [SerializeField] GameObject rewardWindow;
 
         // Battle setup
+        [SerializeField] FollowerCollection followers;
         [SerializeField] Transform battleCanvas;
+        [SerializeField] BaseStats[] followerPrefabs;
         [SerializeField] BaseStats[] enemyPrefabs;
         [SerializeField] UnityEvent battleStart;
         GameObject playerGO;
         GameObject enemyGO;
         GameObject followerGO;
+
+        private void Awake()
+        {
+            // Spawn follower
+            FollowerRole companionToSpawn = new FollowerRole();
+            companionToSpawn = followers.GetFollowerIdentifier(FollowerPosition.Combat);
+            string followerUUID = companionToSpawn.Identifier;
+
+            if (followerUUID == string.Empty)
+            {
+                int randomFollowerIndex = UnityEngine.Random.Range(0, followerPrefabs.Length);
+                BaseStats selectedFollower = followerPrefabs[randomFollowerIndex];
+                followerGO = Instantiate(selectedFollower, battleCanvas).gameObject;
+
+                companionToSpawn.FollowerClass = followerGO.GetComponent<BaseStats>().GetClass();
+                companionToSpawn.Identifier = followerGO.GetComponent<SaveableEntity>().GenerateNewUniqueIdentifier();
+
+                string followerIdentifier = followerGO.GetComponent<SaveableEntity>().GenerateNewUniqueIdentifier();
+                followers.AddNewFollower(FollowerPosition.Combat, companionToSpawn);
+            }
+            else
+            {
+                foreach (BaseStats healClass in followerPrefabs)
+                {
+                    if (companionToSpawn.FollowerClass == healClass.GetClass())
+                    {
+                        followerGO = Instantiate(healClass, battleCanvas).gameObject;
+                        followerGO.GetComponent<SaveableEntity>().SetUniqueIdentifier(followerUUID);
+                    }
+                }
+            }
+        }
 
         private void Start()
         {
@@ -50,10 +88,8 @@ namespace ButtonGame.Core
         private void BattleSetup()
         {
             // Choose random enemy from list
-            int randomEnemyIndex;
-            randomEnemyIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
-            BaseStats selectedEnemy;
-            selectedEnemy = enemyPrefabs[randomEnemyIndex];
+            int randomEnemyIndex= UnityEngine.Random.Range(0, enemyPrefabs.Length);
+            BaseStats selectedEnemy= enemyPrefabs[randomEnemyIndex];
 
             // Find player
             playerGO = GameObject.FindGameObjectWithTag("Player");
@@ -62,9 +98,6 @@ namespace ButtonGame.Core
             // Spawn enemy
             enemyGO = Instantiate(selectedEnemy, battleCanvas).gameObject;
             enemyGO.transform.SetAsFirstSibling();
-
-            // Spawn Follower
-            followerGO = GameObject.FindGameObjectWithTag("Follower");
 
             // Assign opponent to scripts
             enemyGO.GetComponent<CombatEffects>().SetTarget(playerGO);

@@ -8,7 +8,7 @@ using ButtonGame.Stats.Enums;
 
 namespace ButtonGame.UI.Stats
 {
-    public class SkillDisplay : MonoBehaviour, ITooltipProvider
+    public class SkillDisplay : MonoBehaviour, ITooltipProvider, ISkillDisplay
     {
         [SerializeField] AttackType atkName;
         [SerializeField] SkillDescription[] skillDescriptions;

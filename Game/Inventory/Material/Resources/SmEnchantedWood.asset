@@ -16,6 +16,6 @@ MonoBehaviour:
   displayName: Weakly Enchanted Wood
   categoryName: 4
   description: []
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e6669c3fc8cb4fa4881625d382eb8633, type: 3}
   value: 0
   stackable: 1

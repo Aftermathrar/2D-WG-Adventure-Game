@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using ButtonGame.Saving;
 using ButtonGame.Stats.Enums;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace ButtonGame.Stats.Follower
 {
@@ -10,6 +11,8 @@ namespace ButtonGame.Stats.Follower
         // Dictionary<string, FollowerSetup> characterDict = null;
         CalorieManager calorieManager;
         Dictionary<Stat, float[]> modifiedStats;
+
+        public UnityEvent bodyUpdated;
 
         // GUID key to appearance stat record
         // [System.Serializable]
@@ -100,6 +103,7 @@ namespace ButtonGame.Stats.Follower
             BodyRecord body = (BodyRecord)state;
             calorieManager = body.manager;
             modifiedStats = body.stats;
+            bodyUpdated.Invoke();
         }
     }
 

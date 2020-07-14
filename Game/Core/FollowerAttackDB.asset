@@ -22,14 +22,14 @@ MonoBehaviour:
       Cost: 0
       Cooldown: 0
       CastTime: 0
-      IsRecastSkill: 0
+      isRecastSkill: 0
       RecastTimer: 0
       ActionModifier: 0
       EffectID: 0
       EffectTarget: 0
       ApplyEffect: 0
       Power: 0
-      MovePool: 0
+      movePool: 0
   - attackName: 1
     attackStats:
       HealingClass: 1
@@ -39,14 +39,14 @@ MonoBehaviour:
       Cost: 20
       Cooldown: 15
       CastTime: 1
-      IsRecastSkill: 1
+      isRecastSkill: 1
       RecastTimer: 15
       ActionModifier: 1
       EffectID: 9
       EffectTarget: 8
       ApplyEffect: 1
       Power: 0
-      MovePool: 5
+      movePool: 5
   - attackName: 2
     attackStats:
       HealingClass: 1
@@ -56,14 +56,14 @@ MonoBehaviour:
       Cost: 30
       Cooldown: 15
       CastTime: 1
-      IsRecastSkill: 1
+      isRecastSkill: 1
       RecastTimer: 600
       ActionModifier: 1
       EffectID: 11
       EffectTarget: 2
       ApplyEffect: 1
       Power: 0
-      MovePool: 0
+      movePool: 0
   - attackName: 3
     attackStats:
       HealingClass: 1
@@ -73,14 +73,14 @@ MonoBehaviour:
       Cost: 30
       Cooldown: 12
       CastTime: 1
-      IsRecastSkill: 0
+      isRecastSkill: 0
       RecastTimer: 0
       ActionModifier: 1
       EffectID: 14
       EffectTarget: 8
       ApplyEffect: 1
       Power: 0
-      MovePool: 3
+      movePool: 3
   - attackName: 4
     attackStats:
       HealingClass: 1
@@ -89,15 +89,15 @@ MonoBehaviour:
       ID: 4
       Cost: 8
       Cooldown: 7
-      CastTime: .5
-      IsRecastSkill: 1
+      CastTime: 0.5
+      isRecastSkill: 1
       RecastTimer: 15
       ActionModifier: 1
       EffectID: 12
       EffectTarget: 4
       ApplyEffect: 1
       Power: 0
-      MovePool: 6
+      movePool: 6
   - attackName: 5
     attackStats:
       HealingClass: 1
@@ -107,14 +107,14 @@ MonoBehaviour:
       Cost: 0
       Cooldown: 34
       CastTime: 3
-      IsRecastSkill: 0
+      isRecastSkill: 0
       RecastTimer: 0
       ActionModifier: 1
       EffectID: 0
       EffectTarget: 0
       ApplyEffect: 1
       Power: 32
-      MovePool: 4
+      movePool: 4
   - attackName: 6
     attackStats:
       HealingClass: 1
@@ -124,14 +124,14 @@ MonoBehaviour:
       Cost: 10
       Cooldown: 6
       CastTime: 1.5
-      IsRecastSkill: 0
+      isRecastSkill: 0
       RecastTimer: 0
       ActionModifier: 1
       EffectID: 0
       EffectTarget: 0
       ApplyEffect: 1
       Power: 30
-      MovePool: 1
+      movePool: 1
   - attackName: 7
     attackStats:
       HealingClass: 1
@@ -141,14 +141,14 @@ MonoBehaviour:
       Cost: 15
       Cooldown: 20
       CastTime: 2
-      IsRecastSkill: 0
+      isRecastSkill: 0
       RecastTimer: 0
       ActionModifier: 1
       EffectID: 0
       EffectTarget: 0
       ApplyEffect: 1
       Power: 60
-      MovePool: 2
+      movePool: 2
   - attackName: 8
     attackStats:
       HealingClass: 1
@@ -158,31 +158,32 @@ MonoBehaviour:
       Cost: 5
       Cooldown: 5
       CastTime: 1
-      IsRecastSkill: 0
+      isRecastSkill: 0
       RecastTimer: 0
       ActionModifier: 1
       EffectID: 0
       EffectTarget: 0
       ApplyEffect: 1
       Power: 0
-      MovePool: 8
+      movePool: 8
   - attackName: 9
     attackStats:
       HealingClass: 2
       Name: Aura of the Berserk
-      Description: Magic to heighten the senses and induce fury. Raises attack power, speed, and crit factor.
+      Description: Magic to heighten the senses and induce fury. Raises attack power,
+        speed, and crit factor.
       ID: 10
       Cost: 10
       Cooldown: 15
       CastTime: 2
-      IsRecastSkill: 0
+      isRecastSkill: 1
       RecastTimer: 590
       ActionModifier: 1.2
       EffectID: 16
       EffectTarget: 2
       ApplyEffect: 1
       Power: 0
-      MovePool: 0
+      movePool: 0
   - attackName: 10
     attackStats:
       HealingClass: 2
@@ -192,14 +193,14 @@ MonoBehaviour:
       Cost: 12
       Cooldown: 0
       CastTime: 1.3
-      IsRecastSkill: 1
+      isRecastSkill: 0
       RecastTimer: 0
       ActionModifier: 1.2
       EffectID: 0
       EffectTarget: 0
       ApplyEffect: 1
       Power: 20
-      MovePool: 1
+      movePool: 1
   - attackName: 11
     attackStats:
       HealingClass: 2
@@ -209,14 +210,14 @@ MonoBehaviour:
       Cost: 20
       Cooldown: 8
       CastTime: 1.3
-      IsRecastSkill: 1
+      isRecastSkill: 0
       RecastTimer: 0
       ActionModifier: 1.2
       EffectID: 0
       EffectTarget: 0
       ApplyEffect: 1
       Power: 40
-      MovePool: 2
+      movePool: 2
   - attackName: 12
     attackStats:
       HealingClass: 2
@@ -226,14 +227,14 @@ MonoBehaviour:
       Cost: 18
       Cooldown: 25
       CastTime: 2
-      IsRecastSkill: 1
+      isRecastSkill: 0
       RecastTimer: 0
       ActionModifier: 1.2
       EffectID: 20
       EffectTarget: 2
       ApplyEffect: 1
       Power: 0
-      MovePool: 3
+      movePool: 3
   - attackName: 13
     attackStats:
       HealingClass: 2
@@ -243,31 +244,32 @@ MonoBehaviour:
       Cost: 18
       Cooldown: 60
       CastTime: 2
-      IsRecastSkill: 0
+      isRecastSkill: 1
       RecastTimer: 590
       ActionModifier: 1.2
       EffectID: 17
       EffectTarget: 2
       ApplyEffect: 1
       Power: 0
-      MovePool: 5
+      movePool: 5
   - attackName: 14
     attackStats:
       HealingClass: 2
       Name: Shadow Infection
-      Description: Send out negative energy to infect the target with a conjured disease.
+      Description: Send out negative energy to infect the target with a conjured
+        disease.
       ID: 15
       Cost: 5
       Cooldown: 5
       CastTime: 1
-      IsRecastSkill: 0
+      isRecastSkill: 1
       RecastTimer: 15
       ActionModifier: 1.2
       EffectID: 18
       EffectTarget: 4
       ApplyEffect: 1
       Power: 0
-      MovePool: 6
+      movePool: 6
   - attackName: 15
     attackStats:
       HealingClass: 2
@@ -277,14 +279,14 @@ MonoBehaviour:
       Cost: 20
       Cooldown: 120
       CastTime: 1.5
-      IsRecastSkill: 1
+      isRecastSkill: 0
       RecastTimer: 0
       ActionModifier: 1.2
       EffectID: 19
       EffectTarget: 4
       ApplyEffect: 1
       Power: 0
-      MovePool: 7
+      movePool: 7
   - attackName: 16
     attackStats:
       HealingClass: 2
@@ -294,11 +296,11 @@ MonoBehaviour:
       Cost: 12
       Cooldown: 2.5
       CastTime: 2
-      IsRecastSkill: 1
+      isRecastSkill: 0
       RecastTimer: 0
       ActionModifier: 1.2
       EffectID: 0
-      EffectTarget: 2
+      EffectTarget: 0
       ApplyEffect: 1
       Power: 0
-      MovePool: 8
+      movePool: 8

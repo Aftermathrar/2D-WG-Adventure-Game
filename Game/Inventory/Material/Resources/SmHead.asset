@@ -16,6 +16,6 @@ MonoBehaviour:
   displayName: Small Monster Head
   categoryName: 4
   description: []
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 61fb76e8df5715e4e82b76dbecc18d5f, type: 3}
   value: 0
   stackable: 1

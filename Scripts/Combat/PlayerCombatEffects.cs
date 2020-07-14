@@ -98,7 +98,7 @@ namespace ButtonGame.Combat
                     }
                 }
                 yield return new WaitForSeconds(tickRate);
-            } while (buffList[fxNameOverTime][1] <= buffDuration && isBattleActive);
+            } while (buffList.ContainsKey(fxNameOverTime) && buffList[fxNameOverTime][1] <= buffDuration && isBattleActive);
 
             removeIDs.Add(fxNameOverTime);
         }

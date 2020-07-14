@@ -40,10 +40,10 @@ namespace ButtonGame.Core.UI.Tooltips
             ClearTooltip();
         }
 
-        private void OnDisable()
-        {
-            ClearTooltip();
-        }
+        // private void onDisable()
+        // {
+        //     ClearTooltip();
+        // }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {

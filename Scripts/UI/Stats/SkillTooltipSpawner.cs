@@ -9,16 +9,16 @@ using UnityEngine.UI;
 
 namespace ButtonGame.UI.Stats
 {
-    [RequireComponent(typeof(SkillDisplay))]
+    [RequireComponent(typeof(ISkillDisplay))]
     public class SkillTooltipSpawner : TooltipSpawner, IPointerEnterHandler
     {
-        SkillDisplay skill = null;
+        ISkillDisplay skill = null;
         int skillDescLength;
         List<Text> textLines = new List<Text>();
 
         private void OnEnable() 
         {
-            skill = GetComponent<SkillDisplay>();
+            skill = GetComponent<ISkillDisplay>();
         }
         public override bool CanCreateTooltip()
         {

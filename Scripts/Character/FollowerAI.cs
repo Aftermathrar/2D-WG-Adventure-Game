@@ -21,21 +21,21 @@ namespace ButtonGame.Character
         // References? Dependencies?
         [SerializeField] FollowerAttackIconDB followerAttackIconDB = null;
         [SerializeField] EffectDB effectDB = null;
-        [SerializeField] FollowerCombatLog combatLog = null;
         [SerializeField] Image actBarOverlay = null;
         [SerializeField] HitTimerSpawner hitTimerSpawner = null;
-        FollowerAttackManager attackManager;
-        BaseStats baseStats;
-        BaseFollowerAttackStats baseAttackStats;
-        FollowerFighter fighter;
-        Fullness fullness;
-        Mana selfMana;
-        Health playerHealth;
-        Mana playerMana;
-        Health targetHealth;
+        FollowerAttackManager attackManager = null;
+        FollowerCombatLog combatLog = null;
+        BaseStats baseStats = null;
+        BaseFollowerAttackStats baseAttackStats = null;
+        FollowerFighter fighter = null;
+        Fullness fullness = null;
+        Mana selfMana = null;
+        Health playerHealth = null;
+        Mana playerMana = null;
+        Health targetHealth = null;
 
         // Character stats
-        float attackSpeed;
+        float attackSpeed = 100f;
         float cooldownReduction = 0f;
         float actionRecovery = 0f;
         float actionModifier = 0f;
@@ -94,6 +94,7 @@ namespace ButtonGame.Character
             fighter = GetComponent<FollowerFighter>();
             fullness = GetComponent<Fullness>();
             selfMana = GetComponent<Mana>();
+            combatLog = (FollowerCombatLog)GameObject.FindObjectOfType(typeof(FollowerCombatLog));
         }
 
         // Called during battle setup from LevelManager
@@ -306,6 +307,7 @@ namespace ButtonGame.Character
                     FollowerAttackPool.HealBig,
                     FollowerAttackPool.HealSmall
                 };
+                
                 foreach (var heal in healSkills)
                 {
                     attackAndCost = attackManager.GetAttackCost(heal);
@@ -415,6 +417,7 @@ namespace ButtonGame.Character
                 int randInt = Random.Range(0, 100);
                 if (overstuffedPercent > randInt)
                 {
+                    // Divide by 100 cubed
                     float capacityIncrease = (greed + fatDesire) * overstuffedPercent / 1000000f;
                     fullness.IncreaseCapacity(capacityIncrease);
                 }
@@ -443,7 +446,8 @@ namespace ButtonGame.Character
             {
                 FollowerAttackStats attackStats = attackManager.GetAttackStats(attack);
                 float cooldown = attackStats.Cooldown * (1 - fighter.GetStat(Stat.CooldownReduction)/100);
-                if (skillCooldown[currentAttack] >= (Time.time - cooldown))
+
+                if (skillCooldown[currentAttack] + cooldown >= Time.time)
                 {
                     return true;
                 }

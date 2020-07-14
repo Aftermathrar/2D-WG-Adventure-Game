@@ -11,7 +11,7 @@ using ButtonGame.Stats.Enums;
 
 namespace ButtonGame.Combat
 {
-    public abstract class CombatEffects : MonoBehaviour, ISaveable, IStatModifier
+    public abstract class CombatEffects : MonoBehaviour, ISaveable, IStatModifier, IBuffListProvider
     {
         [SerializeField] protected EffectDB effectDB;
         [SerializeField] EffectIconDB fxIconDB;
@@ -234,6 +234,14 @@ namespace ButtonGame.Combat
                     fxIconSpawner.UpdateIconFill(id, fillPercent, timeRemaining);
                 }
             }
+        }
+
+        public void NonCombatBuff(string id)
+        {
+            fxID = id;
+            fxName = (EffectName)Enum.Parse(typeof(EffectName), id);
+            BuffStat();
+            // RestoreIcons();
         }
 
         private void RestoreIcons()

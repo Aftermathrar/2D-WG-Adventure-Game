@@ -16,6 +16,6 @@ MonoBehaviour:
   displayName: Quartz Ore
   categoryName: 4
   description: []
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e219f9e3ffabf9a4baec5fe2149c1d56, type: 3}
   value: 0
   stackable: 1

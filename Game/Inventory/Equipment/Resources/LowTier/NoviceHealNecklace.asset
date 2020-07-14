@@ -20,6 +20,7 @@ MonoBehaviour:
   value: 0
   stackable: 0
   allowedEquipLocation: 7
+  equipClass: 1
   equipmentStats:
   - stat: 2
     value: 12

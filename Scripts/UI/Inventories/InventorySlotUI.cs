@@ -13,14 +13,16 @@ namespace ButtonGame.UI.Inventories
         // STATE
         int index;
         Inventory inventory = null;
-        Equipment equipment = null;
+        Equipment playerEquipment = null;
+        Equipment followerEquipment = null;
 
         // PUBLIC
 
-        public void Setup(Inventory inventory, Equipment equipment, int index)
+        public void Setup(Inventory inventory, Equipment playerEquipment, Equipment followerEquipment, int index)
         {
             this.inventory = inventory;
-            this.equipment = equipment;
+            this.playerEquipment = playerEquipment;
+            this.followerEquipment = followerEquipment;
             this.index = index;
             icon.SetItem(inventory.GetItemInSlot(index), inventory.GetCountInSlot(index));
         }
@@ -59,7 +61,14 @@ namespace ButtonGame.UI.Inventories
             if(eventData.pointerId != -2) return;
 
             EquipableItem equipableItem = inventory.GetItemInSlot(index) as EquipableItem;
-            if(equipment == null || equipableItem == null) return;
+            if(playerEquipment == null || equipableItem == null) return;
+
+            // Set up correct equipment reference
+            Equipment equipment = null;
+            if(equipableItem.IsPlayerEquipment())
+                equipment = playerEquipment;
+            else
+                equipment = followerEquipment;
 
             int equipIndex = equipment.TryAddItem(equipableItem);
             if(equipIndex >= 0)

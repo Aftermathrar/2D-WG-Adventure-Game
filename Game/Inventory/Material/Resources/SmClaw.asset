@@ -16,6 +16,6 @@ MonoBehaviour:
   displayName: Small Monster Claw
   categoryName: 4
   description: []
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 5d760e21aa4beff44a0817d70ceec842, type: 3}
   value: 0
   stackable: 1

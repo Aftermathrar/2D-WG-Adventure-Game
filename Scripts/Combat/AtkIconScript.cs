@@ -53,10 +53,16 @@ namespace ButtonGame.Combat
         Coroutine spawnHitTimer = null;
         protected List<HitTimer> hitTimers = new List<HitTimer>();
 
+        protected UIShake shaker = null;
+        [SerializeField] protected float shakeDuration = 0f;
+        [SerializeField] protected float shakeMagnitude = 0;
+        [SerializeField] protected int shakeCount = 0;
+
         public void SetTarget(Health _target)
         {
             target = _target;
             targetStats = target.GetComponentInParent<BaseStats>();
+            shaker = target.GetComponent<UIShake>();
         }
 
         protected virtual void Awake()
@@ -200,6 +206,8 @@ namespace ButtonGame.Combat
                 float damage = CalculateDamage();
                 if (target.TakeDamage(damage, isCrit))
                 {
+                    shaker = target.GetComponent<UIShake>();
+                    StartCoroutine(shaker.Shake(shakeDuration, shakeMagnitude, shakeCount));
                     player.DamageDealt(damage);
                     CheckEffectActivation(true);
                 }
@@ -360,6 +368,8 @@ namespace ButtonGame.Combat
             //Reflect is 40% damage
             total *= 0.4f;
 
+            shaker = target.GetComponent<UIShake>();
+            StartCoroutine(shaker.Shake(shakeDuration, shakeMagnitude / 2, shakeCount));
             target.TakeDamage(total, true);
             player.DamageDealt(total);
         }

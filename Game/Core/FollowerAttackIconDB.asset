@@ -30,7 +30,7 @@ MonoBehaviour:
   - attackName: 7
     sprite: {fileID: 21300000, guid: e8ab6676899f8504a862989b66d40af1, type: 3}
   - attackName: 8
-    sprite: {fileID: 21300000, guid: 6e201a1e1e6efb241a8ca34456ff81cd, type: 3}
+    sprite: {fileID: 21300000, guid: 0dcb011c521611a4fb6b643c267cf72f, type: 3}
   - attackName: 9
     sprite: {fileID: 21300000, guid: 3e445c7ab9c015048bc38565ebc524b7, type: 3}
   - attackName: 10
@@ -46,4 +46,4 @@ MonoBehaviour:
   - attackName: 15
     sprite: {fileID: 21300000, guid: 10666db491ab4c3489596fcc697fee2f, type: 3}
   - attackName: 16
-    sprite: {fileID: 21300000, guid: 0893d7a6fdfe64e44bd8e9621aefd8a5, type: 3}
+    sprite: {fileID: 21300000, guid: 47ffd177f442edb479c869e3054561f6, type: 3}

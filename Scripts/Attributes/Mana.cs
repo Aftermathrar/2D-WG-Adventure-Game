@@ -35,7 +35,10 @@ namespace ButtonGame.Attributes
 
         public void RecalculateMaxMana()
         {
-            maxMana = baseStats.GetStat(Stat.Mana);
+            float newMax = baseStats.GetStat(Stat.Mana);
+            float difference = Mathf.Max(0, newMax - maxMana);
+            maxMana = newMax;
+            manaPoints.value = Mathf.Min(maxMana, manaPoints.value + difference);
         }
 
         public void UseMana(float mpCost)

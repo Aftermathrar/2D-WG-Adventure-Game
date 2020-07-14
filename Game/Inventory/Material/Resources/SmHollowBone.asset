@@ -16,6 +16,6 @@ MonoBehaviour:
   displayName: Small Hollow Bone
   categoryName: 4
   description: []
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 12ca3a01312f0df40b7e3e634383befa, type: 3}
   value: 0
   stackable: 1

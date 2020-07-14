@@ -16,6 +16,6 @@ MonoBehaviour:
   displayName: Small Monster Fang
   categoryName: 4
   description: []
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: c25ca37ca57bdd741adad4d1c949ae36, type: 3}
   value: 0
   stackable: 1

@@ -238,7 +238,7 @@ MonoBehaviour:
     - stat: 1
       value: Spirit Surge
     - stat: 2
-      value: Increases Attack power by 22 and Attack Speed by 5%
+      value: Increases Attack power by 48% and Attack Speed by 10
     - stat: 3
       value: 1
     - stat: 4
@@ -256,7 +256,7 @@ MonoBehaviour:
     - stat: 11
       value: AttackPower,AttackSpeed
     - stat: 12
-      value: 24,10
+      value: 48,10
   - effectName: 10
     effectStats:
     - stat: 0
@@ -308,7 +308,7 @@ MonoBehaviour:
     - stat: 11
       value: AttackPower,Defense
     - stat: 12
-      value: 25,6
+      value: 25,11
   - effectName: 12
     effectStats:
     - stat: 0

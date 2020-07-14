@@ -15,6 +15,7 @@ namespace ButtonGame.Inventories
         // CONFIG DATA
         [Tooltip("Where are we allowed to put this item.")]
         [SerializeField] EquipLocation allowedEquipLocation = EquipLocation.Weapon;
+        [SerializeField] CharacterClass equipClass = CharacterClass.Player;
         [SerializeField] EquipmentStats[] equipmentStats;
 
         // PUBLIC
@@ -22,6 +23,11 @@ namespace ButtonGame.Inventories
         public EquipLocation GetAllowedEquipLocation()
         {
             return allowedEquipLocation;
+        }
+
+        public bool IsPlayerEquipment()
+        {
+            return equipClass == CharacterClass.Player;
         }
 
         public Dictionary<Stat, float[]> GetStatValues()

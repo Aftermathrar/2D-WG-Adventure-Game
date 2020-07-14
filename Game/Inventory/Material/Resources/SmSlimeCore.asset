@@ -16,6 +16,6 @@ MonoBehaviour:
   displayName: Weak Slime Core
   categoryName: 4
   description: []
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: bf24fff3cf170e448b97ab5faf1ca3af, type: 3}
   value: 0
   stackable: 1

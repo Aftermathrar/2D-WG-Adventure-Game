@@ -10,12 +10,13 @@ namespace ButtonGame.UI.EffectIcon
 
         public override void Spawn(string id, int count, Sprite sprite)
         {
-            float spawnPosX = transform.position.x + (50f * count);
-            Vector3 spawnPos = new Vector3(spawnPosX, transform.position.y, transform.position.z);
+            float spawnPosX = (50f * count);
+            Vector3 spawnPos = new Vector3(spawnPosX, 0, 0);
             EffectIconImage instance = null;
             if (fxIconStack.Count == 0)
             {
-                instance = Instantiate(fxIcon, spawnPos, Quaternion.identity, transform);
+                instance = Instantiate(fxIcon, transform);
+                instance.SetPosition(spawnPos);
             }
             else
             {

@@ -16,6 +16,6 @@ MonoBehaviour:
   displayName: Gamey Tenderloin
   categoryName: 4
   description: []
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a596e9fe209c43e40aa6d84f2e1affb7, type: 3}
   value: 0
   stackable: 1

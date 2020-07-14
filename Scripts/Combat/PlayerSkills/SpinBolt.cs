@@ -4,6 +4,7 @@ using ButtonGame.Attributes;
 using ButtonGame.Character;
 using ButtonGame.Stats;
 using ButtonGame.Stats.Enums;
+using ButtonGame.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,6 +52,13 @@ namespace ButtonGame.Combat.Skills
 
                     // Check for 60% rhk reset
                     if(currentHitCount == 0) CheckCooldownReset();
+
+                    // Shake on final hit
+                    if(currentHitCount + 1 == maxHitCount)
+                    {
+                        shaker = target.GetComponent<UIShake>();
+                        StartCoroutine(shaker.Shake(shakeDuration, shakeMagnitude, shakeCount));
+                    }
                 }
                 currentHitCount += 1;
 

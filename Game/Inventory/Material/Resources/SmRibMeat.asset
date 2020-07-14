@@ -16,6 +16,6 @@ MonoBehaviour:
   displayName: Gamey Rib Meat
   categoryName: 4
   description: []
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3ad58189c659a21459ecfb0e8bb56516, type: 3}
   value: 0
   stackable: 1

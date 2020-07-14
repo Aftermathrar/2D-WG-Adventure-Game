@@ -16,6 +16,6 @@ MonoBehaviour:
   displayName: Gamey Leg Meat
   categoryName: 4
   description: []
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: dc09674ad11618e4dbff2355e6ec31ea, type: 3}
   value: 0
   stackable: 1

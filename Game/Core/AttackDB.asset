@@ -303,7 +303,7 @@ MonoBehaviour:
       - 10100
     - stat: 3
       value:
-      - 11
+      - 10
     - stat: 4
       value:
       - 8
@@ -374,7 +374,7 @@ MonoBehaviour:
       - 10300
     - stat: 3
       value:
-      - 17
+      - 25
     - stat: 4
       value:
       - 10
@@ -442,7 +442,7 @@ MonoBehaviour:
       - 10400
     - stat: 3
       value:
-      - 10
+      - 20
     - stat: 4
       value:
       - 6
@@ -545,7 +545,7 @@ MonoBehaviour:
       - 10500
     - stat: 3
       value:
-      - 12
+      - 20
     - stat: 4
       value:
       - 9
@@ -706,7 +706,7 @@ MonoBehaviour:
       - 10600
     - stat: 3
       value:
-      - 5
+      - 20
     - stat: 4
       value:
       - 20
@@ -830,7 +830,7 @@ MonoBehaviour:
       - 11100
     - stat: 20
       value:
-      - 11
+      - 21
     - stat: 21
       value:
       - 0
@@ -847,7 +847,7 @@ MonoBehaviour:
       - 11100
     - stat: 3
       value:
-      - 11
+      - 21
     - stat: 4
       value:
       - 0

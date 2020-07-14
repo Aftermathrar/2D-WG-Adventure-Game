@@ -38,7 +38,7 @@ MonoBehaviour:
   - effectName: 11
     sprite: {fileID: 21300000, guid: c9c2a08fb66032d4b88e4b46bbbcc6cd, type: 3}
   - effectName: 12
-    sprite: {fileID: 21300000, guid: a6427327dd9520d42a75366e317b33bb, type: 3}
+    sprite: {fileID: 21300000, guid: 08235184e1988a14ba14be1d1d2dbf79, type: 3}
   - effectName: 13
     sprite: {fileID: 21300000, guid: a033cddd169f7f449a972a5df3b45db4, type: 3}
   - effectName: 14

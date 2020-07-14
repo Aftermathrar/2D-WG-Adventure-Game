@@ -8,11 +8,6 @@ namespace ButtonGame.Stats.Follower
     {
         [SerializeField] FollowerAttackDB followerAttackDB;
 
-        // public float GetAttackStat(string propertyName, FollowerAttackName attackName)
-        // {
-        //     FollowerAttackStats stats = followerAttackDB.GetAttackStat(attackName);
-
-        //     return 0;
-        // }
+        
     }
 }

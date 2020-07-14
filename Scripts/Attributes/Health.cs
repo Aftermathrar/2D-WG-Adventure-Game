@@ -54,7 +54,10 @@ namespace ButtonGame.Attributes
 
         public void RecalculateMaxHealth()
         {
-            maxHealth = baseStats.GetStat(Stat.Health);
+            float newMax = baseStats.GetStat(Stat.Health);
+            float difference = Mathf.Max(0, newMax - maxHealth);
+            maxHealth = newMax;
+            healthPoints.value = Mathf.Min(maxHealth, healthPoints.value + difference);
         }
 
         public bool IsDead()
