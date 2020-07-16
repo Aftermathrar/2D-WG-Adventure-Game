@@ -33,6 +33,7 @@ namespace ButtonGame.Stats.Follower
             modifiedStats[Stat.Capacity] = new float[] { 0, Random.Range(-100, 200) };
             modifiedStats[Stat.Greed] = new float[] { 0, Random.Range(0, 20) };
             modifiedStats[Stat.FatDesire] = new float[] {0, Random.Range(0, 20) };
+            modifiedStats[Stat.Metabolism] = new float[] { 0, Random.Range(0, 300) };
         }
 
         public void ModifyStat(Stat stat, float modValue, bool isAdditive)

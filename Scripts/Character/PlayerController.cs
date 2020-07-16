@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using ButtonGame.Attributes;
 using ButtonGame.Combat;
+using System.Collections;
 
 namespace ButtonGame.Character
 {
@@ -132,6 +133,15 @@ namespace ButtonGame.Character
                 GetComponent<Mana>().GainAttribute();
                 manaRegenTime = 0;
             }
+        }
+
+        public IEnumerator HealAfterLoss()
+        {
+            yield return new WaitForSecondsRealtime(3f);
+            Mana mana = GetComponent<Mana>();
+            mana.GainAttribute(mana.GetMaxAttributeValue());
+            Health health = GetComponent<Health>();
+            health.GainAttribute(health.GetMaxAttributeValue());
         }
     }
 }

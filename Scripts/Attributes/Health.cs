@@ -23,7 +23,6 @@ namespace ButtonGame.Attributes
         [System.Serializable]
         public class OnDeathEvent : UnityEvent<string> { }
 
-        // float missingHealthPoints = 70;
         LazyValue<float> healthPoints;
         float maxHealth;
         BaseStats baseStats;
@@ -94,7 +93,6 @@ namespace ButtonGame.Attributes
             if (healthPoints.value == 0)
             {
                 Die();
-                // Do stuff to end the battle
             }
 
             return (damage > 0);
@@ -111,6 +109,11 @@ namespace ButtonGame.Attributes
             isDead = true;
             GetComponent<ActionScheduler>().CancelCurrentAction();
             onDeath.Invoke(gameObject.tag);
+        }
+
+        public void StartBattle()
+        {
+            isDead = false;
         }
 
         public bool IsBlocking(bool shouldReflect = true)

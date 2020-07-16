@@ -257,6 +257,7 @@ namespace ButtonGame.Core
                 outroText.text = "DEFEATED";
                 Inventory inventory = enemyGO.GetComponent<Inventory>();
                 inventory.ClearInventory();
+                StartCoroutine(playerGO.GetComponent<PlayerController>().HealAfterLoss());
                 StartCoroutine(BattleRewards());
             }
         }

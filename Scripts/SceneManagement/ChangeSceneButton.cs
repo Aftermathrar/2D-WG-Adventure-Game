@@ -27,7 +27,10 @@ namespace ButtonGame.SceneManagement
             }
 
             DontDestroyOnLoad(this.gameObject);
+            LoadFader loadFader = FindObjectOfType<LoadFader>();
             SavingWrapper savingWrapper = FindObjectOfType<SavingWrapper>();
+
+            loadFader.FadeOutImmediate();
 
             savingWrapper.Save();
 
@@ -36,6 +39,7 @@ namespace ButtonGame.SceneManagement
             yield return savingWrapper.Load();
 
             savingWrapper.Save();
+            loadFader.FadeInImmediate();
             Time.timeScale = 1f;
 
             Destroy(this.gameObject);

@@ -13,7 +13,7 @@ namespace ButtonGame.Control
     {
         [SerializeField] EffectDB effectDB;
         [SerializeField] EffectIconDB fxIconDB;
-        [SerializeField] IBuffListProvider buffEffects = null;
+        [SerializeField] CombatEffects buffEffects = null;
         [SerializeField] EffectIconSpawner fxIconSpawner = null;
 
         int fxIconCount;
