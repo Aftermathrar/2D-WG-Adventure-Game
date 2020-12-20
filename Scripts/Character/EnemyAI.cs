@@ -99,44 +99,49 @@ namespace ButtonGame.Character
                 }
                 else
                 {
-                    curAtk = atkQueue.Dequeue();
-                    timeSinceAttackStarted = 0;
-                    float atkSpeed = fighter.GetStat(Stat.AttackSpeed);
-                    atkSpeed = 1 / atkSpeed * 100;
-                    totalAtkTime = GetAttackStat(MonAtkStat.TotalTime, 0) * atkSpeed;
-                    atkLeadTime = GetAttackStat(MonAtkStat.LeadTime, 0) * atkSpeed;
-                    maxHitCount = GetAttackStat(MonAtkStat.HitCount, 0);
-                    Sprite[] sprites = monAtkIconDB.GetSprite(curAtk);
-                    GetComponentInParent<ActionScheduler>().StartAction(this);
-
-                    if(maxHitCount >=1)
-                    {
-                        int maxEffectCount = monAtkDB.GetAttackStat(MonAtkStat.EffectID, curAtk).Length;
-                        isEffectOnHit = new bool[maxEffectCount];
-                        for (int i = 0; i < maxEffectCount; i++)
-                        {
-                            string[] fxApply = monAtkDB.GetAttackStat(MonAtkStat.ApplyEffect, curAtk);
-                            isEffectOnHit[i] = fxApply[i] == "OnHit";
-                        }
-
-                        for (int i = 0; i < maxHitCount; i++)
-                        {
-                            float newPosX = (i * 80);
-                            HitTimer instance = hitTimerSpawner.SpawnHitTimer(newPosX);
-                            hitTimers.Add(instance);
-                            instance.SetSprite(sprites[i]);
-
-                            Color32 atkColor = new Color32(254, 195, 30, 255);
-                            StartCoroutine(instance.EnemyBorderFill(atkLeadTime, atkColor));
-                        }
-                    }
-                    // Set attack stats and start attack action
-                    enemy.startAttack(totalAtkTime);
-                    enemy.SetNewStatus(myName + GetAttackString(MonAtkStat.LeadText), atkLeadTime);
-                    enemy.enemyAttack -= TryAttack;
-                    enemy.enemyAttack += AttackLeadTime;
+                    StartNewAttack();
                 }
             }
+        }
+
+        private void StartNewAttack()
+        {
+            curAtk = atkQueue.Dequeue();
+            timeSinceAttackStarted = 0;
+            float atkSpeed = fighter.GetStat(Stat.AttackSpeed);
+            atkSpeed = 1 / atkSpeed * 100;
+            totalAtkTime = GetAttackStat(MonAtkStat.TotalTime, 0) * atkSpeed;
+            atkLeadTime = GetAttackStat(MonAtkStat.LeadTime, 0) * atkSpeed;
+            maxHitCount = GetAttackStat(MonAtkStat.HitCount, 0);
+            Sprite[] sprites = monAtkIconDB.GetSprite(curAtk);
+            GetComponentInParent<ActionScheduler>().StartAction(this);
+
+            if (maxHitCount >= 1)
+            {
+                int maxEffectCount = monAtkDB.GetAttackStat(MonAtkStat.EffectID, curAtk).Length;
+                isEffectOnHit = new bool[maxEffectCount];
+                for (int i = 0; i < maxEffectCount; i++)
+                {
+                    string[] fxApply = monAtkDB.GetAttackStat(MonAtkStat.ApplyEffect, curAtk);
+                    isEffectOnHit[i] = fxApply[i] == "OnHit";
+                }
+
+                for (int i = 0; i < maxHitCount; i++)
+                {
+                    float newPosX = (i * 80);
+                    HitTimer instance = hitTimerSpawner.SpawnHitTimer(newPosX);
+                    hitTimers.Add(instance);
+                    instance.SetSprite(sprites[i]);
+
+                    Color32 atkColor = new Color32(254, 195, 30, 255);
+                    StartCoroutine(instance.EnemyBorderFill(atkLeadTime, atkColor));
+                }
+            }
+            // Set attack stats and start attack action
+            enemy.startAttack(totalAtkTime);
+            enemy.SetNewStatus(myName + GetAttackString(MonAtkStat.LeadText), atkLeadTime);
+            enemy.enemyAttack -= TryAttack;
+            enemy.enemyAttack += AttackLeadTime;
         }
 
         public void AttackLeadTime()
@@ -233,6 +238,7 @@ namespace ButtonGame.Character
                 }
             }
         }
+        
         private float CalculateDamage()
         {
             float total = 0;

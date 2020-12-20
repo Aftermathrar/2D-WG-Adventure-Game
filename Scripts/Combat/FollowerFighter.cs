@@ -20,7 +20,7 @@ namespace ButtonGame.Combat
 
         protected override void Start()
         {
-            target = effects.GetTarget();
+            // target = effects.GetTarget();
             RecalculateStats();
         }
 
