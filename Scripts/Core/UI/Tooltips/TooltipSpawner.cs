@@ -27,6 +27,8 @@ namespace ButtonGame.Core.UI.Tooltips
         /// The spawned tooltip prefab for updating.
         /// </param>
         public abstract void UpdateTooltip();
+
+        public virtual void UpdateTooltip(GameObject tooltip) {}
         
         /// <summary>
         /// Return true when the tooltip spawner should be allowed to create a tooltip.

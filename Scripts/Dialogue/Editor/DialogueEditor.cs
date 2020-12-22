@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using System;
+using ButtonGame.Quests;
+using ButtonGame.Core;
+using System.Linq;
+using ButtonGame.Inventories;
 
 namespace ButtonGame.Dialogue.Editor
 {
@@ -57,12 +61,12 @@ namespace ButtonGame.Dialogue.Editor
             
             nodeStyle = new GUIStyle();
             nodeStyle.normal.background = EditorGUIUtility.Load("node0") as Texture2D;
-            nodeStyle.padding = new RectOffset(10, 10, 6, 10);
+            nodeStyle.padding = new RectOffset(10, 10, 8, 10);
             nodeStyle.border = new RectOffset(12, 12, 12, 12);
 
             playerNodeStyle = new GUIStyle();
             playerNodeStyle.normal.background = EditorGUIUtility.Load("node1") as Texture2D;
-            playerNodeStyle.padding = new RectOffset(10, 10, 6, 10);
+            playerNodeStyle.padding = new RectOffset(10, 10, 8, 10);
             playerNodeStyle.border = new RectOffset(12, 12, 12, 12);
 
             OnSelectionChanged();
@@ -164,53 +168,226 @@ namespace ButtonGame.Dialogue.Editor
 
         private void DrawNode(DialogueNode node)
         {
-            int heightPadding = 58;
-            GUIStyle style = nodeStyle;
-            if(node.IsPlayerSpeaking())
-            {
-                style = playerNodeStyle;
-            }
-            else
-            {
-                heightPadding += 20;
-            }
-
-            GUIStyle wrapStyle = new GUIStyle(EditorStyles.textField);
-            wrapStyle.wordWrap = true;
-            node.SetNodeHeight(heightPadding + wrapStyle.CalcHeight(new GUIContent(node.GetText()),
-                node.GetRect().width - style.padding.left - style.padding.right));
+            GUIStyle style, wrapStyle;
+            SetNodeStyleAndSize(node, out style, out wrapStyle);
 
             GUILayout.BeginArea(node.GetRect(), style);
 
+            // Create, Link, Destroy buttons
             GUILayout.BeginHorizontal();
-            node.SetPlayerSpeaking(EditorGUILayout.Toggle(node.IsPlayerSpeaking()));
-            EditorGUILayout.LabelField("Is Player speaking?");
-            GUILayout.EndHorizontal();
-            if(!node.IsPlayerSpeaking())
-            {
-                GUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Speaker:", GUILayout.Width(51));
-                node.SetSpeaker(EditorGUILayout.TextField(node.GetSpeaker(), GUILayout.Width(126)));
-                GUILayout.EndHorizontal();
-            }
-            node.SetText(EditorGUILayout.TextArea(node.GetText(), wrapStyle));
-            
-
-            GUILayout.BeginHorizontal();
-
-            if (GUILayout.Button("x"))
-            {
-                nodeToDelete = node;
-            }
-            DrawLinkButtons(node);
             if (GUILayout.Button("+"))
             {
                 creatingNode = node;
             }
-
+            DrawLinkButtons(node);
+            if (GUILayout.Button("x"))
+            {
+                nodeToDelete = node;
+            }
             GUILayout.EndHorizontal();
 
+            // Toggle Is Player Speaking
+            GUILayout.BeginHorizontal();
+            node.SetPlayerSpeaking(EditorGUILayout.Toggle(node.IsPlayerSpeaking()));
+            EditorGUILayout.LabelField("Is Player speaking?");
+            GUILayout.EndHorizontal();
+            if (!node.IsPlayerSpeaking())
+            {
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Speaker:", GUILayout.Width(51));
+                node.SetSpeaker(EditorGUILayout.TextField(node.GetSpeaker()));
+                GUILayout.EndHorizontal();
+            }
+
+            // Dialogue Text
+            node.SetText(EditorGUILayout.TextArea(node.GetText(), wrapStyle));
+
+            // Toggles For Actions and Conditions
+            GUILayout.BeginHorizontal();
+            node.SetHasOnEnterAction(EditorGUILayout.Toggle(node.GetHasOnEnterAction()));
+            EditorGUILayout.LabelField("Enter", GUILayout.Width(34));
+            node.SetHasOnExitAction(EditorGUILayout.Toggle(node.GetHasOnExitAction()));
+            EditorGUILayout.LabelField("Exit", GUILayout.Width(30));
+            node.SetHasConditionSelect(EditorGUILayout.Toggle(node.GetHasConditionSelect()));
+            EditorGUILayout.LabelField("Condition");
+            GUILayout.EndHorizontal();
+
+            if (node.GetHasOnEnterAction())
+            {
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("OnEnter:", GUILayout.Width(49));
+                node.SetOnEnterAction(EditorGUILayout.TextField(node.GetOnEnterAction()));
+                GUILayout.EndHorizontal();
+            }
+
+            if (node.GetHasOnExitAction())
+            {
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("OnExit:", GUILayout.Width(49));
+                node.SetOnExitAction(EditorGUILayout.TextField(node.GetOnExitAction()));
+                GUILayout.EndHorizontal();
+            }
+
+            if (node.GetHasConditionSelect())
+            {
+                LayoutConditionSelectionUI(node);
+            }
+
             GUILayout.EndArea();
+        }
+
+        private static void LayoutConditionSelectionUI(DialogueNode node)
+        {
+            ConditionPredicate predicate = (ConditionPredicate)EditorGUILayout.EnumPopup(node.GetCondition());
+
+            node.SetCondition(predicate);
+            List<string> parameterList = new List<string>();
+            int removeCount = 1;
+
+            if (predicate == ConditionPredicate.None)
+            {
+            }
+            else if (predicate == ConditionPredicate.HasQuest)
+            {
+                EditorQuestSelect(node, parameterList);
+            }
+            else if (predicate == ConditionPredicate.CompleteQuest)
+            {
+                EditorQuestSelect(node, parameterList);
+            }
+            else if (predicate == ConditionPredicate.CompleteObjective)
+            {
+                string[] objectiveList = node.GetParameters().ToArray();
+                if(objectiveList.Length > 0)
+                {
+                    Quest questSelect = GenerateQuestSelect(objectiveList[0]);
+                    if(questSelect != null)
+                    {
+                        parameterList.Add(questSelect.name);
+                    }
+                    else
+                    {
+                        parameterList.Add("");
+                    }
+                    for (int i = 1; i < objectiveList.Length; i++)
+                    {
+                        GUILayout.BeginHorizontal();
+                        EditorGUILayout.LabelField("Objective:", GUILayout.Width(58));
+                        if(questSelect != null)
+                        {
+
+                            string[] questObjectives = questSelect.GetObjectives().ToArray();
+                            node.SetObjectiveIndex(EditorGUILayout.Popup(node.GetObjectiveIndex(), questObjectives));
+                            parameterList.Add(questObjectives[node.GetObjectiveIndex()]);
+                        }
+                        else
+                        {
+                            EditorGUILayout.Popup(0, new string[] {""});
+                            parameterList.Add("");
+                        }
+                        GUILayout.EndHorizontal();
+                    }
+                }
+            }
+            else if (predicate == ConditionPredicate.HasItem)
+            {
+                removeCount = 2;
+                string[] itemList = node.GetParameters().ToArray();
+                if(itemList.Length > 0)
+                {
+                    for (int i = 0; i < itemList.Length; i++)
+                    {
+                        InventoryItem item = InventoryItem.GetFromID(itemList[0]);
+                        GUILayout.BeginHorizontal();
+                        EditorGUILayout.LabelField("Item:", GUILayout.Width(40));
+                        item = (InventoryItem)EditorGUILayout.ObjectField(item, typeof(InventoryItem), false);
+                        GUILayout.EndHorizontal();
+                        i++;
+                        if (item != null)
+                        {
+                            parameterList.Add(item.GetItemID());
+                            if(i < itemList.Length)
+                            {
+                                int itemCount = 1;
+                                GUILayout.BeginHorizontal();
+                                EditorGUILayout.LabelField("Item Count:", GUILayout.Width(70));
+                                string countString = EditorGUILayout.TextField(itemList[i]);
+                                GUILayout.EndHorizontal();
+                                if(!int.TryParse(countString, out itemCount))
+                                {
+                                    Debug.Log("This parameter only takes a number!");
+                                }
+                                parameterList.Add(itemCount.ToString());
+                            }
+                            else
+                            {
+                                parameterList.Add("");
+                            }
+                        }
+                        else
+                        {
+                            parameterList.Add("");
+                        }
+                    }
+                }
+
+            }
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Add Parameter"))
+            {
+                parameterList.Add("");
+            }
+            if (GUILayout.Button("Remove"))
+            {
+                for (int i = 0; i < removeCount; i++)
+                {
+                    parameterList.RemoveAt(parameterList.Count() - 1);
+                }
+            }
+            node.SetConditionNegate(EditorGUILayout.Toggle(node.GetConditionNegate()));
+            EditorGUILayout.LabelField("Negate");
+            GUILayout.EndHorizontal();
+
+            node.SetConditionParameters(parameterList);
+        }
+
+        private static void EditorQuestSelect(DialogueNode node, List<string> parameterList)
+        {
+            List<Quest> questParameters = new List<Quest>();
+            string[] nodeParameters = node.GetParameters().ToArray();
+
+            foreach (string parameter in node.GetParameters())
+            {
+                Quest questSelect = GenerateQuestSelect(parameter);
+                questParameters.Add(questSelect);
+            }
+
+            foreach (Quest questParameter in questParameters)
+            {
+                if (questParameter == null)
+                {
+                    parameterList.Add("");
+                    continue;
+                }
+                parameterList.Add(questParameter.name);
+            }
+        }
+
+        private static Quest GenerateQuestSelect(string parameter)
+        {
+            Quest questSelect = Quest.GetByName(parameter);
+            GUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Quest:", GUILayout.Width(40));
+            questSelect = (Quest)EditorGUILayout.ObjectField(questSelect, typeof(Quest), false);
+            GUILayout.EndHorizontal();
+            return questSelect;
+        }
+
+        private object CaptureParameter(ScriptableObject newParameter)
+        {
+            ConditionParameters state = new ConditionParameters();
+            state.parameter = newParameter;
+            return state;
         }
 
         private void DrawLinkButtons(DialogueNode node)
@@ -264,6 +441,34 @@ namespace ButtonGame.Dialogue.Editor
             }
         }
 
+        private void SetNodeStyleAndSize(DialogueNode node, out GUIStyle style, out GUIStyle wrapStyle)
+        {
+            //Style select and height calculation
+            int heightPadding = 80;
+            style = nodeStyle;
+            if (node.IsPlayerSpeaking())
+            {
+                style = playerNodeStyle;
+            }
+            else
+            {
+                heightPadding += 20;
+            }
+
+            if (node.GetHasOnEnterAction()) heightPadding += 20;
+            if (node.GetHasOnExitAction()) heightPadding += 20;
+            if (node.GetHasConditionSelect()) 
+            {
+                heightPadding += 40;
+                heightPadding += 20 * node.GetParameters().Count();
+            }
+
+            wrapStyle = new GUIStyle(EditorStyles.textField);
+            wrapStyle.wordWrap = true;
+            node.SetNodeHeight(heightPadding + wrapStyle.CalcHeight(new GUIContent(node.GetText()),
+                node.GetRect().width - style.padding.left - style.padding.right));
+        }
+
         private DialogueNode GetNodeAtPoint(Vector2 point)
         {
             DialogueNode foundNode = null;
@@ -275,6 +480,12 @@ namespace ButtonGame.Dialogue.Editor
                 }
             }
             return foundNode;
+        }
+
+        [System.Serializable]
+        class ConditionParameters
+        {
+            public ScriptableObject parameter;
         }
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ButtonGame.Core;
+using ButtonGame.Quests;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,11 +19,18 @@ namespace ButtonGame.Dialogue
         [SerializeField]
         List<string> children = new List<string>();
         [SerializeField]
-        Rect rect = new Rect(10, 10, 200, 75);
+        Rect rect = new Rect(10, 10, 250, 75);
         [SerializeField]
         string OnEnterAction;
         [SerializeField]
         string onExitAction;
+        [SerializeField]
+        Condition condition;
+
+        bool hasOnEnterAction;
+        bool hasOnExitAction;
+        bool hasConditionSelect;
+        int objectiveIndex;
 
         public string GetText()
         {
@@ -48,6 +57,21 @@ namespace ButtonGame.Dialogue
             return isPlayerSpeaking;
         }
 
+        public bool GetHasOnEnterAction()
+        {
+            return hasOnEnterAction;
+        }
+
+        public bool GetHasOnExitAction()
+        {
+            return hasOnExitAction;
+        }
+
+        public bool GetHasConditionSelect()
+        {
+            return hasConditionSelect;
+        }
+
         public string GetOnEnterAction()
         {
             return OnEnterAction;
@@ -56,6 +80,31 @@ namespace ButtonGame.Dialogue
         public string GetOnExitAction()
         {
             return onExitAction;
+        }
+
+        public int GetObjectiveIndex()
+        {
+            return objectiveIndex;
+        }
+
+        public ConditionPredicate GetCondition()
+        {
+            return condition.GetPredicate();
+        }
+
+        public IEnumerable<string> GetParameters()
+        {
+            return condition.GetParameters();
+        }
+
+        public bool GetConditionNegate()
+        {
+            return condition.GetNegate();
+        }
+
+        public bool CheckCondition(IEnumerable<IPredicateEvaluator> evaluators)
+        {
+            return condition.Check(evaluators);
         }
 
 #if UNITY_EDITOR
@@ -76,9 +125,31 @@ namespace ButtonGame.Dialogue
             EditorUtility.SetDirty(this);
         }
 
+        public void SetOnEnterAction(string newEnterAction)
+        {
+            Undo.RecordObject(this, "Modify OnEnterAction");
+            OnEnterAction = newEnterAction;
+            EditorUtility.SetDirty(this);
+        }
+
+        public void SetOnExitAction(string newExitAction)
+        {
+            Undo.RecordObject(this, "Modify OnExitAction");
+            onExitAction = newExitAction;
+            EditorUtility.SetDirty(this);
+        }
+
+        public void SetCondition(ConditionPredicate newPredicate)
+        {
+            Undo.RecordObject(this, "Change Condition Predicate");
+            condition.SetPredicate(newPredicate);
+            EditorUtility.SetDirty(this);
+        }
+
         public void SetNodeHeight(float newHeight)
         {
             rect.height = newHeight;
+            EditorUtility.SetDirty(this);
         }
 
         public void AddChild(string childID)
@@ -106,6 +177,48 @@ namespace ButtonGame.Dialogue
         {
             Undo.RecordObject(this, "Change Dialogue Speaker");
             isPlayerSpeaking = newIsPlayerSpeaking;
+            EditorUtility.SetDirty(this);
+        }
+
+        // Value controlled by Dialogue Editor GUI
+        public void SetHasOnEnterAction(bool toggleValue)
+        {
+            hasOnEnterAction = toggleValue;
+            EditorUtility.SetDirty(this);
+        }
+
+        // Value controlled by Dialogue Editor GUI
+        public void SetHasOnExitAction(bool toggleValue)
+        {
+            hasOnExitAction = toggleValue;
+            EditorUtility.SetDirty(this);
+        }
+
+        // Value controlled by Dialogue Editor GUI
+        public void SetHasConditionSelect(bool toggleValue)
+        {
+            hasConditionSelect = toggleValue;
+            EditorUtility.SetDirty(this);
+        }
+
+        public void SetConditionParameters(IEnumerable<string> newParameters)
+        {
+            Undo.RecordObject(this, "Change Condition Parameter");
+            condition.SetParameters(newParameters);
+            EditorUtility.SetDirty(this);
+        }
+
+        public void SetConditionNegate(bool newNegate)
+        {
+            Undo.RecordObject(this, "Change Condition Negate");
+            condition.SetNegate(newNegate);
+            EditorUtility.SetDirty(this);
+        }
+
+        public void SetObjectiveIndex(int newIndex)
+        {
+            Undo.RecordObject(this, "Change ConditionObjective");
+            objectiveIndex = newIndex;
             EditorUtility.SetDirty(this);
         }
 #endif

@@ -2,6 +2,7 @@
 using UnityEngine;
 using ButtonGame.Saving;
 using System.Collections.Generic;
+using ButtonGame.Core;
 
 namespace ButtonGame.Inventories
 {
@@ -94,6 +95,23 @@ namespace ButtonGame.Inventories
                     return true;
                 }
             }
+            return false;
+        }
+
+        /// <summary>
+        /// Is there an instance of the item in the inventory? If so, return slot.
+        /// </summary>
+        public bool HasItem(InventoryItem item, out int slot)
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (object.ReferenceEquals(slots[i].item, item))
+                {
+                    slot = i;
+                    return true;
+                }
+            }
+            slot = -1;
             return false;
         }
 
@@ -261,6 +279,30 @@ namespace ButtonGame.Inventories
             {
                 inventoryUpdated();
             }
+        }
+
+        public bool? Evaluate(ConditionPredicate predicate, List<string> parameters)
+        {
+            if (predicate != ConditionPredicate.HasItem) return null;
+            string[] parameterArray = parameters.ToArray();
+            for (int i = 0; i < parameterArray.Length; i++)
+            {
+                int slot;
+                InventoryItem item = InventoryItem.GetFromID(parameterArray[i]);
+                i++;
+                if (HasItem(item, out slot))
+                {
+                    if (GetCountInSlot(slot) < int.Parse(parameters[i]))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
