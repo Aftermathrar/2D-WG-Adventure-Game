@@ -18,6 +18,18 @@ namespace ButtonGame.SceneManagement
             StartCoroutine(Transition());
         }
 
+        public void ChangeScene(string saveFile)
+        {
+            transform.SetParent(null);
+            onSceneChange?.Invoke();
+            StartCoroutine(Transition(saveFile));
+        }
+
+        public void SetSceneToLoad(int newScene)
+        {
+            sceneToLoad = newScene;
+        }
+
         private IEnumerator Transition()
         {
             if(sceneToLoad < 0)
@@ -39,6 +51,33 @@ namespace ButtonGame.SceneManagement
             yield return savingWrapper.Load();
 
             savingWrapper.Save();
+            loadFader.FadeInImmediate();
+            Time.timeScale = 1f;
+
+            Destroy(this.gameObject);
+        }
+
+        private IEnumerator Transition(string saveFile)
+        {
+            if (sceneToLoad < 0)
+            {
+                Debug.LogError("Scene to load not set");
+                yield break;
+            }
+
+            DontDestroyOnLoad(this.gameObject);
+            LoadFader loadFader = FindObjectOfType<LoadFader>();
+            SavingWrapper savingWrapper = FindObjectOfType<SavingWrapper>();
+
+            loadFader.FadeOutImmediate();
+
+            // savingWrapper.Save(saveFile);
+
+            yield return SceneManager.LoadSceneAsync(sceneToLoad);
+
+            yield return savingWrapper.Load(saveFile);
+
+            // savingWrapper.Save(saveFile);
             loadFader.FadeInImmediate();
             Time.timeScale = 1f;
 

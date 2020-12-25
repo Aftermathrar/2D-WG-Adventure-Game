@@ -89,7 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: 80
-  m_MinHeight: -1
+  m_MinHeight: 80
   m_PreferredWidth: 80
   m_PreferredHeight: 80
   m_FlexibleWidth: -1
@@ -210,6 +210,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7023366877588084578}
     m_Modifications:
+    - target: {fileID: -1910727185169369589, guid: 2bb2d39d7c908754f8c35e19d7023b07,
+        type: 3}
+      propertyPath: m_FlexibleWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1910727185169369589, guid: 2bb2d39d7c908754f8c35e19d7023b07,
+        type: 3}
+      propertyPath: m_FlexibleHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3344925100893395074, guid: 2bb2d39d7c908754f8c35e19d7023b07,
         type: 3}
       propertyPath: m_Name
@@ -243,7 +253,7 @@ PrefabInstance:
     - target: {fileID: 4244493612143676632, guid: 2bb2d39d7c908754f8c35e19d7023b07,
         type: 3}
       propertyPath: m_FontData.m_Alignment
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4244493612143676632, guid: 2bb2d39d7c908754f8c35e19d7023b07,
         type: 3}

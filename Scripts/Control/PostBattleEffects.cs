@@ -30,7 +30,7 @@ namespace ButtonGame.Control
 
         private void OnDisable() 
         {
-            RemoveBuffs();
+            // RemoveBuffs();
         }
 
         private void RestoreIcons()

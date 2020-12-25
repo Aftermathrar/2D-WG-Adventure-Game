@@ -12,15 +12,15 @@ PrefabInstance:
       value: TownPriest
       objectReference: {fileID: 0}
     - target: {fileID: 6137850591540138, guid: ae950381609fb054187cb7f2a5e84e50, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137850591540138, guid: ae950381609fb054187cb7f2a5e84e50, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6137850591540138, guid: ae950381609fb054187cb7f2a5e84e50, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6137850591540138, guid: ae950381609fb054187cb7f2a5e84e50, type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6137850591540138, guid: ae950381609fb054187cb7f2a5e84e50, type: 3}
@@ -34,11 +34,6 @@ PrefabInstance:
     - target: {fileID: 6137850591540138, guid: ae950381609fb054187cb7f2a5e84e50, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6403875892074456822, guid: ae950381609fb054187cb7f2a5e84e50,
-        type: 3}
-      propertyPath: uniqueIdentifier
-      value: 50a88b55-3e22-4a1f-bc65-eecc5de4e857
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae950381609fb054187cb7f2a5e84e50, type: 3}

@@ -53,10 +53,16 @@ namespace ButtonGame.Saving
             File.Delete(path);
         }
 
+        public bool HasSaveFile(string saveFile)
+        {
+            string path = GetPathFromSaveFile(saveFile);
+            return File.Exists(path);
+        }
+
         private Dictionary<string, object> LoadFile(string saveFile)
         {
             string path = GetPathFromSaveFile(saveFile);
-            if(!File.Exists(path)) 
+            if(!File.Exists(path))
             {
                 return new Dictionary<string, object>();
             }

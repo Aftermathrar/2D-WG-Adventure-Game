@@ -14,7 +14,7 @@ namespace ButtonGame.Dialogue
         [SerializeField]
         List<DialogueNode> nodes = new List<DialogueNode>();
         [SerializeField]
-        Vector2 newNodeOffset = new Vector2(250, 0);
+        Vector2 newNodeOffset = new Vector2(300, 0);
         
         Dictionary<string, DialogueNode> nodeLookup = new Dictionary<string, DialogueNode>();
 

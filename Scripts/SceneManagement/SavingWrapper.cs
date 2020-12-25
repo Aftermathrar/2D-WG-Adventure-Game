@@ -9,7 +9,7 @@ namespace ButtonGame.SceneManagement
         [SerializeField] KeyCode saveKey = KeyCode.K;
         [SerializeField] KeyCode loadKey = KeyCode.L;
         [SerializeField] KeyCode deleteKey = KeyCode.Delete;
-        const string defaultSaveFile = "save";
+        const string defaultSaveFile = "auto";
         
         private void Awake() 
         {
@@ -40,14 +40,29 @@ namespace ButtonGame.SceneManagement
             yield return GetComponent<SavingSystem>().Load(defaultSaveFile);
         }
 
+        public IEnumerator Load(string saveFile)
+        {
+            yield return GetComponent<SavingSystem>().Load(saveFile);
+        }
+
         public void Save()
         {
             GetComponent<SavingSystem>().Save(defaultSaveFile);
         }
 
+        public void Save(string saveFile)
+        {
+            GetComponent<SavingSystem>().Save(saveFile);
+        }
+
         public void Delete()
         {
             GetComponent<SavingSystem>().Delete(defaultSaveFile);
+        }
+
+        public void Delete(string saveFile)
+        {
+            GetComponent<SavingSystem>().Delete(saveFile);
         }
     }
 }

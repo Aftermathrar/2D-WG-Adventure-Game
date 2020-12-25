@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ButtonGame.Core;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,15 +9,15 @@ namespace ButtonGame.Dialogue
     public class DialogueTrigger : MonoBehaviour
     {
         [SerializeField]
-        string action;
+        OnDialogueAction action;
         [SerializeField]
-        UnityEvent onTrigger;
+        UnityEvent<string[]> onTrigger;
 
-        public void Trigger(string actionToTrigger)
+        public void Trigger(OnDialogueAction actionToTrigger, string[] actionParameters)
         {
             if(actionToTrigger == action)
             {
-                onTrigger.Invoke();
+                onTrigger.Invoke(actionParameters);
             }
         }
     }

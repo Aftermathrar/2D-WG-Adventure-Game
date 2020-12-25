@@ -11,7 +11,7 @@ namespace ButtonGame.Dialogue
     {
         [SerializeField] string playerName;
 
-        Dialogue currentDialogue;
+        [SerializeField] Dialogue currentDialogue;
         DialogueNode currentNode = null;
         AIConversant currentConversant = null;
         bool isChoosing = false;
@@ -57,6 +57,11 @@ namespace ButtonGame.Dialogue
             return currentNode.GetText();
         }
 
+        public string GetText(DialogueNode queryNode)
+        {
+            return queryNode.GetText();
+        }
+
         public string GetCurrentConversantName()
         {
             if(isChoosing)
@@ -69,9 +74,19 @@ namespace ButtonGame.Dialogue
             }
         }
 
+        public string GetCurrentConversantName(DialogueNode queryNode)
+        {
+            return queryNode.GetSpeaker();
+        }
+
         public IEnumerable<DialogueNode> GetChoices()
         {
             return FilterOnCondition(currentDialogue.GetPlayerChildren(currentNode));
+        }
+
+        public IEnumerable<DialogueNode> GetResponses()
+        {
+            return FilterOnCondition(currentDialogue.GetAIChildren(currentNode));
         }
 
         public void SelectChoice(DialogueNode chosenNode)
@@ -84,25 +99,25 @@ namespace ButtonGame.Dialogue
         public void Next()
         {
             int numPlayerResponses = FilterOnCondition(currentDialogue.GetPlayerChildren(currentNode)).Count();
-            if(numPlayerResponses > 0)
-            {
-                isChoosing = true;
-                TriggerExitAction();
-                onConversationUpdated();
-                return;
-            }
-
-            isChoosing = false;
-
             DialogueNode[] children = FilterOnCondition(currentDialogue.GetAIChildren(currentNode)).ToArray();
-            if(children.Length == 0)
+            TriggerExitAction();
+
+            if ((children.Length + numPlayerResponses) == 0)
             {
                 Quit();
                 return;
             }
-            int randomIndex = UnityEngine.Random.Range(0, children.Length);
-            TriggerExitAction();
-            currentNode = children[randomIndex];
+
+            if(numPlayerResponses > 0)
+            {
+                isChoosing = true;
+            }
+            else
+            {
+                isChoosing = false;
+                int randomIndex = UnityEngine.Random.Range(0, children.Length);
+                currentNode = children[randomIndex];
+            }
             TriggerEnterAction();
             onConversationUpdated();
         }
@@ -132,7 +147,7 @@ namespace ButtonGame.Dialogue
         {
             if(currentNode != null)
             {
-                TriggerAction(currentNode.GetOnEnterAction());
+                TriggerAction(currentNode.GetOnEnterAction(), currentNode.GetOnEnterActionParameters().ToArray());
             }
         }
 
@@ -140,17 +155,17 @@ namespace ButtonGame.Dialogue
         {
             if (currentNode != null)
             {
-                TriggerAction(currentNode.GetOnExitAction());
+                TriggerAction(currentNode.GetOnExitAction(), currentNode.GetOnExitActionParameters().ToArray());
             }
         }
 
-        private void TriggerAction(string action)
+        private void TriggerAction(OnDialogueAction action, string[] actionParameters)
         {
-            if(action == "") return;
+            if(action == OnDialogueAction.None) return;
 
             foreach (DialogueTrigger trigger in currentConversant.GetComponents<DialogueTrigger>())
             {
-                trigger.Trigger(action);
+                trigger.Trigger(action, actionParameters);
             }
         }
     }
