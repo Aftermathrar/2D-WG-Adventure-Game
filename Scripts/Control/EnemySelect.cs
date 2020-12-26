@@ -8,17 +8,19 @@ namespace ButtonGame.Control
 {
     public class EnemySelect : MonoBehaviour
     {
-        [SerializeField] LevelManager battleManager = null;
         [SerializeField] CharacterClass enemySelect;
         [SerializeField] GameObject enemySelectionButtons = null;
-        [SerializeField] GameObject tooltipWindow = null;
+        LevelManager battleManager = null;
+        GameObject tooltipWindow = null;
+
+        private void OnEnable()
+        {
+            tooltipWindow = GameObject.FindGameObjectWithTag("TooltipWindow");
+            battleManager = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<LevelManager>();
+        }
 
         public void Continue()
         {
-            if (battleManager == null)
-            {
-                battleManager = (LevelManager)GameObject.FindObjectOfType(typeof(LevelManager));
-            }
             if(battleManager.IsBattleActive())
             {
                 battleManager.ResumeRestart();

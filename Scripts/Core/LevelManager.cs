@@ -61,6 +61,7 @@ namespace ButtonGame.Core
                     if (companionToSpawn.FollowerClass == healClass.GetClass())
                     {
                         followerGO = Instantiate(healClass, battleCanvas).gameObject;
+                        followerGO.transform.SetSiblingIndex(1);
                         followerGO.GetComponent<SaveableEntity>().SetUniqueIdentifier(followerUUID);
                     }
                 }
@@ -257,7 +258,7 @@ namespace ButtonGame.Core
                 outroText.text = "DEFEATED";
                 Inventory inventory = enemyGO.GetComponent<Inventory>();
                 inventory.ClearInventory();
-                StartCoroutine(playerGO.GetComponent<PlayerController>().HealAfterLoss());
+                
                 StartCoroutine(BattleRewards());
             }
         }

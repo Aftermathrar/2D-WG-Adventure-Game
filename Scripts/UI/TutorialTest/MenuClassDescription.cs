@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace ButtonGame.UI
+namespace ButtonGame.UI.TutorialTest
 {
     public class MenuClassDescription : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {

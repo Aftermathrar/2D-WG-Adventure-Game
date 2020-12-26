@@ -12,6 +12,13 @@ public class RestCombat : MonoBehaviour
     [SerializeField] Mana playerMana = null;
     [SerializeField] LevelManager battleManager = null;
 
+    private void Awake() {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerHealth = player.GetComponent<Health>();
+        playerMana = player.GetComponent<Mana>();
+        battleManager = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<LevelManager>();
+    }
+
     private void OnEnable() 
     {        
         if(battleManager.IsBattleActive())

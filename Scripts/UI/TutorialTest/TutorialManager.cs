@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace ButtonGame.UI
+namespace ButtonGame.UI.TutorialTest
 {
     public class TutorialManager : MonoBehaviour, IPointerClickHandler
     {

@@ -13,20 +13,16 @@ namespace ButtonGame.Character
         [SerializeField] Image statusOverlay = null;
         [SerializeField] TextMeshProUGUI dpsText = null;
         [SerializeField] EnemyController enemy = null;
-        float animTime;
+        float animTime = Mathf.Infinity;
         float animLock;
         float skillLock;
         float totalLock;
         float timeInBattle;
         float totalDamage;
+        bool isBattleActive = false;
 
         // Naturally regen mana every 5s
         float manaRegenTime = 0;
-
-        void Start()
-        {
-            animTime = Mathf.Infinity;
-        }
 
         public void SetEnemy(EnemyController enemyController)
         {
@@ -45,11 +41,14 @@ namespace ButtonGame.Character
         // Update is called once per frame
         void Update()
         {
-            animTime += Time.deltaTime;
-            UpdateAnimText();
-            timeInBattle += Time.deltaTime;
+            if(isBattleActive)
+            {
+                animTime += Time.deltaTime;
+                UpdateAnimText();
+                timeInBattle += Time.deltaTime;
+                RegenMana();
+            }
             UpdateDPSText();
-            RegenMana();
         }
 
         public bool CanAttack(float skillPriority)
@@ -133,6 +132,22 @@ namespace ButtonGame.Character
                 GetComponent<Mana>().GainAttribute();
                 manaRegenTime = 0;
             }
+        }
+
+        public void StartBattle()
+        {
+            isBattleActive = true;
+        }
+
+        public void EndBattle(string tag)
+        {
+            if (tag == "Player")
+            {
+                StartCoroutine(HealAfterLoss());
+            }
+            isBattleActive = false;
+            animTime = Mathf.Infinity;
+            UpdateAnimText();
         }
 
         public IEnumerator HealAfterLoss()

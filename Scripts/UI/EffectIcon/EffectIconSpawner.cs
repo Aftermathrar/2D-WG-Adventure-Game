@@ -10,12 +10,14 @@ namespace ButtonGame.UI.EffectIcon
         protected Dictionary<string, EffectIconImage> iconInstances = new Dictionary<string, EffectIconImage>();
         protected Stack<EffectIconImage> fxIconStack = new Stack<EffectIconImage>();
 
+        float iconOffset = 80f;
+
         public virtual void Spawn(string id, int count, Sprite sprite)
         {
             // float spawnPosX = transform.position.x + (50f * count);
             // Vector3 spawnPos = new Vector3(spawnPosX, transform.position.y, transform.position.z);
             // Icons are 75 units square
-            float spawnPosX = (80f * count);
+            float spawnPosX = (iconOffset * count);
             Vector3 spawnPos = new Vector3(spawnPosX, 0, 0);
             EffectIconImage instance = null;
             if(fxIconStack.Count == 0)
@@ -47,7 +49,7 @@ namespace ButtonGame.UI.EffectIcon
                     for (int i = fxIndex + 1; i < childCount; i++)
                     {
                         EffectIconImage icon = transform.GetChild(i).GetComponent<EffectIconImage>();
-                        icon.StartCoroutine(icon.MoveHorizontal());
+                        icon.StartCoroutine(icon.MoveHorizontal(iconOffset));
                     }
                 }
                 instance.gameObject.SetActive(false);

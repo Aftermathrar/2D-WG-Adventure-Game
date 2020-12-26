@@ -23,8 +23,9 @@ namespace ButtonGame.Character
         [SerializeField] EffectDB effectDB = null;
         [SerializeField] Image actBarOverlay = null;
         [SerializeField] HitTimerSpawner hitTimerSpawner = null;
-        FollowerAttackManager attackManager = null;
+        [SerializeField] GameObject logPrefab = null;
         FollowerCombatLog combatLog = null;
+        FollowerAttackManager attackManager = null;
         BaseStats baseStats = null;
         BaseFollowerAttackStats baseAttackStats = null;
         FollowerFighter fighter = null;
@@ -94,7 +95,9 @@ namespace ButtonGame.Character
             fighter = GetComponent<FollowerFighter>();
             fullness = GetComponent<Fullness>();
             selfMana = GetComponent<Mana>();
-            combatLog = (FollowerCombatLog)GameObject.FindObjectOfType(typeof(FollowerCombatLog));
+
+            combatLog = Instantiate(logPrefab, transform.parent).GetComponent<FollowerCombatLog>();
+            combatLog.transform.SetSiblingIndex(2);
         }
 
         // Called during battle setup from LevelManager

@@ -13,7 +13,7 @@ namespace ButtonGame.SceneManagement
 
         public void ChangeScene()
         {
-            transform.parent = null;
+            transform.SetParent(null);
             onSceneChange?.Invoke();
             StartCoroutine(Transition());
         }

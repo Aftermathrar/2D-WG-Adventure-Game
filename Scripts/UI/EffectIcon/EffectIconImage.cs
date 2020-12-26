@@ -41,10 +41,10 @@ namespace ButtonGame.UI.EffectIcon
             timerText.text = string.Format("{0:0}{1}", Mathf.CeilToInt(t), s);
         }
 
-        public IEnumerator MoveHorizontal()
+        public IEnumerator MoveHorizontal(float xOffset)
         {
             Vector3 startPosition = transform.localPosition;
-            Vector3 targetPosition = new Vector3(startPosition.x - 75f, startPosition.y, startPosition.z);
+            Vector3 targetPosition = new Vector3(startPosition.x - xOffset, startPosition.y, startPosition.z);
             for(float t = 0; t < 0.2f; t+=Time.deltaTime)
             {
                 transform.localPosition = Vector3.Lerp(startPosition, targetPosition, t/0.2f);

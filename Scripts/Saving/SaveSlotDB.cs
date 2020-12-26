@@ -10,8 +10,17 @@ namespace ButtonGame.Saving
     [CreateAssetMenu(fileName = "SaveSlotDB", menuName = "Stats/SaveSlotDB")]
     public class SaveSlotDB : ScriptableObject
     {
-        // [SerializeField] List<SaveSlot> saves = new List<SaveSlot>();
         Dictionary<string, SaveRecord> saveLookup = null;
+
+        [System.Serializable]
+        class SaveRecord
+        {
+            public string playerName;
+            public string rank;
+            public string time;
+            public string quest;
+            public string scene;
+        }
 
         public Dictionary<string, string> GetSaveRecord(string saveFile)
         {
@@ -86,23 +95,6 @@ namespace ButtonGame.Saving
 
                 saveLookup[fileName] = saveRecord;
             }
-        }
-
-        [System.Serializable]
-        class SaveSlot
-        {
-            public string saveFile;
-            public SaveRecord record;
-        }
-
-        [System.Serializable]
-        class SaveRecord
-        {
-            public string playerName;
-            public string rank;
-            public string time;
-            public string quest;
-            public string scene;
         }
     }
 }

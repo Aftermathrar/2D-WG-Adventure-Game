@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace ButtonGame.UI
+namespace ButtonGame.UI.TutorialTest
 {
     public class ToggleUI : MonoBehaviour
     {
