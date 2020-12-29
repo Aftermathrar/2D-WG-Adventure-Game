@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-69672028195194424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: e07f900d-f3c9-4fed-bee0-f5c62e28f465
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: How To Play
+  text: '[]The next spell is Magic Missiles. This skill will apply stacking defense
+    debuffs onto the enemy, allowing your other skills to do more damage.
+
+    []While
+    it doesn''t create a barrier normally, if it''s cast shortly after Aura Blast,
+    the Aura effect will add a barrier to this skill.'
+  children:
+  - e3e8bb98-3f8a-4958-9e30-c56a1bc98fb8
+  rect:
+    serializedVersion: 2
+    x: 45
+    y: 428
+    width: 250
+    height: 265
+  onEnterAction: 6
+  onEnterActionParameter: []
+  onExitAction: 7
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587a94579930f974ea9763a0959d39dc, type: 3}
+  m_Name: PlayerSkillTutorial
+  m_EditorClassIdentifier: 
+  defaultSpeakerName: How To Play
+  nodes:
+  - {fileID: -69672028195194424}
+  - {fileID: 7937504242341899315}
+  newNodeOffset: {x: 300, y: 0}
+--- !u!114 &7937504242341899315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: e3e8bb98-3f8a-4958-9e30-c56a1bc98fb8
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: How To Play
+  text: '[]The other aspect to watch with Magic Missiles is how the Status Bar changes
+    to green quickly, meaning you can interrupt it with other spells. Watch the hit
+    indicators appearing on the left so that you don''t interrupt with too many of
+    the hits remaining.'
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 340
+    y: 409
+    width: 250
+    height: 210
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []

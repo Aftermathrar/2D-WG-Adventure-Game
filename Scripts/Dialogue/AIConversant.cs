@@ -7,17 +7,19 @@ namespace ButtonGame.Dialogue
     public class AIConversant : MonoBehaviour
     {
         [SerializeField] Dialogue dialogue;
-        // callingController.
         
+        public void StartDialogue()
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConversant>().StartDialogue(this, dialogue);
+        }
+
+        public void StartDialogue(Dialogue newDialogue)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConversant>().StartDialogue(this, newDialogue);
+        }
+
         private void Start() 
         {
-            StartCoroutine("DialogueTest");
-        }
-        
-        private IEnumerator DialogueTest()
-        {
-            yield return new WaitForSeconds(2f);
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConversant>().StartDialogue(this, dialogue);
         }
     }
 }

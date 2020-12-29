@@ -156,6 +156,13 @@ namespace ButtonGame.Dialogue
                         onEnterActionParameter.Add("");
                     }
                     return;
+                case OnDialogueAction.MoveWindow:
+                    if(paramLength != 1)
+                    {
+                        onEnterActionParameter.Clear();
+                        onEnterActionParameter.Add("0");
+                    }
+                    break;
                 case OnDialogueAction.CompleteObjective:
                     if (paramLength != 2)
                     {
@@ -169,7 +176,7 @@ namespace ButtonGame.Dialogue
                     {
                         onEnterActionParameter.Clear();
                         onEnterActionParameter.Add("");
-                        onEnterActionParameter.Add("");
+                        onEnterActionParameter.Add("0");
                     }
                     return;
                 default:
@@ -194,6 +201,13 @@ namespace ButtonGame.Dialogue
                         onExitActionParameter.Add("");
                     }
                     return;
+                case OnDialogueAction.MoveWindow:
+                    if (paramLength != 1)
+                    {
+                        onEnterActionParameter.Clear();
+                        onEnterActionParameter.Add("0");
+                    }
+                    break;
                 case OnDialogueAction.CompleteObjective:
                     if(paramLength != 2)
                     {
@@ -207,7 +221,7 @@ namespace ButtonGame.Dialogue
                     {
                         onExitActionParameter.Clear();
                         onExitActionParameter.Add("");
-                        onExitActionParameter.Add("");
+                        onExitActionParameter.Add("0");
                     }
                     return;
                 default:

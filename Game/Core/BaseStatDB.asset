@@ -106,7 +106,7 @@ MonoBehaviour:
   - characterClass: 3
     baseStats:
     - stat: 0
-      value: Test
+      value: Training Dummy
     - stat: 1
       value: 1000
     - stat: 4
@@ -120,7 +120,7 @@ MonoBehaviour:
     - stat: 12
       value: 80
     - stat: 16
-      value: Test dummy
+      value: Former tree
     - stat: 17
       value: 2
     - stat: 18
@@ -138,11 +138,11 @@ MonoBehaviour:
     - stat: 0
       value: Slime
     - stat: 1
-      value: 10000
+      value: 1000
     - stat: 4
-      value: 2.25
+      value: 0.25
     - stat: 6
-      value: 1200
+      value: 800
     - stat: 8
       value: 70
     - stat: 10
@@ -166,11 +166,11 @@ MonoBehaviour:
     - stat: 0
       value: Fox
     - stat: 1
-      value: 7000
+      value: 700
     - stat: 4
-      value: 3
+      value: 0.25
     - stat: 6
-      value: 1125
+      value: 750
     - stat: 8
       value: 140
     - stat: 10
@@ -194,11 +194,11 @@ MonoBehaviour:
     - stat: 0
       value: Treant
     - stat: 1
-      value: 10000
+      value: 1000
     - stat: 4
-      value: 1.6
+      value: 0.2
     - stat: 6
-      value: 1200
+      value: 800
     - stat: 8
       value: 60
     - stat: 10
@@ -222,11 +222,11 @@ MonoBehaviour:
     - stat: 0
       value: Boar
     - stat: 1
-      value: 11000
+      value: 1100
     - stat: 4
-      value: 3.5
+      value: 0.25
     - stat: 6
-      value: 1375
+      value: 850
     - stat: 8
       value: 120
     - stat: 10
@@ -250,11 +250,11 @@ MonoBehaviour:
     - stat: 0
       value: Small Bat
     - stat: 1
-      value: 8000
+      value: 800
     - stat: 4
-      value: 2.5
+      value: 0.25
     - stat: 6
-      value: 1200
+      value: 800
     - stat: 8
       value: 110
     - stat: 10
@@ -265,6 +265,34 @@ MonoBehaviour:
       value: At least flying enemies are the same as normal enemies.
     - stat: 17
       value: 1.5
+    - stat: 18
+      value: 0
+    - stat: 21
+      value: 1
+    - stat: 22
+      value: 60
+    - stat: 23
+      value: 0
+  - characterClass: 9
+    baseStats:
+    - stat: 0
+      value: Instructor
+    - stat: 1
+      value: 40000
+    - stat: 4
+      value: 0.1
+    - stat: 6
+      value: 2000
+    - stat: 8
+      value: 100
+    - stat: 10
+      value: 0
+    - stat: 12
+      value: 80
+    - stat: 16
+      value: A teacher helping you with a demonstration
+    - stat: 17
+      value: 2
     - stat: 18
       value: 0
     - stat: 21

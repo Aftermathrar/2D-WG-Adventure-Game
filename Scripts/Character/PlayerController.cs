@@ -24,11 +24,16 @@ namespace ButtonGame.Character
         // Naturally regen mana every 5s
         float manaRegenTime = 0;
 
+        private void Start() 
+        {
+            UpdateAnimText();
+        }
+
         public void SetEnemy(EnemyController enemyController)
         {
             enemy = enemyController;
             
-            ITargetable targetCandidate = enemy.transform.GetComponent<ITargetable>();
+            ITargetable targetCandidate = enemy.GetComponent<ITargetable>();
             foreach (IAtkSkill atk in GetComponentsInChildren<IAtkSkill>())
             {
                 targetCandidate.HandleAttack(atk);

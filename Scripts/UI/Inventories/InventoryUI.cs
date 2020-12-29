@@ -32,7 +32,10 @@ namespace ButtonGame.UI.Inventories
         private void Start()
         {
             playerEquipment = Equipment.GetEntityEquipment("Player");
-            followerEquipment = Equipment.GetEntityEquipment("Follower");
+            if(GameObject.FindGameObjectWithTag("Follower") != null)
+            {
+                followerEquipment = Equipment.GetEntityEquipment("Follower");
+            }
             Redraw();
         }
 

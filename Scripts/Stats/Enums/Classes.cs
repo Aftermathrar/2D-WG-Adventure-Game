@@ -5,11 +5,12 @@ namespace ButtonGame.Stats.Enums
         Player,
         Priest,
         WitchDoctor,
-        Test,
+        TrainingDummy,
         Slime,
         Fox,
         Treant,
         Boar,
-        SmallBat
+        SmallBat,
+        Instructor
     }
 }

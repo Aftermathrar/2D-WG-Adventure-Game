@@ -7,10 +7,16 @@ namespace ButtonGame.UI
     public class UIShake : MonoBehaviour
     {
         Vector3 originalPos = new Vector3();
+        RectTransform m_RectTransform;
 
         private void Awake() 
         {
-            originalPos = transform.localPosition;
+            m_RectTransform = GetComponent<RectTransform>();
+        }
+
+        private void Start() 
+        {
+            originalPos = m_RectTransform.anchoredPosition;
         }
 
         public IEnumerator Shake(float duration, float magnitude, int shakeCount)
@@ -27,20 +33,20 @@ namespace ButtonGame.UI
                 shakePositions[i] = new Vector3(randX, randY, 0);
             }
 
-            Vector3 shakePos = transform.localPosition;
+            Vector3 shakePos = m_RectTransform.anchoredPosition;
             float shakeDuration = duration / shakePositions.Length / 2;
             for (int i = 0; i < shakePositions.Length; i++)
             {
                 while(elapsedTime < shakeDuration)
                 {
                     float shakePercent = elapsedTime / shakeDuration;
-                    transform.localPosition = Vector3.Lerp(shakePos, shakePositions[i], shakePercent);
+                    m_RectTransform.anchoredPosition = Vector3.Lerp(shakePos, shakePositions[i], shakePercent);
                     elapsedTime += Time.deltaTime;
 
                     yield return null;
                 }
                 elapsedTime = 0;
-                shakePos = transform.localPosition;
+                shakePos = m_RectTransform.anchoredPosition;
             }
 
             shakeDuration = duration / 2;
@@ -48,12 +54,12 @@ namespace ButtonGame.UI
             while(elapsedTime < shakeDuration)
             {
                 float postShakePercent = elapsedTime / shakeDuration;
-                transform.localPosition = Vector3.Lerp(shakePos, originalPos, postShakePercent);
+                m_RectTransform.anchoredPosition = Vector3.Lerp(shakePos, originalPos, postShakePercent);
                 elapsedTime += Time.deltaTime;
 
                 yield return null;
             }
-            transform.localPosition = originalPos;
+            m_RectTransform.anchoredPosition = originalPos;
         }
     }
 }

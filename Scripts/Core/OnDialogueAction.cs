@@ -10,7 +10,10 @@ namespace ButtonGame.Core
         GiveQuest,
         CompleteObjective,
         GiveItem,
-        Attack,
-        Pacify
+        StartBattle,
+        EndBattle,
+        PauseBattle,
+        ResumeBattle,
+        MoveWindow
     }
 }

@@ -31,12 +31,9 @@ namespace ButtonGame.Saving
         {
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
 
-            if (buildIndex > 0)
-            {
-                Dictionary<string, object> state = LoadFile(saveFile);
-                CaptureState(state);
-                SaveFile(saveFile, state);
-            }
+            Dictionary<string, object> state = LoadFile(saveFile);
+            CaptureState(state);
+            SaveFile(saveFile, state);
         }
 
         public IEnumerator Load(string saveFile)

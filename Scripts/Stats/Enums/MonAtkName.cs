@@ -17,6 +17,7 @@ namespace ButtonGame.Stats.Enums
         TreeWhip,
         Swoop,
         Bloodsuck,
-        WingSmash
+        WingSmash,
+        StandStill
     }
 }

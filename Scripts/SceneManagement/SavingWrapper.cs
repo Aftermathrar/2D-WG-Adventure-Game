@@ -6,9 +6,9 @@ namespace ButtonGame.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
-        [SerializeField] KeyCode saveKey = KeyCode.K;
-        [SerializeField] KeyCode loadKey = KeyCode.L;
-        [SerializeField] KeyCode deleteKey = KeyCode.Delete;
+        // [SerializeField] KeyCode saveKey = KeyCode.K;
+        // [SerializeField] KeyCode loadKey = KeyCode.L;
+        // [SerializeField] KeyCode deleteKey = KeyCode.Delete;
         const string defaultSaveFile = "auto";
         
         private void Awake() 
@@ -20,19 +20,20 @@ namespace ButtonGame.SceneManagement
             yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
         }
 
-        private void Update() {
-            if (Input.GetKeyDown(saveKey))
-            {
-                Save();
-            }
-            if (Input.GetKeyDown(loadKey))
-            {
-                StartCoroutine(Load());
-            }
-            if (Input.GetKeyDown(deleteKey))
-            {
-                Delete();
-            }
+        private void Update() 
+        {
+            // if (Input.GetKeyDown(saveKey))
+            // {
+            //     Save();
+            // }
+            // if (Input.GetKeyDown(loadKey))
+            // {
+            //     StartCoroutine(Load());
+            // }
+            // if (Input.GetKeyDown(deleteKey))
+            // {
+            //     Delete();
+            // }
         }
 
         public IEnumerator Load()

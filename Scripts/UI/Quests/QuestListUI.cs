@@ -20,7 +20,7 @@ namespace ButtonGame.UI.Quests
 
         private void Redraw()
         {
-            foreach (Transform item in transform)
+            foreach (QuestItemUI item in GetComponentsInChildren<QuestItemUI>())
             {
                 Destroy(item.gameObject);
             }

@@ -161,8 +161,6 @@ namespace ButtonGame.Character
             float atkSpeed = fighter.GetStat(Stat.AttackSpeed);
             atkSpeed = 1 / atkSpeed * 100;
 
-            CheckEffectActivation(false);
-
             if (GetAttackStat(MonAtkStat.InvulnTime, 0) > 0)
             {
                 fighter.StartInvulnTime(GetAttackStat(MonAtkStat.InvulnTime, 0));
@@ -170,6 +168,7 @@ namespace ButtonGame.Character
 
             if(maxHitCount > 0)
             {
+                CheckEffectActivation(false);
                 maxTimeToHit = monAttacks.GetAttackStatArray(MonAtkStat.TimeToHit, curAtk);
                 fighter.activeAttack += UpdateTimeToHit;
                 string s = monAtkDB.GetAttackStat(MonAtkStat.AttackText, curAtk)[currentHitCount];

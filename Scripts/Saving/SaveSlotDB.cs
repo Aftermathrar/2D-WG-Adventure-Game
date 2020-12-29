@@ -74,7 +74,6 @@ namespace ButtonGame.Saving
             {
                 string fileName = filePath.Replace(Application.persistentDataPath + "\\", "");
                 fileName = fileName.Replace(".sav", "");
-                Debug.Log(fileName);
 
                 var stateDict = new Dictionary<string, object>();
                 using (FileStream stream = File.Open(filePath, FileMode.Open))
@@ -82,7 +81,7 @@ namespace ButtonGame.Saving
                     BinaryFormatter formatter = new BinaryFormatter();
                     stateDict = (Dictionary<string, object>)formatter.Deserialize(stream);
                 }
-
+                
                 stateDict = (Dictionary<string, object>)stateDict["player"];
                 var state = (Dictionary<string, string>)stateDict["ButtonGame.Attributes.PlayerInfo"];
                 SaveRecord saveRecord = new SaveRecord();

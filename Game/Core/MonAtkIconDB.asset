@@ -71,3 +71,6 @@ MonoBehaviour:
   - monAtkName: 15
     sprite:
     - {fileID: 21300000, guid: ceee3649964a2ba4e8eacec5030460fd, type: 3}
+  - monAtkName: 16
+    sprite:
+    - {fileID: 21300000, guid: 4eccf40450ae11a4096d2944f02fbcaf, type: 3}

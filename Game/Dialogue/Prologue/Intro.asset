@@ -1,0 +1,352 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8909315960534060281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: eaac6095-9b6e-4569-988d-a65260aa58bf
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Vanguard Magic
+  text: '[]This discipline is focused on being a frontline soldier, able to sustain
+    and mitigate damage while getting support from behind. Since your goal was to
+    be a solo adventurer, you''ve mastered a number of offensive spells and how to
+    overlay defensive buffs onto them. The result is that you''re able attack fiercely
+    and time your attacks in order to reflect any incoming damage.
+
+    []The demonstration
+    you''ll be doing will be an overview of how each of your abilities work and how
+    to overlap their buffs. Then you''ll work with an instructor doing simple attacks
+    to show students how the damage nullification and reflection works.'
+  children:
+  - b7c07863-4f76-4907-96e7-23a57c04c856
+  rect:
+    serializedVersion: 2
+    x: 1176
+    y: 100
+    width: 250
+    height: 360
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-8576493085493120793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: ae6e4cf4-afe6-442a-9693-8087a70258fa
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Dawn of a new journey
+  text: '[]After being stuck in classrooms and libraries for so long, you''re eager
+    to travel and conquer each of these instances. Everything from this point will
+    determine whether your name goes down in the history books or fails to even make
+    it onto a tombstone.'
+  children:
+  - d5b1b8ca-c72f-47ff-a34b-a221a0a5f651
+  rect:
+    serializedVersion: 2
+    x: 576
+    y: 148
+    width: 250
+    height: 210
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-5204235904946937293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: b7c07863-4f76-4907-96e7-23a57c04c856
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: How To Play
+  text: '[]You make your way to one of the practice fields where the demonstrations
+    are starting. There are a number of wooden platform thrown together to act as
+    separate stages, with students congregating around whatever looks interesting.
+    Soon enough, you hear, "Now, to showcase the utility of magic specialised for
+    the Vanguards in the army, we have [Player]!"
+
+    []Going up on the stage, you
+    begin going through your rehearsed speech: "The first aspect of magic to understand
+    is how to read your opponent in combat. With passive detection, their information
+    will show up at the top of the screen."'
+  children:
+  - ddb21246-f080-4634-b134-d5ebcd87de02
+  rect:
+    serializedVersion: 2
+    x: 1495
+    y: 55
+    width: 250
+    height: 365
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 4
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-4662253019302330755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: f854ae76-ba62-4359-a149-a915973466f8
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Dawn of a new journey
+  text: "[]The ones that prove worthwhile invariably come under the control of the
+    adventurer's guild, which curates information, quests, and supplies to ensure
+    the smooth and efficient harvest of the dungeons. \n[]It's not all without incident,
+    though. Outbreaks from previously undiscovered dungeons can take villages by
+    surprise, threatening to wipe them off the map. Even catalogued dungeons will
+    have deaths from unprepared or overconfident adventurers."
+  children:
+  - ae6e4cf4-afe6-442a-9693-8087a70258fa
+  rect:
+    serializedVersion: 2
+    x: 298
+    y: 106
+    width: 250
+    height: 315
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-1750264798687654577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: ddb21246-f080-4634-b134-d5ebcd87de02
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: How To Play
+  text: ' []The enemy''s HP is a red bar, while the green bar is an indication of
+    what actions it is preparing to take. Most enemies will have an Idle time between
+    each attack. When that is over, the status text will let you know what attack
+    is coming up. The icons below show what the attack is and how many hits there
+    will be.
+
+    []When the countdown finishes, each icon will start to fill up
+    and when it completes, the attack will hit. After seeing the same attack multiple
+    times, you''ll start to get the timing down.'
+  children:
+  - 0c612ada-2519-4bf7-b39e-2454d84f5c56
+  rect:
+    serializedVersion: 2
+    x: 1792
+    y: 65
+    width: 250
+    height: 335
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 7
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587a94579930f974ea9763a0959d39dc, type: 3}
+  m_Name: Intro
+  m_EditorClassIdentifier: 
+  defaultSpeakerName: How To Play
+  nodes:
+  - {fileID: 6103634262906380852}
+  - {fileID: -4662253019302330755}
+  - {fileID: 2165746995484127790}
+  - {fileID: -8909315960534060281}
+  - {fileID: -8576493085493120793}
+  - {fileID: -5204235904946937293}
+  - {fileID: -1750264798687654577}
+  - {fileID: 5694918556806027993}
+  - {fileID: 702763292137383063}
+  newNodeOffset: {x: 300, y: 0}
+--- !u!114 &702763292137383063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: f2607482-b9ed-4ef0-b935-76370b2cd9ff
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: How To Play
+  text: '[]Press 1 or click on the skill icon to use Aura Blast. The yellow shape
+    that covers your HP and Mana shows that the barrier is active, which blocks damage
+    from each incoming hit. Very strong attacks can bleed over your barrier, so look
+    into better equipment if this is making you lose fights.'
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 2452
+    y: 160
+    width: 250
+    height: 245
+  onEnterAction: 7
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &2165746995484127790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: d5b1b8ca-c72f-47ff-a34b-a221a0a5f651
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Back to reality
+  text: '[]Either way, nothing will start before getting out of bed. You reluctantly
+    get up and start getting ready for the day. Due to an irregular graduation process
+    here, there''s nothing special you need to wear, so your standard issue uniform
+    will suffice.
+
+    []In this school, new students begin their orientation around
+    the same time the graduating class is leaving. This gives each department an
+    opportunity to demonstrate the merits of their program by having select upperclassmen
+    show off what they''ve learned. You were chosen to display some of the possibilities
+    for Vanguard Magic.'
+  children:
+  - eaac6095-9b6e-4569-988d-a65260aa58bf
+  rect:
+    serializedVersion: 2
+    x: 856
+    y: 109
+    width: 250
+    height: 345
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &5694918556806027993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 0c612ada-2519-4bf7-b39e-2454d84f5c56
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: How To Play
+  text: '[]Your own status works similarly, you can see your HP in red and your remaining
+    Mana in blue. The bottom bar represents your current state of spell channeling.
+    When it''s red, you''re unable to interrupt your skill. Yellow can be canceled
+    with high-priority spells and green means any skill can be used.
+
+    []When
+    it''s empty as it is now, it means your spell has ended and you are free to act
+    again. The difference between green status and empty will matter for spells that
+    cast a barrier on you while they are active. To show this, I''ll demonstrate
+    Aura Blast, a useful skill that is able to block incoming damage while active.'
+  children:
+  - f2607482-b9ed-4ef0-b935-76370b2cd9ff
+  rect:
+    serializedVersion: 2
+    x: 2134
+    y: 93
+    width: 250
+    height: 440
+  onEnterAction: 8
+  onEnterActionParameter:
+  - 400
+  onExitAction: 1
+  onExitActionParameter:
+  - Understanding your skills
+  condition:
+    and: []
+--- !u!114 &6103634262906380852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 73773638-1f41-4c62-ba95-7c6259c28105
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Dawn of a new journey
+  text: '[]It''s the start of a new chapter in your life, the first where you''ll
+    truly be on your own. Growing up surrounded by swords and magic, you proved competent
+    enough to board at a prominent magic university, grinding away with studies until
+    learning a suite of spells that suit you.
+
+    []Today is your final day, after
+    which you''ve decided to travel and carve your own path with your skills. The
+    continent is littered with dungeons, overlapped with human settlements that sprang
+    up to harvest the myriad resources on offer inside. These dungeons vary in appearance
+    and difficulty based on the region they appear in.'
+  children:
+  - f854ae76-ba62-4359-a149-a915973466f8
+  rect:
+    serializedVersion: 2
+    x: 28
+    y: 104
+    width: 250
+    height: 360
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ButtonGame.Attributes;
 using ButtonGame.Core;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace ButtonGame.Dialogue
 {
     public class PlayerConversant : MonoBehaviour
     {
-        [SerializeField] string playerName;
+        [SerializeField] public string playerName;
 
         [SerializeField] Dialogue currentDialogue;
         DialogueNode currentNode = null;
@@ -20,11 +21,12 @@ namespace ButtonGame.Dialogue
 
         public void StartDialogue(AIConversant newConversant, Dialogue newDialogue)
         {
+            playerName = GetComponent<PlayerInfo>().GetPlayerInfo("name");
             currentConversant = newConversant;
             currentDialogue = newDialogue;
             currentNode = currentDialogue.GetRootNode();
             TriggerEnterAction();
-            onConversationUpdated();
+            onConversationUpdated?.Invoke();
         }
 
         public void Quit()
@@ -34,7 +36,7 @@ namespace ButtonGame.Dialogue
             currentDialogue = null;
             currentNode = null;
             isChoosing = false;
-            onConversationUpdated();
+            onConversationUpdated?.Invoke();
         }
 
         public bool IsActive()

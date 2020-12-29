@@ -323,13 +323,15 @@ namespace ButtonGame.Dialogue.Editor
                     if (item != null)
                     {
                         dialogueActions.Add(item.GetItemID());
-
                     }
                     else
                     {
                         dialogueActions.Add("");
                     }
-                    dialogueActions.Add(GenerateItemCountField(actionParams[1]).ToString());
+                    dialogueActions.Add(GenerateItemCountField(actionParams[1]));
+                    break;
+                case OnDialogueAction.MoveWindow:
+                    dialogueActions.Add(GenerateNumberField(actionParams[0], "Y offset:", 50));
                     break;
             }
         }
@@ -463,7 +465,7 @@ namespace ButtonGame.Dialogue.Editor
             }
         }
 
-        private static int GenerateItemCountField(string itemString)
+        private static string GenerateItemCountField(string itemString)
         {
             int itemCount;
             GUILayout.BeginHorizontal();
@@ -475,7 +477,21 @@ namespace ButtonGame.Dialogue.Editor
                 Debug.Log("This parameter only takes a number!");
             }
             itemCount = Math.Max(itemCount, 1);
-            return itemCount;
+            return itemCount.ToString();
+        }
+
+        private static string GenerateNumberField(string numString, string label, int width)
+        {
+            int strCount;
+            GUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField(label, GUILayout.Width(width));
+            string countString = EditorGUILayout.TextField(numString);
+            GUILayout.EndHorizontal();
+            if (!int.TryParse(countString, out strCount))
+            {
+                Debug.Log("This parameter only takes a number!");
+            }
+            return strCount.ToString();
         }
 
         private static InventoryItem GenerateItemSelect(InventoryItem item)

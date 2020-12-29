@@ -20,7 +20,7 @@ MonoBehaviour:
       - None
     - stat: 1
       value:
-      - Empty
+      - Literally not an attack
     - stat: 2
       value:
       - 0
@@ -29,10 +29,10 @@ MonoBehaviour:
       - 1
     - stat: 4
       value:
-      - 1
+      - 5
     - stat: 5
       value:
-      - placeholder
+      - stands perfectly still
     - stat: 6
       value:
       - FALSE
@@ -1330,6 +1330,83 @@ MonoBehaviour:
     - stat: 19
       value:
       - 1800
+    - stat: 20
+      value:
+      - 1
+    - stat: 21
+      value:
+      - FALSE
+    - stat: 22
+      value:
+      - None
+    - stat: 23
+      value:
+      - Self
+    - stat: 24
+      value:
+      - OnHit
+  - monAtkName: 16
+    monAtkStats:
+    - stat: 0
+      value:
+      - StandStill
+    - stat: 1
+      value:
+      - Literally not an attack
+    - stat: 2
+      value:
+      - 1
+    - stat: 3
+      value:
+      - 6
+    - stat: 4
+      value:
+      - 3
+    - stat: 5
+      value:
+      - stands perfectly still
+    - stat: 6
+      value:
+      - FALSE
+    - stat: 7
+      value:
+      - 0
+    - stat: 8
+      value:
+      - FALSE
+    - stat: 9
+      value:
+      - 0
+    - stat: 10
+      value:
+      - 0
+    - stat: 11
+      value:
+      - 0
+    - stat: 12
+      value:
+      - 0
+    - stat: 13
+      value:
+      - None
+    - stat: 14
+      value:
+      - 1
+    - stat: 15
+      value:
+      - continues standing still!
+    - stat: 16
+      value:
+      - 3
+    - stat: 17
+      value:
+      - FALSE
+    - stat: 18
+      value:
+      - 0
+    - stat: 19
+      value:
+      - 0
     - stat: 20
       value:
       - 1

@@ -23,6 +23,16 @@ namespace ButtonGame.Quests
             OnQuestUpdated();
         }
 
+        public void AddQuest(string[] questString)
+        {
+            Quest quest = Quest.GetByName(questString[0]);
+            if(HasQuest(quest)) return;
+            QuestStatus newStatus = new QuestStatus(quest);
+            statuses.Add(newStatus);
+
+            OnQuestUpdated();
+        }
+
         private void OnQuestUpdated()
         {
             if (onQuestUpdated != null)
@@ -47,6 +57,12 @@ namespace ButtonGame.Quests
         public bool HasQuest(Quest quest)
         {
             return GetQuestStatus(quest) != null;
+        }
+
+        public bool HasObjectiveCompleted(Quest quest, string objective)
+        {
+            QuestStatus status = GetQuestStatus(quest);
+            return (status != null && status.IsObjectiveComplete(objective));
         }
 
         private QuestStatus GetQuestStatus(Quest quest)

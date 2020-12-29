@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7562845641113681104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 5885fa12-377e-4234-a4ae-3a10ff009e9e
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: How to Play
+  text: '[]Now we''ll have help from an instructor to show how blocking works. They''ll
+    repeat a basic attack for us, you can press Space to use Magic Shield. This doesn''t
+    deal significant damage, but has no cooldown. When blocking within 0.5s of the
+    attack, you''ll get a Perfect Defense that immediately deals a bonus 40% of the
+    spell power.'
+  children:
+  - 07d2da37-d612-4ba0-abb7-dd5e66c33065
+  rect:
+    serializedVersion: 2
+    x: 28
+    y: 281
+    width: 250
+    height: 280
+  onEnterAction: 6
+  onEnterActionParameter: []
+  onExitAction: 7
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-6653097682902173236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 07d2da37-d612-4ba0-abb7-dd5e66c33065
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: How to Play
+  text: '[]By timing your skills and using Aura Blast to grant extra barriers, you
+    can deal a much higher amount of damage.'
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 328
+    y: 281
+    width: 250
+    height: 150
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587a94579930f974ea9763a0959d39dc, type: 3}
+  m_Name: PlayerBlockTutorial
+  m_EditorClassIdentifier: 
+  defaultSpeakerName: How to Play
+  nodes:
+  - {fileID: -7562845641113681104}
+  - {fileID: -6653097682902173236}
+  newNodeOffset: {x: 300, y: 0}

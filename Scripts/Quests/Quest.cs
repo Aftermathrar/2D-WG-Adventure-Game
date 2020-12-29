@@ -10,7 +10,7 @@ namespace ButtonGame.Quests
     public class Quest : ScriptableObject 
     {
         [SerializeField]
-        List<string> objectives = new List<string>();
+        List<Objective> objectives = new List<Objective>();
         [SerializeField] 
         List<Reward> rewards = new List<Reward>();
 
@@ -22,12 +22,13 @@ namespace ButtonGame.Quests
             public InventoryItem item;
         }
 
-        // [System.Serializable]
-        // public class Objective
-        // {
-        //     public string reference;
-        //     public string description;
-        // }
+        [System.Serializable]
+        public class Objective
+        {
+            public string description;
+            public QuestAction completeObjectiveAction;
+            public List<string> parameter;
+        }
 
         public int GetObjectiveCount()
         {
@@ -36,7 +37,10 @@ namespace ButtonGame.Quests
 
         public IEnumerable<string> GetObjectives()
         {
-            return objectives;
+            foreach (var objective in objectives)
+            {
+                yield return objective.description;
+            }
         }
 
         public IEnumerable<Reward> GetRewards()
@@ -53,7 +57,7 @@ namespace ButtonGame.Quests
         {
             foreach (var objective in objectives)
             {
-                if(objective == objectiveRef)
+                if(objective.description == objectiveRef)
                 {
                     return true;
                 }

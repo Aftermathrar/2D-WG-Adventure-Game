@@ -20,15 +20,34 @@ namespace ButtonGame.Attributes
         int currentScene = -1;
         Dictionary<string, string> infoLookup = null;
 
-        public Dictionary<string, string> GetPlayerInfo()
+        public Dictionary<string, string> GetPlayerLookup()
         {
             BuildLookup();
             return infoLookup;
         }
 
+        public string GetPlayerInfo(string key)
+        {
+            BuildLookup();
+            return infoLookup[key];
+        }
+
+        public void SetPlayerInfo(Dictionary<string, string> newInfoLookup)
+        {
+            infoLookup = newInfoLookup;
+            playerName = infoLookup["name"];
+            playerRank = infoLookup["rank"];
+            time = infoLookup["time"];
+            currentQuest = infoLookup["quest"];
+            currentScene = int.Parse(infoLookup["scene"]);
+        }
+
         private void BuildLookup()
         {
-            infoLookup = new Dictionary<string, string>();
+            if(infoLookup == null)
+            {
+                infoLookup = new Dictionary<string, string>();
+            }
             infoLookup["name"] = playerName;
             infoLookup["rank"] = playerRank;
             infoLookup["time"] = time;
