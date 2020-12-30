@@ -37,6 +37,15 @@ namespace ButtonGame.Dialogue
         int enterActionIndex;
         int exitActionIndex;
 
+        private void Awake()
+        {
+            hasOnEnterAction = onEnterAction > 0;
+            hasOnExitAction = onExitAction > 0;
+            hasConditionSelect = condition != null;
+            enterActionIndex = (int)onEnterAction;
+            exitActionIndex = (int)onExitAction;
+        }
+
         public string GetText()
         {
             return text;

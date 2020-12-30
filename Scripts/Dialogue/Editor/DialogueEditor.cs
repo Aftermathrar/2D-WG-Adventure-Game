@@ -234,12 +234,10 @@ namespace ButtonGame.Dialogue.Editor
 
                 string[] actionParams = node.GetOnEnterActionParameters().ToArray();
                 List<string> onEnterActions = new List<string>();
-                int actionIndex = node.GetEnterActionIndex();
 
-                BuildDialogueActionsSelect(node, enterAction, actionParams, onEnterActions, actionIndex);
+                BuildDialogueActionsSelect(node, enterAction, actionParams, onEnterActions);
 
                 node.SetOnEnterActionParameters(onEnterActions);
-                node.SetEnterActionIndex(actionIndex);
             }
 
             if (node.GetHasOnExitAction())
@@ -253,12 +251,10 @@ namespace ButtonGame.Dialogue.Editor
 
                 string[] actionParams = node.GetOnExitActionParameters().ToArray();
                 List<string> onExitActions = new List<string>();
-                int actionIndex = node.GetExitActionIndex();
 
-                BuildDialogueActionsSelect(node, exitAction, actionParams, onExitActions, actionIndex);
+                BuildDialogueActionsSelect(node, exitAction, actionParams, onExitActions);
 
                 node.SetOnExitActionParameters(onExitActions);
-                node.SetExitActionIndex(actionIndex);
             }
 
             if (node.GetHasConditionSelect())
@@ -271,7 +267,7 @@ namespace ButtonGame.Dialogue.Editor
 
         private static void BuildDialogueActionsSelect(
             DialogueNode node, OnDialogueAction dialogueAction, 
-            string[] actionParams, List<string> dialogueActions, int actionIndex)
+            string[] actionParams, List<string> dialogueActions)
         {
             switch (dialogueAction)
             {
@@ -287,14 +283,17 @@ namespace ButtonGame.Dialogue.Editor
                         {
                             dialogueActions.Add(selectedQuest.name);
                             string[] questObjectives = selectedQuest.GetObjectives().ToArray();
+                            int actionIndex = node.GetExitActionIndex();
                             if (actionIndex >= questObjectives.Length)
                             {
+                                Debug.Log("Action index too high");
                                 actionIndex = 0;
                             }
 
                             EditorGUILayout.LabelField("Objective:", GUILayout.Width(58));
                             actionIndex = EditorGUILayout.Popup(actionIndex, questObjectives);
                             dialogueActions.Add(questObjectives[actionIndex]);
+                            node.SetExitActionIndex(actionIndex);
                         }
                         else
                         {

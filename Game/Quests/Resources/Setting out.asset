@@ -10,22 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63c8b3b219716fc49b57eb8f27f93cb2, type: 3}
-  m_Name: Understanding your skills
+  m_Name: Setting out
   m_EditorClassIdentifier: 
   objectives:
-  - description: Use Aura Blast
+  - description: 
     completeObjectiveAction: 0
     parameter: []
-  - description: Use Magic Missiles
+  - description: 
     completeObjectiveAction: 0
     parameter: []
-  - description: Use Magic Shield
-    completeObjectiveAction: 0
-    parameter: []
-  - description: Use Punch
-    completeObjectiveAction: 0
-    parameter: []
-  - description: Finish the demonstration
+  - description: 
     completeObjectiveAction: 0
     parameter: []
   rewards: []

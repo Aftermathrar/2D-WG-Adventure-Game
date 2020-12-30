@@ -11,6 +11,7 @@ namespace ButtonGame.Quests
     public class QuestList : MonoBehaviour, ISaveable, IPredicateEvaluator
     {
         List<QuestStatus> statuses = new List<QuestStatus>();
+        Dictionary<string, QuestStatus> completedQuests = new Dictionary<string, QuestStatus>();
 
         public event Action onQuestUpdated;
 
@@ -49,9 +50,17 @@ namespace ButtonGame.Quests
                 if(status.IsComplete())
                 {
                     GiveReward(quest);
+                    completedQuests[quest.GetTitle()] = status;
+                    statuses.Remove(status);
                 }
                 OnQuestUpdated();
             }
+        }
+
+        public void CompleteObjective(string[] questParameters)
+        {
+            Quest quest = Quest.GetByName(questParameters[0]);
+            CompleteObjective(quest, questParameters[1]);
         }
 
         public bool HasQuest(Quest quest)
@@ -61,12 +70,25 @@ namespace ButtonGame.Quests
 
         public bool HasObjectiveCompleted(Quest quest, string objective)
         {
+            if(completedQuests.ContainsKey(quest.GetTitle()))
+            {
+                return true;
+            }
             QuestStatus status = GetQuestStatus(quest);
             return (status != null && status.IsObjectiveComplete(objective));
         }
 
+        public bool HasQuestCompleted(string questString)
+        {
+            return completedQuests.ContainsKey(questString);
+        }
+
         private QuestStatus GetQuestStatus(Quest quest)
         {
+            if(completedQuests.ContainsKey(quest.GetTitle()))
+            {
+                return completedQuests[quest.GetTitle()];
+            }
             foreach (QuestStatus status in statuses)
             {
                 if (status.GetQuest() == quest)

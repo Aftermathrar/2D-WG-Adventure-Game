@@ -506,6 +506,7 @@ namespace ButtonGame.Combat
         public void StartBattle()
         {
             StopAttack();
+            cdResetOverlay.alpha = 0;
             timeSinceAtkStart = Mathf.Infinity;
             timeSinceAtkOnCooldown = Mathf.Infinity;
             isBattleActive = true;
@@ -515,6 +516,17 @@ namespace ButtonGame.Combat
         {
             Cancel();
             isBattleActive = false;
+        }
+
+        private void OnDisable() 
+        {
+            fighter.activeAttack -= UpdateTimer;
+            fighter.activeAttack -= StartCooldown;
+        }
+
+        private void OnEnable() 
+        {
+            ResetButton();
         }
     }
 }

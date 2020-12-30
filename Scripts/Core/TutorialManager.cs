@@ -4,9 +4,10 @@ using ButtonGame.Attributes;
 using ButtonGame.Character;
 using ButtonGame.Combat;
 using ButtonGame.Dialogue;
+using ButtonGame.Inventories;
 using ButtonGame.Quests;
-using ButtonGame.Stats;
 using ButtonGame.Stats.Enums;
+using ButtonGame.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,9 +23,14 @@ namespace ButtonGame.Core
         GameObject questUI;
         [SerializeField]
         ButtonGame.Dialogue.Dialogue[] dialogues;
+        [SerializeField]
+        List<EquipableItem> startingGear = new List<EquipableItem>();
+        [SerializeField]
+        HitTimerSpawner hitTimerSpawner;
         QuestList questList;
         Health playerHealth;
         Mana playerMana;
+        Equipment playerEquipment;
 
         AIConversant convo = null;
         int battleCounter = 0;
@@ -53,6 +59,15 @@ namespace ButtonGame.Core
             {
                 playerMana.GainAttribute(50f);
             }
+            if(Input.GetKeyDown(KeyCode.Tab))
+            {
+                Quest quest = Quest.GetByName("Understanding your skills");
+                if (questList.HasObjectiveCompleted(quest, "Use Punch"))
+                {
+                    questList.CompleteObjective(quest, "Finish the demonstration");
+                    playerGO.GetComponent<PlayerConversant>().Quit();
+                }
+            }
         }
 
         public void BeginTutorialBattle()
@@ -60,27 +75,6 @@ namespace ButtonGame.Core
             CharacterClass nextEnemy = enemyPrefabs[battleCounter].GetClass();
             BattleSetup(nextEnemy);
             battleCounter++;
-        }
-
-        private void BattleSetup()
-        {
-            // Find player
-            playerGO = GameObject.FindGameObjectWithTag("Player");
-            PlayerController playerController = playerGO.GetComponent<PlayerController>();
-            questList = playerGO.GetComponent<QuestList>();
-
-            // Spawn enemy
-            enemyGO = SpawnNewEnemy();
-            enemyGO.transform.SetAsFirstSibling();
-
-            // Assign opponent to scripts
-            enemyGO.GetComponent<CombatEffects>().SetTarget(playerGO);
-            enemyGO.GetComponent<EnemyAI>().SetTarget(playerController);
-            playerController.SetEnemy(enemyGO.GetComponent<EnemyController>());
-            playerGO.GetComponent<CombatEffects>().SetTarget(enemyGO);
-
-            // Activate battle
-            StartCoroutine(BeginBattle());
         }
 
         private void BattleSetup(CharacterClass enemyName)
@@ -91,8 +85,23 @@ namespace ButtonGame.Core
             questList = playerGO.GetComponent<QuestList>();
             playerHealth = playerGO.GetComponent<Health>();
             playerMana = playerGO.GetComponent<Mana>();
+            playerEquipment = playerGO.GetComponent<Equipment>();
             playerHUD.SetActive(true);
             playerAtkButtons.SetActive(true);
+            questList.onQuestUpdated += QuestCompleteCheck;
+
+            // Spawn starting equipment
+            foreach (EquipableItem equipableItem in startingGear)
+            {
+                int equipIndex = playerEquipment.TryAddItem(equipableItem);
+                if (equipIndex >= 0)
+                {
+                    EquipLocation equipLocation = equipableItem.GetAllowedEquipLocation();
+                    playerEquipment.AddItem(equipLocation, equipableItem, equipIndex);
+                }
+            }
+            playerHealth.RecalculateMaxHealth();
+            playerMana.RecalculateMaxMana();
 
             // Spawn enemy
             enemyGO = SpawnNewEnemy(enemyName);
@@ -160,9 +169,9 @@ namespace ButtonGame.Core
 
         private void AtkSkillUsed(Transform atk)
         {
+            Quest quest = Quest.GetByName("Understanding your skills");
             if(atk.name == "Skill 1")
             {
-                Quest quest = Quest.GetByName("Understanding your skills");
                 if(!questList.HasObjectiveCompleted(quest, "Use Aura Blast"))
                 {
                     questList.CompleteObjective(quest, "Use Aura Blast");
@@ -170,25 +179,24 @@ namespace ButtonGame.Core
                     StartCoroutine(DelayStartDialogue(2f, dialogues[1], 1));
                 }
             }
-            else if(atk.name == "Skill 2" && !isPaused)
+            else if(atk.name == "Skill 2" && !questList.HasObjectiveCompleted(quest, "Use Magic Missiles"))
             {
-                Quest quest = Quest.GetByName("Understanding your skills");
-                if (!questList.HasObjectiveCompleted(quest, "Use Magic Missiles"))
-                {
-                    questList.CompleteObjective(quest, "Use Magic Missiles");
-                    playerGO.GetComponent<PlayerConversant>().Quit();
-                    StartCoroutine(DelayStartDialogue(2f, dialogues[2], -1));
-                }
+                questList.CompleteObjective(quest, "Use Magic Missiles");
+                playerGO.GetComponent<PlayerConversant>().Quit();
+                StartCoroutine(DelayStartDialogue(2f, dialogues[2], -1));
             }
-            else if(atk.name == "Skill 9" && !isPaused)
+            else if(atk.name == "Skill 9" && !questList.HasObjectiveCompleted(quest, "Use Magic Shield"))
             {
-                Quest quest = Quest.GetByName("Understanding your skills");
-                if (!questList.HasObjectiveCompleted(quest, "Use Magic Shield"))
-                {
-                    questList.CompleteObjective(quest, "Use Magic Shield");
-                    playerGO.GetComponent<PlayerConversant>().Quit();
-                    StartCoroutine(DelayStartDialogue(2f, dialogues[3], -1));
-                }
+                questList.CompleteObjective(quest, "Use Magic Shield");
+                playerGO.GetComponent<PlayerConversant>().Quit();
+                StartCoroutine(DelayStartDialogue(2f, dialogues[3], -1));
+            }
+            else if(atk.name == "Skill 7" && !questList.HasObjectiveCompleted(quest, "Use Punch"))
+            {
+                questList.CompleteObjective(quest, "Use Punch");
+                playerGO.GetComponent<PlayerConversant>().Quit();
+
+                StartCoroutine(DelayStartDialogue(3f, dialogues[4], -1));
             }
         }
 
@@ -222,9 +230,38 @@ namespace ButtonGame.Core
                     atkButtons[7].StartBattle();
                     playerGO.GetComponent<PlayerController>().SetEnemy(enemyGO.GetComponent<EnemyController>());
                     break;
+                case 5:
+                    foreach (var atk in atkButtons)
+                    {
+                        atk.gameObject.SetActive(true);
+                        atk.enabled = true;
 
+                        atk.StartBattle();
+                    }
+                    playerGO.GetComponent<PlayerController>().SetEnemy(enemyGO.GetComponent<EnemyController>());
+                    break;
+                 case 6:
+                    Debug.Log("case 6 activated??");
+                     break;
             }
             atkCounter++;
+        }
+
+        private void QuestCompleteCheck()
+        {
+            if(questList.HasQuestCompleted("Understanding your skills") && !questList.HasQuest(Quest.GetByName("Setting out")))
+            {
+                playerGO.GetComponent<Fighter>().enabled = false;
+                foreach (Transform item in hitTimerSpawner.transform)
+                {
+                    hitTimerSpawner.ReturnToStack(item.GetComponent<HitTimer>());
+                }
+                playerHUD.SetActive(false);
+                playerAtkButtons.SetActive(false);
+                Destroy(enemyGO);
+                StopCoroutine(coTutorial);
+                coTutorial = StartCoroutine(DelayStartDialogue(1f, dialogues[5], -1));
+            }
         }
 
         private IEnumerator DelayStartDialogue(float timeDelay, ButtonGame.Dialogue.Dialogue dialogue, int atkIndex)
@@ -242,6 +279,7 @@ namespace ButtonGame.Core
             foreach (int i in atkIndexes)
             {
                 atkButtons[i].StartBattle();
+                atkButtons[i].enabled = false;
             }
             yield return null;
             foreach (int i in atkIndexes)

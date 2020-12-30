@@ -119,8 +119,8 @@ namespace ButtonGame.Dialogue
                 isChoosing = false;
                 int randomIndex = UnityEngine.Random.Range(0, children.Length);
                 currentNode = children[randomIndex];
+                TriggerEnterAction();
             }
-            TriggerEnterAction();
             onConversationUpdated();
         }
 

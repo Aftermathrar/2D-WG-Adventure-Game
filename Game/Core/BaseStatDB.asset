@@ -108,7 +108,7 @@ MonoBehaviour:
     - stat: 0
       value: Training Dummy
     - stat: 1
-      value: 1000
+      value: 2000
     - stat: 4
       value: 0.25
     - stat: 6
@@ -284,7 +284,7 @@ MonoBehaviour:
     - stat: 6
       value: 2000
     - stat: 8
-      value: 100
+      value: 150
     - stat: 10
       value: 0
     - stat: 12
@@ -292,7 +292,7 @@ MonoBehaviour:
     - stat: 16
       value: A teacher helping you with a demonstration
     - stat: 17
-      value: 2
+      value: 1
     - stat: 18
       value: 0
     - stat: 21

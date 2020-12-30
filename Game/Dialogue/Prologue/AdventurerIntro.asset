@@ -1,0 +1,628 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7565672167620215333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 89bf8b21-d348-473c-ac7b-06e275265b6d
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Mrs. Harnett
+  text: '[]Hmm, I do have to say you''ve come up with a unique arsenal of spells
+    at your disposal. It''s obviously got solo questing in mind, but is a good fit
+    into any party, since competent tanks are hard to find.
+
+    []That said, having
+    a support join you can make a significant difference in combat.'
+  children:
+  - 41475934-a1f2-4131-9a70-7b9f76d8487f
+  rect:
+    serializedVersion: 2
+    x: 654
+    y: 237
+    width: 250
+    height: 225
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-6742173207161682569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 81dfef40-333f-4094-9476-60c88c779ec0
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: 
+  text: '[]Now that you''ve done your part in promoting your department''s abilities,
+    it''s time to collect your certificate of graduation. Since this works as proof
+    of identification and is enchanted with storage magic, the certificate takes
+    the form of a badge you can easily keep on your person.
+
+    []As you''re walking
+    to the office of the Vanguard branch building, you hear a familiar call out to
+    you, "[Player]!" You turn to see Mrs. Harnett, the professor you were closest
+    with, catch up to you.
+
+    []"Let''s head to my office to discuss your plans
+    after graduation."'
+  children:
+  - f2ef246d-381d-4309-b6bf-bb12e5847fb2
+  - 7f5457c0-b0ce-4f16-bad6-1c7755834f73
+  - 250e0c58-499a-43f0-aba0-bb4b16715133
+  - 8c5e51ba-4a0e-413b-abdb-5afe77752f37
+  rect:
+    serializedVersion: 2
+    x: 18
+    y: 351
+    width: 250
+    height: 370
+  onEnterAction: 8
+  onEnterActionParameter:
+  - 0
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-5586401359303605272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 912f22dd-3fca-4e84-a547-6f0cdadbd791
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  speakerName: Mrs. Harnett
+  text: Sounds a little too good to be true, what's the catch?
+  children:
+  - 954214ce-74af-4dd2-96be-23aad033df29
+  - 02984c82-800e-4173-b475-ee169dd6ca12
+  - a5803c82-12ea-4ae3-99a1-4f880d1920c7
+  rect:
+    serializedVersion: 2
+    x: 1302
+    y: 600
+    width: 250
+    height: 115
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-4153735944415427427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 0700d072-53d4-4967-a29f-b567b45c529f
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Mrs. Harnett
+  text: '[]If you''re able to defeat the boss, you''re allowed to do so. Once it''s
+    gone, the dungeon core will collapse, dropping the instance''s loot and moving
+    you outside. Then report back to the guild in this city with proof of your kill
+    and they''ll take care of your membership.
+
+    []The guild badge uses the same
+    magic techniques as your academy badge, so they''ll just modify it to add your
+    adventurer information.'
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 2208
+    y: 261
+    width: 250
+    height: 270
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-4116356917512234545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: a5803c82-12ea-4ae3-99a1-4f880d1920c7
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  speakerName: Mrs. Harnett
+  text: Still, it's a tempting offer. It's not like they want me to fail, right?
+  children:
+  - 1cb672f4-acc5-4c27-ad53-675eb9d769da
+  rect:
+    serializedVersion: 2
+    x: 1609
+    y: 909
+    width: 250
+    height: 115
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-2505688561173231966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: f2ef246d-381d-4309-b6bf-bb12e5847fb2
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Mrs. Harnett
+  text: '[]I hear you''re planning on becoming an adventurer after you leave the
+    university? Most of the student body signs up for the country''s military, since
+    your career would be more stable and much safer. The handful of students that
+    decide to go into adventuring are usually the spoiled nobles that hire groups
+    to clear quests for them.
+
+    []Since that doesn''t seem possible with your
+    situation, what''s got you so dead set on adventuring?'
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 355
+    y: 97
+    width: 250
+    height: 285
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-1827224805794488410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 02984c82-800e-4173-b475-ee169dd6ca12
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  speakerName: Mrs. Harnett
+  text: Well, I'm confident enough in my abilities to crush whatever's in my way.
+  children:
+  - 1cb672f4-acc5-4c27-ad53-675eb9d769da
+  rect:
+    serializedVersion: 2
+    x: 1609
+    y: 783
+    width: 250
+    height: 115
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-1043375136567628031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 7b0487c0-fa99-4027-99c6-709b87292dc9
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Mrs. Harnett
+  text: '[]Hahaha, that''s certainly not an answer I was expecting, but not unheard
+    of from some of the kids your age. I''d imagine the rich kids joining the guild
+    were reading the same books you were...'
+  children:
+  - 41475934-a1f2-4131-9a70-7b9f76d8487f
+  rect:
+    serializedVersion: 2
+    x: 658
+    y: 646
+    width: 250
+    height: 180
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-352659644586519786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: f6d39eef-b685-46bc-b926-b33ee3170ae8
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Mrs. Harnett
+  text: '[]How this relates to you is that both parties are interested in clearing
+    out the dungeon at no cost to them. The guild knows we always have students looking
+    to join them and are offering to grant you an immediate membership if you''re
+    able to scout the dungeon in more detail and report back to them.'
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 1305
+    y: 213
+    width: 250
+    height: 225
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &-2992393196945092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: b7fba385-9a4b-4e35-ae2a-fda5eef83f42
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Mrs. Harnett
+  text: '[]Wanderlust can be pretty powerful, I just hope you won''t end up regretting
+    your decision later. If you join up with the army after too much time, you won''t
+    have very much say in where you get assigned.'
+  children:
+  - 41475934-a1f2-4131-9a70-7b9f76d8487f
+  rect:
+    serializedVersion: 2
+    x: 652
+    y: 452
+    width: 250
+    height: 195
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587a94579930f974ea9763a0959d39dc, type: 3}
+  m_Name: AdventurerIntro
+  m_EditorClassIdentifier: 
+  defaultSpeakerName: Mrs. Harnett
+  nodes:
+  - {fileID: -6742173207161682569}
+  - {fileID: -2505688561173231966}
+  - {fileID: 2664233637748962555}
+  - {fileID: 4236634694313472578}
+  - {fileID: 9218359029426009974}
+  - {fileID: -7565672167620215333}
+  - {fileID: -1043375136567628031}
+  - {fileID: -2992393196945092}
+  - {fileID: 698684114672642484}
+  - {fileID: -352659644586519786}
+  - {fileID: 8711646890525531138}
+  - {fileID: -5586401359303605272}
+  - {fileID: 3868003136437285369}
+  - {fileID: 7670632926159084428}
+  - {fileID: -1827224805794488410}
+  - {fileID: -4116356917512234545}
+  - {fileID: -4153735944415427427}
+  - {fileID: 4516531258800693408}
+  newNodeOffset: {x: 300, y: 0}
+--- !u!114 &698684114672642484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 41475934-a1f2-4131-9a70-7b9f76d8487f
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Mrs. Harnett
+  text: '[]I wanted to ask since I had a proposal from the higher ups to go along
+    with your badge. Recently, a new dungeon appeared near Stonebanks, a village
+    a couple of days'' travel from here and within the land of an Earl who serves
+    on the board of directors here.
+
+    []From his report, it''s a minor mountain
+    dungeon that doesn''t pose much of a threat or have much strategic value. Due
+    to this, the Adventurer''s Guild is hesitant to send personnel until they can
+    get more information on it.
+
+    []As you know, to become a member of the Guild,
+    you have to attend one of the recruitment sessions held each season... and the
+    most recent one just passed.'
+  children:
+  - f6d39eef-b685-46bc-b926-b33ee3170ae8
+  - 73b94c04-7eba-4756-9d3d-ac6daab27f36
+  - 912f22dd-3fca-4e84-a547-6f0cdadbd791
+  rect:
+    serializedVersion: 2
+    x: 1003
+    y: 280
+    width: 250
+    height: 375
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &2664233637748962555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 7f5457c0-b0ce-4f16-bad6-1c7755834f73
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  speakerName: Mrs. Harnett
+  text: It's a gamble, but I think what I've learned here will be enough to earn
+    a good living.
+  children:
+  - 89bf8b21-d348-473c-ac7b-06e275265b6d
+  rect:
+    serializedVersion: 2
+    x: 353
+    y: 380
+    width: 250
+    height: 130
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &3868003136437285369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 1cb672f4-acc5-4c27-ad53-675eb9d769da
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Mrs. Harnett
+  text: '[]That''s true. And since the alternative is to wait for a few months, this
+    is definitely a good opportunity. Let me explain what you''ll be doing.
+
+    []You
+    need to head out to Stonebanks and give the chief this missive so that he''ll
+    provide you some support if you need it. Then, you just head into the dungeon
+    and defeat the boss. As with the practice dungeons here, you need to eliminate
+    enough of the spawned monsters to disperse enough mana to reveal the boss room.'
+  children:
+  - 0700d072-53d4-4967-a29f-b567b45c529f
+  - f02ba797-f575-4d48-820d-1f74ba058035
+  rect:
+    serializedVersion: 2
+    x: 1914
+    y: 262
+    width: 250
+    height: 300
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &4236634694313472578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 250e0c58-499a-43f0-aba0-bb4b16715133
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  speakerName: Mrs. Harnett
+  text: I read a few too many adventure novels about ranking up and building a harem...
+  children:
+  - 7b0487c0-fa99-4027-99c6-709b87292dc9
+  rect:
+    serializedVersion: 2
+    x: 358
+    y: 646
+    width: 250
+    height: 115
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &4516531258800693408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: f02ba797-f575-4d48-820d-1f74ba058035
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  speakerName: Mrs. Harnett
+  text: Got it, I'll head out in the morning.
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 2205
+    y: 529
+    width: 250
+    height: 140
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 1
+  onExitActionParameter:
+  - Setting out
+  condition:
+    and: []
+--- !u!114 &7670632926159084428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 954214ce-74af-4dd2-96be-23aad033df29
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Mrs. Harnett
+  text: '[]It''s mostly as it seems, although I agree there are a couple suspicious
+    points. The academy regularly pulls some strings to grant exceptions to the normal
+    recruitment process of the guild, but it''s strange that there hasn''t been more
+    info out of Stonebanks.
+
+    []Low-ranking dungeons usually have more information
+    coming out of them, it''s strange to not know what monsters have been sighted.
+    Given that the Earl isn''t concerned about the village, it''s probably pretty
+    weak.'
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 1609
+    y: 462
+    width: 250
+    height: 300
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &8711646890525531138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 73b94c04-7eba-4756-9d3d-ac6daab27f36
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  speakerName: Mrs. Harnett
+  text: Sounds good to me, not a bad way to make an impression with the guild.
+  children:
+  - 1cb672f4-acc5-4c27-ad53-675eb9d769da
+  rect:
+    serializedVersion: 2
+    x: 1305
+    y: 456
+    width: 250
+    height: 115
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+--- !u!114 &9218359029426009974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 8c5e51ba-4a0e-413b-abdb-5afe77752f37
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  speakerName: Mrs. Harnett
+  text: I've spent over half my life in the academy, the freedom adventuring offers
+    is more important than anything else.
+  children:
+  - b7fba385-9a4b-4e35-ae2a-fda5eef83f42
+  rect:
+    serializedVersion: 2
+    x: 356
+    y: 508
+    width: 250
+    height: 145
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []

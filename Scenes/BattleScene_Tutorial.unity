@@ -286,6 +286,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &752114130 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2303015971682542745, guid: 80d78f949e8a92641823838a2effe131,
+    type: 3}
+  m_PrefabInstance: {fileID: 3874947614827803761}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f1024369c6187c4b86610ebf9a7b0a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &896404233 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3619659671551742535, guid: 80d78f949e8a92641823838a2effe131,
@@ -885,6 +897,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -30.11
       objectReference: {fileID: 0}
+    - target: {fileID: 3982486735624151904, guid: 600b333ed3db92e45a6b0d4cea135f49,
+        type: 3}
+      propertyPath: m_MinHeight
+      value: 350
+      objectReference: {fileID: 0}
     - target: {fileID: 4559154294529136891, guid: 600b333ed3db92e45a6b0d4cea135f49,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1413,7 +1430,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afd5ec7635850f948a9b7311be4a6852, type: 2}
   - {fileID: 11400000, guid: 868542b111c1b7e43a16e43076d59301, type: 2}
   - {fileID: 11400000, guid: 75c1e9b6d9cdbe542989b2f11adc6923, type: 2}
-  - {fileID: 11400000, guid: 247609f27a49c7c4d99e6cdd69ed5e5c, type: 2}
+  - {fileID: 11400000, guid: f80ef603bceefb24db60354cbddaa679, type: 2}
+  - {fileID: 11400000, guid: 4707d4540090ee64fa1ea5712fefd625, type: 2}
+  - {fileID: 11400000, guid: bddc2ee79147b994fa72e8b99871117e, type: 2}
+  startingGear:
+  - {fileID: 11400000, guid: 6d1ffa614cb307a4b88215d7a7e2ffff, type: 2}
+  - {fileID: 11400000, guid: 7687eea85a411eb4496550b386dc6b5f, type: 2}
+  - {fileID: 11400000, guid: 97fbc2f2331fff0459daa2d0e233a5af, type: 2}
+  - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
+  - {fileID: 11400000, guid: 92f821e368df70c478f56d3cfa226ef0, type: 2}
+  - {fileID: 11400000, guid: 92f821e368df70c478f56d3cfa226ef0, type: 2}
+  - {fileID: 11400000, guid: b4a991c0124f23648837927b0ad08b3c, type: 2}
+  - {fileID: 11400000, guid: b4a991c0124f23648837927b0ad08b3c, type: 2}
+  - {fileID: 11400000, guid: 92068fa2faa8fd94a957135977a28eab, type: 2}
+  hitTimerSpawner: {fileID: 752114130}
 --- !u!114 &1978749224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1573,6 +1603,34 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3874947614827803761}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1978749231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978749222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d247834c9d8e3ed4d8add9277957c0d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: 2
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1614530312}
+        m_TargetAssemblyTypeName: ButtonGame.Quests.QuestList, Assembly-CSharp
+        m_MethodName: CompleteObjective
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &3874947614827803761
 PrefabInstance:
   m_ObjectHideFlags: 0
