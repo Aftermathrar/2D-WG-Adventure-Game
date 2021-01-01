@@ -1,0 +1,177 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d865d1433e5634c8d2f79fd74ae99d, type: 3}
+  m_Name: BodyTypeDB
+  m_EditorClassIdentifier: 
+  bodyTypeDB:
+  - bodyType: 0
+    baseFatDistribution:
+      baseBodyPartFat:
+      - bodyPart: 0
+        fatDistribution: 0.01
+      - bodyPart: 1
+        fatDistribution: 0.03
+      - bodyPart: 2
+        fatDistribution: 0.06
+      - bodyPart: 3
+        fatDistribution: 0.13
+      - bodyPart: 4
+        fatDistribution: 0.08
+      - bodyPart: 5
+        fatDistribution: 0.08
+      - bodyPart: 6
+        fatDistribution: 0.12
+      - bodyPart: 7
+        fatDistribution: 0.1
+      - bodyPart: 8
+        fatDistribution: 0.12
+      - bodyPart: 9
+        fatDistribution: 0.1
+      - bodyPart: 10
+        fatDistribution: 0.12
+      - bodyPart: 11
+        fatDistribution: 0.05
+  - bodyType: 1
+    baseFatDistribution:
+      baseBodyPartFat:
+      - bodyPart: 0
+        fatDistribution: 0.005
+      - bodyPart: 1
+        fatDistribution: 0.015
+      - bodyPart: 2
+        fatDistribution: 0.06
+      - bodyPart: 3
+        fatDistribution: 0.2
+      - bodyPart: 4
+        fatDistribution: 0.06
+      - bodyPart: 5
+        fatDistribution: 0.05
+      - bodyPart: 6
+        fatDistribution: 0.06
+      - bodyPart: 7
+        fatDistribution: 0.08
+      - bodyPart: 8
+        fatDistribution: 0.15
+      - bodyPart: 9
+        fatDistribution: 0.12
+      - bodyPart: 10
+        fatDistribution: 0.15
+      - bodyPart: 11
+        fatDistribution: 0.05
+  - bodyType: 2
+    baseFatDistribution:
+      baseBodyPartFat:
+      - bodyPart: 0
+        fatDistribution: 0.005
+      - bodyPart: 1
+        fatDistribution: 0.01
+      - bodyPart: 2
+        fatDistribution: 0.04
+      - bodyPart: 3
+        fatDistribution: 0.06
+      - bodyPart: 4
+        fatDistribution: 0.04
+      - bodyPart: 5
+        fatDistribution: 0.05
+      - bodyPart: 6
+        fatDistribution: 0.06
+      - bodyPart: 7
+        fatDistribution: 0.12
+      - bodyPart: 8
+        fatDistribution: 0.195
+      - bodyPart: 9
+        fatDistribution: 0.16
+      - bodyPart: 10
+        fatDistribution: 0.21
+      - bodyPart: 11
+        fatDistribution: 0.05
+  - bodyType: 3
+    baseFatDistribution:
+      baseBodyPartFat:
+      - bodyPart: 0
+        fatDistribution: 0.01
+      - bodyPart: 1
+        fatDistribution: 0.04
+      - bodyPart: 2
+        fatDistribution: 0.08
+      - bodyPart: 3
+        fatDistribution: 0.2
+      - bodyPart: 4
+        fatDistribution: 0.1
+      - bodyPart: 5
+        fatDistribution: 0.06
+      - bodyPart: 6
+        fatDistribution: 0.09
+      - bodyPart: 7
+        fatDistribution: 0.1
+      - bodyPart: 8
+        fatDistribution: 0.1
+      - bodyPart: 9
+        fatDistribution: 0.08
+      - bodyPart: 10
+        fatDistribution: 0.1
+      - bodyPart: 11
+        fatDistribution: 0.04
+  - bodyType: 4
+    baseFatDistribution:
+      baseBodyPartFat:
+      - bodyPart: 0
+        fatDistribution: 0.005
+      - bodyPart: 1
+        fatDistribution: 0.03
+      - bodyPart: 2
+        fatDistribution: 0.05
+      - bodyPart: 3
+        fatDistribution: 0.18
+      - bodyPart: 4
+        fatDistribution: 0.08
+      - bodyPart: 5
+        fatDistribution: 0.03
+      - bodyPart: 6
+        fatDistribution: 0.03
+      - bodyPart: 7
+        fatDistribution: 0.14
+      - bodyPart: 8
+        fatDistribution: 0.16
+      - bodyPart: 9
+        fatDistribution: 0.125
+      - bodyPart: 10
+        fatDistribution: 0.15
+      - bodyPart: 11
+        fatDistribution: 0.02
+  - bodyType: 5
+    baseFatDistribution:
+      baseBodyPartFat:
+      - bodyPart: 0
+        fatDistribution: 0.015
+      - bodyPart: 1
+        fatDistribution: 0.035
+      - bodyPart: 2
+        fatDistribution: 0.07
+      - bodyPart: 3
+        fatDistribution: 0.125
+      - bodyPart: 4
+        fatDistribution: 0.08
+      - bodyPart: 5
+        fatDistribution: 0.11
+      - bodyPart: 6
+        fatDistribution: 0.12
+      - bodyPart: 7
+        fatDistribution: 0.17
+      - bodyPart: 8
+        fatDistribution: 0.1
+      - bodyPart: 9
+        fatDistribution: 0.07
+      - bodyPart: 10
+        fatDistribution: 0.08
+      - bodyPart: 11
+        fatDistribution: 0.025

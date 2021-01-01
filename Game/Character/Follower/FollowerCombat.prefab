@@ -211,12 +211,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b183af9af6f6ae34b8a3f45b3248f815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: F
-  Height: 0
-  Weight: 0
-  eyeColor: 0
-  hairColor: 0
-  bodyType: 0
+  bodyTypeDB: {fileID: 11400000, guid: 771736bdff7e0944d9d0617c46c61b4b, type: 2}
+  charName: 
+  baseBody:
+    height: 0
+    baseWeight: 0
+    fatWeight: 0
+    eyeColor: 0
+    hairColor: 0
+    bodyType: 0
 --- !u!114 &4497053417470753148
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -44,15 +44,16 @@ namespace ButtonGame.Core
 
             if (followerUUID == string.Empty)
             {
-                int randomFollowerIndex = UnityEngine.Random.Range(0, followerPrefabs.Length);
-                BaseStats selectedFollower = followerPrefabs[randomFollowerIndex];
-                followerGO = Instantiate(selectedFollower, transform, false).gameObject;
+                // Handle no follower without spawning a random new one
+                // int randomFollowerIndex = UnityEngine.Random.Range(0, followerPrefabs.Length);
+                // BaseStats selectedFollower = followerPrefabs[randomFollowerIndex];
+                // followerGO = Instantiate(selectedFollower, transform, false).gameObject;
 
-                companionToSpawn.FollowerClass = followerGO.GetComponent<BaseStats>().GetClass();
-                companionToSpawn.Identifier = followerGO.GetComponent<SaveableEntity>().GenerateNewUniqueIdentifier();
+                // companionToSpawn.FollowerClass = followerGO.GetComponent<BaseStats>().GetClass();
+                // companionToSpawn.Identifier = followerGO.GetComponent<SaveableEntity>().GenerateNewUniqueIdentifier();
 
-                string followerIdentifier = followerGO.GetComponent<SaveableEntity>().GenerateNewUniqueIdentifier();
-                followers.AddNewFollower(FollowerPosition.Combat, companionToSpawn);
+                // string followerIdentifier = followerGO.GetComponent<SaveableEntity>().GenerateNewUniqueIdentifier();
+                // followers.AddNewFollower(FollowerPosition.Combat, companionToSpawn);
             }
             else
             {

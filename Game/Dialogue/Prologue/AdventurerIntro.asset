@@ -399,7 +399,7 @@ MonoBehaviour:
     x: 1003
     y: 280
     width: 250
-    height: 375
+    height: 360
   onEnterAction: 0
   onEnterActionParameter: []
   onExitAction: 0
