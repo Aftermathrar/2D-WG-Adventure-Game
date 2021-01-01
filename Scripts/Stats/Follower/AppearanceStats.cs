@@ -19,7 +19,6 @@ namespace ButtonGame.Stats.Follower
             public float height;
             public float baseWeight;
             public float fatWeight;
-            public float percentBodyFat;
             public EyeColors eyeColor;
             public HairColors hairColor;
             public BodyTypes bodyType;
@@ -34,7 +33,7 @@ namespace ButtonGame.Stats.Follower
                 baseWeight = heightScale * defaultBaseWeight;
 
                 // Random BF % to determine starting total weight
-                percentBodyFat = UnityEngine.Random.Range(12f, 30f) / 100;
+                float percentBodyFat = UnityEngine.Random.Range(12f, 30f) / 100;
                 fatWeight = baseWeight / (1 - percentBodyFat) - baseWeight;
 
                 int bodyTypeCount = Enum.GetNames(typeof(BodyTypes)).Length;
@@ -47,15 +46,25 @@ namespace ButtonGame.Stats.Follower
                 return baseWeight + fatWeight;
             }
 
+            public float GetBodyFatPercent()
+            {
+                float bfPercent = fatWeight / (baseWeight + fatWeight);
+                return bfPercent;
+            }
+
             public float GetLinearHeightScale()
             {
                 return height / defaultHeight;
             }
 
+            public float GetInverseLinearHeightScale()
+            {
+                return defaultHeight / height;
+            }
+
             public void GainWeight(float amount)
             {
                 fatWeight += amount;
-                percentBodyFat = fatWeight / (baseWeight + fatWeight);
             }
         }
 
@@ -96,73 +105,82 @@ namespace ButtonGame.Stats.Follower
         public float GetBodyPartSize(BodyPart bodyPart)
         {
             float baseSize;
-            float areaWeight;
+            float fatSize;
             switch (bodyPart)
             {
                 case BodyPart.Arms:
-                        baseSize = 10f;
-                        baseSize *= baseBody.GetLinearHeightScale();
-                        areaWeight = GetBodyPartWeight(bodyPart);
-                        areaWeight /= (1 + baseBody.percentBodyFat);
-                        return baseSize + areaWeight;
+                    baseSize = 10f;
+                    baseSize *= baseBody.GetLinearHeightScale();
+                    fatSize = GetBodyPartWeight(bodyPart);
+                    fatSize *= baseBody.GetInverseLinearHeightScale();
+                    fatSize /= (1 + baseBody.GetBodyFatPercent());
+                    return baseSize + fatSize;
                 case BodyPart.Breasts:
-                        baseSize = 34f;
-                        baseSize *= baseBody.GetLinearHeightScale();
-                        areaWeight = GetBodyPartWeight(bodyPart);
-                        areaWeight += GetBodyPartWeight(BodyPart.Chest);
-                        areaWeight /= (1 + baseBody.percentBodyFat);
-                        return baseSize + areaWeight;
+                    baseSize = 34f;
+                    baseSize *= baseBody.GetLinearHeightScale();
+                    fatSize = GetBodyPartWeight(bodyPart);
+                    fatSize += GetBodyPartWeight(BodyPart.Chest);
+                    fatSize *= baseBody.GetInverseLinearHeightScale();
+                    fatSize /= (1 + baseBody.GetBodyFatPercent());
+                    return baseSize + fatSize;
                 case BodyPart.Chest:
-                        baseSize = 34f;
-                        baseSize *= baseBody.GetLinearHeightScale();
-                        areaWeight = GetBodyPartWeight(bodyPart);
-                        areaWeight += GetBodyPartWeight(BodyPart.Breasts);
-                        areaWeight /= (1 + baseBody.percentBodyFat);
-                        return baseSize + areaWeight;
+                    baseSize = 34f;
+                    baseSize *= baseBody.GetLinearHeightScale();
+                    fatSize = GetBodyPartWeight(bodyPart);
+                    fatSize += GetBodyPartWeight(BodyPart.Breasts);
+                    fatSize *= baseBody.GetInverseLinearHeightScale();
+                    fatSize /= (1 + baseBody.GetBodyFatPercent());
+                    return baseSize + fatSize;
                 case BodyPart.Visceral:
-                        baseSize = 21f;
-                        baseSize *= baseBody.GetLinearHeightScale();
-                        areaWeight = GetBodyPartWeight(bodyPart);
-                        areaWeight += GetBodyPartWeight(BodyPart.Stomach);
-                        areaWeight += GetBodyPartWeight(BodyPart.Waist);
-                        areaWeight /= (1 + baseBody.percentBodyFat);
-                        return baseSize + areaWeight;
+                    baseSize = 21f;
+                    baseSize *= baseBody.GetLinearHeightScale();
+                    fatSize = GetBodyPartWeight(bodyPart);
+                    fatSize += GetBodyPartWeight(BodyPart.Stomach);
+                    fatSize += GetBodyPartWeight(BodyPart.Waist);
+                    fatSize *= baseBody.GetInverseLinearHeightScale();
+                    fatSize /= (1 + baseBody.GetBodyFatPercent());
+                    return baseSize + fatSize;
                 case BodyPart.Stomach:
-                        baseSize = 21f;
-                        baseSize *= baseBody.GetLinearHeightScale();
-                        areaWeight = GetBodyPartWeight(bodyPart);
-                        areaWeight += GetBodyPartWeight(BodyPart.Visceral);
-                        areaWeight += GetBodyPartWeight(BodyPart.Waist);
-                        areaWeight /= (1 + baseBody.percentBodyFat);
-                        return baseSize + areaWeight;
+                    baseSize = 21f;
+                    baseSize *= baseBody.GetLinearHeightScale();
+                    fatSize = GetBodyPartWeight(bodyPart);
+                    fatSize += GetBodyPartWeight(BodyPart.Visceral);
+                    fatSize += GetBodyPartWeight(BodyPart.Waist);
+                    fatSize *= baseBody.GetInverseLinearHeightScale();
+                    fatSize /= (1 + baseBody.GetBodyFatPercent());
+                    return baseSize + fatSize;
                 case BodyPart.Waist:
-                        baseSize = 21f;
-                        baseSize *= baseBody.GetLinearHeightScale();
-                        areaWeight = GetBodyPartWeight(bodyPart);
-                        areaWeight += GetBodyPartWeight(BodyPart.Visceral);
-                        areaWeight += GetBodyPartWeight(BodyPart.Stomach);
-                        areaWeight /= (1 + baseBody.percentBodyFat);
-                        return baseSize + areaWeight;
+                    baseSize = 21f;
+                    baseSize *= baseBody.GetLinearHeightScale();
+                    fatSize = GetBodyPartWeight(bodyPart);
+                    fatSize += GetBodyPartWeight(BodyPart.Visceral);
+                    fatSize += GetBodyPartWeight(BodyPart.Stomach);
+                    fatSize *= baseBody.GetInverseLinearHeightScale();
+                    fatSize /= (1 + baseBody.GetBodyFatPercent());
+                    return baseSize + fatSize;
                 case BodyPart.Hips:
-                        baseSize = 30f;
-                        baseSize *= baseBody.GetLinearHeightScale();
-                        areaWeight = GetBodyPartWeight(bodyPart);
-                        areaWeight += GetBodyPartWeight(BodyPart.Butt);
-                        areaWeight /= (1 + baseBody.percentBodyFat);
-                        return baseSize + areaWeight;
+                    baseSize = 30f;
+                    baseSize *= baseBody.GetLinearHeightScale();
+                    fatSize = GetBodyPartWeight(bodyPart);
+                    fatSize += GetBodyPartWeight(BodyPart.Butt);
+                    fatSize *= baseBody.GetInverseLinearHeightScale();
+                    fatSize /= (1 + baseBody.GetBodyFatPercent());
+                    return baseSize + fatSize;
                 case BodyPart.Butt:
-                        baseSize = 30f;
-                        baseSize *= baseBody.GetLinearHeightScale();
-                        areaWeight = GetBodyPartWeight(bodyPart);
-                        areaWeight += GetBodyPartWeight(BodyPart.Hips);
-                        areaWeight /= (1 + baseBody.percentBodyFat);
-                        return baseSize + areaWeight;
+                    baseSize = 30f;
+                    baseSize *= baseBody.GetLinearHeightScale();
+                    fatSize = GetBodyPartWeight(bodyPart);
+                    fatSize += GetBodyPartWeight(BodyPart.Hips);
+                    fatSize *= baseBody.GetInverseLinearHeightScale();
+                    fatSize /= (1 + baseBody.GetBodyFatPercent());
+                    return baseSize + fatSize;
                 case BodyPart.Thighs:
-                        baseSize = 15f;
-                        baseSize *= baseBody.GetLinearHeightScale();
-                        areaWeight = GetBodyPartWeight(bodyPart);
-                        areaWeight /= (1 + baseBody.percentBodyFat);
-                        return baseSize + areaWeight;
+                    baseSize = 15f;
+                    baseSize *= baseBody.GetLinearHeightScale();
+                    fatSize = GetBodyPartWeight(bodyPart);
+                    fatSize *= baseBody.GetInverseLinearHeightScale();
+                    fatSize /= (1 + baseBody.GetBodyFatPercent());
+                    return baseSize + fatSize;
             }
             return -1;
         }
