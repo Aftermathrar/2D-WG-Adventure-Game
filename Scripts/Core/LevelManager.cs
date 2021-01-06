@@ -37,7 +37,6 @@ namespace ButtonGame.Core
         private void Awake()
         {
             // Spawn follower
-            Debug.Log("Level Manager");
             FollowerRole companionToSpawn = new FollowerRole();
             companionToSpawn = followers.GetFollowerIdentifier(FollowerPosition.Combat);
             string followerUUID = companionToSpawn.Identifier;

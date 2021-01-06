@@ -34,16 +34,16 @@ namespace ButtonGame.Dialogue
         bool hasOnEnterAction;
         bool hasOnExitAction;
         bool hasConditionSelect;
+        [SerializeField]
         int enterActionIndex;
+        [SerializeField]
         int exitActionIndex;
 
         private void Awake()
         {
             hasOnEnterAction = onEnterAction > 0;
             hasOnExitAction = onExitAction > 0;
-            hasConditionSelect = condition != null;
-            enterActionIndex = (int)onEnterAction;
-            exitActionIndex = (int)onExitAction;
+            hasConditionSelect = condition.GetConditionSize() > 0;
         }
 
         public string GetText()

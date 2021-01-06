@@ -6,6 +6,7 @@ using ButtonGame.Combat;
 using ButtonGame.Dialogue;
 using ButtonGame.Inventories;
 using ButtonGame.Quests;
+using ButtonGame.SceneManagement;
 using ButtonGame.Stats.Enums;
 using ButtonGame.UI;
 using UnityEngine;
@@ -66,6 +67,12 @@ namespace ButtonGame.Core
                 {
                     questList.CompleteObjective(quest, "Finish the demonstration");
                     playerGO.GetComponent<PlayerConversant>().Quit();
+                }
+
+                quest = Quest.GetByName("Setting out");
+                if(questList.HasQuest(quest))
+                {
+                    GetComponentInChildren<ChangeSceneButton>().ChangeScene();
                 }
             }
         }

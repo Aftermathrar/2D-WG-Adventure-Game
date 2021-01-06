@@ -202,6 +202,14 @@ namespace ButtonGame.Dialogue.Editor
             // Dialogue Text
             node.SetText(EditorGUILayout.TextArea(node.GetText(), wrapStyle));
 
+            // Button to create variable description fields
+            GUILayout.BeginHorizontal();
+            EditorGUILayout.Toggle(false);
+            EditorGUILayout.LabelField("Description", GUILayout.Width(70));
+            EditorGUILayout.Popup(0, new string[] {"yo", "noid"}, GUILayout.Width(140));
+            GUILayout.EndHorizontal();
+
+
             // Toggles For Actions and Conditions
             GUILayout.BeginHorizontal();
             node.SetHasOnEnterAction(EditorGUILayout.Toggle(node.GetHasOnEnterAction()));
@@ -597,7 +605,7 @@ namespace ButtonGame.Dialogue.Editor
         private void SetNodeStyleAndSize(DialogueNode node, out GUIStyle style, out GUIStyle wrapStyle)
         {
             //Style select and height calculation
-            int heightPadding = 82;
+            int heightPadding = 102;
             style = nodeStyle;
             if (node.IsPlayerSpeaking())
             {
@@ -640,7 +648,7 @@ namespace ButtonGame.Dialogue.Editor
                 }
             }
 
-            wrapStyle = new GUIStyle(EditorStyles.textField);
+            wrapStyle = new GUIStyle(EditorStyles.textArea);
             wrapStyle.wordWrap = true;
             float nodeHeightCalc = wrapStyle.CalcHeight(new GUIContent(node.GetText()), 
                 node.GetRect().width - style.padding.left - style.padding.right);

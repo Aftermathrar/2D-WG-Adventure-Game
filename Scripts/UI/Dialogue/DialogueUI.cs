@@ -54,8 +54,8 @@ namespace ButtonGame.UI
         {
             if(Input.GetButtonDown("Submit"))
             {
-                if(nextButton.IsActive()) nextButton.onClick.Invoke();
-                else if(quitButton.IsActive()) quitButton.onClick.Invoke();
+                if(nextButton.gameObject.activeSelf) nextButton.onClick.Invoke();
+                else if(quitButton.gameObject.activeSelf) quitButton.onClick.Invoke();
             }
             if(choiceRoot.gameObject.activeSelf)
             {

@@ -17,10 +17,13 @@ namespace ButtonGame.Stats.Follower
         private class BaseBodyStats
         {
             public float height;
+            public float heightScale;
+            public float reciprocalHeightScale;     // Used to normalize part weight for description
             public float baseWeight;
             public float fatWeight;
             public EyeColors eyeColor;
             public HairColors hairColor;
+            public float hairLength;
             public BodyTypes bodyType;
 
             const float defaultHeight = 70f;
@@ -29,7 +32,8 @@ namespace ButtonGame.Stats.Follower
             public void GenerateBodyStats()
             {
                 height = UnityEngine.Random.Range(60f, 80f);
-                float heightScale = height / defaultHeight * height / defaultHeight;
+                heightScale = height / defaultHeight * height / defaultHeight;
+                reciprocalHeightScale = 1 / heightScale;
                 baseWeight = heightScale * defaultBaseWeight;
 
                 // Random BF % to determine starting total weight
@@ -99,6 +103,13 @@ namespace ButtonGame.Stats.Follower
         {
             float bpWeight;
             bpWeight = fatDistribution[bodyPart] * baseBody.fatWeight;
+            return bpWeight;
+        }
+
+        public float GetNormalizedBodyPartWeight(BodyPart bodyPart)
+        {
+            float bpWeight = GetBodyPartWeight(bodyPart);
+            bpWeight *= baseBody.reciprocalHeightScale;
             return bpWeight;
         }
 
