@@ -40,6 +40,36 @@ namespace ButtonGame.Inventories
             }
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                foreach (var pair in equippedItems)
+                {
+                    FollowerEquipableItem fItem = pair.Value[0] as FollowerEquipableItem;
+                    if (fItem != null)
+                    {
+                        foreach (var size in fItem.GetWearableSizes())
+                        {
+                            Debug.Log(size);
+                        }
+                    }
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                foreach (var pair in equippedItems)
+                {
+                    FollowerEquipableItem fItem = pair.Value[0] as FollowerEquipableItem;
+                    if (fItem != null)
+                    {
+                        fItem.AddMeasurements();
+                    }
+                }
+            }
+        }
+
         // PUBLIC
 
         /// <summary>
@@ -97,13 +127,14 @@ namespace ButtonGame.Inventories
         /// Add an item to the given equip location. Do not attempt to equip to
         /// an incompatible slot.
         /// </summary>
-        public void AddItem(EquipLocation slot, EquipableItem item, int index)
+        public void AddItem(EquipLocation slot, EquipableItem item, int index, object state = null)
         {
             Debug.Assert(item.GetAllowedEquipLocation() == slot);
 
-            equippedItems[slot][index] = item;
+            equippedItems[slot][index] = Instantiate(item);
             
             AddEquipmentStats(item);
+            if (state != null) equippedItems[slot][index].SetModifiers(state);
 
             if (equipmentUpdated != null)
             {
@@ -170,19 +201,26 @@ namespace ButtonGame.Inventories
         public object CaptureState()
         {
             var equippedItemsForSerialization = new Dictionary<EquipLocation, string[]>();
+            var equippedItemModifiers = new Dictionary<EquipLocation, object[]>();
             foreach (var pair in equippedItems)
             {
                 string[] s = new string[pair.Value.Length];
+                object[] obj = new object[pair.Value.Length];
                 for (int i = 0; i < s.Length; i++)
                 {
                     if(pair.Value[i] !=null)
                     {
                         s[i] = pair.Value[i].GetItemID();
+                        obj[i] = pair.Value[i].GetModifiers();
                     }
                 }
                 equippedItemsForSerialization[pair.Key] = s;
+                equippedItemModifiers[pair.Key] = obj;
             }
-            return equippedItemsForSerialization;
+            SlotRecords slotRecords = new SlotRecords();
+            slotRecords.locationItems = equippedItemsForSerialization;
+            slotRecords.modifiers = equippedItemModifiers;
+            return slotRecords;
         }
 
         public void RestoreState(object state)
@@ -190,15 +228,22 @@ namespace ButtonGame.Inventories
             equippedItems = new Dictionary<EquipLocation, EquipableItem[]>();
             equippedStats = new Dictionary<Stat, float[]>();
             
-            var equippedItemsForSerialization = (Dictionary<EquipLocation, string[]>)state;
+            SlotRecords slotRecords = (SlotRecords)state;
+            var equippedItemsForSerialization = slotRecords.locationItems;
+            var equippedItemModifiers = (Dictionary<EquipLocation, object[]>)slotRecords.modifiers;
             
             foreach (var pair in equippedItemsForSerialization)
             {
                 var items = new EquipableItem[pair.Value.Length];
                 for (int i = 0; i < items.Length; i++)
                 {
-                    items[i] = (EquipableItem)InventoryItem.GetFromID(pair.Value[i]);
-                    AddEquipmentStats(items[i]);
+                    EquipableItem candidate = InventoryItem.GetFromID(pair.Value[i]) as EquipableItem;
+                    if(candidate != null)
+                    {
+                        items[i] = Instantiate(candidate);
+                        AddEquipmentStats(items[i]);
+                        items[i].SetModifiers(equippedItemModifiers[pair.Key][i]);
+                    }
                 }
                 equippedItems[pair.Key] = items;
             }
@@ -206,12 +251,18 @@ namespace ButtonGame.Inventories
 
         public float[] GetStatEffectModifiers(Stat stat)
         {
-            // Short circuit on null check
             if(equippedStats != null && equippedStats.ContainsKey(stat))
             {
                 return equippedStats[stat];
             }
             return new float[] { 0, 0 };
+        }
+
+        [System.Serializable]
+        private class SlotRecords
+        {
+            public Dictionary<EquipLocation, string[]> locationItems;
+            public object modifiers;
         }
     }
 }

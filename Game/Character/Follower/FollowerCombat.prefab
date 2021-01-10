@@ -215,10 +215,13 @@ MonoBehaviour:
   charName: 
   baseBody:
     height: 0
+    heightScale: 0
+    reciprocalHeightScale: 0
     baseWeight: 0
     fatWeight: 0
     eyeColor: 0
     hairColor: 0
+    hairLength: 0
     bodyType: 0
 --- !u!114 &4497053417470753148
 MonoBehaviour:
@@ -441,7 +444,7 @@ MonoBehaviour:
     slotsAvailable: 1
   - equipType: 7
     slotsAvailable: 1
-  - equipType: 9
+  - equipType: 16
     slotsAvailable: 1
   - equipType: 11
     slotsAvailable: 4

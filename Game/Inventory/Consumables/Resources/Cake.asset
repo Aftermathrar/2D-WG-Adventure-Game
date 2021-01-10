@@ -15,7 +15,10 @@ MonoBehaviour:
   itemID: 963a13ad-9170-4398-ac4e-88256afb1a5b
   displayName: Cake
   categoryName: 3
-  description: []
+  description:
+  - hasIcon: 0
+    iconImage: {fileID: 0}
+    description: 
   icon: {fileID: 21300000, guid: c2fedff9758e9e74ebcd97ea7ef92654, type: 3}
   value: 20
   stackable: 1

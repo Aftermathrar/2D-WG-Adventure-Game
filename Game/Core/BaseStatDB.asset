@@ -108,7 +108,7 @@ MonoBehaviour:
     - stat: 0
       value: Training Dummy
     - stat: 1
-      value: 2000
+      value: 5000
     - stat: 4
       value: 0.25
     - stat: 6
@@ -122,7 +122,7 @@ MonoBehaviour:
     - stat: 16
       value: Former tree
     - stat: 17
-      value: 2
+      value: 4
     - stat: 18
       value: 0
     - stat: 20
@@ -138,11 +138,11 @@ MonoBehaviour:
     - stat: 0
       value: Slime
     - stat: 1
-      value: 1000
+      value: 10000
     - stat: 4
-      value: 0.25
+      value: 2.25
     - stat: 6
-      value: 800
+      value: 1200
     - stat: 8
       value: 70
     - stat: 10
@@ -155,6 +155,8 @@ MonoBehaviour:
       value: 1
     - stat: 18
       value: 0
+    - stat: 20
+      value: 0
     - stat: 21
       value: 1
     - stat: 22
@@ -166,11 +168,11 @@ MonoBehaviour:
     - stat: 0
       value: Fox
     - stat: 1
-      value: 700
+      value: 7000
     - stat: 4
-      value: 0.25
+      value: 3
     - stat: 6
-      value: 750
+      value: 1125
     - stat: 8
       value: 140
     - stat: 10
@@ -183,6 +185,8 @@ MonoBehaviour:
       value: 0.5
     - stat: 18
       value: 0
+    - stat: 20
+      value: 0
     - stat: 21
       value: 1
     - stat: 22
@@ -194,11 +198,11 @@ MonoBehaviour:
     - stat: 0
       value: Treant
     - stat: 1
-      value: 1000
+      value: 10000
     - stat: 4
-      value: 0.2
+      value: 1.6
     - stat: 6
-      value: 800
+      value: 1200
     - stat: 8
       value: 60
     - stat: 10
@@ -211,6 +215,8 @@ MonoBehaviour:
       value: 2
     - stat: 18
       value: 0
+    - stat: 20
+      value: 0
     - stat: 21
       value: 1
     - stat: 22
@@ -222,11 +228,11 @@ MonoBehaviour:
     - stat: 0
       value: Boar
     - stat: 1
-      value: 1100
+      value: 11000
     - stat: 4
-      value: 0.25
+      value: 3.5
     - stat: 6
-      value: 850
+      value: 1375
     - stat: 8
       value: 120
     - stat: 10
@@ -239,6 +245,8 @@ MonoBehaviour:
       value: 1.5
     - stat: 18
       value: 0
+    - stat: 20
+      value: 0
     - stat: 21
       value: 1
     - stat: 22
@@ -250,11 +258,11 @@ MonoBehaviour:
     - stat: 0
       value: Small Bat
     - stat: 1
-      value: 800
+      value: 8000
     - stat: 4
-      value: 0.25
+      value: 2.5
     - stat: 6
-      value: 800
+      value: 1200
     - stat: 8
       value: 110
     - stat: 10
@@ -266,6 +274,8 @@ MonoBehaviour:
     - stat: 17
       value: 1.5
     - stat: 18
+      value: 0
+    - stat: 20
       value: 0
     - stat: 21
       value: 1
@@ -284,7 +294,7 @@ MonoBehaviour:
     - stat: 6
       value: 2000
     - stat: 8
-      value: 150
+      value: 100
     - stat: 10
       value: 0
     - stat: 12
@@ -292,8 +302,10 @@ MonoBehaviour:
     - stat: 16
       value: A teacher helping you with a demonstration
     - stat: 17
-      value: 1
+      value: 2
     - stat: 18
+      value: 0
+    - stat: 20
       value: 0
     - stat: 21
       value: 1

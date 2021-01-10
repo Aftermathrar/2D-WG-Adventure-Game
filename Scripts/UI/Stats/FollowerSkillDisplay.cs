@@ -53,7 +53,7 @@ namespace ButtonGame.UI.Stats
             return attackDB.GetAttackStat(atkName).movePool.ToString();
         }
 
-        public TooltipDescriptionField[] GetDescriptionFields()
+        public IEnumerable<TooltipDescriptionField> GetDescriptionFields()
         {
             return skillTooltips;
         }

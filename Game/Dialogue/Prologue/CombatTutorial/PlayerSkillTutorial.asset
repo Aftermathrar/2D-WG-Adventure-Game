@@ -27,13 +27,15 @@ MonoBehaviour:
     x: 45
     y: 428
     width: 250
-    height: 280
+    height: 300
   onEnterAction: 6
   onEnterActionParameter: []
   onExitAction: 7
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 6
+  exitActionIndex: 7
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,10 +77,12 @@ MonoBehaviour:
     x: 340
     y: 409
     width: 250
-    height: 210
+    height: 230
   onEnterAction: 0
   onEnterActionParameter: []
   onExitAction: 0
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0

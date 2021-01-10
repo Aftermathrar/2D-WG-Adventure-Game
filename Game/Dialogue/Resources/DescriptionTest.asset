@@ -1,0 +1,529 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7563034360417705377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: bae67b73-31b8-4bf4-a876-b04debb5a7fb
+  m_EditorClassIdentifier: 
+  isVariableText: 0
+  text: hair framing her
+  children:
+  - 05a93aed-fea4-44ff-88b7-8cefcf2429bb
+  rect:
+    serializedVersion: 2
+    x: 648
+    y: 163
+    width: 250
+    height: 100
+  descCondition:
+    predicate: 0
+    descParameters: []
+--- !u!114 &-4739640907559480755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: 6204c801-c6fc-4c16-9f83-23051b4a2a61
+  m_EditorClassIdentifier: 
+  isVariableText: 0
+  text: body, with
+  children:
+  - 7b2b1857-69b5-402b-b592-f81cbadc4cd5
+  rect:
+    serializedVersion: 2
+    x: 1212
+    y: 64
+    width: 250
+    height: 100
+  descCondition:
+    predicate: 0
+    descParameters: []
+--- !u!114 &-4139702408371259567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: 38e9db15-2590-41e7-89c9-e9225e86d680
+  m_EditorClassIdentifier: 
+  isVariableText: 0
+  text: thighs.
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 2355
+    y: 66
+    width: 250
+    height: 100
+  descCondition:
+    predicate: 0
+    descParameters: []
+--- !u!114 &-3286992520077404535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: 96927100-6d85-4abb-93c6-fdd3b99a9d04
+  m_EditorClassIdentifier: 
+  isVariableText: 1
+  text: 
+  children:
+  - bd1be3c3-2e0f-40df-9f09-ad6fa12dd093
+  rect:
+    serializedVersion: 2
+    x: 355
+    y: 181
+    width: 250
+    height: 240
+  descCondition:
+    predicate: 22
+    descParameters:
+    - limit: 0
+      text: buzzed,
+    - limit: 3
+      text: short,
+    - limit: 6
+      text: shoulder length,
+    - limit: 9
+      text: long,
+--- !u!114 &-2177621871170600054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: b1ba6ac1-3b49-42cd-98b1-904e74a72e4a
+  m_EditorClassIdentifier: 
+  isVariableText: 1
+  text: 
+  children:
+  - 6204c801-c6fc-4c16-9f83-23051b4a2a61
+  rect:
+    serializedVersion: 2
+    x: 924
+    y: 170
+    width: 250
+    height: 280
+  descCondition:
+    predicate: 3
+    descParameters:
+    - limit: 0
+      text: startlingly thin
+    - limit: 15
+      text: thin
+    - limit: 18
+      text: soft
+    - limit: 21
+      text: plush
+    - limit: 25
+      text: attractive
+--- !u!114 &-2136360305151863842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: 266c9fae-1b9b-42d2-a13a-4746644ac2b5
+  m_EditorClassIdentifier: 
+  isVariableText: 0
+  text: female with
+  children:
+  - 96927100-6d85-4abb-93c6-fdd3b99a9d04
+  rect:
+    serializedVersion: 2
+    x: 359
+    y: 63
+    width: 250
+    height: 100
+  descCondition:
+    predicate: 0
+    descParameters: []
+--- !u!114 &-597328781502114422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: bd1be3c3-2e0f-40df-9f09-ad6fa12dd093
+  m_EditorClassIdentifier: 
+  isVariableText: 1
+  text: 
+  children:
+  - bae67b73-31b8-4bf4-a876-b04debb5a7fb
+  rect:
+    serializedVersion: 2
+    x: 642
+    y: 66
+    width: 250
+    height: 80
+  descCondition:
+    predicate: 21
+    descParameters: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad3be16b1fecc2748b4615a50d93e666, type: 3}
+  m_Name: DescriptionTest
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 8231721273515307254}
+  - {fileID: 3498301829769220824}
+  - {fileID: -2136360305151863842}
+  - {fileID: -3286992520077404535}
+  - {fileID: -597328781502114422}
+  - {fileID: -7563034360417705377}
+  - {fileID: 4721735001505897144}
+  - {fileID: 5826269078826730435}
+  - {fileID: -2177621871170600054}
+  - {fileID: -4739640907559480755}
+  - {fileID: 4022874760856267350}
+  - {fileID: 610397784043887685}
+  - {fileID: 5971422145315197128}
+  - {fileID: 4331107906993931282}
+  - {fileID: 7966749488048795990}
+  - {fileID: 8149564956700190632}
+  - {fileID: 5883574292328423327}
+  - {fileID: -4139702408371259567}
+  newNodeOffset: {x: 300, y: 0}
+--- !u!114 &610397784043887685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: c4409db2-3168-4d56-9728-8b27ac3b2859
+  m_EditorClassIdentifier: 
+  isVariableText: 0
+  text: breasts and a
+  children:
+  - 635ee800-b691-434b-861c-fdd94cd13925
+  rect:
+    serializedVersion: 2
+    x: 1493
+    y: 65
+    width: 250
+    height: 100
+  descCondition:
+    predicate: 0
+    descParameters: []
+--- !u!114 &3498301829769220824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: 37814986-96f3-4942-9c91-78856bc43657
+  m_EditorClassIdentifier: 
+  isVariableText: 1
+  text: 
+  children:
+  - 266c9fae-1b9b-42d2-a13a-4746644ac2b5
+  rect:
+    serializedVersion: 2
+    x: 46
+    y: 180
+    width: 250
+    height: 200
+  descCondition:
+    predicate: 1
+    descParameters:
+    - limit: 0
+      text: short
+    - limit: 65
+      text: medium
+    - limit: 75
+      text: tall
+--- !u!114 &4022874760856267350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: 7b2b1857-69b5-402b-b592-f81cbadc4cd5
+  m_EditorClassIdentifier: 
+  isVariableText: 1
+  text: 
+  children:
+  - c4409db2-3168-4d56-9728-8b27ac3b2859
+  rect:
+    serializedVersion: 2
+    x: 1205
+    y: 203
+    width: 250
+    height: 160
+  descCondition:
+    predicate: 17
+    descParameters:
+    - limit: 0
+      text: not big
+    - limit: 35
+      text: big
+--- !u!114 &4331107906993931282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: f8020daf-b571-43ec-9961-70c81ce20aa3
+  m_EditorClassIdentifier: 
+  isVariableText: 0
+  text: belly leading into
+  children:
+  - 2a19294f-d826-457e-ac7a-90671d4d00d1
+  rect:
+    serializedVersion: 2
+    x: 1787
+    y: 64
+    width: 250
+    height: 100
+  descCondition:
+    predicate: 0
+    descParameters: []
+--- !u!114 &4721735001505897144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: 05a93aed-fea4-44ff-88b7-8cefcf2429bb
+  m_EditorClassIdentifier: 
+  isVariableText: 1
+  text: 
+  children:
+  - 4f5a7cef-8874-4bdd-8480-8b8d22076d6a
+  rect:
+    serializedVersion: 2
+    x: 649
+    y: 260
+    width: 250
+    height: 200
+  descCondition:
+    predicate: 4
+    descParameters:
+    - limit: 0
+      text: gaunt
+    - limit: 0.5
+      text: normal
+    - limit: 1
+      text: chubby
+--- !u!114 &5826269078826730435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: 4f5a7cef-8874-4bdd-8480-8b8d22076d6a
+  m_EditorClassIdentifier: 
+  isVariableText: 0
+  text: face. She has a
+  children:
+  - b1ba6ac1-3b49-42cd-98b1-904e74a72e4a
+  rect:
+    serializedVersion: 2
+    x: 917
+    y: 66
+    width: 250
+    height: 100
+  descCondition:
+    predicate: 0
+    descParameters: []
+--- !u!114 &5883574292328423327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: d54736cf-1272-44e6-a746-85ff00b184c0
+  m_EditorClassIdentifier: 
+  isVariableText: 1
+  text: 
+  children:
+  - 38e9db15-2590-41e7-89c9-e9225e86d680
+  rect:
+    serializedVersion: 2
+    x: 2077
+    y: 197
+    width: 250
+    height: 160
+  descCondition:
+    predicate: 20
+    descParameters:
+    - limit: 0
+      text: thin
+    - limit: 20
+      text: thick
+--- !u!114 &5971422145315197128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: 635ee800-b691-434b-861c-fdd94cd13925
+  m_EditorClassIdentifier: 
+  isVariableText: 1
+  text: 
+  children:
+  - f8020daf-b571-43ec-9961-70c81ce20aa3
+  rect:
+    serializedVersion: 2
+    x: 1495
+    y: 200
+    width: 250
+    height: 160
+  descCondition:
+    predicate: 18
+    descParameters:
+    - limit: 0
+      text: smol
+    - limit: 30
+      text: not smol
+--- !u!114 &7966749488048795990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: 2a19294f-d826-457e-ac7a-90671d4d00d1
+  m_EditorClassIdentifier: 
+  isVariableText: 1
+  text: 
+  children:
+  - 4548e12a-a63a-490f-8131-b4851621c1f2
+  rect:
+    serializedVersion: 2
+    x: 1793
+    y: 205
+    width: 250
+    height: 160
+  descCondition:
+    predicate: 19
+    descParameters:
+    - limit: 0
+      text: normal
+    - limit: 38
+      text: wide
+--- !u!114 &8149564956700190632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: 4548e12a-a63a-490f-8131-b4851621c1f2
+  m_EditorClassIdentifier: 
+  isVariableText: 0
+  text: hips and
+  children:
+  - d54736cf-1272-44e6-a746-85ff00b184c0
+  rect:
+    serializedVersion: 2
+    x: 2072
+    y: 66
+    width: 250
+    height: 100
+  descCondition:
+    predicate: 0
+    descParameters: []
+--- !u!114 &8231721273515307254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec360eee445ad714399d8bf8e365bcb1, type: 3}
+  m_Name: 731c7d93-5935-4559-a7a3-cf6686f6226a
+  m_EditorClassIdentifier: 
+  isVariableText: 0
+  text: Test NPC is a
+  children:
+  - 37814986-96f3-4942-9c91-78856bc43657
+  rect:
+    serializedVersion: 2
+    x: 33
+    y: 69
+    width: 250
+    height: 100
+  descCondition:
+    predicate: 0
+    descParameters: []

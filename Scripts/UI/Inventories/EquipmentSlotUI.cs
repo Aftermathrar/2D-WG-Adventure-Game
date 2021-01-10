@@ -54,9 +54,9 @@ namespace ButtonGame.UI.Inventories
             return 1;
         }
 
-        public void AddItems(InventoryItem item, int number)
+        public void AddItems(InventoryItem item, int number, object state)
         {
-            playerEquipment.AddItem(equipLocation, (EquipableItem)item, index);
+            playerEquipment.AddItem(equipLocation, (EquipableItem)item, index, state);
         }
 
         public InventoryItem GetItem()
@@ -99,6 +99,16 @@ namespace ButtonGame.UI.Inventories
         void RedrawUI()
         {
             icon.SetItem(playerEquipment.GetItemInSlot(equipLocation, index), 1);
+        }
+
+        public object GetModifiers()
+        {
+            return playerEquipment.GetItemInSlot(equipLocation, index).GetModifiers();
+        }
+
+        public object GetSourceModifiers()
+        {
+            return playerEquipment.GetItemInSlot(equipLocation, index).GetModifiers();
         }
     }
 }

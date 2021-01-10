@@ -75,23 +75,23 @@ MonoBehaviour:
       - bodyPart: 1
         fatDistribution: 0.01
       - bodyPart: 2
-        fatDistribution: 0.04
+        fatDistribution: 0.03
       - bodyPart: 3
         fatDistribution: 0.06
       - bodyPart: 4
         fatDistribution: 0.04
       - bodyPart: 5
-        fatDistribution: 0.05
+        fatDistribution: 0.04
       - bodyPart: 6
-        fatDistribution: 0.06
+        fatDistribution: 0.05
       - bodyPart: 7
-        fatDistribution: 0.12
+        fatDistribution: 0.08
       - bodyPart: 8
         fatDistribution: 0.195
       - bodyPart: 9
         fatDistribution: 0.16
       - bodyPart: 10
-        fatDistribution: 0.21
+        fatDistribution: 0.28
       - bodyPart: 11
         fatDistribution: 0.05
   - bodyType: 3
@@ -139,13 +139,13 @@ MonoBehaviour:
       - bodyPart: 6
         fatDistribution: 0.03
       - bodyPart: 7
-        fatDistribution: 0.14
+        fatDistribution: 0.12
       - bodyPart: 8
-        fatDistribution: 0.16
+        fatDistribution: 0.13
       - bodyPart: 9
         fatDistribution: 0.125
       - bodyPart: 10
-        fatDistribution: 0.15
+        fatDistribution: 0.2
       - bodyPart: 11
         fatDistribution: 0.02
   - bodyType: 5

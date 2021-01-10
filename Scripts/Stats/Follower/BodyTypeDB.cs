@@ -28,7 +28,7 @@ namespace ButtonGame.Stats.Follower
         [System.Serializable]
         public class BaseBodyPartFatDistribution
         {
-            public BodyPart bodyPart;
+            public BodyParts bodyPart;
             public float fatDistribution;
         }
 

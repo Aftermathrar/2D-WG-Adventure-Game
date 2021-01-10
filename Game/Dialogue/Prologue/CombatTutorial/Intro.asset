@@ -38,6 +38,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &-8576493085493120793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,6 +72,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &-5204235904946937293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +112,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 4
 --- !u!114 &-4662253019302330755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +148,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &-1750264798687654577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +187,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 7
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +244,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 7
+  exitActionIndex: 0
 --- !u!114 &2165746995484127790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +284,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &5694918556806027993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,6 +326,8 @@ MonoBehaviour:
   - Understanding your skills
   condition:
     and: []
+  enterActionIndex: 8
+  exitActionIndex: 1
 --- !u!114 &6103634262906380852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,3 +366,5 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0

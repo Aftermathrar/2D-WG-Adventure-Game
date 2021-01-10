@@ -76,7 +76,7 @@ namespace ButtonGame.UI.EffectIcon
             return "Combat Buff";
         }
 
-        public TooltipDescriptionField[] GetDescriptionFields()
+        public IEnumerable<TooltipDescriptionField> GetDescriptionFields()
         {
             return effectTooltips;
         }

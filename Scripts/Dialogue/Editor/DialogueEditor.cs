@@ -19,16 +19,17 @@ namespace ButtonGame.Dialogue.Editor
         [NonSerialized]
         GUIStyle playerNodeStyle;
         [NonSerialized]
-        DialogueNode draggingNode = null;
-        [NonSerialized]
-        Vector2 draggingOffset;
-        [NonSerialized]
         DialogueNode creatingNode = null;
         [NonSerialized]
         DialogueNode nodeToDelete = null;
         [NonSerialized]
         DialogueNode linkingParentNode = null;
+
         Vector2 scrollPosition;
+        [NonSerialized]
+        DialogueNode draggingNode = null;
+        [NonSerialized]
+        Vector2 draggingOffset;
         [NonSerialized]
         bool draggingCanvas = false;
         [NonSerialized]
@@ -37,7 +38,7 @@ namespace ButtonGame.Dialogue.Editor
         const float canvasSize = 4000;
         const float backgroundSize = 50;
 
-        [MenuItem("Window/Dialogue Editor")]
+        [MenuItem("Window/Dialogue/Dialogue Editor")]
         public static void ShowEditorWindow()
         {
             GetWindow(typeof(DialogueEditor), false, "Dialogue Editor");
@@ -201,13 +202,6 @@ namespace ButtonGame.Dialogue.Editor
 
             // Dialogue Text
             node.SetText(EditorGUILayout.TextArea(node.GetText(), wrapStyle));
-
-            // Button to create variable description fields
-            GUILayout.BeginHorizontal();
-            EditorGUILayout.Toggle(false);
-            EditorGUILayout.LabelField("Description", GUILayout.Width(70));
-            EditorGUILayout.Popup(0, new string[] {"yo", "noid"}, GUILayout.Width(140));
-            GUILayout.EndHorizontal();
 
 
             // Toggles For Actions and Conditions
@@ -605,7 +599,7 @@ namespace ButtonGame.Dialogue.Editor
         private void SetNodeStyleAndSize(DialogueNode node, out GUIStyle style, out GUIStyle wrapStyle)
         {
             //Style select and height calculation
-            int heightPadding = 102;
+            int heightPadding = 82;
             style = nodeStyle;
             if (node.IsPlayerSpeaking())
             {
@@ -667,19 +661,6 @@ namespace ButtonGame.Dialogue.Editor
                 }
             }
             return foundNode;
-        }
-
-        private object CaptureParameter(ScriptableObject newParameter)
-        {
-            ConditionParameters state = new ConditionParameters();
-            state.parameter = newParameter;
-            return state;
-        }
-
-        [System.Serializable]
-        class ConditionParameters
-        {
-            public ScriptableObject parameter;
         }
     }
 }

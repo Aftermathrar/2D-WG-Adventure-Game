@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc047c233344664c9996be4c36379e2, type: 3}
   m_Name: SmKnottedRoot
   m_EditorClassIdentifier: 
-  itemID: bab34164-888c-4a32-957c-0a768ba0bf3a
+  itemID: 77a5e765-1060-42d1-bb65-f8bca425723a
   displayName: Soft Knotted Root
   categoryName: 4
   description: []

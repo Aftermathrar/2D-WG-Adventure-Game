@@ -23,6 +23,9 @@ namespace ButtonGame.Core.UI.Dragging
         /// </summary>
         /// <param name="item">The item type.</param>
         /// <param name="number">The quantity of items.</param>
-        void AddItems(T item, int number);
+        /// <param name="state">The modifier object for the item instance</param>
+        void AddItems(T item, int number, object state);
+
+        object GetModifiers();
     }
 }

@@ -36,9 +36,9 @@ namespace ButtonGame.UI.Inventories
             return 0;
         }
 
-        public void AddItems(InventoryItem item, int number)
+        public void AddItems(InventoryItem item, int number, object state)
         {
-            inventory.AddItemToSlot(index, item, number);
+            inventory.AddItemToSlot(index, item, number, state);
         }
 
         public InventoryItem GetItem()
@@ -49,6 +49,16 @@ namespace ButtonGame.UI.Inventories
         public int GetNumber()
         {
             return inventory.GetCountInSlot(index);
+        }
+
+        public object GetModifiers()
+        {
+            return inventory.GetItemInSlot(index).GetModifiers();
+        }
+
+        public object GetSourceModifiers()
+        {
+            return inventory.GetItemInSlot(index).GetModifiers();
         }
 
         public void RemoveItems(int number)
@@ -81,9 +91,9 @@ namespace ButtonGame.UI.Inventories
                 if(takebackItem != null)
                 {
                     equipment.RemoveItem(equipLocation, equipIndex);
-                    AddItems(takebackItem, 1);
+                    AddItems(takebackItem, 1, takebackItem.GetModifiers());
                 }
-                equipment.AddItem(equipLocation, equipableItem, equipIndex);
+                equipment.AddItem(equipLocation, equipableItem, equipIndex, equipableItem.GetModifiers());
             }
         }
     }

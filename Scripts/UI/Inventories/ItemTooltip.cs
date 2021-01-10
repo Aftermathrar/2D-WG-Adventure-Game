@@ -16,7 +16,6 @@ namespace ButtonGame.UI.Inventories
         [SerializeField] TextMeshProUGUI rightTitleText = null;
         [SerializeField] GameObject tooltipContainer = null;
         [SerializeField] GameObject tooltipPrefab = null;
-        TooltipDescriptionField[] descriptionFields;
 
         List<GameObject> tooltips = new List<GameObject>();
 
@@ -26,8 +25,7 @@ namespace ButtonGame.UI.Inventories
         {
             leftTitleText.text = item.GetDisplayName();
             rightTitleText.text = item.GetCategoryName();
-            descriptionFields = item.GetDescriptionFields();
-            foreach (TooltipDescriptionField itemDescription in descriptionFields)
+            foreach (TooltipDescriptionField itemDescription in item.GetDescriptionFields())
             {
                 GameObject tooltipGO = Instantiate(tooltipPrefab, tooltipContainer.transform);
                 TooltipIconText tooltip = tooltipGO.GetComponent<TooltipIconText>();

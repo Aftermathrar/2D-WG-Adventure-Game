@@ -28,5 +28,7 @@ namespace ButtonGame.Core.UI.Dragging
         /// This should never exceed the number returned by `GetNumber`.
         /// </param>
         void RemoveItems(int number);
+
+        object GetSourceModifiers();
     }
 }

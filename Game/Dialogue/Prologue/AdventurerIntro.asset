@@ -34,6 +34,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &-6742173207161682569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +80,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 8
+  exitActionIndex: 0
 --- !u!114 &-5586401359303605272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +113,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &-4153735944415427427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +150,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &-4116356917512234545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +181,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &-2505688561173231966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +218,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &-1827224805794488410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +249,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &-1043375136567628031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +282,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &-352659644586519786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +315,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &-2992393196945092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +348,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +426,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &2664233637748962555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,6 +458,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &3868003136437285369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,6 +497,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &4236634694313472578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,6 +528,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &4516531258800693408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,6 +559,8 @@ MonoBehaviour:
   - Setting out
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 1
 --- !u!114 &7670632926159084428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,6 +597,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &8711646890525531138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,6 +628,8 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &9218359029426009974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,3 +660,5 @@ MonoBehaviour:
   onExitActionParameter: []
   condition:
     and: []
+  enterActionIndex: 0
+  exitActionIndex: 0

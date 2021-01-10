@@ -111,8 +111,10 @@ namespace ButtonGame.Core.UI.Dragging
             // Provisionally remove item from both sides. 
             var removedSourceNumber = source.GetNumber();
             var removedSourceItem = source.GetItem();
+            var removedSourceState = source.GetModifiers();
             var removedDestinationNumber = destination.GetNumber();
             var removedDestinationItem = destination.GetItem();
+            var removedDestinationState = destination.GetModifiers();
 
             source.RemoveItems(removedSourceNumber);
             destination.RemoveItems(removedDestinationNumber);
@@ -123,12 +125,12 @@ namespace ButtonGame.Core.UI.Dragging
             // Do take backs (if needed)
             if (sourceTakeBackNumber > 0)
             {
-                source.AddItems(removedSourceItem, sourceTakeBackNumber);
+                source.AddItems(removedSourceItem, sourceTakeBackNumber, removedSourceState);
                 removedSourceNumber -= sourceTakeBackNumber;
             }
             if (destinationTakeBackNumber > 0)
             {
-                destination.AddItems(removedDestinationItem, destinationTakeBackNumber);
+                destination.AddItems(removedDestinationItem, destinationTakeBackNumber, removedSourceState);
                 removedDestinationNumber -= destinationTakeBackNumber;
             }
 
@@ -136,19 +138,19 @@ namespace ButtonGame.Core.UI.Dragging
             if (source.MaxAcceptable(removedDestinationItem) < removedDestinationNumber ||
                 destination.MaxAcceptable(removedSourceItem) < removedSourceNumber)
             {
-                destination.AddItems(removedDestinationItem, removedDestinationNumber);
-                source.AddItems(removedSourceItem, removedSourceNumber);
+                destination.AddItems(removedDestinationItem, removedDestinationNumber, removedDestinationState);
+                source.AddItems(removedSourceItem, removedSourceNumber, removedSourceState);
                 return;
             }
 
             // Do swaps
             if (removedDestinationNumber > 0)
             {
-                source.AddItems(removedDestinationItem, removedDestinationNumber);
+                source.AddItems(removedDestinationItem, removedDestinationNumber, removedDestinationState);
             }
             if (removedSourceNumber > 0)
             {
-                destination.AddItems(removedSourceItem, removedSourceNumber);
+                destination.AddItems(removedSourceItem, removedSourceNumber, removedSourceState);
             }
         }
 
@@ -156,6 +158,7 @@ namespace ButtonGame.Core.UI.Dragging
         {
             var draggingItem = source.GetItem();
             var draggingNumber = source.GetNumber();
+            var draggingModifiers = source.GetSourceModifiers();
 
             var acceptable = destination.MaxAcceptable(draggingItem);
             var toTransfer = Mathf.Min(acceptable, draggingNumber);
@@ -163,7 +166,7 @@ namespace ButtonGame.Core.UI.Dragging
             if (toTransfer > 0)
             {
                 source.RemoveItems(toTransfer);
-                destination.AddItems(draggingItem, toTransfer);
+                destination.AddItems(draggingItem, toTransfer, draggingModifiers);
                 return false;
             }
 

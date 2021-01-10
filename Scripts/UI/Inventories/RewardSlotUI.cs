@@ -51,14 +51,24 @@ namespace ButtonGame.UI.Inventories
             return 0;
         }
 
-        public void AddItems(InventoryItem item, int number)
+        public void AddItems(InventoryItem item, int number, object state)
         {
-            inventory.AddItemToSlot(index, item, number);
+            inventory.AddItemToSlot(index, item, number, state);
         }
 
         public void RemoveItems(int number)
         {
             inventory.RemoveFromSlot(index, number);
+        }
+
+        public object GetModifiers()
+        {
+            return inventory.GetItemInSlot(index).GetModifiers();
+        }
+
+        public object GetSourceModifiers()
+        {
+            return inventory.GetItemInSlot(index).GetModifiers();
         }
     }
 }

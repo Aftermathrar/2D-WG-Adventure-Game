@@ -137,7 +137,19 @@ namespace ButtonGame.UI
         private string ReplaceSubstringVariables(string sInput)
         {
             string sModified;
-            sModified = sInput.Replace("[Player]", playerConversant.playerName);
+            if(sInput.IndexOf("[Scene:") >= 0)
+            {
+                string sceneName = sInput.Substring(8, sInput.Length - 9);
+                AIConversant currentConversant = playerConversant.GetCurrentConversant();
+
+                SceneText sceneText = Resources.Load(sceneName) as SceneText;
+                sModified = sceneText.GetText(currentConversant);
+            }
+            else
+            {
+                sModified = sInput;
+            }
+            sModified = sModified.Replace("[Player]", playerConversant.playerName);
             sModified = sModified.Replace("[]", "    ");
             return sModified;
         }

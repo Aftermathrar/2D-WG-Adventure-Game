@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ButtonGame.Dialogue
 {
-    [CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue", order = 0)]
+    [CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue/Dialogue", order = 0)]
     public class Dialogue : ScriptableObject, ISerializationCallbackReceiver
     {
         [SerializeField] 
@@ -35,7 +35,6 @@ namespace ButtonGame.Dialogue
 
         public IEnumerable<DialogueNode> GetAllNodes()
         {
-
             return nodes;
         }
 

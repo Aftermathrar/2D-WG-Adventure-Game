@@ -64,6 +64,11 @@ namespace ButtonGame.Dialogue
             return queryNode.GetText();
         }
 
+        public AIConversant GetCurrentConversant()
+        {
+            return currentConversant;
+        }
+
         public string GetCurrentConversantName()
         {
             if(isChoosing)

@@ -19,6 +19,7 @@ namespace ButtonGame.Inventories
         ArmorGem,
         AccessoryGem,
         Staff,
-        Robe
+        Robe,
+        Innerwear
     }   
 }

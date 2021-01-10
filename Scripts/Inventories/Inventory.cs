@@ -28,6 +28,35 @@ namespace ButtonGame.Inventories
             public int number;
         }
 
+        // private void Update() {
+        //     if(Input.GetKeyDown(KeyCode.K))
+        //     {
+        //         foreach (var slot in slots)
+        //         {
+        //             FollowerEquipableItem fItem = slot.item as FollowerEquipableItem;
+        //             if(fItem != null)
+        //             {
+        //                 foreach (var size in fItem.GetWearableSizes())
+        //                 {
+        //                     Debug.Log(size);
+        //                 }
+        //             }
+        //         }
+        //     }
+
+        //     if(Input.GetKeyDown(KeyCode.J))
+        //     {
+        //         foreach (var slot in slots)
+        //         {
+        //             FollowerEquipableItem fItem = slot.item as FollowerEquipableItem;
+        //             if (fItem != null)
+        //             {
+        //                 fItem.AddMeasurements();
+        //             }
+        //         }
+        //     }
+        // }
+
         // PUBLIC
 
         /// <summary>
@@ -157,7 +186,7 @@ namespace ButtonGame.Inventories
         /// <param name="item">The item type to add.</param>
         /// <param name="number">The number of items to add.null</param>
         /// <returns>True if the item was added anywhere in the inventory.</returns>
-        public bool AddItemToSlot(int slot, InventoryItem item, int number)
+        public bool AddItemToSlot(int slot, InventoryItem item, int number, object state = null)
         {
             if (slots[slot].item != null)
             {
@@ -170,8 +199,9 @@ namespace ButtonGame.Inventories
                 slot = i;
             }
 
-            slots[slot].item = item;
+            slots[slot].item = Instantiate(item);
             slots[slot].number += number;
+            if(state != null) slots[slot].item.SetModifiers(state);
             if (inventoryUpdated != null)
             {
                 inventoryUpdated();
@@ -250,6 +280,7 @@ namespace ButtonGame.Inventories
         {
             public string itemID;
             public int number;
+            public object modifiers;
         }
 
         object ISaveable.CaptureState()
@@ -261,6 +292,7 @@ namespace ButtonGame.Inventories
                 {
                     slotRecords[i].itemID = slots[i].item.GetItemID();
                     slotRecords[i].number = slots[i].number;
+                    slotRecords[i].modifiers = slots[i].item.GetModifiers();
                 }
             }
             return slotRecords;
@@ -271,8 +303,13 @@ namespace ButtonGame.Inventories
             var slotRecords = (InventorySlotRecord[])state;
             for (int i = 0; i < inventorySize; i++)
             {
-                slots[i].item = InventoryItem.GetFromID(slotRecords[i].itemID);
-                slots[i].number = slotRecords[i].number;
+                InventoryItem candidate = InventoryItem.GetFromID(slotRecords[i].itemID);
+                if(candidate != null)
+                {
+                    slots[i].item = Instantiate(candidate);
+                    slots[i].number = slotRecords[i].number;
+                    slots[i].item.SetModifiers(slotRecords[i].modifiers);
+                }
             }
 
             if (inventoryUpdated != null)

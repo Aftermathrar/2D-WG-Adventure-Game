@@ -66,7 +66,7 @@ namespace ButtonGame.UI.Stats
             return "Skill";
         }
 
-        public TooltipDescriptionField[] GetDescriptionFields()
+        public IEnumerable<TooltipDescriptionField> GetDescriptionFields()
         {
             return skillTooltips;
         }
