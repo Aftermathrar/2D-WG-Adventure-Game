@@ -43,6 +43,8 @@ namespace ButtonGame.Core
         {
             // Forcefully skip spawning follower
             convo = GetComponent<AIConversant>();
+            playerGO = GameObject.FindGameObjectWithTag("Player");
+            questList = playerGO.GetComponent<QuestList>();
         }
 
         private void Start() 
@@ -87,9 +89,7 @@ namespace ButtonGame.Core
         private void BattleSetup(CharacterClass enemyName)
         {
             // Find and activate player
-            playerGO = GameObject.FindGameObjectWithTag("Player");
             PlayerController playerController = playerGO.GetComponent<PlayerController>();
-            questList = playerGO.GetComponent<QuestList>();
             playerHealth = playerGO.GetComponent<Health>();
             playerMana = playerGO.GetComponent<Mana>();
             playerEquipment = playerGO.GetComponent<Equipment>();

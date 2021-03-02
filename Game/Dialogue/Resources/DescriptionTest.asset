@@ -125,7 +125,7 @@ MonoBehaviour:
   - 6204c801-c6fc-4c16-9f83-23051b4a2a61
   rect:
     serializedVersion: 2
-    x: 924
+    x: 925
     y: 170
     width: 250
     height: 280
@@ -133,15 +133,15 @@ MonoBehaviour:
     predicate: 3
     descParameters:
     - limit: 0
-      text: startlingly thin
+      text: a startlingly thin
     - limit: 15
-      text: thin
+      text: a thin
     - limit: 18
-      text: soft
+      text: a soft
     - limit: 21
-      text: plush
+      text: a plush
     - limit: 25
-      text: attractive
+      text: an attractive
 --- !u!114 &-2136360305151863842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,14 +355,16 @@ MonoBehaviour:
     x: 649
     y: 260
     width: 250
-    height: 200
+    height: 240
   descCondition:
     predicate: 4
     descParameters:
     - limit: 0
       text: gaunt
+    - limit: 0.25
+      text: slim
     - limit: 0.5
-      text: normal
+      text: pretty
     - limit: 1
       text: chubby
 --- !u!114 &5826269078826730435
@@ -378,7 +380,7 @@ MonoBehaviour:
   m_Name: 4f5a7cef-8874-4bdd-8480-8b8d22076d6a
   m_EditorClassIdentifier: 
   isVariableText: 0
-  text: face. She has a
+  text: face. She has
   children:
   - b1ba6ac1-3b49-42cd-98b1-904e74a72e4a
   rect:
@@ -520,8 +522,8 @@ MonoBehaviour:
   - 37814986-96f3-4942-9c91-78856bc43657
   rect:
     serializedVersion: 2
-    x: 33
-    y: 69
+    x: 32
+    y: 68
     width: 250
     height: 100
   descCondition:

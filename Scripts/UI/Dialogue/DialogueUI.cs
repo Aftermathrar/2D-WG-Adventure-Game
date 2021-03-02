@@ -143,7 +143,7 @@ namespace ButtonGame.UI
                 AIConversant currentConversant = playerConversant.GetCurrentConversant();
 
                 SceneText sceneText = Resources.Load(sceneName) as SceneText;
-                sModified = sceneText.GetText(currentConversant);
+                sModified = sceneText.GetText(currentConversant.gameObject);
             }
             else
             {

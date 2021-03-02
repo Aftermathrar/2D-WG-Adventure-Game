@@ -36,6 +36,15 @@ namespace ButtonGame.UI.Inventories
             return 0;
         }
 
+        public bool HasStack(InventoryItem item)
+        {
+            if(item.IsStackable() && inventory.HasItem(item))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void AddItems(InventoryItem item, int number, object state)
         {
             inventory.AddItemToSlot(index, item, number, state);

@@ -38,7 +38,7 @@ namespace ButtonGame.Dialogue.Editor
         [MenuItem("Window/Dialogue/Dialogue Text Editor")]
         public static void ShowEditorWindow()
         {
-            GetWindow(typeof(DialogueTextEditor), false, "Dialogue Editor");
+            GetWindow(typeof(DialogueTextEditor), false, "Scene Editor");
         }
 
         [OnOpenAssetAttribute(1)]

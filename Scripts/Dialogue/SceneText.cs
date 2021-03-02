@@ -31,12 +31,12 @@ namespace ButtonGame.Dialogue
             return nodes;
         }
 
-        public string GetText(AIConversant conversant)
+        public string GetText(GameObject conversantGO)
         {
             string sceneText = "";
             foreach (var node in nodes)
             {
-                sceneText += node.GetText(conversant) + " ";
+                sceneText += node.GetText(conversantGO) + " ";
             }
             return sceneText;
         }

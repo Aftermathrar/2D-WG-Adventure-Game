@@ -29,6 +29,9 @@ namespace ButtonGame.Core.UI.Dragging
         /// </param>
         void RemoveItems(int number);
 
+        /// <summary>
+        /// Get any modifier fields unique to the item instance.
+        /// </summary>
         object GetSourceModifiers();
     }
 }

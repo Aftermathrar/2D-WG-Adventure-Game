@@ -10,7 +10,7 @@ namespace ButtonGame.Dialogue
 {
     public class PlayerConversant : MonoBehaviour
     {
-        [SerializeField] public string playerName;
+        public string playerName;
 
         [SerializeField] Dialogue currentDialogue;
         DialogueNode currentNode = null;

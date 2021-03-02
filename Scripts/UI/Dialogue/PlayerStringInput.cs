@@ -50,6 +50,7 @@ namespace ButtonGame.UI.Dialogue
                         info["rank"] = "No Rank";
                         info["time"] = "Monday 6:00 AM";
                         info["quest"] = "Prologue";
+                        info["location"] = "Tutorial";
                         info["scene"] = SceneManager.GetActiveScene().buildIndex.ToString();
                         
                         nameConfirmPanel.SetActive(true);

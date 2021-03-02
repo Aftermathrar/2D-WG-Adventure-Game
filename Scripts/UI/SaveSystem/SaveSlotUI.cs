@@ -25,6 +25,7 @@ namespace ButtonGame.UI.SaveSystem
         string slotName = "Save Slot ";
         string saveFile = "save";
         bool isSaving = false;
+        string locationToLoad = "";
         int sceneToLoad = -1;
 
         private void Awake() 
@@ -54,6 +55,7 @@ namespace ButtonGame.UI.SaveSystem
                 rankText.text = infoLookup["rank"];
                 timeText.text = infoLookup["time"];
                 questText.text = infoLookup["quest"];
+                locationToLoad = infoLookup["location"];
                 sceneToLoad = int.Parse(infoLookup["scene"]);
             }
             else
@@ -99,6 +101,7 @@ namespace ButtonGame.UI.SaveSystem
                 saveMenu.CloseMenu();
                 return;
             }
+            sceneChangeObj.SetDestination(locationToLoad);
             sceneChangeObj.SetSceneToLoad(sceneToLoad);
             sceneChangeObj.ChangeScene(saveFile);
         }

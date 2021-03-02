@@ -146,6 +146,7 @@ namespace ButtonGame.Character
         {
             float upperBound = fullness.GetMaxAttributeValue() * (maxFullness - hungerValue) / 100;
             int invSize = inventory.GetSize();
+            consumableIndex.Clear();
             for (int i = 0; i < invSize; i++)
             {
                 ConsumableItem food = inventory.GetItemInSlot(i) as ConsumableItem;

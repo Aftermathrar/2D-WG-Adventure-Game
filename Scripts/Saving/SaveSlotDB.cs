@@ -19,6 +19,7 @@ namespace ButtonGame.Saving
             public string rank;
             public string time;
             public string quest;
+            public string location;
             public string scene;
         }
 
@@ -39,6 +40,7 @@ namespace ButtonGame.Saving
             saveInfo["rank"] = saveLookup[saveFile].rank;
             saveInfo["time"] = saveLookup[saveFile].time;
             saveInfo["quest"] = saveLookup[saveFile].quest;
+            saveInfo["location"] = saveLookup[saveFile].location;
             saveInfo["scene"] = saveLookup[saveFile].scene;
 
             return saveInfo;
@@ -60,6 +62,7 @@ namespace ButtonGame.Saving
             newRecord.rank = state["rank"];
             newRecord.time = state["time"];
             newRecord.quest = state["quest"];
+            newRecord.location = state["location"];
             newRecord.scene = state["scene"];
 
             saveLookup[saveFile] = newRecord;
@@ -90,6 +93,7 @@ namespace ButtonGame.Saving
                 saveRecord.rank = state["rank"];
                 saveRecord.time = state["time"];
                 saveRecord.quest = state["quest"];
+                saveRecord.location = state["location"];
                 saveRecord.scene = state["scene"];
 
                 saveLookup[fileName] = saveRecord;

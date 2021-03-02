@@ -195,6 +195,7 @@ MonoBehaviour:
   playerRank: max
   time: ye
   currentQuest: none
+  currentLocation: dungeon
   currentScene: -1
 --- !u!114 &8965338866591582634
 MonoBehaviour:

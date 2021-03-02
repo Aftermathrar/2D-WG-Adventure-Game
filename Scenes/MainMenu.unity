@@ -655,9 +655,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: 3
+  destination: Tutorial
   onSceneChange:
     m_PersistentCalls:
       m_Calls: []
+  locationChangeEvent: {fileID: 11400000, guid: bac9eaa0d90c3ab4a9b276e8d4ef29e1,
+    type: 2}
 --- !u!224 &203977621
 RectTransform:
   m_ObjectHideFlags: 0
@@ -888,6 +891,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0c1a08db1ecea4081ddabcf86bd7de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: 
+  playerRank: 
+  time: 
+  currentQuest: 
+  currentLocation: 
+  currentScene: -1
 --- !u!1 &271309437
 GameObject:
   m_ObjectHideFlags: 0
@@ -2110,6 +2119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0c1a08db1ecea4081ddabcf86bd7de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: 
+  playerRank: 
+  time: 
+  currentQuest: 
+  currentLocation: 
+  currentScene: -1
 --- !u!1 &979246903
 GameObject:
   m_ObjectHideFlags: 0
@@ -3301,7 +3316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1521769411
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9620,6 +9635,11 @@ PrefabInstance:
       value: Saving Menu
       objectReference: {fileID: 0}
     - target: {fileID: 8292883409240634069, guid: 799ca45b1395a614fb80cc24a05e83d2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8292883409308365409, guid: 799ca45b1395a614fb80cc24a05e83d2,
         type: 3}
       propertyPath: m_IsActive
       value: 1

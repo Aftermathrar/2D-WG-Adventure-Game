@@ -19,6 +19,13 @@ namespace ButtonGame.Core.UI.Dragging
         int MaxAcceptable(T item);
 
         /// <summary>
+        /// Whether the target inventory has a slot the item can be stacked into.
+        /// </summary>
+        /// <param name="item">The item type to look for a stack.</param>
+        /// <returns>If the item is stackable and is in the inventory, returns true.</returns>
+        bool HasStack(T item);
+
+        /// <summary>
         /// Update the UI and any data to reflect adding the item to this destination.
         /// </summary>
         /// <param name="item">The item type.</param>
@@ -26,6 +33,9 @@ namespace ButtonGame.Core.UI.Dragging
         /// <param name="state">The modifier object for the item instance</param>
         void AddItems(T item, int number, object state);
 
+        /// <summary>
+        /// Get any modifier fields unique to the item instance.
+        /// </summary>
         object GetModifiers();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ButtonGame.Events;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -9,7 +10,9 @@ namespace ButtonGame.SceneManagement
     public class ChangeSceneButton : MonoBehaviour
     {
         [SerializeField] int sceneToLoad = -1;
+        [SerializeField] string destination;
         [SerializeField] UnityEvent onSceneChange;
+        [SerializeField] GameEvent locationChangeEvent;
 
         public void ChangeScene()
         {
@@ -28,6 +31,11 @@ namespace ButtonGame.SceneManagement
         public void SetSceneToLoad(int newScene)
         {
             sceneToLoad = newScene;
+        }
+
+        public void SetDestination(string newDestination)
+        {
+            destination = newDestination;
         }
 
         private IEnumerator Transition()
@@ -51,6 +59,7 @@ namespace ButtonGame.SceneManagement
             yield return savingWrapper.Load();
 
             savingWrapper.Save();
+            locationChangeEvent.RaiseEvent(destination);
             loadFader.FadeInImmediate();
             Time.timeScale = 1f;
 
@@ -78,6 +87,8 @@ namespace ButtonGame.SceneManagement
             yield return savingWrapper.Load(saveFile);
 
             // savingWrapper.Save(saveFile);
+            locationChangeEvent.RaiseEvent(destination);
+            Debug.Log(destination);
             loadFader.FadeInImmediate();
             Time.timeScale = 1f;
 

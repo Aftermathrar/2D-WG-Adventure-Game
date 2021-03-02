@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Setting out
   m_EditorClassIdentifier: 
   objectives:
-  - description: 
+  - description: Travel to Rondelle
     completeObjectiveAction: 0
     parameter: []
   - description: 

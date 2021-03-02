@@ -17,6 +17,8 @@ namespace ButtonGame.Attributes
         [SerializeField]
         string currentQuest;
         [SerializeField]
+        string currentLocation;
+        [SerializeField]
         int currentScene = -1;
         Dictionary<string, string> infoLookup = null;
 
@@ -39,7 +41,17 @@ namespace ButtonGame.Attributes
             playerRank = infoLookup["rank"];
             time = infoLookup["time"];
             currentQuest = infoLookup["quest"];
+            currentLocation = infoLookup["location"];
             currentScene = int.Parse(infoLookup["scene"]);
+        }
+
+        public void SetPlayerInfo(string key, string newInfo)
+        {
+            BuildLookup();
+            if(infoLookup.ContainsKey(key))
+            {
+                infoLookup[key] = newInfo;
+            }
         }
 
         private void BuildLookup()
@@ -52,6 +64,7 @@ namespace ButtonGame.Attributes
             infoLookup["rank"] = playerRank;
             infoLookup["time"] = time;
             infoLookup["quest"] = currentQuest;
+            infoLookup["location"] = currentLocation;
             infoLookup["scene"] = SceneManager.GetActiveScene().buildIndex.ToString();
         }
 
@@ -68,6 +81,7 @@ namespace ButtonGame.Attributes
             playerRank = infoLookup["rank"];
             time = infoLookup["time"];
             currentQuest = infoLookup["quest"];
+            currentLocation = infoLookup["location"];
             currentScene = int.Parse(infoLookup["scene"]);
         }
     }

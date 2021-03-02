@@ -49,9 +49,11 @@ namespace ButtonGame.Inventories
                     FollowerEquipableItem fItem = pair.Value[0] as FollowerEquipableItem;
                     if (fItem != null)
                     {
+                        int i = 0;
                         foreach (var size in fItem.GetWearableSizes())
                         {
-                            Debug.Log(size);
+                            i++;
+                            Debug.Log(i + ": " + size);
                         }
                     }
                 }

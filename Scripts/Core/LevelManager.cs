@@ -7,7 +7,6 @@ using ButtonGame.Character;
 using ButtonGame.Combat;
 using ButtonGame.Stats.Enums;
 using ButtonGame.Stats.Follower;
-using ButtonGame.Control;
 using ButtonGame.Saving;
 using TMPro;
 using ButtonGame.Inventories;
@@ -250,6 +249,8 @@ namespace ButtonGame.Core
             Time.timeScale = 0.3f;
             if (tag != "Player")
             {
+                string s = enemyGO.GetComponent<BaseStats>().GetStatText(Stat.Name);
+                playerGO.GetComponent<PlayerBattleStats>().AddEnemyKill(s);
                 StartCoroutine(BattleRewards());
             }
             else

@@ -143,6 +143,14 @@ namespace ButtonGame.Core.UI.Dragging
                 return;
             }
 
+            // If stack exists in inventory, send both items to destination to stack source and return destination
+            if(destination.HasStack(removedSourceItem))
+            {
+                destination.AddItems(removedSourceItem, removedSourceNumber, removedSourceState);
+                destination.AddItems(removedDestinationItem, removedDestinationNumber, removedDestinationState);
+                return;
+            }
+
             // Do swaps
             if (removedDestinationNumber > 0)
             {

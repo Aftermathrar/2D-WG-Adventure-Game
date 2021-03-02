@@ -34,12 +34,12 @@ namespace ButtonGame.Dialogue
             }
         }
 
-        public string GetText(AIConversant conversant)
+        public string GetText(GameObject conversantGO)
         {
             if(isVariableText)
             {
                 // Parse text
-                return GetDescription(conversant);
+                return GetDescription(conversantGO);
             }
             else
             {
@@ -47,9 +47,9 @@ namespace ButtonGame.Dialogue
             }
         }
 
-        public string GetDescription(AIConversant conversant)
+        public string GetDescription(GameObject conversantGO)
         {
-            AppearanceStats appearance = conversant.GetComponent<AppearanceStats>();
+            AppearanceStats appearance = conversantGO.GetComponent<AppearanceStats>();
             switch (descCondition.GetPredicate())
             {
                 case TextDescriptionPredicate.Height:

@@ -28,35 +28,6 @@ namespace ButtonGame.Inventories
             public int number;
         }
 
-        // private void Update() {
-        //     if(Input.GetKeyDown(KeyCode.K))
-        //     {
-        //         foreach (var slot in slots)
-        //         {
-        //             FollowerEquipableItem fItem = slot.item as FollowerEquipableItem;
-        //             if(fItem != null)
-        //             {
-        //                 foreach (var size in fItem.GetWearableSizes())
-        //                 {
-        //                     Debug.Log(size);
-        //                 }
-        //             }
-        //         }
-        //     }
-
-        //     if(Input.GetKeyDown(KeyCode.J))
-        //     {
-        //         foreach (var slot in slots)
-        //         {
-        //             FollowerEquipableItem fItem = slot.item as FollowerEquipableItem;
-        //             if (fItem != null)
-        //             {
-        //                 fItem.AddMeasurements();
-        //             }
-        //         }
-        //     }
-        // }
-
         // PUBLIC
 
         /// <summary>
@@ -199,7 +170,8 @@ namespace ButtonGame.Inventories
                 slot = i;
             }
 
-            slots[slot].item = Instantiate(item);
+            // slots[slot].item = Instantiate(item);
+            slots[slot].item = item;
             slots[slot].number += number;
             if(state != null) slots[slot].item.SetModifiers(state);
             if (inventoryUpdated != null)
@@ -270,6 +242,12 @@ namespace ButtonGame.Inventories
                     {
                         return i;
                     }
+                    // if(slots[i].item == null) continue;
+
+                    // if(slots[i].item.GetItemID() == item.GetItemID())
+                    // {
+                    //     return i;
+                    // }
                 }
             }
             return -1;
@@ -306,7 +284,8 @@ namespace ButtonGame.Inventories
                 InventoryItem candidate = InventoryItem.GetFromID(slotRecords[i].itemID);
                 if(candidate != null)
                 {
-                    slots[i].item = Instantiate(candidate);
+                    // slots[i].item = Instantiate(candidate);
+                    slots[i].item = candidate;
                     slots[i].number = slotRecords[i].number;
                     slots[i].item.SetModifiers(slotRecords[i].modifiers);
                 }

@@ -49,6 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: -1
+  destination: 
   onSceneChange:
     m_PersistentCalls:
       m_Calls: []
+  locationChangeEvent: {fileID: 11400000, guid: bac9eaa0d90c3ab4a9b276e8d4ef29e1,
+    type: 2}

@@ -54,6 +54,11 @@ namespace ButtonGame.UI.Inventories
             return 1;
         }
 
+        public bool HasStack(InventoryItem item)
+        {
+            return false;
+        }
+
         public void AddItems(InventoryItem item, int number, object state)
         {
             playerEquipment.AddItem(equipLocation, (EquipableItem)item, index, state);
