@@ -275,7 +275,7 @@ namespace ButtonGame.Combat
                 {
                     fxIconCount -= 1;
                     buffList.Remove(id);
-                    fxIconSpawner.ReturnToPool(id);
+                    fxIconSpawner.DeactivateIcon(id);
 
                     if(coBuffList.ContainsKey(id)) 
                         StopCoroutine(coBuffList[id]);

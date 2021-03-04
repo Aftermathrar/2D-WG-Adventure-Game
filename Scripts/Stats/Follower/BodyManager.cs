@@ -26,13 +26,13 @@ namespace ButtonGame.Stats.Follower
             // public FollowerPositions position;
         // }
     
-        private void Awake() 
+        private void Awake()
         {
             calorieManager = new CalorieManager();
             modifiedStats = new Dictionary<Stat, float[]>();
             modifiedStats[Stat.Capacity] = new float[] { 0, Random.Range(-100, 200) };
             modifiedStats[Stat.Greed] = new float[] { 0, Random.Range(0, 20) };
-            modifiedStats[Stat.FatDesire] = new float[] {0, Random.Range(0, 20) };
+            modifiedStats[Stat.FatDesire] = new float[] { 0, Random.Range(0, 20) };
             modifiedStats[Stat.Metabolism] = new float[] { 0, Random.Range(0, 300) };
         }
 
@@ -84,13 +84,6 @@ namespace ButtonGame.Stats.Follower
             return new float[] { 0, 0 };
         }
 
-        [System.Serializable]
-        private struct BodyRecord
-        {
-            public CalorieManager manager;
-            public Dictionary<Stat, float[]> stats;
-        }
-
         public object CaptureState()
         {
             BodyRecord body = new BodyRecord();
@@ -106,13 +99,20 @@ namespace ButtonGame.Stats.Follower
             modifiedStats = body.stats;
             bodyUpdated.Invoke();
         }
-    }
 
-    [System.Serializable]
-    public class CalorieManager
-    {
-        public float dailyCalories = 0f;
-        public float stomachCalories = 800f;
+        [System.Serializable]
+        private class BodyRecord
+        {
+            public CalorieManager manager;
+            public Dictionary<Stat, float[]> stats;
+        }
+
+        [System.Serializable]
+        protected class CalorieManager
+        {
+            public float dailyCalories = 0f;
+            public float stomachCalories = 800f;
+        }
     }
 
 }

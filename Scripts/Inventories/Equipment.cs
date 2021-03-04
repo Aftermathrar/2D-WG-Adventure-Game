@@ -40,37 +40,37 @@ namespace ButtonGame.Inventories
             }
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                foreach (var pair in equippedItems)
-                {
-                    FollowerEquipableItem fItem = pair.Value[0] as FollowerEquipableItem;
-                    if (fItem != null)
-                    {
-                        int i = 0;
-                        foreach (var size in fItem.GetWearableSizes())
-                        {
-                            i++;
-                            Debug.Log(i + ": " + size);
-                        }
-                    }
-                }
-            }
+        // private void Update()
+        // {
+        //     if (Input.GetKeyDown(KeyCode.K))
+        //     {
+        //         foreach (var pair in equippedItems)
+        //         {
+        //             FollowerEquipableItem fItem = pair.Value[0] as FollowerEquipableItem;
+        //             if (fItem != null)
+        //             {
+        //                 int i = 0;
+        //                 foreach (var size in fItem.GetWearableSizes())
+        //                 {
+        //                     i++;
+        //                     Debug.Log(i + ": " + size);
+        //                 }
+        //             }
+        //         }
+        //     }
 
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                foreach (var pair in equippedItems)
-                {
-                    FollowerEquipableItem fItem = pair.Value[0] as FollowerEquipableItem;
-                    if (fItem != null)
-                    {
-                        fItem.AddMeasurements();
-                    }
-                }
-            }
-        }
+        //     if (Input.GetKeyDown(KeyCode.J))
+        //     {
+        //         foreach (var pair in equippedItems)
+        //         {
+        //             FollowerEquipableItem fItem = pair.Value[0] as FollowerEquipableItem;
+        //             if (fItem != null)
+        //             {
+        //                 fItem.AddMeasurements();
+        //             }
+        //         }
+        //     }
+        // }
 
         // PUBLIC
 

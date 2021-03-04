@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using ButtonGame.Stats;
 using ButtonGame.Character;
 using ButtonGame.Combat;
+using ButtonGame.Inventories;
+using ButtonGame.Locations;
+using ButtonGame.Saving;
+using ButtonGame.Stats;
 using ButtonGame.Stats.Enums;
 using ButtonGame.Stats.Follower;
-using ButtonGame.Saving;
 using TMPro;
-using ButtonGame.Inventories;
 
 namespace ButtonGame.Core
 {
@@ -25,55 +26,19 @@ namespace ButtonGame.Core
         [SerializeField] GameObject rewardWindow;
 
         // Battle setup
-        [SerializeField] FollowerCollection followers;
-        [SerializeField] BaseStats[] followerPrefabs;
-        [SerializeField] protected BaseStats[] enemyPrefabs;
+        [SerializeField] protected EnemySpawnDB enemySpawnDB;
         [SerializeField] UnityEvent battleStart;
         protected GameObject playerGO;
         protected GameObject enemyGO;
-        GameObject followerGO;
-
-        private void Awake()
-        {
-            // Spawn follower
-            FollowerRole companionToSpawn = new FollowerRole();
-            companionToSpawn = followers.GetFollowerIdentifier(FollowerPosition.Combat);
-            string followerUUID = companionToSpawn.Identifier;
-
-            if (followerUUID == string.Empty)
-            {
-                // Handle no follower without spawning a random new one
-                // int randomFollowerIndex = UnityEngine.Random.Range(0, followerPrefabs.Length);
-                // BaseStats selectedFollower = followerPrefabs[randomFollowerIndex];
-                // followerGO = Instantiate(selectedFollower, transform, false).gameObject;
-
-                // companionToSpawn.FollowerClass = followerGO.GetComponent<BaseStats>().GetClass();
-                // companionToSpawn.Identifier = followerGO.GetComponent<SaveableEntity>().GenerateNewUniqueIdentifier();
-
-                // string followerIdentifier = followerGO.GetComponent<SaveableEntity>().GenerateNewUniqueIdentifier();
-                // followers.AddNewFollower(FollowerPosition.Combat, companionToSpawn);
-            }
-            else
-            {
-                foreach (BaseStats healClass in followerPrefabs)
-                {
-                    if (companionToSpawn.FollowerClass == healClass.GetClass())
-                    {
-                        followerGO = Instantiate(healClass, transform, false).gameObject;
-                        followerGO.transform.SetSiblingIndex(1);
-                        followerGO.GetComponent<SaveableEntity>().SetUniqueIdentifier(followerUUID);
-                        break;
-                    }
-                }
-            }
-        }
+        protected BaseStats[] enemyPrefabs;
+        LocationList location;
 
         private void Start()
         {
             BattleSetup();
         }
 
-        private void Update() 
+        protected virtual void Update() 
         {
             if(Input.GetKeyDown(KeyCode.Tab) && isBattleActive)
             {
@@ -90,44 +55,42 @@ namespace ButtonGame.Core
 
         private void BattleSetup()
         {
-            // Find player
-            playerGO = GameObject.FindGameObjectWithTag("Player");
-            PlayerController playerController = playerGO.GetComponent<PlayerController>();
+            // Populate enemy list
+            location = GetComponent<LocationManager>().GetCurrentLocation();
+            enemyPrefabs = enemySpawnDB.GetEnemyList(location);
 
             // Spawn enemy
             enemyGO = SpawnNewEnemy();
             enemyGO.transform.SetAsFirstSibling();
 
-            // Assign opponent to scripts
-            enemyGO.GetComponent<CombatEffects>().SetTarget(playerGO);
-            enemyGO.GetComponent<EnemyAI>().SetTarget(playerController);
-            playerController.SetEnemy(enemyGO.GetComponent<EnemyController>());
-            playerGO.GetComponent<CombatEffects>().SetTarget(enemyGO);
-            if(followerGO != null) 
-            {
-                followerGO.GetComponent<FollowerAI>().SetTarget(playerGO, enemyGO);
-                followerGO.GetComponent<CombatEffects>().SetTarget(enemyGO);
-            }
-
-            // Activate battle
-            StartCoroutine(BeginBattle());
+            AssignTargets();
         }
 
         private void BattleSetup(CharacterClass enemyName)
+        {
+            // Populate enemy list
+            LocationList location = GetComponent<LocationManager>().GetCurrentLocation();
+            enemyPrefabs = enemySpawnDB.GetEnemyList(location);
+
+            // Spawn enemy
+            enemyGO = SpawnNewEnemy(enemyName);
+            enemyGO.transform.SetAsFirstSibling();
+            
+            AssignTargets();
+        }
+
+        private void AssignTargets()
         {
             // Find player
             playerGO = GameObject.FindGameObjectWithTag("Player");
             PlayerController playerController = playerGO.GetComponent<PlayerController>();
 
-            // Spawn enemy
-            enemyGO = SpawnNewEnemy(enemyName);
-            enemyGO.transform.SetAsFirstSibling();
-
             // Assign opponent to scripts
             enemyGO.GetComponent<CombatEffects>().SetTarget(playerGO);
             enemyGO.GetComponent<EnemyAI>().SetTarget(playerController);
             playerController.SetEnemy(enemyGO.GetComponent<EnemyController>());
             playerGO.GetComponent<CombatEffects>().SetTarget(enemyGO);
+            GameObject followerGO = GameObject.FindGameObjectWithTag("Follower");
             if (followerGO != null)
             {
                 followerGO.GetComponent<FollowerAI>().SetTarget(playerGO, enemyGO);
@@ -146,17 +109,17 @@ namespace ButtonGame.Core
             return Instantiate(selectedEnemy, transform, false).gameObject;
         }
 
-        protected GameObject SpawnNewEnemy(CharacterClass enemyName)
+        protected GameObject SpawnNewEnemy(CharacterClass enemyType)
         {
             // Find enemy type from list
             foreach (var enemyPrefab in enemyPrefabs)
             {
-                if(enemyPrefab.GetClass() == enemyName)
+                if(enemyPrefab.GetClass() == enemyType)
                 {
                     return Instantiate(enemyPrefab, transform, false).gameObject;
                 }
             }
-            Debug.Log("Enemy of type " + enemyName.ToString() + " not found! Spawning random enemy.");
+            Debug.Log("Enemy of type " + enemyType.ToString() + " not found! Spawning random enemy.");
 
             // Choose random enemy from list
             int randomEnemyIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
@@ -250,7 +213,7 @@ namespace ButtonGame.Core
             if (tag != "Player")
             {
                 string s = enemyGO.GetComponent<BaseStats>().GetStatText(Stat.Name);
-                playerGO.GetComponent<PlayerBattleStats>().AddEnemyKill(s);
+                playerGO.GetComponent<PlayerBattleStats>().AddEnemyKill(s, location.ToString());
                 StartCoroutine(BattleRewards());
             }
             else

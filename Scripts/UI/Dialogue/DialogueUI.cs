@@ -54,10 +54,10 @@ namespace ButtonGame.UI
         {
             if(Input.GetButtonDown("Submit"))
             {
-                if(nextButton.gameObject.activeSelf) nextButton.onClick.Invoke();
-                else if(quitButton.gameObject.activeSelf) quitButton.onClick.Invoke();
+                if(nextButton.gameObject.activeInHierarchy) nextButton.onClick.Invoke();
+                else if(quitButton.gameObject.activeInHierarchy) quitButton.onClick.Invoke();
             }
-            if(choiceRoot.gameObject.activeSelf)
+            if(choiceRoot.gameObject.activeInHierarchy)
             {
                 for (int i = 0; i < choiceButtons.Count; i++)
                 {

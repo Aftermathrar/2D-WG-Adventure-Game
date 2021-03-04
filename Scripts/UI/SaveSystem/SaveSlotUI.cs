@@ -25,7 +25,7 @@ namespace ButtonGame.UI.SaveSystem
         string slotName = "Save Slot ";
         string saveFile = "save";
         bool isSaving = false;
-        string locationToLoad = "";
+        string locationToLoad;
         int sceneToLoad = -1;
 
         private void Awake() 

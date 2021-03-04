@@ -88,7 +88,6 @@ namespace ButtonGame.SceneManagement
 
             // savingWrapper.Save(saveFile);
             locationChangeEvent.RaiseEvent(destination);
-            Debug.Log(destination);
             loadFader.FadeInImmediate();
             Time.timeScale = 1f;
 

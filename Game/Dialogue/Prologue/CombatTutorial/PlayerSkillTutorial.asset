@@ -27,7 +27,7 @@ MonoBehaviour:
     x: 45
     y: 428
     width: 250
-    height: 300
+    height: 280
   onEnterAction: 6
   onEnterActionParameter: []
   onExitAction: 7
@@ -77,7 +77,7 @@ MonoBehaviour:
     x: 340
     y: 409
     width: 250
-    height: 230
+    height: 210
   onEnterAction: 0
   onEnterActionParameter: []
   onExitAction: 0

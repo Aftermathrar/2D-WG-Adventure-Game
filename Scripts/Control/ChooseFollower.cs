@@ -27,7 +27,7 @@ namespace ButtonGame.Control
             FollowerRole followerRole = new FollowerRole();
             followerRole.FollowerClass = followerPrefab.GetComponent<BaseStats>().GetClass();
             followerRole.Identifier = followerPrefab.GenerateNewUniqueIdentifier();
-            followers.AddNewFollower(FollowerPosition.Combat, followerRole);
+            // followers.AddNewFollower(FollowerPosition.Combat, followerRole);
             GetComponent<ChangeSceneButton>().ChangeScene();
         }
     }

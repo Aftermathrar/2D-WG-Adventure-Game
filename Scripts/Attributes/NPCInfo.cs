@@ -57,6 +57,7 @@ namespace ButtonGame.Attributes
 
         public object CaptureState()
         {
+            BuildLookup();
             return infoLookup;
         }
 

@@ -18,7 +18,7 @@ namespace ButtonGame.Stats.Follower
         {
             public float height;
             public float heightScale;
-            public float reciprocalHeightScale;     // Used to normalize part weight for description
+            public float inverseHeightScale;     // Used to normalize part weight for description
             public float baseWeight;
             public float fatWeight;
             public EyeColors eyeColor;
@@ -33,7 +33,7 @@ namespace ButtonGame.Stats.Follower
             {
                 height = UnityEngine.Random.Range(60f, 80f);
                 heightScale = height / defaultHeight * height / defaultHeight;
-                reciprocalHeightScale = 1 / heightScale;
+                inverseHeightScale = 1 / heightScale;
                 baseWeight = heightScale * defaultBaseWeight;
 
                 // Random BF % to determine starting total weight
@@ -83,27 +83,27 @@ namespace ButtonGame.Stats.Follower
         {
             if(fatDistribution == null)
             {
-                BuildFatLookup();
                 baseBody = new BaseBodyStats();
                 baseBody.GenerateBodyStats();
+                BuildFatLookup();
             }
             // Debug.Log("Total: " + baseBody.GetWeight() + " Height: " + baseBody.height + " Bodytype: " + baseBody.bodyType.ToString());
         }
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Tab))
-            {
-                baseBody.GainWeight(10);
-                DebugGetSizes();
-                Debug.Log("Total: " + baseBody.GetWeight() + " Height: " + baseBody.height + " Bodytype: " + baseBody.bodyType.ToString());
-            }
-            else if(Input.GetKeyDown(KeyCode.LeftControl))
-            {
-                baseBody.GainWeight(-10);
-                DebugGetSizes();
-                Debug.Log("Total: " + baseBody.GetWeight() + " Height: " + baseBody.height + " Bodytype: " + baseBody.bodyType.ToString());
-            }
+            // if(Input.GetKeyDown(KeyCode.Tab))
+            // {
+            //     baseBody.GainWeight(10);
+            //     DebugGetSizes();
+            //     Debug.Log("Total: " + baseBody.GetWeight() + " Height: " + baseBody.height + " Bodytype: " + baseBody.bodyType.ToString());
+            // }
+            // else if(Input.GetKeyDown(KeyCode.LeftControl))
+            // {
+            //     baseBody.GainWeight(-10);
+            //     DebugGetSizes();
+            //     Debug.Log("Total: " + baseBody.GetWeight() + " Height: " + baseBody.height + " Bodytype: " + baseBody.bodyType.ToString());
+            // }
         }
 
         public float GetHeight()
@@ -131,7 +131,7 @@ namespace ButtonGame.Stats.Follower
         public float GetNormalizedBodyPartWeight(BodyParts bodyPart)
         {
             float bpWeight = GetBodyPartWeight(bodyPart);
-            bpWeight *= baseBody.reciprocalHeightScale;
+            bpWeight *= baseBody.inverseHeightScale;
             return bpWeight;
         }
 

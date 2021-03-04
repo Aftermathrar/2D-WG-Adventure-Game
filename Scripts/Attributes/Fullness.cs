@@ -38,10 +38,11 @@ namespace ButtonGame.Attributes
 
         public void RecalculateMaxCapacity()
         {
+            float fullnessFraction = GetFraction();
             float newMax = Mathf.Round(GetComponent<BaseStats>().GetStat(Stat.Capacity));
             float difference = Mathf.Max(0, newMax - maxCapacity);
             maxCapacity = newMax;
-            fullnessPoints.value = Mathf.Min(maxCapacity, fullnessPoints.value + difference);
+            fullnessPoints.value = maxCapacity * fullnessFraction;
         }
 
         public float DigestFood(float foodAmount)
@@ -99,12 +100,13 @@ namespace ButtonGame.Attributes
 
         public object CaptureState()
         {
-            return fullnessPoints.value;
+            return GetFraction();
         }
 
         public void RestoreState(object state)
         {
-            fullnessPoints.value = (float)state;
+            float fullnessFraction = (float)state;
+            fullnessPoints.value = maxCapacity * fullnessFraction;
         }
     }
 }

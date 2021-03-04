@@ -5,10 +5,12 @@ using ButtonGame.Character;
 using ButtonGame.Combat;
 using ButtonGame.Dialogue;
 using ButtonGame.Inventories;
+using ButtonGame.Locations;
 using ButtonGame.Quests;
 using ButtonGame.SceneManagement;
 using ButtonGame.Stats.Enums;
 using ButtonGame.UI;
+using ButtonGame.UI.EffectIcon;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +30,8 @@ namespace ButtonGame.Core
         List<EquipableItem> startingGear = new List<EquipableItem>();
         [SerializeField]
         HitTimerSpawner hitTimerSpawner;
+        [SerializeField]
+        EffectIconSpawner effectIconSpawner;
         QuestList questList;
         Health playerHealth;
         Mana playerMana;
@@ -38,8 +42,9 @@ namespace ButtonGame.Core
         int atkCounter = 0;
         List<AtkIconScript> atkButtons = new List<AtkIconScript>();
         Coroutine coTutorial;
+        bool isFading = false;
 
-        private void Awake() 
+        private void Awake()
         {
             // Forcefully skip spawning follower
             convo = GetComponent<AIConversant>();
@@ -47,12 +52,12 @@ namespace ButtonGame.Core
             questList = playerGO.GetComponent<QuestList>();
         }
 
-        private void Start() 
+        private void Start()
         {
             convo.StartDialogue(dialogues[0]);
         }
 
-        private void Update() 
+        protected override void Update() 
         {
             if(playerHealth != null && playerHealth.GetPercentage() < 50f)
             {
@@ -62,25 +67,31 @@ namespace ButtonGame.Core
             {
                 playerMana.GainAttribute(50f);
             }
+
+
+            Quest quest = Quest.GetByName("Setting out");
+            if (questList.HasQuest(quest) && !isFading)
+            {
+                isFading = true;
+                StartCoroutine(EndTutorialFade(1f));
+            }
             if(Input.GetKeyDown(KeyCode.Tab))
             {
-                Quest quest = Quest.GetByName("Understanding your skills");
-                if (questList.HasObjectiveCompleted(quest, "Use Punch"))
+                quest = Quest.GetByName("Understanding your skills");
+                // if (questList.HasObjectiveCompleted(quest, "Use Punch"))
+                if(atkCounter == 6 && !questList.HasQuestCompleted("Understanding your skills"))
                 {
                     questList.CompleteObjective(quest, "Finish the demonstration");
                     playerGO.GetComponent<PlayerConversant>().Quit();
-                }
-
-                quest = Quest.GetByName("Setting out");
-                if(questList.HasQuest(quest))
-                {
-                    GetComponentInChildren<ChangeSceneButton>().ChangeScene();
                 }
             }
         }
 
         public void BeginTutorialBattle()
         {
+            LocationList location = GetComponent<LocationManager>().GetCurrentLocation();
+            Debug.Log(location.ToString());
+            enemyPrefabs = enemySpawnDB.GetEnemyList(location);
             CharacterClass nextEnemy = enemyPrefabs[battleCounter].GetClass();
             BattleSetup(nextEnemy);
             battleCounter++;
@@ -263,6 +274,7 @@ namespace ButtonGame.Core
                 {
                     hitTimerSpawner.ReturnToStack(item.GetComponent<HitTimer>());
                 }
+                effectIconSpawner.DeactivateAllIcons();
                 playerHUD.SetActive(false);
                 playerAtkButtons.SetActive(false);
                 Destroy(enemyGO);
@@ -279,6 +291,12 @@ namespace ButtonGame.Core
             {
                 atkButtons[atkIndex].gameObject.SetActive(true);
             }
+        }
+
+        private IEnumerator EndTutorialFade(float timeDelay)
+        {
+            yield return new WaitForSeconds(timeDelay);
+            GetComponentInChildren<ChangeSceneButton>().ChangeScene();
         }
 
         private IEnumerator DisableSkills(int[] atkIndexes)

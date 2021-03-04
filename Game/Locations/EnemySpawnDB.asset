@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ce5250e6d3eaa49bc7e2404b318bbc, type: 3}
+  m_Name: EnemySpawnDB
+  m_EditorClassIdentifier: 
+  enemyLists:
+  - location: 1
+    enemyTypes:
+    - {fileID: 1039606837993956888, guid: 71fcf856f77dd5a489adf98f6e17c7d3, type: 3}
+    - {fileID: 4295084416209835755, guid: 3af2fc5c8e06cb343b6d0d689ef55bff, type: 3}
+    roomsToClear: 0
+    locationToUnlock: 2
+  - location: 4
+    enemyTypes:
+    - {fileID: 7404446953737141491, guid: 3cc8c1ded4cf03d4c83cd79d34743187, type: 3}
+    - {fileID: 7096010099583267893, guid: c45a79b56602fcf4fb80407ced122095, type: 3}
+    roomsToClear: 3
+    locationToUnlock: 5
+  - location: 5
+    enemyTypes:
+    - {fileID: 1039606837993956888, guid: 71fcf856f77dd5a489adf98f6e17c7d3, type: 3}
+    roomsToClear: 0
+    locationToUnlock: 2
+  - location: 8
+    enemyTypes:
+    - {fileID: 4051202388295732959, guid: 86b1b9dfb09a5ba43b5052c74c6a1522, type: 3}
+    - {fileID: 8267451805670141381, guid: c038c08015538d24db97d8e021fe2013, type: 3}
+    roomsToClear: 2
+    locationToUnlock: 3
+  - location: 6
+    enemyTypes:
+    - {fileID: 8267451805670141381, guid: c038c08015538d24db97d8e021fe2013, type: 3}
+    - {fileID: 7096010099583267893, guid: c45a79b56602fcf4fb80407ced122095, type: 3}
+    - {fileID: 7404446953737141491, guid: 3cc8c1ded4cf03d4c83cd79d34743187, type: 3}
+    - {fileID: 8334305489803838515, guid: 648ec4a5da33cab48878d2a561cf2c05, type: 3}
+    - {fileID: 4051202388295732959, guid: 86b1b9dfb09a5ba43b5052c74c6a1522, type: 3}
+    roomsToClear: 2
+    locationToUnlock: 3

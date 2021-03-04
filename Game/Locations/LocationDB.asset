@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffead5d576be84b4d808c9263a89b5f0, type: 3}
+  m_Name: LocationDB
+  m_EditorClassIdentifier: 
+  locations:
+  - location: 0
+    name: Tutorial
+    description: Debug text.
+    distance: 0
+    isAvailable: 0
+    isCombatArea: 1
+    hasTraveled: 0
+  - location: 1
+    name: Dawn City
+    description: A sprawling city that is connected to several profitable dungeons
+      of varying sizes. Due to this, it acts as one of the main hubs for the Adventurer's
+      Guild, since nearly all ranks can find work. Named for the large Magic Academy
+      that sees the beginning of many Adventurer's Careers.
+    distance: 0
+    isAvailable: 1
+    isCombatArea: 0
+    hasTraveled: 1
+  - location: 2
+    name: Rondelle
+    description: One of many scattered villages in the country of Gaira. Villagers
+      live a mostly independent life centered around cultivating and selling plant-based
+      foods and herbs not available in dungeons.
+    distance: 2
+    isAvailable: 1
+    isCombatArea: 0
+    hasTraveled: 0
+  - location: 3
+    name: The Rook's Key
+    description: Starter dungeon for low-ranked adventurer's. The guild staff must
+      enjoy hearing newbies brag that they're heading into the Rook Key Dungeon while
+      being oblivious about the name.
+    distance: 0
+    isAvailable: 0
+    isCombatArea: 1
+    hasTraveled: 0
+  - location: 4
+    name: Boss Room
+    description: Final chamber of the Rookie dungeon.
+    distance: 0
+    isAvailable: 0
+    isCombatArea: 1
+    hasTraveled: 0

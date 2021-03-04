@@ -341,17 +341,11 @@ MonoBehaviour:
   outroScreen: {fileID: 2652043973001315224}
   buttonContainer: {fileID: 404941287079887298}
   rewardWindow: {fileID: 8833621504939701885}
+  enemySpawnDB: {fileID: 11400000, guid: 2829bf4d82f1d3a4a954c464db4902eb, type: 2}
   followers: {fileID: 11400000, guid: eaf8e7a3e1fce99499f9ca1182d55460, type: 2}
-  battleCanvas: {fileID: 3874947613725895249}
   followerPrefabs:
   - {fileID: 1893665674785471535, guid: 1baa524934aaced4093155778ec1c8d7, type: 3}
   - {fileID: 3219474026403078554, guid: d5c12acb1537b05489245e76b2e18b06, type: 3}
-  enemyPrefabs:
-  - {fileID: 8267451805670141381, guid: c038c08015538d24db97d8e021fe2013, type: 3}
-  - {fileID: 7096010099583267893, guid: c45a79b56602fcf4fb80407ced122095, type: 3}
-  - {fileID: 7404446953737141491, guid: 3cc8c1ded4cf03d4c83cd79d34743187, type: 3}
-  - {fileID: 8334305489803838515, guid: 648ec4a5da33cab48878d2a561cf2c05, type: 3}
-  - {fileID: 4051202388295732959, guid: 86b1b9dfb09a5ba43b5052c74c6a1522, type: 3}
   battleStart:
     m_PersistentCalls:
       m_Calls:
@@ -367,6 +361,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  enemyPrefabs:
+  - {fileID: 8267451805670141381, guid: c038c08015538d24db97d8e021fe2013, type: 3}
+  - {fileID: 7096010099583267893, guid: c45a79b56602fcf4fb80407ced122095, type: 3}
+  - {fileID: 7404446953737141491, guid: 3cc8c1ded4cf03d4c83cd79d34743187, type: 3}
+  - {fileID: 8334305489803838515, guid: 648ec4a5da33cab48878d2a561cf2c05, type: 3}
+  - {fileID: 4051202388295732959, guid: 86b1b9dfb09a5ba43b5052c74c6a1522, type: 3}
 --- !u!114 &8635451538153761492
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -56,7 +56,7 @@ namespace ButtonGame.Control
             foreach (string id in buffList.Keys)
             {
                 fxIconCount -= 1;
-                fxIconSpawner.ReturnToPool(id);
+                fxIconSpawner.DeactivateIcon(id);
             }
         }
     }

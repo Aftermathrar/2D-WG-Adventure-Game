@@ -37,25 +37,38 @@ namespace ButtonGame.UI.EffectIcon
             iconInstances[id] = instance;
         }
 
-        public virtual void ReturnToPool(string id)
+        public virtual void DeactivateIcon(string id)
         {
             if(iconInstances.ContainsKey(id))
             {
-                EffectIconImage instance = iconInstances[id];
-                int childCount = transform.childCount;
-                if (childCount > 1)
-                {
-                    int fxIndex = instance.transform.GetSiblingIndex();
-                    for (int i = fxIndex + 1; i < childCount; i++)
-                    {
-                        EffectIconImage icon = transform.GetChild(i).GetComponent<EffectIconImage>();
-                        icon.StartCoroutine(icon.MoveHorizontal(iconOffset));
-                    }
-                }
-                instance.gameObject.SetActive(false);
-                instance.transform.SetAsFirstSibling();
-                fxIconStack.Push(instance);
+                ReturnIconToPool(id);
             }
+        }
+
+        public void DeactivateAllIcons()
+        {
+            foreach (string id in iconInstances.Keys)
+            {
+                ReturnIconToPool(id);
+            }
+        }
+
+        private void ReturnIconToPool(string id)
+        {
+            EffectIconImage instance = iconInstances[id];
+            int childCount = transform.childCount;
+            if (childCount > 1)
+            {
+                int fxIndex = instance.transform.GetSiblingIndex();
+                for (int i = fxIndex + 1; i < childCount; i++)
+                {
+                    EffectIconImage icon = transform.GetChild(i).GetComponent<EffectIconImage>();
+                    icon.StartCoroutine(icon.MoveHorizontal(iconOffset));
+                }
+            }
+            instance.gameObject.SetActive(false);
+            instance.transform.SetAsFirstSibling();
+            fxIconStack.Push(instance);
         }
 
         public void UpdateIconFill(string id, float fillPercent, float timeRemaining)

@@ -33,7 +33,7 @@ namespace ButtonGame.UI.EffectIcon
             fxDisplay.SetEffectName(id);
         }
 
-        public override void ReturnToPool(string id)
+        public override void DeactivateIcon(string id)
         {
             if (iconInstances.ContainsKey(id))
             {

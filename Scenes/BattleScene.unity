@@ -430,7 +430,7 @@ PrefabInstance:
     - target: {fileID: 1884226762947482222, guid: 80d78f949e8a92641823838a2effe131,
         type: 3}
       propertyPath: destination
-      value: Dawn City
+      value: DawnCity
       objectReference: {fileID: 0}
     - target: {fileID: 2316349384988136783, guid: 80d78f949e8a92641823838a2effe131,
         type: 3}
@@ -472,6 +472,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2930529482527461820, guid: 80d78f949e8a92641823838a2effe131,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2930529482527461820, guid: 80d78f949e8a92641823838a2effe131,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2930529482527461820, guid: 80d78f949e8a92641823838a2effe131,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 4051202388295732959, guid: 86b1b9dfb09a5ba43b5052c74c6a1522,
+        type: 3}
+    - target: {fileID: 2930529482527461820, guid: 80d78f949e8a92641823838a2effe131,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 4051202388295732959, guid: 86b1b9dfb09a5ba43b5052c74c6a1522,
+        type: 3}
+    - target: {fileID: 2930529482527461820, guid: 80d78f949e8a92641823838a2effe131,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 4051202388295732959, guid: 86b1b9dfb09a5ba43b5052c74c6a1522,
+        type: 3}
     - target: {fileID: 3874947613725895249, guid: 80d78f949e8a92641823838a2effe131,
         type: 3}
       propertyPath: m_Pivot.x
@@ -737,6 +765,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8625281598730452452, guid: 80d78f949e8a92641823838a2effe131,
+        type: 3}
+      propertyPath: m_Name
+      value: PauseMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 9181384867916703313, guid: 80d78f949e8a92641823838a2effe131,
         type: 3}
       propertyPath: response.m_PersistentCalls.m_Calls.Array.size
@@ -793,7 +826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locationDB: {fileID: 11400000, guid: 5f56bdedaaf5d1943bd2d17f1a61b273, type: 2}
-  currentLocation: Dungeon
+  currentLocation: 6
 --- !u!114 &3874947614827803764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,3 +886,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6932f2a9cfba62408194fcdf7d8258d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &3874947614827803767 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3874947613725895249, guid: 80d78f949e8a92641823838a2effe131,
+    type: 3}
+  m_PrefabInstance: {fileID: 3874947614827803761}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3874947614827803768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3874947614827803762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326e1a931a01b614f8fe2ac4b1b61cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followerPrefabs:
+  - {fileID: 1893665674785471535, guid: 1baa524934aaced4093155778ec1c8d7, type: 3}
+  - {fileID: 3219474026403078554, guid: d5c12acb1537b05489245e76b2e18b06, type: 3}
+  parentTransform: {fileID: 3874947614827803767}
+  siblingIndex: 1
+  isCombat: 1
+--- !u!114 &3874947614827803769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3874947614827803762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2def7d8656f36c45989329662c8a71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeFollowerUUID: 
+  classChoices: 0100000002000000
+  nonCombatPrefab: {fileID: 0}
+  followers: []

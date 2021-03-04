@@ -1120,7 +1120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: 1
-  destination: Dawn City
+  destination: DawnCity
   onSceneChange:
     m_PersistentCalls:
       m_Calls: []
@@ -1458,11 +1458,9 @@ MonoBehaviour:
   outroScreen: {fileID: 1836097839}
   buttonContainer: {fileID: 1853654797}
   rewardWindow: {fileID: 1304305108}
+  enemySpawnDB: {fileID: 11400000, guid: 2829bf4d82f1d3a4a954c464db4902eb, type: 2}
   followers: {fileID: 0}
   followerPrefabs: []
-  enemyPrefabs:
-  - {fileID: 1039606837993956888, guid: 71fcf856f77dd5a489adf98f6e17c7d3, type: 3}
-  - {fileID: 4295084416209835755, guid: 3af2fc5c8e06cb343b6d0d689ef55bff, type: 3}
   battleStart:
     m_PersistentCalls:
       m_Calls:
@@ -1499,6 +1497,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b4a991c0124f23648837927b0ad08b3c, type: 2}
   - {fileID: 11400000, guid: 92068fa2faa8fd94a957135977a28eab, type: 2}
   hitTimerSpawner: {fileID: 752114130}
+  effectIconSpawner: {fileID: 3874947614827803762}
 --- !u!114 &1978749224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1712,7 +1711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locationDB: {fileID: 11400000, guid: 5f56bdedaaf5d1943bd2d17f1a61b273, type: 2}
-  currentLocation: Tutorial
+  currentLocation: 1
 --- !u!114 &1978749234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2333,3 +2332,15 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2930529482527461820, guid: 80d78f949e8a92641823838a2effe131, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 80d78f949e8a92641823838a2effe131, type: 3}
+--- !u!114 &3874947614827803762 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3619659672787249628, guid: 80d78f949e8a92641823838a2effe131,
+    type: 3}
+  m_PrefabInstance: {fileID: 3874947614827803761}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134ce31e048043747a34416dad5394d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

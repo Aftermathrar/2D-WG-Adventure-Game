@@ -20,18 +20,28 @@ namespace ButtonGame.Saving
         {
             if(uniqueIdentifier != "") return uniqueIdentifier;
 
-            // SerializedObject serializedObject = new SerializedObject(this);
-            // SerializedProperty property = serializedObject.FindProperty("uniqueIdentifier");
-
-            if (string.IsNullOrEmpty(uniqueIdentifier) || !IsUnique(uniqueIdentifier))
+            while (string.IsNullOrEmpty(uniqueIdentifier) || !IsUnique(uniqueIdentifier))
             {
                 uniqueIdentifier = System.Guid.NewGuid().ToString();
-                // serializedObject.ApplyModifiedProperties();
             }
 
             globalLookup[uniqueIdentifier] = this;
 
             return uniqueIdentifier;
+        }
+
+        public string GenerateNewUniqueIdentifier(string externalUniqueIdentifier)
+        {
+            if (externalUniqueIdentifier != "") return externalUniqueIdentifier;
+
+            while (string.IsNullOrEmpty(externalUniqueIdentifier) || !IsUnique(externalUniqueIdentifier))
+            {
+                externalUniqueIdentifier = System.Guid.NewGuid().ToString();
+            }
+
+            globalLookup[externalUniqueIdentifier] = this;
+
+            return externalUniqueIdentifier;
         }
 
         public void SetUniqueIdentifier(string newIdentifier)

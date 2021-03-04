@@ -10,40 +10,40 @@ namespace ButtonGame.Control
 {
     public class FollowerSpawner : MonoBehaviour
     {
-        [SerializeField] FollowerCollection followers;
+        [SerializeField] Transform parentTransform;
         [SerializeField] BaseStats[] followerPrefabs;
-        [SerializeField] Transform HUDTransform;
+        [SerializeField] Transform parentTransformBackground;
+        [SerializeField] BaseStats[] nonCombatPrefabs;
+        [SerializeField] int siblingIndex = 1;
+        [SerializeField] bool isCombat;
 
-        GameObject followerGO = null;
-
-        private void Awake()
+        public void SpawnActiveFollower(CharacterClass followerClass, string followerUUID, object state = null) 
         {
-            FollowerRole companionToSpawn = new FollowerRole();
-            companionToSpawn = followers.GetFollowerIdentifier(FollowerPosition.Combat);
-            string followerUUID = companionToSpawn.Identifier;
-
-            // If UUID is blank, spawn a random NPC from the prefabs and register it
-            if(followerUUID == string.Empty)
+            foreach (var prefab in followerPrefabs)
             {
-                int randomFollowerIndex = UnityEngine.Random.Range(0, followerPrefabs.Length);
-                BaseStats selectedFollower = followerPrefabs[randomFollowerIndex];
-                followerGO = Instantiate(selectedFollower, HUDTransform).gameObject;
-
-                FollowerRole newCompanion = new FollowerRole();
-                newCompanion.FollowerClass = followerGO.GetComponent<BaseStats>().GetClass();
-                newCompanion.Identifier = followerGO.GetComponent<SaveableEntity>().GenerateNewUniqueIdentifier();
-
-                followers.AddNewFollower(FollowerPosition.Combat, newCompanion);
-            }
-            else // Spawn NPC from SO Dictionary
-            {
-                foreach (BaseStats healClass in followerPrefabs)
+                if(prefab.GetClass() == followerClass)
                 {
-                    if(companionToSpawn.FollowerClass == healClass.GetClass())
-                    {
-                        followerGO = Instantiate(healClass, HUDTransform).gameObject;
-                        followerGO.GetComponent<SaveableEntity>().SetUniqueIdentifier(followerUUID);
-                    }
+                    GameObject followerGO = Instantiate(prefab, parentTransform).gameObject;
+                    SaveableEntity saveableEntity = followerGO.GetComponent<SaveableEntity>();
+                    saveableEntity.SetUniqueIdentifier(followerUUID);
+                    if(state != null) saveableEntity.RestoreState(state);
+                    followerGO.transform.SetSiblingIndex(siblingIndex);
+                }
+            }
+        }
+
+        public void SpawnBackgroundFollower(CharacterClass followerClass, string followerUUID, object state = null)
+        {
+            if(isCombat) return;
+
+            foreach (var prefab in nonCombatPrefabs)
+            {
+                if (prefab.GetClass() == followerClass)
+                {
+                    GameObject followerGO = Instantiate(prefab, parentTransformBackground).gameObject;
+                    SaveableEntity saveableEntity = followerGO.GetComponent<SaveableEntity>();
+                    saveableEntity.SetUniqueIdentifier(followerUUID);
+                    if(state != null) saveableEntity.RestoreState(state);
                 }
             }
         }
