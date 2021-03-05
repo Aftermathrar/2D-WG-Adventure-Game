@@ -18,8 +18,8 @@ GameObject:
   - component: {fileID: 6137850591540128}
   - component: {fileID: 6137850591540131}
   - component: {fileID: 2585730965522721016}
-  - component: {fileID: 6403875892074456822}
   - component: {fileID: 518685586638112331}
+  - component: {fileID: 8327786095007255668}
   m_Layer: 5
   m_Name: FollowerTown
   m_TagString: Follower
@@ -175,7 +175,7 @@ MonoBehaviour:
   baseBody:
     height: 0
     heightScale: 0
-    reciprocalHeightScale: 0
+    inverseHeightScale: 0
     baseWeight: 0
     fatWeight: 0
     eyeColor: 0
@@ -276,19 +276,6 @@ MonoBehaviour:
   floatBoolResponse:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6403875892074456822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6137850591539805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5877edb8cb95a7248be827f88e0c23f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uniqueIdentifier: 
 --- !u!114 &518685586638112331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +291,18 @@ MonoBehaviour:
   npcName: 
   npcRank: 
   currentQuest: 
+--- !u!114 &8327786095007255668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6137850591539805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da301558a6c8b6045ba359a8675c919c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8909728935232299330
 MonoBehaviour:
   m_ObjectHideFlags: 0

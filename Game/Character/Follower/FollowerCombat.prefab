@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 8424557897787468333}
   - component: {fileID: 5019745467978660609}
   - component: {fileID: 4292756227488813779}
-  - component: {fileID: 2728090468353287857}
   - component: {fileID: 336034127231568151}
+  - component: {fileID: -7393164206029125840}
   m_Layer: 5
   m_Name: FollowerCombat
   m_TagString: Follower
@@ -217,7 +217,7 @@ MonoBehaviour:
   baseBody:
     height: 0
     heightScale: 0
-    reciprocalHeightScale: 0
+    inverseHeightScale: 0
     baseWeight: 0
     fatWeight: 0
     eyeColor: 0
@@ -468,19 +468,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2728090468353287857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3010367974231482646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5877edb8cb95a7248be827f88e0c23f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uniqueIdentifier: 
 --- !u!114 &336034127231568151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,6 +483,18 @@ MonoBehaviour:
   npcName: 
   npcRank: 
   currentQuest: 
+--- !u!114 &-7393164206029125840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3010367974231482646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da301558a6c8b6045ba359a8675c919c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3010367975092857043
 PrefabInstance:
   m_ObjectHideFlags: 0

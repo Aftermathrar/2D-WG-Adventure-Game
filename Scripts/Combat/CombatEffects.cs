@@ -46,7 +46,8 @@ namespace ButtonGame.Combat
                 BuffTimer();
         }
 
-        private void LateUpdate() {
+        private void LateUpdate() 
+        {
             if(removeIDs.Count > 0)
                 RemoveBuffs();
         }

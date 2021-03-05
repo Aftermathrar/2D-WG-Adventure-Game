@@ -6,10 +6,8 @@ using ButtonGame.Character;
 using ButtonGame.Combat;
 using ButtonGame.Inventories;
 using ButtonGame.Locations;
-using ButtonGame.Saving;
 using ButtonGame.Stats;
 using ButtonGame.Stats.Enums;
-using ButtonGame.Stats.Follower;
 using TMPro;
 
 namespace ButtonGame.Core
@@ -75,7 +73,7 @@ namespace ButtonGame.Core
             // Spawn enemy
             enemyGO = SpawnNewEnemy(enemyName);
             enemyGO.transform.SetAsFirstSibling();
-            
+
             AssignTargets();
         }
 
@@ -119,12 +117,9 @@ namespace ButtonGame.Core
                     return Instantiate(enemyPrefab, transform, false).gameObject;
                 }
             }
-            Debug.Log("Enemy of type " + enemyType.ToString() + " not found! Spawning random enemy.");
 
-            // Choose random enemy from list
-            int randomEnemyIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
-            BaseStats selectedEnemy = enemyPrefabs[randomEnemyIndex];
-            return Instantiate(selectedEnemy, transform, false).gameObject;
+            // If not found, spawn random available enemy
+            return SpawnNewEnemy();
         }
 
         protected IEnumerator BeginBattle()

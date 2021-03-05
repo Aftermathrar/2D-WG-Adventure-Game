@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ButtonGame.Control;
+using ButtonGame.Events;
 using ButtonGame.Saving;
 using ButtonGame.Stats.Enums;
 using UnityEngine;
@@ -10,10 +12,11 @@ namespace ButtonGame.Core
     [RequireComponent(typeof(FollowerSpawner))]
     public class FollowerManager : MonoBehaviour, ISaveable
     {
-        [SerializeField] string activeFollowerUUID = "";
+        [SerializeField] int activeFollowerIndex = -1;
         [SerializeField] CharacterClass[] classChoices; 
         [SerializeField] List<FollowerEntry> followers = new List<FollowerEntry>();
-        [SerializeField] Transform npcContainer = null;
+        [SerializeField] List<SaveableClone> followerSaveables = new List<SaveableClone>();
+        [SerializeField] GameEvent followerChangeEvent;
         FollowerSpawner followerSpawner = null;
 
         private void Awake() 
@@ -32,7 +35,7 @@ namespace ButtonGame.Core
             FollowerEntry newFollower = new FollowerEntry();
             SaveableEntity saveable = GetComponent<SaveableEntity>();
 
-            newFollower.position = (activeFollowerUUID == "") ? FollowerPosition.Combat : FollowerPosition.Home;
+            newFollower.position = (activeFollowerIndex >= 0) ? FollowerPosition.Home : FollowerPosition.Combat;
             newFollower.followerClass = newClass;
             newFollower.name = "Test NPC " + followers.Count.ToString();
             newFollower.identifier = saveable.GenerateNewUniqueIdentifier("");
@@ -50,42 +53,90 @@ namespace ButtonGame.Core
 
         public bool GetActiveFollower(out string followerUUID)
         {
-            followerUUID = activeFollowerUUID;
-            return (followerUUID != "") ? true : false;
+            if(activeFollowerIndex >= 0)
+            {
+                followerUUID = followers[activeFollowerIndex].identifier;
+                return true;
+            }
+            followerUUID = "";
+            return false;
+        }
+
+        public string GetFollowerID(int index)
+        {
+            return (index < followers.Count) ? followers[index].identifier : "";
+        }
+
+        public string GetFollowerClass(int index)
+        {
+            return (index < followers.Count) ? followers[index].followerClass.ToString() : "";
+        }
+
+        public string GetFollowerPosition(int index)
+        {
+            return (index < followers.Count) ? followers[index].position.ToString() : "";
+        }
+
+        public GameObject GetFollowerObject(int index)
+        {
+            if(index >= followers.Count) return null;
+
+            return followerSaveables[index].gameObject;
+        }
+
+        public void ChangeActiveFollower(int index)
+        {
+            if(index == activeFollowerIndex) return;
+
+            int i;
+            for (i = 0; i < followers.Count; i++)
+            {
+                if(followers[i].position == FollowerPosition.Combat)
+                {
+                    followers[i].state = followerSaveables[i].CaptureState();
+                    followers[i].position = FollowerPosition.Home;
+                    break;
+                }
+            }
+
+            followers[index].state = followerSaveables[index].CaptureState();
+            followers[index].position = FollowerPosition.Combat;
+            activeFollowerIndex = index;
+            
+            // Respawn follower prefabs
+            Destroy(followerSaveables[i].gameObject);
+            Destroy(followerSaveables[index].gameObject);
+            followerSaveables[i] = followerSpawner.SpawnBackgroundFollower(followers[i].followerClass, followers[i].identifier, followers[i].state);
+            followerSaveables[index] = followerSpawner.SpawnActiveFollower(followers[index].followerClass, followers[index].identifier, followers[index].state);
+
+            // Remove potential buffs from player
+            if(followers[i].followerClass == CharacterClass.Priest)
+            {
+                followerChangeEvent.RaiseEvent(EffectName.DivineInfusion.ToString());
+            }
+            else
+            {
+                followerChangeEvent.RaiseEvent(EffectName.Berserk.ToString());
+            }
         }
 
         private void RegisterActiveFollower(FollowerEntry newActiveFollower)
         {
-            activeFollowerUUID = newActiveFollower.identifier;
-            followerSpawner.SpawnActiveFollower(newActiveFollower.followerClass, activeFollowerUUID);
+            activeFollowerIndex = followers.Count - 1;
+            followerSaveables.Add(followerSpawner.SpawnActiveFollower(newActiveFollower.followerClass, newActiveFollower.identifier));
         }
 
         private void RegisterBackgroundFollower(FollowerEntry newFollower)
         {
-            followerSpawner.SpawnBackgroundFollower(newFollower.followerClass, newFollower.identifier);
+            followerSaveables.Add(followerSpawner.SpawnBackgroundFollower(newFollower.followerClass, newFollower.identifier));
         }
 
         public object CaptureState()
         {
-            foreach (var follower in followers)
+            for (int i = 0; i < followers.Count; i++)
             {
-                if(follower.position == FollowerPosition.Combat)
-                {
-                    follower.state = GameObject.FindGameObjectWithTag("Follower").GetComponent<SaveableEntity>().CaptureState();
-                    continue;
-                }
-                else if(npcContainer != null)
-                {
-                    foreach (Transform item in npcContainer.transform)
-                    {
-                        SaveableEntity saveableEntity = item.GetComponent<SaveableEntity>();
-                        if (saveableEntity.GetUniqueIdentifier() == follower.identifier)
-                        {
-                            follower.state = saveableEntity.CaptureState();
-                            break;
-                        }
-                    }
-                }
+                if(followerSaveables[i] == null) continue;
+                followers[i].state = followerSaveables[i].CaptureState();
             }
 
             return followers;
@@ -94,16 +145,17 @@ namespace ButtonGame.Core
         public void RestoreState(object state)
         {
             followers = (List<FollowerEntry>)state;
-            foreach (var follower in followers)
+
+            for (int i = 0; i < followers.Count; i++)
             {
-                if(follower.position == FollowerPosition.Combat)
+                if (followers[i].position == FollowerPosition.Combat)
                 {
-                    activeFollowerUUID = follower.identifier;
-                    followerSpawner.SpawnActiveFollower(follower.followerClass, activeFollowerUUID, follower.state);
+                    activeFollowerIndex = i;
+                    followerSaveables.Add(followerSpawner.SpawnActiveFollower(followers[i].followerClass, followers[i].identifier, followers[i].state));
                 }
                 else
                 {
-                    followerSpawner.SpawnBackgroundFollower(follower.followerClass, follower.identifier, follower.state);
+                    followerSaveables.Add(followerSpawner.SpawnBackgroundFollower(followers[i].followerClass, followers[i].identifier, followers[i].state));
                 }
             }
         }

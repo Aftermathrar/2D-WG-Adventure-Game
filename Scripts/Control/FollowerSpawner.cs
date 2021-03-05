@@ -17,35 +17,41 @@ namespace ButtonGame.Control
         [SerializeField] int siblingIndex = 1;
         [SerializeField] bool isCombat;
 
-        public void SpawnActiveFollower(CharacterClass followerClass, string followerUUID, object state = null) 
+        public SaveableClone SpawnActiveFollower(CharacterClass followerClass, string followerUUID, object state = null) 
         {
             foreach (var prefab in followerPrefabs)
             {
                 if(prefab.GetClass() == followerClass)
                 {
                     GameObject followerGO = Instantiate(prefab, parentTransform).gameObject;
-                    SaveableEntity saveableEntity = followerGO.GetComponent<SaveableEntity>();
-                    saveableEntity.SetUniqueIdentifier(followerUUID);
-                    if(state != null) saveableEntity.RestoreState(state);
+                    SaveableClone saveableClone = followerGO.GetComponent<SaveableClone>();
+                    saveableClone.SetUniqueIdentifier(followerUUID);
+                    if(state != null) saveableClone.RestoreState(state);
                     followerGO.transform.SetSiblingIndex(siblingIndex);
+
+                    return saveableClone;
                 }
             }
+            return null;
         }
 
-        public void SpawnBackgroundFollower(CharacterClass followerClass, string followerUUID, object state = null)
+        public SaveableClone SpawnBackgroundFollower(CharacterClass followerClass, string followerUUID, object state = null)
         {
-            if(isCombat) return;
+            if(isCombat) return null;
 
             foreach (var prefab in nonCombatPrefabs)
             {
                 if (prefab.GetClass() == followerClass)
                 {
                     GameObject followerGO = Instantiate(prefab, parentTransformBackground).gameObject;
-                    SaveableEntity saveableEntity = followerGO.GetComponent<SaveableEntity>();
-                    saveableEntity.SetUniqueIdentifier(followerUUID);
-                    if(state != null) saveableEntity.RestoreState(state);
+                    SaveableClone saveableClone = followerGO.GetComponent<SaveableClone>();
+                    saveableClone.SetUniqueIdentifier(followerUUID);
+                    if(state != null) saveableClone.RestoreState(state);
+
+                    return saveableClone;
                 }
             }
+            return null;
         }
     }
 }
