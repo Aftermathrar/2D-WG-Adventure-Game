@@ -75,36 +75,14 @@ namespace ButtonGame.Core
             return false;
         }
 
-        public string GetFollowerID(int index)
-        {
-            return (index < followers.Count) ? followers[index].identifier : "";
-        }
-
-        public string GetFollowerClass(int index)
-        {
-            return (index < followers.Count) ? followers[index].followerClass.ToString() : "";
-        }
-
-        public string GetFollowerPosition(int index)
-        {
-            return (index < followers.Count) ? followers[index].position.ToString() : "";
-        }
-
-        public GameObject GetFollowerObject(int index)
-        {
-            if(index >= followers.Count) return null;
-
-            return followerSaveables[index].gameObject;
-        }
-
         public void ChangeActiveFollower(int index)
         {
-            if(index == activeFollowerIndex) return;
+            if (index == activeFollowerIndex) return;
 
             int i;
             for (i = 0; i < followers.Count; i++)
             {
-                if(followers[i].position == FollowerPosition.Combat)
+                if (followers[i].position == FollowerPosition.Combat)
                 {
                     followers[i].state = followerSaveables[i].CaptureState();
                     followers[i].position = FollowerPosition.Home;
@@ -115,7 +93,7 @@ namespace ButtonGame.Core
             followers[index].state = followerSaveables[index].CaptureState();
             followers[index].position = FollowerPosition.Combat;
             activeFollowerIndex = index;
-            
+
             // Respawn follower prefabs
             Destroy(followerSaveables[i].gameObject);
             Destroy(followerSaveables[index].gameObject);
@@ -123,7 +101,7 @@ namespace ButtonGame.Core
             followerSaveables[index] = followerSpawner.SpawnActiveFollower(followers[index].followerClass, followers[index].identifier, followers[index].state);
 
             // Remove potential buffs from player
-            if(followers[i].followerClass == CharacterClass.Priest)
+            if (followers[i].followerClass == CharacterClass.Priest)
             {
                 followerChangeEvent.RaiseEvent(EffectName.DivineInfusion.ToString());
             }
@@ -131,6 +109,26 @@ namespace ButtonGame.Core
             {
                 followerChangeEvent.RaiseEvent(EffectName.Berserk.ToString());
             }
+        }
+
+        public string GetFollowerID(int index)
+        {
+            return followers[index].identifier;
+        }
+
+        public string GetFollowerClass(int index)
+        {
+            return followers[index].followerClass.ToString();
+        }
+
+        public string GetFollowerPosition(int index)
+        {
+            return followers[index].position.ToString();
+        }
+
+        public GameObject GetFollowerObject(int index)
+        {
+            return followerSaveables[index].gameObject;
         }
 
         private void RegisterActiveFollower(FollowerEntry newActiveFollower)
