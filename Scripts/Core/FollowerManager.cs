@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ButtonGame.Attributes;
 using ButtonGame.Control;
 using ButtonGame.Events;
 using ButtonGame.Saving;
@@ -33,11 +34,13 @@ namespace ButtonGame.Core
         public void AddNewFollower(CharacterClass newClass)
         {
             FollowerEntry newFollower = new FollowerEntry();
+            // Get SaveableEntity component on Manager in order to generate UUID
             SaveableEntity saveable = GetComponent<SaveableEntity>();
+            int followerCount = followers.Count;
 
             newFollower.position = (activeFollowerIndex >= 0) ? FollowerPosition.Home : FollowerPosition.Combat;
             newFollower.followerClass = newClass;
-            newFollower.name = "Test NPC " + followers.Count.ToString();
+            newFollower.name = "Test NPC " + followerCount.ToString();
             newFollower.identifier = saveable.GenerateNewUniqueIdentifier("");
 
             followers.Add(newFollower);
@@ -49,6 +52,16 @@ namespace ButtonGame.Core
             {
                 RegisterBackgroundFollower(newFollower);
             }
+            
+            // FollowerSaveables is reference list to spawned NPCs
+            NPCInfo info = followerSaveables[followerCount].GetComponent<NPCInfo>();
+            info.SetCharacterInfo("name", newFollower.name);
+            info.SetCharacterInfo("rank", "Rank E");
+        }
+
+        public int GetFollowerCount()
+        {
+            return followers.Count;
         }
 
         public bool GetActiveFollower(out string followerUUID)

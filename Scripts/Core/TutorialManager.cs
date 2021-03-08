@@ -90,7 +90,6 @@ namespace ButtonGame.Core
         public void BeginTutorialBattle()
         {
             LocationList location = GetComponent<LocationManager>().GetCurrentLocation();
-            Debug.Log(location.ToString());
             enemyPrefabs = enemySpawnDB.GetEnemyList(location);
             CharacterClass nextEnemy = enemyPrefabs[battleCounter].GetClass();
             BattleSetup(nextEnemy);

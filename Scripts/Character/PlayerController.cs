@@ -4,6 +4,7 @@ using TMPro;
 using ButtonGame.Attributes;
 using ButtonGame.Combat;
 using System.Collections;
+using System.Text;
 
 namespace ButtonGame.Character
 {
@@ -19,6 +20,7 @@ namespace ButtonGame.Character
         float totalLock;
         float timeInBattle;
         float totalDamage;
+        StringBuilder dpsString = new StringBuilder("DPS: ", 20);
         bool isBattleActive = false;
 
         // Naturally regen mana every 5s
@@ -121,7 +123,10 @@ namespace ButtonGame.Character
             {
                 dps = Mathf.CeilToInt(totalDamage / timeInBattle);
             }
-            dpsText.text = "DPS: " + dps;
+
+            dpsString.Length = 5;
+            dpsString.Append(dps);
+            dpsText.text = dpsString.ToString();
         }
 
         public void DamageDealt(float damage)

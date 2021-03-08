@@ -8,43 +8,81 @@ using UnityEngine.UI;
 namespace ButtonGame.UI.Menus
 {
     public class FollowerSlotUI : MonoBehaviour
-    {
-        [SerializeField] FollowerManager followerManager;
-        [SerializeField] Image icon = null;
-        [SerializeField] Text slotText;
+    {   
+        [SerializeField] Text classText;
         [SerializeField] Text followerName;
         [SerializeField] Text rankText;
         [SerializeField] Text jobText;
         [SerializeField] Text hungerText;
 
         Button button;
+        FollowerManager followerManager;
 
-        int slot;
+        [SerializeField]
+        int slot = -1;
         
         private void Awake() 
         {
             button = GetComponent<Button>();
-            slot = transform.GetSiblingIndex();
         }
 
-        private void OnEnable() 
+        private void OnDisable() 
         {
+            gameObject.SetActive(false);
+        }
+
+        public void SlotSetup(FollowerManager manager, int slotNumber)
+        {
+            followerManager = manager;
+            slot = slotNumber;
+            LayoutElement layout = GetComponent<LayoutElement>();
+            RectTransform parentRect = transform.parent.parent.GetComponent<RectTransform>();
+            layout.preferredWidth = (parentRect.rect.width - 20) / 2;
+
             GameObject followerGO = followerManager.GetFollowerObject(slot);
-            if(followerGO == null) return;
+            if (followerGO == null) return;
 
             NPCInfo info = followerGO.GetComponent<NPCInfo>();
 
-            slotText.text = followerManager.GetFollowerClass(slot);
+            classText.text = (followerManager.GetFollowerClass(slot) == "Priest") ? "Priest" : "Witch Doctor";
             followerName.text = info.GetCharacterInfo("name");
             rankText.text = info.GetCharacterInfo("rank");
-            jobText.text = followerManager.GetFollowerPosition(slot);
-            hungerText.text = ((int)followerGO.GetComponent<Fullness>().GetAttributeValue()).ToString();
+            jobText.text = GetPositionToDisplay();
+            hungerText.text = GetHungerDisplay(followerGO.GetComponent<Fullness>().GetPercentage());
         }
 
         public void ChangeFollower()
         {
             followerManager.ChangeActiveFollower(slot);
-            OnEnable();
+            GetComponentInParent<FollowerMenu>().CloseMenu();
+        }
+
+        private string GetPositionToDisplay()
+        {
+            string position = followerManager.GetFollowerPosition(slot);
+            switch (position)
+            {
+                case "Combat":
+                    return "In Party";
+                case "Home":
+                    return "Idle";
+                default:
+                    return "Lost to the Void";
+            }
+        }
+
+        private string GetHungerDisplay(float hungerPercent)
+        {
+            if(hungerPercent <= 10)
+                return "Starving";
+            else if(hungerPercent <= 50)
+                return "Hungry";
+            else if(hungerPercent <= 80)
+                return "Content";
+            else if(hungerPercent <= 100)
+                return "Stuffed";
+            else
+                return "Overstuffed";
         }
     }
 }

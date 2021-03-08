@@ -27,21 +27,27 @@ namespace ButtonGame.Attributes
             return infoLookup[key];
         }
 
-        public void SetCharacterInfo(Dictionary<string, string> newInfoLookup)
-        {
-            infoLookup = newInfoLookup;
-            npcName = infoLookup["name"];
-            npcRank = infoLookup["rank"];
-            currentQuest = infoLookup["quest"];
-        }
-
         public void SetCharacterInfo(string key, string newInfo)
         {
             BuildLookup();
             if(infoLookup.ContainsKey(key))
             {
                 infoLookup[key] = newInfo;
+                UpdateProperties();
             }
+        }
+
+        private void SetCharacterInfo(Dictionary<string, string> newInfoLookup)
+        {
+            infoLookup = newInfoLookup;
+            UpdateProperties();
+        }
+
+        private void UpdateProperties()
+        {
+            npcName = infoLookup["name"];
+            npcRank = infoLookup["rank"];
+            currentQuest = infoLookup["quest"];
         }
 
         private void BuildLookup()
