@@ -16,7 +16,7 @@ public class RestCombat : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<Health>();
         playerMana = player.GetComponent<Mana>();
-        battleManager = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<LevelManager>();
+        battleManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
     }
 
     private void OnEnable() 

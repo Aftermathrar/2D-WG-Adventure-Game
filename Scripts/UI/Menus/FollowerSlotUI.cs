@@ -15,6 +15,9 @@ namespace ButtonGame.UI.Menus
         [SerializeField] Text jobText;
         [SerializeField] Text hungerText;
 
+        [SerializeField] LayoutElement layout = null;
+        [SerializeField] RectTransform parentRect = null;
+
         Button button;
         FollowerManager followerManager;
 
@@ -35,8 +38,6 @@ namespace ButtonGame.UI.Menus
         {
             followerManager = manager;
             slot = slotNumber;
-            LayoutElement layout = GetComponent<LayoutElement>();
-            RectTransform parentRect = transform.parent.parent.GetComponent<RectTransform>();
             layout.preferredWidth = (parentRect.rect.width - 20) / 2;
 
             GameObject followerGO = followerManager.GetFollowerObject(slot);

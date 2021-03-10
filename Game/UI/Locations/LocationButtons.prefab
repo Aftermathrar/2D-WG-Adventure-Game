@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 5137029731604046359}
   - component: {fileID: 5137029731604046358}
   - component: {fileID: 5137029731604046361}
+  - component: {fileID: 8845666049131554233}
   m_Layer: 5
   m_Name: LocationButtons
   m_TagString: Untagged
@@ -168,6 +169,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8845666049131554233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5137029731604046363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d367a51c961c64cb2a0d8f8c4d947f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locationMenuDB: {fileID: 11400000, guid: f744190d09882d542b6a423f131600e0, type: 2}
+  menuSlots:
+  - {fileID: 6194902621609612440}
+  - {fileID: 7193350322545019198}
+  - {fileID: 3118608269180141705}
+  - {fileID: 8486123311750892039}
+  - {fileID: 6408153700434382274}
+  - {fileID: 2535636211865758237}
+  - {fileID: 3568531572782818144}
+  - {fileID: 3274802063270807680}
 --- !u!1 &5718553083690845412
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +418,7 @@ PrefabInstance:
     - target: {fileID: 2702968477953648946, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
       propertyPath: m_Name
-      value: LocationButton (1)
+      value: LocationButton7
       objectReference: {fileID: 0}
     - target: {fileID: 2702968477953648946, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
@@ -620,12 +643,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05bf4445084b85d468604d05aed1b4ca, type: 3}
---- !u!224 &10551596368291813 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3052829337909530906, guid: 05bf4445084b85d468604d05aed1b4ca,
-    type: 3}
-  m_PrefabInstance: {fileID: 3060381237268281087}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5419803068055782492 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7012010790293926563, guid: 05bf4445084b85d468604d05aed1b4ca,
@@ -636,6 +653,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &10551596368291813 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3052829337909530906, guid: 05bf4445084b85d468604d05aed1b4ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 3060381237268281087}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3568531572782818144 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2016856219290506655, guid: 05bf4445084b85d468604d05aed1b4ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 3060381237268281087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f674f26963e25eb4c903f227b627d083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3511353850836358422
@@ -673,7 +708,7 @@ PrefabInstance:
     - target: {fileID: 2702968477953648946, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
       propertyPath: m_Name
-      value: LocationButton
+      value: LocationButton3
       objectReference: {fileID: 0}
     - target: {fileID: 3052829337909530906, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
@@ -890,6 +925,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3118608269180141705 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2016856219290506655, guid: 05bf4445084b85d468604d05aed1b4ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 3511353850836358422}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f674f26963e25eb4c903f227b627d083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1938519962489455628 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3052829337909530906, guid: 05bf4445084b85d468604d05aed1b4ca,
@@ -931,7 +978,7 @@ PrefabInstance:
     - target: {fileID: 2702968477953648946, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
       propertyPath: m_Name
-      value: LocationButton (1)
+      value: LocationButton8
       objectReference: {fileID: 0}
     - target: {fileID: 2702968477953648946, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
@@ -1159,6 +1206,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3274802063270807680 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2016856219290506655, guid: 05bf4445084b85d468604d05aed1b4ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 3931430455968013599}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f674f26963e25eb4c903f227b627d083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4092984505847594882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1194,7 +1253,7 @@ PrefabInstance:
     - target: {fileID: 2702968477953648946, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
       propertyPath: m_Name
-      value: LocationButton (1)
+      value: LocationButton6
       objectReference: {fileID: 0}
     - target: {fileID: 2702968477953648946, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
@@ -1409,6 +1468,18 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05bf4445084b85d468604d05aed1b4ca, type: 3}
+--- !u!114 &2535636211865758237 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2016856219290506655, guid: 05bf4445084b85d468604d05aed1b4ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 4092984505847594882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f674f26963e25eb4c903f227b627d083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6449885916429667617 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7012010790293926563, guid: 05bf4445084b85d468604d05aed1b4ca,
@@ -1462,7 +1533,7 @@ PrefabInstance:
     - target: {fileID: 2702968477953648946, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
       propertyPath: m_Name
-      value: LocationButton (1)
+      value: LocationButton5
       objectReference: {fileID: 0}
     - target: {fileID: 2702968477953648946, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
@@ -1672,6 +1743,12 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05bf4445084b85d468604d05aed1b4ca, type: 3}
+--- !u!224 &7588233073458350407 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3052829337909530906, guid: 05bf4445084b85d468604d05aed1b4ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 4833213271939356765}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2476046810465626878 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7012010790293926563, guid: 05bf4445084b85d468604d05aed1b4ca,
@@ -1684,12 +1761,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &7588233073458350407 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3052829337909530906, guid: 05bf4445084b85d468604d05aed1b4ca,
+--- !u!114 &6408153700434382274 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2016856219290506655, guid: 05bf4445084b85d468604d05aed1b4ca,
     type: 3}
   m_PrefabInstance: {fileID: 4833213271939356765}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f674f26963e25eb4c903f227b627d083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5622153797740806407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1735,7 +1818,7 @@ PrefabInstance:
     - target: {fileID: 2702968477953648946, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
       propertyPath: m_Name
-      value: LocationButton
+      value: LocationButton1
       objectReference: {fileID: 0}
     - target: {fileID: 3052829337909530906, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
@@ -1932,6 +2015,41 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
       objectReference: {fileID: 1828761218325229058}
+    - target: {fileID: 7012010790293926563, guid: 05bf4445084b85d468604d05aed1b4ca,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012010790293926563, guid: 05bf4445084b85d468604d05aed1b4ca,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012010790293926563, guid: 05bf4445084b85d468604d05aed1b4ca,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8845666049131554233}
+    - target: {fileID: 7012010790293926563, guid: 05bf4445084b85d468604d05aed1b4ca,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012010790293926563, guid: 05bf4445084b85d468604d05aed1b4ca,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeNodeOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012010790293926563, guid: 05bf4445084b85d468604d05aed1b4ca,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ButtonGame.Locations.MenuManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012010790293926563, guid: 05bf4445084b85d468604d05aed1b4ca,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8184893725886483617, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
       propertyPath: m_Sprite
@@ -1956,6 +2074,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6194902621609612440 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2016856219290506655, guid: 05bf4445084b85d468604d05aed1b4ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 5622153797740806407}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f674f26963e25eb4c903f227b627d083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7942542401062297496
@@ -2003,7 +2133,7 @@ PrefabInstance:
     - target: {fileID: 2702968477953648946, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
       propertyPath: m_Name
-      value: LocationButton
+      value: LocationButton4
       objectReference: {fileID: 0}
     - target: {fileID: 3052829337909530906, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
@@ -2239,6 +2369,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7942542401062297496}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8486123311750892039 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2016856219290506655, guid: 05bf4445084b85d468604d05aed1b4ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 7942542401062297496}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f674f26963e25eb4c903f227b627d083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1114146758371781947 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7012010790293926563, guid: 05bf4445084b85d468604d05aed1b4ca,
@@ -2296,7 +2438,7 @@ PrefabInstance:
     - target: {fileID: 2702968477953648946, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
       propertyPath: m_Name
-      value: LocationButton
+      value: LocationButton2
       objectReference: {fileID: 0}
     - target: {fileID: 2702968477953648946, guid: 05bf4445084b85d468604d05aed1b4ca,
         type: 3}
@@ -2516,6 +2658,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7193350322545019198 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2016856219290506655, guid: 05bf4445084b85d468604d05aed1b4ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 8660063685892758689}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f674f26963e25eb4c903f227b627d083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &5941213355478404539 stripped

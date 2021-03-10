@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ButtonGame.Locations
 {
-    [CreateAssetMenu(fileName = "LocationDB", menuName = "Stats/LocationDB")]
+    [CreateAssetMenu(fileName = "LocationDB", menuName = "Locations/LocationDB")]
     public class LocationDB : ScriptableObject
     {
         [SerializeField] Location[] locations = null;

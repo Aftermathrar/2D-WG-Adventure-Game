@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ButtonGame.Attributes;
 using ButtonGame.Saving;
 using UnityEngine;
 
@@ -10,6 +11,9 @@ namespace ButtonGame.Locations
     {
         [SerializeField] LocationDB locationDB = null;
         [SerializeField] LocationList currentLocation;
+        [SerializeField] TownNodeList currentNode;
+        [SerializeField] PlayerInfo playerInfo;
+        [SerializeField] MenuManager menuManager;
         Dictionary<LocationList, Location> locationLookup = null;
         List<LocationList> availableLocations = new List<LocationList>();
 
@@ -67,12 +71,17 @@ namespace ButtonGame.Locations
         }
 
         // Set
+        // Comes from SceneChangeObj, which is on buttons that change scene (Save Slots/Travel Buttons)
         public void SetCurrentLocation(string locName)
         {
             if(!Enum.TryParse<LocationList>(locName, out currentLocation))
             {
                 Debug.LogError("Location not found.");
+                return;
             }
+            // SceneChangeObj gets data from PlayerInfo (for Save Slots), so update location in it
+            playerInfo.SetPlayerInfo("location", locName);
+            currentNode = TownNodeList.Main;
         }
 
         public void SetAvailable(LocationList locName, bool value)
@@ -121,14 +130,27 @@ namespace ButtonGame.Locations
         }
 
         // Save system
+        [System.Serializable]
+        private class LocationState
+        {
+            public LocationList currentLocation;
+            public Dictionary<LocationList, Location> locationLookup;
+        }
+
         public object CaptureState()
         {
-            return locationLookup;
+            LocationState state = new LocationState();
+            state.currentLocation = currentLocation;
+            state.locationLookup = locationLookup;
+            return state;
         }
 
         public void RestoreState(object state)
         {
-            locationLookup = (Dictionary<LocationList, Location>)state;
+            LocationState locationState = (LocationState)state;
+            locationLookup = locationState.locationLookup;
+            currentLocation = locationState.currentLocation;
+            currentNode = TownNodeList.Main;
 
             foreach (Location location in locationDB.GetLocations())
             {
@@ -146,6 +168,7 @@ namespace ButtonGame.Locations
             }
 
             BuildAvailableList();
+            menuManager.MakeMainMenu(currentLocation);
         }
     }
 }

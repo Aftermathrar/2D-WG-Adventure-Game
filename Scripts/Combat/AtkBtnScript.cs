@@ -60,7 +60,7 @@
 //             baseStats = player.GetComponent<BaseStats>();
 //             fighter = player.GetComponent<Fighter>();
 //             attackValues = player.GetComponent<AttackValues>();
-//             levelManager = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<LevelManager>();
+//             levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
 //             levelManager.StartCurrentBattle += StartBattle;
 //             levelManager.EndCurrentBattle += EndBattle;
 //         }

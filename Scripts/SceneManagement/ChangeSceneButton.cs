@@ -18,6 +18,7 @@ namespace ButtonGame.SceneManagement
         {
             transform.SetParent(null);
             onSceneChange?.Invoke();
+            locationChangeEvent.RaiseEvent(destination);
             StartCoroutine(Transition());
         }
 
@@ -25,6 +26,7 @@ namespace ButtonGame.SceneManagement
         {
             transform.SetParent(null);
             onSceneChange?.Invoke();
+            locationChangeEvent.RaiseEvent(destination);
             StartCoroutine(Transition(saveFile));
         }
 
@@ -59,7 +61,6 @@ namespace ButtonGame.SceneManagement
             yield return savingWrapper.Load();
 
             savingWrapper.Save();
-            locationChangeEvent.RaiseEvent(destination);
             loadFader.FadeInImmediate();
             Time.timeScale = 1f;
 
@@ -87,7 +88,6 @@ namespace ButtonGame.SceneManagement
             yield return savingWrapper.Load(saveFile);
 
             // savingWrapper.Save(saveFile);
-            locationChangeEvent.RaiseEvent(destination);
             loadFader.FadeInImmediate();
             Time.timeScale = 1f;
 

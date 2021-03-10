@@ -16,7 +16,7 @@ namespace ButtonGame.Control
         private void OnEnable()
         {
             tooltipWindow = GameObject.FindGameObjectWithTag("TooltipWindow");
-            battleManager = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<LevelManager>();
+            battleManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         }
 
         public void Continue()

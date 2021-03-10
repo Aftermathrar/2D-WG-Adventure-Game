@@ -1,0 +1,201 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0529b509e755249b678ec8f1db91d5, type: 3}
+  m_Name: LocationMenuDB
+  m_EditorClassIdentifier: 
+  locationMenuLists:
+  - locationName: Dawn City
+    location: 2
+    townNodes:
+    - townNodeName: Main
+      townNode: 1
+      menuInformation:
+      - titleText: Home
+        subtitleText: 
+        sprite: {fileID: 21300000, guid: 530e7e15b4e752341848a89ab37bb557, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 2
+        isMenu: 0
+      - titleText: Market
+        subtitleText: 
+        sprite: {fileID: 21300000, guid: cece6ab4c4c9f12489f32798fb822cdc, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 3
+        isMenu: 0
+      - titleText: Guild
+        subtitleText: 
+        sprite: {fileID: 21300000, guid: c803f7ef2cded30419c2eec61674b987, type: 3}
+        spriteColor: {r: 0.8509804, g: 0.6156863, b: 0.3882353, a: 1}
+        connectedNode: 4
+        isMenu: 0
+      - titleText: Travel
+        subtitleText: 
+        sprite: {fileID: 21300000, guid: 50b520ea761b294419c80f78bb8b22ea, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 5
+        isMenu: 1
+    - townNodeName: Home
+      townNode: 2
+      menuInformation:
+      - titleText: Back
+        subtitleText: to Town
+        sprite: {fileID: 21300000, guid: 3fa452765e1140b478163c03d137feed, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 1
+        isMenu: 0
+      - titleText: Manage
+        subtitleText: Party
+        sprite: {fileID: 21300000, guid: af85e019d3ea5ad47b2995f30e91642b, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 6
+        isMenu: 1
+      - titleText: Kitchen
+        subtitleText: 
+        sprite: {fileID: 21300000, guid: 4c48361cc4c63214d8a499f9674e0068, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 7
+        isMenu: 1
+      - titleText: Facilities
+        subtitleText: 
+        sprite: {fileID: 21300000, guid: 8082b8f77e8add84fa20066e639afb5a, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 8
+        isMenu: 1
+    - townNodeName: Market
+      townNode: 3
+      menuInformation:
+      - titleText: Back
+        subtitleText: to Town
+        sprite: {fileID: 21300000, guid: 3fa452765e1140b478163c03d137feed, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 1
+        isMenu: 0
+      - titleText: Tailor
+        subtitleText: 
+        sprite: {fileID: 21300000, guid: 669de20ca9c7d7b43a535657f2ed14cc, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 15
+        isMenu: 1
+      - titleText: Blacksmith
+        subtitleText: 
+        sprite: {fileID: 21300000, guid: bfd021d0c17143542b3c24358400f03a, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 14
+        isMenu: 1
+      - titleText: Furnishings
+        subtitleText: 
+        sprite: {fileID: 21300000, guid: 06a463ce04f9fed46aa58066bc797945, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 16
+        isMenu: 1
+      - titleText: Food
+        subtitleText: Stall
+        sprite: {fileID: 21300000, guid: cece6ab4c4c9f12489f32798fb822cdc, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 10
+        isMenu: 1
+      - titleText: Cafe
+        subtitleText: 
+        sprite: {fileID: 21300000, guid: 5dbb17e13ad09ea4aa920ae9daf9c6fd, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 11
+        isMenu: 1
+      - titleText: Restaurant
+        subtitleText: 
+        sprite: {fileID: 21300000, guid: 9a11fb9037ff3724a9728d498aceaa97, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 12
+        isMenu: 1
+      - titleText: Bakery
+        subtitleText: 
+        sprite: {fileID: 21300000, guid: 2dfc5ac4e251a184b8233dcffe3c0874, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 13
+        isMenu: 1
+    - townNodeName: Guild
+      townNode: 4
+      menuInformation:
+      - titleText: Back
+        subtitleText: to Town
+        sprite: {fileID: 21300000, guid: 3fa452765e1140b478163c03d137feed, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 1
+        isMenu: 0
+      - titleText: Quest
+        subtitleText: Counter
+        sprite: {fileID: 21300000, guid: 1453dbf51d2ec2044a74b4bfe2cf93ac, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 17
+        isMenu: 1
+      - titleText: Dining
+        subtitleText: Hall
+        sprite: {fileID: 21300000, guid: 947c8e7d8f0cbed4b9ff8934e98874b7, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 20
+        isMenu: 1
+      - titleText: Bar
+        subtitleText: 
+        sprite: {fileID: 21300000, guid: 2b2f3485d2621a240901dd226d65349d, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 21
+        isMenu: 1
+      - titleText: Bounty
+        subtitleText: Turn In
+        sprite: {fileID: 21300000, guid: 9f1d8ae3e0260314a8a63003aa884082, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 18
+        isMenu: 1
+      - titleText: Request
+        subtitleText: Board
+        sprite: {fileID: 21300000, guid: fd4e44bf48c5f67419b24a779d607799, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 19
+        isMenu: 1
+  - locationName: Rondelle
+    location: 3
+    townNodes:
+    - townNodeName: Main
+      townNode: 1
+      menuInformation:
+      - titleText: 
+        subtitleText: 
+        sprite: {fileID: 0}
+        spriteColor: {r: 0, g: 0, b: 0, a: 0}
+        connectedNode: 0
+        isMenu: 0
+      - titleText: 
+        subtitleText: 
+        sprite: {fileID: 0}
+        spriteColor: {r: 0, g: 0, b: 0, a: 0}
+        connectedNode: 0
+        isMenu: 0
+      - titleText: 
+        subtitleText: 
+        sprite: {fileID: 0}
+        spriteColor: {r: 0, g: 0, b: 0, a: 0}
+        connectedNode: 0
+        isMenu: 0
+      - titleText: 
+        subtitleText: 
+        sprite: {fileID: 0}
+        spriteColor: {r: 0, g: 0, b: 0, a: 0}
+        connectedNode: 0
+        isMenu: 0
+    - townNodeName: 
+      townNode: 0
+      menuInformation: []
+    - townNodeName: 
+      townNode: 0
+      menuInformation: []
+    - townNodeName: 
+      townNode: 0
+      menuInformation: []

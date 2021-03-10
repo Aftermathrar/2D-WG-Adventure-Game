@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ButtonGame.Locations
 {
-    [CreateAssetMenu(fileName = "EnemySpawnDB", menuName = "Stats/EnemySpawnDB", order = 0)]
+    [CreateAssetMenu(fileName = "EnemySpawnDB", menuName = "Locations/EnemySpawnDB", order = 0)]
     public class EnemySpawnDB : ScriptableObject 
     {
         [SerializeField] EnemyList[] enemyLists;

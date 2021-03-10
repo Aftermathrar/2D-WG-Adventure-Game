@@ -365,6 +365,9 @@ MonoBehaviour:
   rankText: {fileID: 533726026868790283}
   jobText: {fileID: 2889774944557391903}
   hungerText: {fileID: 7210052531945816767}
+  layout: {fileID: 2435580247087753056}
+  parentRect: {fileID: 0}
+  slot: -1
 --- !u!114 &2435580247087753056
 MonoBehaviour:
   m_ObjectHideFlags: 0

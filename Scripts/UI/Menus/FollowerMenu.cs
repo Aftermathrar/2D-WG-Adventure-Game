@@ -33,7 +33,7 @@ namespace ButtonGame.UI.Menus
             }
         }
 
-        private void OpenMenu()
+        public void OpenMenu()
         {
             background.enabled = true;
             titleText.text = "No Active Companion";

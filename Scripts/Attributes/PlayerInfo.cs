@@ -34,9 +34,8 @@ namespace ButtonGame.Attributes
             return infoLookup[key];
         }
 
-        public void SetPlayerInfo(Dictionary<string, string> newInfoLookup)
+        public void UpdatePlayerInfo()
         {
-            infoLookup = newInfoLookup;
             playerName = infoLookup["name"];
             playerRank = infoLookup["rank"];
             time = infoLookup["time"];
@@ -45,12 +44,19 @@ namespace ButtonGame.Attributes
             currentScene = int.Parse(infoLookup["scene"]);
         }
 
+        public void SetPlayerInfo(Dictionary<string, string> newInfoLookup)
+        {
+            infoLookup = newInfoLookup;
+            UpdatePlayerInfo();
+        }
+
         public void SetPlayerInfo(string key, string newInfo)
         {
             BuildLookup();
             if(infoLookup.ContainsKey(key))
             {
                 infoLookup[key] = newInfo;
+                UpdatePlayerInfo();
             }
         }
 
@@ -77,12 +83,7 @@ namespace ButtonGame.Attributes
         public void RestoreState(object state)
         {
             infoLookup = (Dictionary<string, string>)state;
-            playerName = infoLookup["name"];
-            playerRank = infoLookup["rank"];
-            time = infoLookup["time"];
-            currentQuest = infoLookup["quest"];
-            currentLocation = infoLookup["location"];
-            currentScene = int.Parse(infoLookup["scene"]);
+            UpdatePlayerInfo();
         }
     }
 }

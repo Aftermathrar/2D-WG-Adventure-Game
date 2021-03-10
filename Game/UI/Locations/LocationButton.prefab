@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 5539854442147921681}
   - component: {fileID: 968393624576187054}
   - component: {fileID: 7012010790293926563}
+  - component: {fileID: 2016856219290506655}
   - component: {fileID: 5900120868557075587}
   m_Layer: 5
   m_Name: LocationButton
@@ -199,6 +200,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2016856219290506655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702968477953648946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f674f26963e25eb4c903f227b627d083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleText: {fileID: 5850152604874002523}
+  subtitleText: {fileID: 422311063800965780}
+  image: {fileID: 8184893725886483617}
 --- !u!114 &5900120868557075587
 MonoBehaviour:
   m_ObjectHideFlags: 0
