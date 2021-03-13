@@ -19,17 +19,18 @@ MonoBehaviour:
     menuCategories:
     - category: Buy
       menuContents:
-      - item: {fileID: 11400000, guid: 7687eea85a411eb4496550b386dc6b5f, type: 2}
-      - item: {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
+      - {fileID: 11400000, guid: 7687eea85a411eb4496550b386dc6b5f, type: 2}
+      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
     - category: Craft
-      menuContents: []
+      menuContents:
+      - {fileID: 11400000, guid: f2979878a58c2a94fa5f16638c702f30, type: 2}
   - townNodeName: Tailor
     townNode: 15
     isMerchant: 1
     menuCategories:
     - category: Buy
       menuContents:
-      - item: {fileID: 11400000, guid: 97fbc2f2331fff0459daa2d0e233a5af, type: 2}
-      - item: {fileID: 11400000, guid: 665e0aa1400fca340a7fc16358eefcdc, type: 2}
+      - {fileID: 11400000, guid: 665e0aa1400fca340a7fc16358eefcdc, type: 2}
+      - {fileID: 11400000, guid: 12bf4338f915b7a48a69d4db6e7ed352, type: 2}
     - category: Craft
       menuContents: []

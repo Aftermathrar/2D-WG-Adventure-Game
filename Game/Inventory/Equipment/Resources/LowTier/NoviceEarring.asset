@@ -20,10 +20,9 @@ MonoBehaviour:
     iconImage: {fileID: 0}
     description: Commonly produced Magic Earring. Part of a larger set.
   icon: {fileID: 21300000, guid: a8a4baebfca19a74fb5d81e7df973220, type: 3}
-  value: 0
+  value: 1
   stackable: 0
   allowedEquipLocation: 4
-  equipClass: 0
   equipmentStats:
   - stat: 6
     value: 4

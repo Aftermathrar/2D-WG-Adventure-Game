@@ -20,7 +20,7 @@ MonoBehaviour:
     iconImage: {fileID: 0}
     description: Academy adventuring pants bestowed to graduating students.
   icon: {fileID: 21300000, guid: 9666abd1bec52234b818626af60e90c1, type: 3}
-  value: 0
+  value: 1
   stackable: 0
   allowedEquipLocation: 2
   equipmentStats:

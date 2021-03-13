@@ -8,6 +8,7 @@ namespace ButtonGame.Locations
     public class MenuManager : MonoBehaviour
     {
         [SerializeField] LocationMenuDB locationMenuDB;
+        [SerializeField] NodeMenu popupNodeMenu;
         [SerializeField] LocationMenuSlotUI[] menuSlots;
         LocationList currentLocation;
         TownNodeList[] connectedNodes;
@@ -25,6 +26,11 @@ namespace ButtonGame.Locations
             if(!isMenuNode[slot])
             {
                 MakeNodeMenu(connectedNodes[slot]);
+            }
+            else
+            {
+                LocationMenuBuilderDB menuBuilderDB = locationMenuDB.GetMenuBuilderDB(currentLocation);
+                popupNodeMenu.OpenMenu(menuBuilderDB, connectedNodes[slot]);
             }
         }
 

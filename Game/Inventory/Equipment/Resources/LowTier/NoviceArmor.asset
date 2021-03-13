@@ -20,7 +20,7 @@ MonoBehaviour:
     iconImage: {fileID: 0}
     description: Academy gear bestowed to graduating students.
   icon: {fileID: 21300000, guid: d8e8f63d93e3fbb4fae86b2ef24aad65, type: 3}
-  value: 0
+  value: 1
   stackable: 0
   allowedEquipLocation: 1
   equipmentStats:

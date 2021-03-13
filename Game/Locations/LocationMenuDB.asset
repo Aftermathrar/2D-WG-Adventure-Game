@@ -15,6 +15,7 @@ MonoBehaviour:
   locationMenuLists:
   - locationName: Dawn City
     location: 2
+    menuBuilderDB: {fileID: 11400000, guid: bc06521458d508b4d841c96de9183cc1, type: 2}
     townNodes:
     - townNodeName: Main
       townNode: 1
@@ -162,6 +163,7 @@ MonoBehaviour:
         isMenu: 1
   - locationName: Rondelle
     location: 3
+    menuBuilderDB: {fileID: 11400000, guid: 32499abb2534e0f4cb9d73ada5ac2f11, type: 2}
     townNodes:
     - townNodeName: Main
       townNode: 1

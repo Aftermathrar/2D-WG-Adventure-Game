@@ -28,6 +28,18 @@ namespace ButtonGame.Locations
             return -1;
         }
 
+        public LocationMenuBuilderDB GetMenuBuilderDB(LocationList location)
+        {
+            foreach (var locationMenu in locationMenuLists)
+            {
+                if(locationMenu.location == location)
+                {
+                    return locationMenu.menuBuilderDB;
+                }
+            }
+            return null;
+        }
+
         public string GetMenuTitle(int index)
         {
             return nodeMenus[index].titleText;
@@ -80,6 +92,7 @@ namespace ButtonGame.Locations
         {
             [SerializeField] string locationName;
             public LocationList location;
+            public LocationMenuBuilderDB menuBuilderDB;
             public TownNodeMenu[] townNodes;
         }
 

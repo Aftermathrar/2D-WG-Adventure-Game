@@ -20,7 +20,7 @@ MonoBehaviour:
     iconImage: {fileID: 0}
     description: Commonly produced Magic Ring. Part of a larger set.
   icon: {fileID: 21300000, guid: 5944d870cd8c0614a8e7c3d053a7d273, type: 3}
-  value: 0
+  value: 1
   stackable: 0
   allowedEquipLocation: 5
   equipmentStats:

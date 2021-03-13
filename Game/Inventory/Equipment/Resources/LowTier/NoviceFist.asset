@@ -23,10 +23,9 @@ MonoBehaviour:
     iconImage: {fileID: 21300000, guid: 003d5db7373c80d409684df76f5e3bf3, type: 3}
     description: Upgrade at the blacksmith to improve their capability.
   icon: {fileID: 21300000, guid: 3066c19e604545c4ea6e06b5b2dce9e7, type: 3}
-  value: 0
+  value: 1
   stackable: 0
   allowedEquipLocation: 0
-  equipClass: 0
   equipmentStats:
   - stat: 4
     value: 28

@@ -20,7 +20,7 @@ MonoBehaviour:
     iconImage: {fileID: 0}
     description: Academy hiking boots bestowed to graduating students.
   icon: {fileID: 21300000, guid: 284254067ee366f46a28114d82d90d2b, type: 3}
-  value: 0
+  value: 1
   stackable: 0
   allowedEquipLocation: 3
   equipmentStats:

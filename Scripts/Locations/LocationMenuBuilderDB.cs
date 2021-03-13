@@ -9,6 +9,39 @@ namespace ButtonGame.Locations
     public class LocationMenuBuilderDB : ScriptableObject 
     {
         [SerializeField] NodeMenuBuilder[] menuBuilders;
+        Dictionary<TownNodeList, MenuCategory[]> nodeMenuLookup = null;
+
+        public IEnumerable<string> GetCategories(TownNodeList townNode)
+        {
+            BuildLookup();
+
+            foreach (MenuCategory menuCategory in nodeMenuLookup[townNode])
+            {
+                yield return menuCategory.category;
+            }
+        }
+
+        public IEnumerable<InventoryItem> GetInventoryItems(TownNodeList townNode, int tabIndex)
+        {
+            BuildLookup();
+            
+            foreach (InventoryItem item in nodeMenuLookup[townNode][tabIndex].menuContents)
+            {
+                yield return item;
+            }
+        }
+
+        private void BuildLookup()
+        {
+            if(nodeMenuLookup != null) return;
+
+            nodeMenuLookup = new Dictionary<TownNodeList, MenuCategory[]>();
+
+            foreach (var menuBuilder in menuBuilders)
+            {
+                nodeMenuLookup[menuBuilder.townNode] = menuBuilder.menuCategories;
+            }
+        }
 
         [System.Serializable]
         private class NodeMenuBuilder
@@ -23,13 +56,7 @@ namespace ButtonGame.Locations
         private class MenuCategory
         {
             public string category;
-            public MenuContent[] menuContents;
-        }
-
-        [System.Serializable]
-        private class MenuContent
-        {
-            public InventoryItem item;
+            public InventoryItem[] menuContents;
         }
     }
 }

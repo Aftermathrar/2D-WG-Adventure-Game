@@ -1,2 +1,2 @@
 # 2D WG Adventure Game
-Simple combat game using buttons
+Simple text adventure game with action combat

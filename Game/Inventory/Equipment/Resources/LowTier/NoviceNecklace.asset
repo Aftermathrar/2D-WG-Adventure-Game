@@ -20,7 +20,7 @@ MonoBehaviour:
     iconImage: {fileID: 0}
     description: Commonly produced Magic Necklace. Part of a larger set.
   icon: {fileID: 21300000, guid: eaa0109d8c9afdd43acd3ec038496bbd, type: 3}
-  value: 0
+  value: 1
   stackable: 0
   allowedEquipLocation: 7
   equipmentStats:
