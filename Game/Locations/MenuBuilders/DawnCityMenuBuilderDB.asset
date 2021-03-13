@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc089fc1df05324486767912929186e, type: 3}
+  m_Name: DawnCityMenuBuilderDB
+  m_EditorClassIdentifier: 
+  menuBuilders:
+  - townNodeName: Blacksmith
+    townNode: 14
+    isMerchant: 1
+    menuCategories:
+    - category: Buy
+      menuContents:
+      - item: {fileID: 11400000, guid: 7687eea85a411eb4496550b386dc6b5f, type: 2}
+      - item: {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
+    - category: Craft
+      menuContents: []
+  - townNodeName: Tailor
+    townNode: 15
+    isMerchant: 1
+    menuCategories:
+    - category: Buy
+      menuContents:
+      - item: {fileID: 11400000, guid: 97fbc2f2331fff0459daa2d0e233a5af, type: 2}
+      - item: {fileID: 11400000, guid: 665e0aa1400fca340a7fc16358eefcdc, type: 2}
+    - category: Craft
+      menuContents: []

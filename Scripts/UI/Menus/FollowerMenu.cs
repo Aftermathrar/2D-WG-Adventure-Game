@@ -36,7 +36,7 @@ namespace ButtonGame.UI.Menus
         public void OpenMenu()
         {
             background.enabled = true;
-            titleText.text = "No Active Companion";
+            titleText.gameObject.SetActive(true);
             ChooseFollower();
             followerPanel.SetActive(true);
         }
@@ -54,7 +54,7 @@ namespace ButtonGame.UI.Menus
             {
                 if(manager.GetFollowerPosition(i) == "Combat")
                 {
-                    titleText.text = "Current Companion:";
+                    titleText.gameObject.SetActive(false);
                     currentSlot = menuHeader.GetChild(1).GetComponent<FollowerSlotUI>();
                 }
                 else

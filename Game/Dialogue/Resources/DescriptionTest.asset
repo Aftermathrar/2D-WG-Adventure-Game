@@ -125,7 +125,7 @@ MonoBehaviour:
   - 6204c801-c6fc-4c16-9f83-23051b4a2a61
   rect:
     serializedVersion: 2
-    x: 925
+    x: 917
     y: 170
     width: 250
     height: 280
@@ -385,8 +385,8 @@ MonoBehaviour:
   - b1ba6ac1-3b49-42cd-98b1-904e74a72e4a
   rect:
     serializedVersion: 2
-    x: 917
-    y: 66
+    x: 910
+    y: 64
     width: 250
     height: 100
   descCondition:
@@ -517,7 +517,7 @@ MonoBehaviour:
   m_Name: 731c7d93-5935-4559-a7a3-cf6686f6226a
   m_EditorClassIdentifier: 
   isVariableText: 0
-  text: Test NPC is a
+  text: '[Name] is a'
   children:
   - 37814986-96f3-4942-9c91-78856bc43657
   rect:

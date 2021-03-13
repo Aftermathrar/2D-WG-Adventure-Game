@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: de4e848c-3f88-4805-a1f8-437ecc3ef7f9
   displayName: Blessed Necklace
-  categoryName: 4
+  categoryName: 0
   description:
   - hasIcon: 0
     iconImage: {fileID: 0}
     description: 
-  icon: {fileID: 21300000, guid: 77d2334181acbe34e832e3611b6fcaa9, type: 3}
+  icon: {fileID: 21300000, guid: eac04e56709acdc4f9a81de8012886b9, type: 3}
   value: 0
   stackable: 0
   allowedEquipLocation: 15

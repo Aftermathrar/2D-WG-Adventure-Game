@@ -7,10 +7,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2183322782582854496, guid: 58448ce465e616546b7724a543e844a9,
+        type: 3}
+      propertyPath: feedeeClass
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3010367974231482646, guid: 58448ce465e616546b7724a543e844a9,
         type: 3}
       propertyPath: m_Name
       value: CombatWitchDoctor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
         type: 3}
@@ -29,6 +69,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -40,16 +85,6 @@ PrefabInstance:
     - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
@@ -66,36 +101,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010367974231482647, guid: 58448ce465e616546b7724a543e844a9,
-        type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5359830041762717022, guid: 58448ce465e616546b7724a543e844a9,
         type: 3}

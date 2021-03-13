@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4246533430270608669, guid: ae950381609fb054187cb7f2a5e84e50,
+        type: 3}
+      propertyPath: feedeeClass
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6137850591539805, guid: ae950381609fb054187cb7f2a5e84e50, type: 3}
       propertyPath: m_Name
       value: TownWitchDoctor
@@ -16,15 +21,15 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6137850591540138, guid: ae950381609fb054187cb7f2a5e84e50, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137850591540138, guid: ae950381609fb054187cb7f2a5e84e50, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6137850591540138, guid: ae950381609fb054187cb7f2a5e84e50, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6137850591540138, guid: ae950381609fb054187cb7f2a5e84e50, type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6137850591540138, guid: ae950381609fb054187cb7f2a5e84e50, type: 3}

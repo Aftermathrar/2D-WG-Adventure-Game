@@ -26,13 +26,8 @@ namespace ButtonGame.Stats.Enums
         DropTier,
         DropChance,
         TimeLimit,
-        Capacity,
         Spirit,
         HealingPower,
         Proficiency,
-        Confidence,
-        Greed,
-        FatDesire,
-        Metabolism
     }
 }

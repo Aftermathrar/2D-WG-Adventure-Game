@@ -27,6 +27,7 @@ namespace ButtonGame.Character
         FollowerCombatLog combatLog = null;
         FollowerAttackManager attackManager = null;
         BaseStats baseStats = null;
+        BaseFeedeeStats baseFeedee = null;
         BaseFollowerAttackStats baseAttackStats = null;
         FollowerFighter fighter = null;
         Fullness fullness = null;
@@ -92,6 +93,7 @@ namespace ButtonGame.Character
         {
             attackManager = GetComponent<FollowerAttackManager>();
             baseStats = GetComponent<BaseStats>();
+            baseFeedee = GetComponent<BaseFeedeeStats>();
             fighter = GetComponent<FollowerFighter>();
             fullness = GetComponent<Fullness>();
             selfMana = GetComponent<Mana>();
@@ -114,7 +116,7 @@ namespace ButtonGame.Character
         private void FollowerSetup() 
         {
             skillCooldown = new Dictionary<FollowerAttackName, float>();
-            float metabolism = baseStats.GetStat(Stat.Metabolism);
+            float metabolism = baseFeedee.GetStat(FeedeeStat.Metabolism);
             attackSpeed = baseStats.GetStat(Stat.AttackSpeed);
             cooldownReduction = baseStats.GetStat(Stat.CooldownReduction);
             actionRecovery = attackSpeed * metabolism / 100;
@@ -131,8 +133,8 @@ namespace ButtonGame.Character
 
         private void AssignHungerStats()
         {
-            greed = baseStats.GetStat(Stat.Greed);
-            fatDesire = baseStats.GetStat(Stat.FatDesire);
+            greed = baseFeedee.GetStat(FeedeeStat.Greed);
+            fatDesire = baseFeedee.GetStat(FeedeeStat.FatDesire);
             preferredFullness += fatDesire / 2;
             maxFullness += greed / 4;
             starveValue += Mathf.Min(100f, greed / 2f);

@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 4292756227488813779}
   - component: {fileID: 336034127231568151}
   - component: {fileID: -7393164206029125840}
+  - component: {fileID: -2183322782582854496}
   m_Layer: 5
   m_Name: FollowerCombat
   m_TagString: Follower
@@ -200,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed47e6bae4eead4d8f454f8a5ea02e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  feedeeStats: {fileID: -2183322782582854496}
 --- !u!114 &4785815338704718002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,6 +497,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da301558a6c8b6045ba359a8675c919c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uniqueIdentifier: 
+--- !u!114 &-2183322782582854496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3010367974231482646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a33b1849229bc948ad9058ef94a97d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FeedeeStatsDB: {fileID: 11400000, guid: 275c15326bc383d42afa705371fafbde, type: 2}
+  feedeeClass: 1
 --- !u!1001 &3010367975092857043
 PrefabInstance:
   m_ObjectHideFlags: 0

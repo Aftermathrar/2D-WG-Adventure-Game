@@ -6,11 +6,11 @@ using UnityEngine.Events;
 
 namespace ButtonGame.Stats.Follower
 {
-    public class BodyManager : MonoBehaviour, IStatModifier, ISaveable
+    public class BodyManager : MonoBehaviour, IFeedeeStatModifier, ISaveable
     {
         // Dictionary<string, FollowerSetup> characterDict = null;
         CalorieManager calorieManager;
-        Dictionary<Stat, float[]> modifiedStats;
+        Dictionary<FeedeeStat, float[]> modifiedStats;
 
         public UnityEvent bodyUpdated;
 
@@ -29,14 +29,14 @@ namespace ButtonGame.Stats.Follower
         private void Awake()
         {
             calorieManager = new CalorieManager();
-            modifiedStats = new Dictionary<Stat, float[]>();
-            modifiedStats[Stat.Capacity] = new float[] { 0, Random.Range(-100, 200) };
-            modifiedStats[Stat.Greed] = new float[] { 0, Random.Range(0, 20) };
-            modifiedStats[Stat.FatDesire] = new float[] { 0, Random.Range(0, 20) };
-            modifiedStats[Stat.Metabolism] = new float[] { 0, Random.Range(0, 300) };
+            modifiedStats = new Dictionary<FeedeeStat, float[]>();
+            modifiedStats[FeedeeStat.Capacity] = new float[] { 0, Random.Range(-100, 200) };
+            modifiedStats[FeedeeStat.Greed] = new float[] { 0, Random.Range(0, 20) };
+            modifiedStats[FeedeeStat.FatDesire] = new float[] { 0, Random.Range(0, 20) };
+            modifiedStats[FeedeeStat.Metabolism] = new float[] { 0, Random.Range(0, 300) };
         }
 
-        public void ModifyStat(Stat stat, float modValue, bool isAdditive)
+        public void ModifyStat(FeedeeStat stat, float modValue, bool isAdditive)
         {
             float[] addValue = new float[2];
             int i = isAdditive? 1 : 0;
@@ -75,7 +75,7 @@ namespace ButtonGame.Stats.Follower
             return cal;
         }
 
-        public float[] GetStatEffectModifiers(Stat stat)
+        public float[] GetFeedeeStatEffectModifiers(FeedeeStat stat)
         {
             if(modifiedStats != null && modifiedStats.ContainsKey(stat))
             {
@@ -104,7 +104,7 @@ namespace ButtonGame.Stats.Follower
         private class BodyRecord
         {
             public CalorieManager manager;
-            public Dictionary<Stat, float[]> stats;
+            public Dictionary<FeedeeStat, float[]> stats;
         }
 
         [System.Serializable]

@@ -62,21 +62,11 @@ MonoBehaviour:
     - stat: 14
       value: 0
     - stat: 24
-      value: 1000
-    - stat: 25
       value: 50
+    - stat: 25
+      value: 100
     - stat: 26
       value: 100
-    - stat: 27
-      value: 100
-    - stat: 28
-      value: 100
-    - stat: 29
-      value: 0
-    - stat: 30
-      value: 0
-    - stat: 31
-      value: 1600
   - characterClass: 2
     baseStats:
     - stat: 2
@@ -88,21 +78,11 @@ MonoBehaviour:
     - stat: 14
       value: 0
     - stat: 24
-      value: 1000
-    - stat: 25
       value: 50
+    - stat: 25
+      value: 100
     - stat: 26
       value: 100
-    - stat: 27
-      value: 100
-    - stat: 28
-      value: 100
-    - stat: 29
-      value: 0
-    - stat: 30
-      value: 0
-    - stat: 31
-      value: 1600
   - characterClass: 3
     baseStats:
     - stat: 0

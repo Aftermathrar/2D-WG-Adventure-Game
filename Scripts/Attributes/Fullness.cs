@@ -15,7 +15,8 @@ namespace ButtonGame.Attributes
         LazyValue<float> fullnessPoints;
         
         float maxCapacity;
-        BaseStats baseStats;
+        [SerializeField] BaseFeedeeStats feedeeStats;
+
         BodyManager bodyManager;
 
         private void Awake() 
@@ -27,7 +28,7 @@ namespace ButtonGame.Attributes
 
         private float GetInitialFullness()
         {
-            return GetComponent<BaseStats>().GetStat(Stat.Capacity);
+            return feedeeStats.GetStat(FeedeeStat.Capacity);
         }
 
         private void Start() 
@@ -39,7 +40,7 @@ namespace ButtonGame.Attributes
         public void RecalculateMaxCapacity()
         {
             float fullnessFraction = GetFraction();
-            float newMax = Mathf.Round(GetComponent<BaseStats>().GetStat(Stat.Capacity));
+            float newMax = Mathf.Round(feedeeStats.GetStat(FeedeeStat.Capacity));
             float difference = Mathf.Max(0, newMax - maxCapacity);
             maxCapacity = newMax;
             fullnessPoints.value = maxCapacity * fullnessFraction;
@@ -69,7 +70,7 @@ namespace ButtonGame.Attributes
         public void IncreaseCapacity(float amount)
         {
             float modvalue = maxCapacity * amount;
-            bodyManager.ModifyStat(Stat.Capacity, modvalue, true);
+            bodyManager.ModifyStat(FeedeeStat.Capacity, modvalue, true);
             RecalculateMaxCapacity();
         }
 
