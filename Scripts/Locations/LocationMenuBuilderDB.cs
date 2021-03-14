@@ -10,6 +10,7 @@ namespace ButtonGame.Locations
     {
         [SerializeField] NodeMenuBuilder[] menuBuilders;
         Dictionary<TownNodeList, MenuCategory[]> nodeMenuLookup = null;
+        Dictionary<TownNodeList, bool> nodeIsMenuLookup = null;
 
         public IEnumerable<string> GetCategories(TownNodeList townNode)
         {
@@ -31,15 +32,27 @@ namespace ButtonGame.Locations
             }
         }
 
+        public bool GetIsMerchant(TownNodeList townNode)
+        {
+            return nodeIsMenuLookup[townNode];
+        }
+
         private void BuildLookup()
         {
             if(nodeMenuLookup != null) return;
 
+            // Build dictionary for menu contents by category
             nodeMenuLookup = new Dictionary<TownNodeList, MenuCategory[]>();
-
             foreach (var menuBuilder in menuBuilders)
             {
                 nodeMenuLookup[menuBuilder.townNode] = menuBuilder.menuCategories;
+            }
+
+            // Build dictionary for whether menu has "Sell" tab
+            nodeIsMenuLookup = new Dictionary<TownNodeList, bool>();
+            foreach (var nodeMenu in menuBuilders)
+            {
+                nodeIsMenuLookup[nodeMenu.townNode] = nodeMenu.isMerchant;
             }
         }
 
