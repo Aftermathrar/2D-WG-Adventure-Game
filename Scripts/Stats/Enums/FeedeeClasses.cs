@@ -13,6 +13,7 @@ namespace ButtonGame.Stats.Enums
         Bartender,
         Enchantress,
         Villager,
-        Farmer
+        Farmer,
+        GuildMember
     }
 }

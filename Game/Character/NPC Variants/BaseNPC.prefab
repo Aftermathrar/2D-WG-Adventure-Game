@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3432660273147372376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3432660273147372353}
+  - component: {fileID: 3432660273147372358}
+  - component: {fileID: 3432660273147372359}
+  - component: {fileID: 3432660273147372356}
+  - component: {fileID: 3432660273147372357}
+  - component: {fileID: 3432660273147372378}
+  - component: {fileID: 3432660273147372379}
+  - component: {fileID: 5644260934312114035}
+  m_Layer: 0
+  m_Name: BaseNPC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3432660273147372353
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3432660273147372376}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3432660273147372358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3432660273147372376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da301558a6c8b6045ba359a8675c919c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 
+--- !u!114 &3432660273147372359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3432660273147372376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b16de6482b3f540892848af212b73e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: 
+  npcRank: 
+  currentQuest: 
+--- !u!114 &3432660273147372356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3432660273147372376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d37d40b912ba041bd18bcf7ca706b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3432660273147372357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3432660273147372376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b183af9af6f6ae34b8a3f45b3248f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyTypeDB: {fileID: 11400000, guid: 771736bdff7e0944d9d0617c46c61b4b, type: 2}
+  charName: 
+  baseBody:
+    height: 0
+    heightScale: 0
+    inverseHeightScale: 0
+    baseWeight: 0
+    fatWeight: 0
+    eyeColor: 0
+    hairColor: 0
+    hairLength: 0
+    bodyType: 0
+--- !u!114 &3432660273147372378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3432660273147372376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed47e6bae4eead4d8f454f8a5ea02e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feedeeStats: {fileID: 5644260934312114035}
+--- !u!114 &3432660273147372379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3432660273147372376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2a219297cf89942bcdd4f5b4de279b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotLimits:
+  - equipType: 1
+    slotsAvailable: 0
+  - equipType: 2
+    slotsAvailable: 0
+  - equipType: 15
+    slotsAvailable: 0
+  - equipType: 16
+    slotsAvailable: 0
+  - equipType: 10
+    slotsAvailable: 0
+  equipmentEffectsUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5644260934312114035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3432660273147372376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a33b1849229bc948ad9058ef94a97d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FeedeeStatsDB: {fileID: 11400000, guid: 275c15326bc383d42afa705371fafbde, type: 2}
+  feedeeClass: 0

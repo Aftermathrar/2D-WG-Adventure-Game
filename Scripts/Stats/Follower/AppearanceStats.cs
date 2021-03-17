@@ -9,7 +9,7 @@ namespace ButtonGame.Stats.Follower
     public class AppearanceStats : MonoBehaviour, ISaveable
     {
         [SerializeField] BodyTypeDB bodyTypeDB;
-        [SerializeField] string charName;
+        // [SerializeField] string charName;
         [SerializeField] BaseBodyStats baseBody = null;
         Dictionary<BodyParts, float> fatDistribution = null;
 
@@ -238,7 +238,7 @@ namespace ButtonGame.Stats.Follower
         public object CaptureState()
         {
             var state = new Dictionary<string, object>();
-            state["name"] = charName;
+            // state["name"] = charName;
             state["body"] = baseBody;
             state["dist"] = fatDistribution;
             return state;
@@ -247,7 +247,7 @@ namespace ButtonGame.Stats.Follower
         public void RestoreState(object state)
         {
             Dictionary<string, object> stateDict = (Dictionary<string, object>)state;
-            charName = (string)stateDict["name"];
+            // charName = (string)stateDict["name"];
             baseBody = (BaseBodyStats)stateDict["body"];
             fatDistribution = (Dictionary<BodyParts, float>)stateDict["dist"];
             // DebugGetSizes();

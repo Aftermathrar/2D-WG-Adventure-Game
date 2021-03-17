@@ -34,6 +34,37 @@ namespace ButtonGame.Locations
             }
         }
 
+        public IEnumerable<LocationList> GetLocations()
+        {
+            foreach (var locationList in locationMenuDB.GetLocations())
+            {
+                yield return locationList;
+            }
+        }
+
+        public IEnumerable<TownNodeList> GetLocationMainNodes(LocationList locationQuery)
+        {
+            foreach (TownNodeList node in locationMenuDB.GetMainNodes(locationQuery))
+            {
+                yield return node;
+            }
+        }
+
+        public int GetNodeMenuCount(LocationList locationQuery, TownNodeList nodeQuery)
+        {
+            return locationMenuDB.GetMenuCount(locationQuery, nodeQuery);
+        }
+
+        public bool HasNPCSpawn(LocationList locationQuery, TownNodeList nodeQuery, int nodeIndex)
+        {
+            return locationMenuDB.HasNPCSpawn(locationQuery, nodeQuery, nodeIndex);
+        }
+
+        public TownNodeList GetConnectedNode(LocationList locationQuery, TownNodeList nodeQuery, int nodeIndex)
+        {
+            return locationMenuDB.GetConnectedNode(locationQuery, nodeQuery, nodeIndex);
+        }
+
         private void MakeNodeMenu(TownNodeList newNode)
         {
             int nodeMenuCount = locationMenuDB.GetMenuCount(currentLocation, newNode);

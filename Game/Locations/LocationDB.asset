@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locations:
   - location: 0
-    name: Tutorial
+    name: None
     description: Debug text.
     distance: 0
     isAvailable: 0

@@ -133,7 +133,7 @@ namespace ButtonGame.Inventories
         {
             Debug.Assert(item.GetAllowedEquipLocation() == slot);
 
-            equippedItems[slot][index] = Instantiate(item);
+            equippedItems[slot][index] = item;
             
             AddEquipmentStats(item);
             if (state != null) equippedItems[slot][index].SetModifiers(state);
@@ -242,7 +242,7 @@ namespace ButtonGame.Inventories
                     EquipableItem candidate = InventoryItem.GetFromID(pair.Value[i]) as EquipableItem;
                     if(candidate != null)
                     {
-                        items[i] = Instantiate(candidate);
+                        items[i] = candidate;
                         AddEquipmentStats(items[i]);
                         items[i].SetModifiers(equippedItemModifiers[pair.Key][i]);
                     }

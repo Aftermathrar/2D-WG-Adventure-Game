@@ -21,34 +21,9 @@ MonoBehaviour:
       menuContents:
       - {fileID: 11400000, guid: 7687eea85a411eb4496550b386dc6b5f, type: 2}
       - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
-      - {fileID: 11400000, guid: d485df93fe4322a4fb277240fa36e07e, type: 2}
+      - {fileID: 11400000, guid: 6d1ffa614cb307a4b88215d7a7e2ffff, type: 2}
+      - {fileID: 11400000, guid: e1f9126e3d430dc4cb7b0a2c2d35760e, type: 2}
+      - {fileID: 11400000, guid: 101e089fed12dc24ca3587ce07e2af10, type: 2}
     - category: Craft
       menuContents:
       - {fileID: 11400000, guid: f2979878a58c2a94fa5f16638c702f30, type: 2}

@@ -13,6 +13,14 @@ namespace ButtonGame.Locations
         Dictionary<LocationList, Dictionary<TownNodeList, TownNodeMenuInformation[]>> nodeMenuLookup;
         TownNodeMenuInformation[] nodeMenus = null;
 
+        public IEnumerable<LocationList> GetLocations()
+        {
+            foreach (var locationMenu in locationMenuLists)
+            {
+                yield return locationMenu.location;
+            }
+        }
+
         public int GetMenuCount(LocationList location, TownNodeList townNode)
         {
             BuildLookup();
@@ -26,6 +34,18 @@ namespace ButtonGame.Locations
                 nodeMenus = null;
             }
             return -1;
+        }
+
+        public IEnumerable<TownNodeList> GetMainNodes(LocationList location)
+        {
+            BuildLookup();
+            if(nodeMenuLookup.ContainsKey(location))
+            {
+                foreach (TownNodeList townNode in nodeMenuLookup[location].Keys)
+                {
+                    yield return townNode;
+                }
+            }
         }
 
         public LocationMenuBuilderDB GetMenuBuilderDB(LocationList location)
@@ -65,9 +85,19 @@ namespace ButtonGame.Locations
             return nodeMenus[index].connectedNode;
         }
 
+        public TownNodeList GetConnectedNode(LocationList locationQuery, TownNodeList nodeQuery, int index)
+        {
+            return nodeMenuLookup[locationQuery][nodeQuery][index].connectedNode;
+        }
+
         public bool IsMenu(int index)
         {
             return nodeMenus[index].isMenu;
+        }
+
+        public bool HasNPCSpawn(LocationList locationQuery, TownNodeList nodeQuery, int index)
+        {
+            return nodeMenuLookup[locationQuery][nodeQuery][index].hasNPCSpawn;
         }
 
         private void BuildLookup()
@@ -113,6 +143,7 @@ namespace ButtonGame.Locations
             public Color spriteColor = Color.white;
             public TownNodeList connectedNode;
             public bool isMenu = false;
+            public bool hasNPCSpawn = false;
         }
     }
 }

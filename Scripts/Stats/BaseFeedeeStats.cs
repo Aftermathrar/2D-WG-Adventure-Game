@@ -16,6 +16,11 @@ namespace ButtonGame.Stats
             return (GetBaseStat(stat) + statModifiers[1]) * (1 + statModifiers[0] / 100);
         }
 
+        public FeedeeClass GetClass()
+        {
+            return feedeeClass;
+        }
+
         private float GetBaseStat(FeedeeStat stat)
         {
             return FeedeeStatsDB.GetStat(feedeeClass, stat);

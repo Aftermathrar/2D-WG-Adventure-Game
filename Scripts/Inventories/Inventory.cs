@@ -189,6 +189,31 @@ namespace ButtonGame.Inventories
             slots = new InventorySlot[inventorySize];
         }
 
+        /// <summary>
+        /// Returns count of an item in inventory.
+        /// </summary>
+        public int GetItemCount(InventoryItem item)
+        {
+            if(item.IsStackable())
+            {
+                int slot = -1;
+                if(HasItem(item, out slot))
+                {
+                    return GetCountInSlot(slot);
+                }
+            }
+
+            int itemCount = 0;
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (object.ReferenceEquals(slots[i].item, item))
+                {
+                    itemCount++;
+                }
+            }
+            return itemCount;
+        }
+
         // PRIVATE
 
         private void Awake()
@@ -242,12 +267,6 @@ namespace ButtonGame.Inventories
                     {
                         return i;
                     }
-                    // if(slots[i].item == null) continue;
-
-                    // if(slots[i].item.GetItemID() == item.GetItemID())
-                    // {
-                    //     return i;
-                    // }
                 }
             }
             return -1;

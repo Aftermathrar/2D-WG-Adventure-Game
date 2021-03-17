@@ -61,6 +61,16 @@ namespace ButtonGame.Locations
             return -1;
         }
 
+        public bool? IsCombatArea(LocationList locName)
+        {
+            Location location;
+            if(locationLookup.TryGetValue(locName, out location))
+            {
+                return location.isCombatArea;
+            }
+            return null;
+        }
+
         public bool HasTraveled(LocationList locName)
         {
             if (locationLookup.ContainsKey(locName))

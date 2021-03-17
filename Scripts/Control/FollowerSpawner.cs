@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using ButtonGame.Saving;
 using ButtonGame.Stats;
 using ButtonGame.Stats.Enums;
-using ButtonGame.Stats.Follower;
 using UnityEngine;
 
 namespace ButtonGame.Control
@@ -23,11 +22,11 @@ namespace ButtonGame.Control
             {
                 if(prefab.GetClass() == followerClass)
                 {
-                    GameObject followerGO = Instantiate(prefab, parentTransform).gameObject;
-                    SaveableClone saveableClone = followerGO.GetComponent<SaveableClone>();
+                    Transform followerTransform = Instantiate(prefab, parentTransform).transform;
+                    SaveableClone saveableClone = followerTransform.GetComponent<SaveableClone>();
                     saveableClone.SetUniqueIdentifier(followerUUID);
                     if(state != null) saveableClone.RestoreState(state);
-                    followerGO.transform.SetSiblingIndex(siblingIndex);
+                    followerTransform.SetSiblingIndex(siblingIndex);
 
                     return saveableClone;
                 }
@@ -43,8 +42,8 @@ namespace ButtonGame.Control
             {
                 if (prefab.GetClass() == followerClass)
                 {
-                    GameObject followerGO = Instantiate(prefab, parentTransformBackground).gameObject;
-                    SaveableClone saveableClone = followerGO.GetComponent<SaveableClone>();
+                    BaseStats followerBase = Instantiate(prefab, parentTransformBackground);
+                    SaveableClone saveableClone = followerBase.GetComponent<SaveableClone>();
                     saveableClone.SetUniqueIdentifier(followerUUID);
                     if(state != null) saveableClone.RestoreState(state);
 

@@ -23,8 +23,8 @@ namespace ButtonGame.UI.Inventories
             nameText.text = name;
             costText.text = "Cost: " + cost.ToString();
             ownedText.text = "Currently Owned: " + owned.ToString();
-            int affordCount = Mathf.FloorToInt(goldOnHand / cost);
-            affordCountText.text = "Can Afford: " + affordCount.ToString();
+            // int affordCount = Mathf.FloorToInt(goldOnHand / cost);
+            // affordCountText.text = "Can Afford: " + affordCount.ToString();
             for (int i = 0; i < actionButtonTexts.Length; i++)
             {
                 string actionText = action + "\n" + actionButtonCounts[i];

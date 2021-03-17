@@ -19,9 +19,12 @@ namespace ButtonGame.UI.Menus
         [SerializeField] ItemMenuSlotUI slotPrefab;
         [SerializeField] RectTransform[] menuTabs;
         [SerializeField] TextMeshProUGUI[] tabTexts;
+        //Cache
         Image[] tabImages;
         List<ItemMenuSlotUI> itemSlots;
-        
+        Inventory playerInventory;
+
+        // Assigned on menu open
         LocationMenuBuilderDB menuBuilderDB = null;
         TownNodeList node;
         int currentTab;
@@ -43,6 +46,8 @@ namespace ButtonGame.UI.Menus
             {
                 itemSlots.Add(menuContent.GetChild(i).GetComponent<ItemMenuSlotUI>());
             }
+
+            playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         }
 
         public void OpenMenu(LocationMenuBuilderDB locationMenuBuilder, TownNodeList townNode)
@@ -77,7 +82,7 @@ namespace ButtonGame.UI.Menus
 
             if (tabIndex == sellTab)
             {
-                SetupSellMenuSlots();
+                slotCoroutine = StartCoroutine(SetupSellMenuSlots());
             }
             else
             {
@@ -125,50 +130,76 @@ namespace ButtonGame.UI.Menus
 
         IEnumerator SetupMenuSlots(int tabIndex)
         {
+            yield return null;
             int i = 0;
             int slotCount = itemSlots.Count;
             foreach (var item in menuBuilderDB.GetInventoryItems(node, tabIndex))
             {
-                ItemMenuSlotUI slotUI;
-                if(i < slotCount)
-                {
-                    slotUI = itemSlots[i];
-                    slotUI.gameObject.SetActive(true);
-                }
-                else
-                {
-                    slotUI = Instantiate(slotPrefab, menuContent);
-                    itemSlots.Add(slotUI);
-                }
+                ItemMenuSlotUI slotUI = GetSlotUI(slotCount, i);
                 
                 slotUI.SlotSetup(tabTexts[tabIndex].text, item.GetIcon(), 
-                    item.GetDisplayName(), item.GetValue(), 1f, 10f);
+                    item.GetDisplayName(), item.GetValue(), playerInventory.GetItemCount(item), 10f);
                 
                 i++;
-                yield return null;
             }
 
             if(i < slotCount)
             {
+                yield return null;
                 for(int j = i; j < slotCount; j++)
                 {
                     menuContent.GetChild(j).gameObject.SetActive(false);
                 }
-                yield return null;
             }
         }
 
-        private void SetupSellMenuSlots()
+        IEnumerator SetupSellMenuSlots()
         {
+            yield return null;
+            int slotCount = itemSlots.Count;
+            int currentSlot = 0;
+            for (int i = 0; i < playerInventory.GetSize(); i++)
+            {
+                int itemCount = playerInventory.GetCountInSlot(i);
+                if (itemCount > 0)
+                {
+                    InventoryItem item = playerInventory.GetItemInSlot(i);
+                    ItemMenuSlotUI slotUI = GetSlotUI(slotCount, currentSlot);
 
+                    slotUI.SlotSetup("Sell", item.GetIcon(), item.GetDisplayName(),
+                        item.GetValue(), itemCount, 10f);
+                    
+                    currentSlot++;
+                    if((currentSlot % 10) == 0)
+                    {
+                        yield return null;
+                    }
+                }
+            }
+        }
+
+        private ItemMenuSlotUI GetSlotUI(int slotCount, int currentSlot)
+        {
+            ItemMenuSlotUI slotUI;
+            if (currentSlot < slotCount)
+            {
+                slotUI = itemSlots[currentSlot];
+                slotUI.gameObject.SetActive(true);
+            }
+            else
+            {
+                slotUI = Instantiate(slotPrefab, menuContent);
+                itemSlots.Add(slotUI);
+            }
+            return slotUI;
         }
 
         IEnumerator ClearSlotsAfterClose()
         {
             foreach (Transform menuSlot in menuContent.transform)
             {
-                menuSlot.gameObject.SetActive(false);
                 yield return null;
+                menuSlot.gameObject.SetActive(false);
             }
         }
     }
