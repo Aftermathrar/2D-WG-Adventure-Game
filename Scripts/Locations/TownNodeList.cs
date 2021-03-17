@@ -23,6 +23,6 @@ namespace ButtonGame.Locations
         BountyCounter,
         RequestBoard,
         DiningHall,
-        Bar,
+        Bar
     }
 }

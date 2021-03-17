@@ -4,9 +4,15 @@ using UnityEngine;
 
 namespace ButtonGame.Saving
 {
+    [System.Serializable]
     public class SaveableClone : MonoBehaviour
     {
         [SerializeField] string uniqueIdentifier = "";
+
+        public string GetUniqueIdentifier()
+        {
+            return uniqueIdentifier;
+        }
 
         public void SetUniqueIdentifier(string newIdentifier)
         {

@@ -14,12 +14,15 @@ namespace ButtonGame.Core
         [SerializeField] MenuManager nodeManager;
         [SerializeField] FeedeeClass[] classChoices;
         // [SerializeField] List<FeedeeInstance> feedees = null;
-        Dictionary<LocationList, Dictionary<SaveableClone, FeedeeInstance>> feedeeLookup = null;
+        Dictionary<LocationList, Dictionary<string, FeedeeInstance>> feedeeLookup = null;
+        List<SaveableClone> saveableClones = null;
         FeedeeSpawner feedeeSpawner = null;
+        LocationManager locationManager = null;
 
         private void Awake() 
         {
             feedeeSpawner = GetComponent<FeedeeSpawner>();
+            locationManager = GetComponent<LocationManager>();
             if(nodeManager == null) GetComponentInChildren<MenuManager>();
         }
 
@@ -41,31 +44,43 @@ namespace ButtonGame.Core
         {
             if(feedeeLookup != null) return;
 
-            feedeeLookup = new Dictionary<LocationList, Dictionary<SaveableClone, FeedeeInstance>>();
+            feedeeLookup = new Dictionary<LocationList, Dictionary<string, FeedeeInstance>>();
+            LocationList currentLocation = locationManager.GetCurrentLocation();
+
             foreach (LocationList location in nodeManager.GetLocations())
             {
-                // feedeeLookup[location] = new Dictionary<SaveableClone, FeedeeInstance>();
-                var feedeeLocationTable = new Dictionary<SaveableClone, FeedeeInstance>();
-                foreach (TownNodeList townNode in nodeManager.GetLocationMainNodes(location))
+                if (location == currentLocation && !feedeeLookup.ContainsKey(location))
                 {
-                    for (int i = 0; i < nodeManager.GetNodeMenuCount(location, townNode); i++)
-                    {
-                        if(nodeManager.HasNPCSpawn(location, townNode, i))
-                        {
-                            TownNodeList feedeeNode = nodeManager.GetConnectedNode(location, townNode, i);
-                            FeedeeClass newFeedeeClass = ChooseFeedeeClass(feedeeNode);
-                            FeedeeInstance newFeedee = CreateNewFeedee(newFeedeeClass, feedeeNode);
-                            SaveableClone feedeeSaveable = feedeeSpawner.SpawnNewNPC(newFeedee.feedeeClass, newFeedee.identifier);
-
-                            NPCInfo info = feedeeSaveable.GetComponent<NPCInfo>();
-                            info.SetCharacterInfo("name", newFeedee.name);
-                            info.SetCharacterInfo("rank", newFeedeeClass.ToString());
-
-                            feedeeLocationTable[feedeeSaveable] = newFeedee;
-                        }
-                    }
-                    feedeeLookup[location] = feedeeLocationTable;
+                    AddNewLookupLocation(location);
                 }
+            }
+        }
+
+        private void AddNewLookupLocation(LocationList location)
+        {
+            var feedeeLocationTable = new Dictionary<string, FeedeeInstance>();
+            saveableClones = new List<SaveableClone>();
+
+            foreach (TownNodeList townNode in nodeManager.GetLocationMainNodes(location))
+            {
+                for (int i = 0; i < nodeManager.GetNodeMenuCount(location, townNode); i++)
+                {
+                    if (nodeManager.HasNPCSpawn(location, townNode, i))
+                    {
+                        TownNodeList feedeeNode = nodeManager.GetConnectedNode(location, townNode, i);
+                        FeedeeClass newFeedeeClass = ChooseFeedeeClass(feedeeNode);
+                        FeedeeInstance newFeedee = CreateNewFeedee(newFeedeeClass, feedeeNode);
+                        SaveableClone feedeeSaveable = feedeeSpawner.SpawnNewNPC(newFeedee.feedeeClass, newFeedee.identifier);
+
+                        NPCInfo info = feedeeSaveable.GetComponent<NPCInfo>();
+                        info.SetCharacterInfo("name", newFeedee.name);
+                        info.SetCharacterInfo("rank", newFeedeeClass.ToString());
+
+                        saveableClones.Add(feedeeSaveable);
+                        feedeeLocationTable[newFeedee.identifier] = newFeedee;
+                    }
+                }
+                feedeeLookup[location] = feedeeLocationTable;
             }
         }
 
@@ -97,14 +112,23 @@ namespace ButtonGame.Core
         public object CaptureState()
         {
             BuildLookup();
-            // return feedeeLookup;
-            return null;
+
+            LocationList currentLocation = locationManager.GetCurrentLocation();
+            if(feedeeLookup.ContainsKey(currentLocation))
+            {
+                foreach (SaveableClone saveable in saveableClones)
+                {
+                    feedeeLookup[currentLocation][saveable.GetUniqueIdentifier()].state = saveable.CaptureState();
+                }
+            }
+
+            return feedeeLookup;
         }
 
         public void RestoreState(object state)
         {
             if(state == null) return;
-            feedeeLookup = (Dictionary<LocationList, Dictionary<SaveableClone, FeedeeInstance>>)state;
+            feedeeLookup = (Dictionary<LocationList, Dictionary<string, FeedeeInstance>>)state;
         }
 
         [System.Serializable]

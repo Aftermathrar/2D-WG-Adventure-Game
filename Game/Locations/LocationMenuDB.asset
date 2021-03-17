@@ -218,12 +218,47 @@ MonoBehaviour:
         connectedNode: 0
         isMenu: 0
         hasNPCSpawn: 0
-    - townNodeName: 
-      townNode: 0
+    - townNodeName: Home
+      townNode: 2
       menuInformation: []
-    - townNodeName: 
-      townNode: 0
-      menuInformation: []
+    - townNodeName: Market
+      townNode: 3
+      menuInformation:
+      - titleText: 
+        subtitleText: 
+        sprite: {fileID: 0}
+        spriteColor: {r: 0, g: 0, b: 0, a: 0}
+        connectedNode: 10
+        isMenu: 0
+        hasNPCSpawn: 1
+      - titleText: 
+        subtitleText: 
+        sprite: {fileID: 0}
+        spriteColor: {r: 0, g: 0, b: 0, a: 0}
+        connectedNode: 10
+        isMenu: 0
+        hasNPCSpawn: 1
+      - titleText: 
+        subtitleText: 
+        sprite: {fileID: 0}
+        spriteColor: {r: 0, g: 0, b: 0, a: 0}
+        connectedNode: 10
+        isMenu: 0
+        hasNPCSpawn: 1
+      - titleText: 
+        subtitleText: 
+        sprite: {fileID: 0}
+        spriteColor: {r: 0, g: 0, b: 0, a: 0}
+        connectedNode: 10
+        isMenu: 0
+        hasNPCSpawn: 1
+      - titleText: 
+        subtitleText: 
+        sprite: {fileID: 0}
+        spriteColor: {r: 0, g: 0, b: 0, a: 0}
+        connectedNode: 10
+        isMenu: 0
+        hasNPCSpawn: 1
     - townNodeName: 
       townNode: 0
       menuInformation: []
