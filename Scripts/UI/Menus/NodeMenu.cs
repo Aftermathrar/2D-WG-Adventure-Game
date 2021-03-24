@@ -24,6 +24,7 @@ namespace ButtonGame.UI.Menus
         //Cache
         Image[] tabImages;
         List<ItemMenuSlotUI> itemSlots;
+        List<Button[]> slotActionButtons;
         Inventory playerInventory;
 
         // Assigned on menu open
@@ -49,9 +50,11 @@ namespace ButtonGame.UI.Menus
         private void Start() 
         {
             itemSlots = new List<ItemMenuSlotUI>();
+            slotActionButtons = new List<Button[]>();
             for (int i = 0; i < menuContent.childCount; i++)
             {
                 itemSlots.Add(menuContent.GetChild(i).GetComponent<ItemMenuSlotUI>());
+                slotActionButtons.Add(itemSlots[i].GetActionButtons());
             }
 
             playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
@@ -131,26 +134,24 @@ namespace ButtonGame.UI.Menus
             return purchaseCount;
         }
 
-        public int SellItem(InventoryItem item, int tryCount)
+        public int SellItem(int inventorySlot, int tryCount)
         {
-            int invCount = playerInventory.GetItemCount(item);
-            int sellCount = Mathf.Min(tryCount, invCount);
+            int sellCount = 0;
             bool reloadMenu = false;
+            InventoryItem item = playerInventory.GetItemInSlot(inventorySlot);
 
             if(item.IsStackable())
             {
+                int invCount = playerInventory.GetItemCount(item);
+                sellCount = Mathf.Min(tryCount, invCount);
                 playerInventory.RemoveItemFromInventory(item, sellCount);
                 playerInventory.AddMoney(item.GetValue() * sellCount);
                 if(invCount <= tryCount) reloadMenu = true;
             }
             else
             {
-                // Loop to sell multiple single stacks at once
-                // for (int i = 0; i < sellCount; i++)
-                // {
-                    playerInventory.RemoveItemFromInventory(item, 1);
-                    playerInventory.AddMoney(item.GetValue());
-                // }
+                playerInventory.RemoveFromSlot(inventorySlot, 1);
+                playerInventory.AddMoney(item.GetValue());
                 reloadMenu = true;
             }
 
@@ -159,6 +160,12 @@ namespace ButtonGame.UI.Menus
                 slotCoroutine = StartCoroutine(SetupSellMenuSlots());
             }
             return sellCount;
+        }
+
+        public bool CraftItem(InventoryItem item, int tryCount, out int craftCount)
+        {
+            craftCount = 0;
+            return false;
         }
 
         private void FormatTabs(int oldIndex, int newIndex)
@@ -202,12 +209,33 @@ namespace ButtonGame.UI.Menus
             yield return null;
             int i = 0;
             int slotCount = itemSlots.Count;
+            string action = tabTexts[tabIndex].text;
             foreach (var item in menuBuilderDB.GetInventoryItems(node, tabIndex))
             {
                 ItemMenuSlotUI slotUI = GetSlotUI(slotCount, i);
 
-                slotUI.SlotSetup(tabTexts[tabIndex].text, item, 
-                    item.GetValue(), playerInventory.GetItemCount(item), 10f, i);
+                slotUI.SlotSetup(action, item.GetIcon(), item.GetDisplayName(), 
+                    item.GetValue(), playerInventory.GetItemCount(item), 10f);
+                
+                for (int j = 0; j < slotActionButtons[i].Length; j++)
+                {
+                    int btnIndex = j;
+                    int itemCountDelta = 0;
+                    slotActionButtons[i][j].onClick.RemoveAllListeners();
+                    slotActionButtons[i][j].onClick.AddListener(() =>
+                    {
+                        switch (action)
+                        {
+                            case "Buy":
+                                itemCountDelta = BuyItem(item, slotUI.GetActionButtonCount(btnIndex));
+                                break;
+                            case "Craft":
+                                CraftItem(item, slotUI.GetActionButtonCount(btnIndex), out itemCountDelta);
+                                break;
+                        }
+                        slotUI.ChangeOwnedValue(itemCountDelta);
+                    });
+                }
                 
                 i++;
                 if ((i % 10) == 0)
@@ -224,6 +252,9 @@ namespace ButtonGame.UI.Menus
                     menuContent.GetChild(j).gameObject.SetActive(false);
                 }
             }
+            // Resize content window
+            int contentHeight = i * 120;
+            menuContent.sizeDelta = new Vector2(menuContent.sizeDelta.x, contentHeight);
         }
 
         IEnumerator SetupSellMenuSlots()
@@ -232,6 +263,7 @@ namespace ButtonGame.UI.Menus
             int slotCount = itemSlots.Count;
             int currentSlot = 0;
             bool isInventoryEmpty = true;
+            Vector2 oldMenuPosition = new Vector2(menuContent.position.x, menuContent.position.y);
 
             for (int i = 0; i < playerInventory.GetSize(); i++)
             {
@@ -243,7 +275,21 @@ namespace ButtonGame.UI.Menus
                     ItemMenuSlotUI slotUI = GetSlotUI(slotCount, currentSlot);
                     float sellValue = item.GetValue() / 2f;
 
-                    slotUI.SlotSetup("Sell", item, sellValue, itemCount, 10f, currentSlot);
+                    slotUI.SlotSetup("Sell", item.GetIcon(), item.GetDisplayName(), 
+                        sellValue, itemCount, 10f);
+
+                    for (int j = 0; j < slotActionButtons[currentSlot].Length; j++)
+                    {
+                        int inventorySlot = i;
+                        int btnIndex = slotUI.GetActionButtonCount(j);
+                        int itemCountDelta = 0;
+                        slotActionButtons[currentSlot][j].onClick.RemoveAllListeners();
+                        slotActionButtons[currentSlot][j].onClick.AddListener(() =>
+                        {
+                            itemCountDelta = SellItem(inventorySlot, btnIndex);
+                            slotUI.ChangeOwnedValue(-itemCountDelta);
+                        });
+                    }
                     
                     currentSlot++;
                     if((currentSlot % 10) == 0)
@@ -265,6 +311,11 @@ namespace ButtonGame.UI.Menus
                     menuContent.GetChild(i).gameObject.SetActive(false);
                 }
             }
+
+            // Resize content window
+            int contentHeight = currentSlot * 120;
+            menuContent.sizeDelta = new Vector2(menuContent.sizeDelta.x, contentHeight);
+            menuContent.position = oldMenuPosition;
         }
 
         private ItemMenuSlotUI GetSlotUI(int slotCount, int currentSlot)
@@ -280,12 +331,10 @@ namespace ButtonGame.UI.Menus
                 slotUI = Instantiate(slotPrefab, menuContent);
                 RectTransform slotRect = slotUI.GetComponent<RectTransform>();
                 slotRect.offsetMax = new Vector2(5, -(5 + currentSlot * 120));
+                slotRect.sizeDelta = new Vector2(1193, 120);
                 itemSlots.Add(slotUI);
+                slotActionButtons.Add(slotUI.GetActionButtons());
             }
-
-            // Resize content window
-            int contentHeight = 120 + currentSlot * 120;
-            menuContent.sizeDelta = new Vector2(menuContent.sizeDelta.x, contentHeight);
 
             return slotUI;
         }
