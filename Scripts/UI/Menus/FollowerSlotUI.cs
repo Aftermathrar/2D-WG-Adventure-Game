@@ -81,9 +81,9 @@ namespace ButtonGame.UI.Menus
             else if(hungerPercent <= 80)
                 return "Content";
             else if(hungerPercent <= 100)
-                return "Stuffed";
+                return "Full";
             else
-                return "Overstuffed";
+                return "Stuffed";
         }
     }
 }

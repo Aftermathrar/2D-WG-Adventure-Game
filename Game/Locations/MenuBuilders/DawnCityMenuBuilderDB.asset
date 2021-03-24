@@ -37,3 +37,71 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 12bf4338f915b7a48a69d4db6e7ed352, type: 2}
     - category: Craft
       menuContents: []
+  - townNodeName: Furnishings
+    townNode: 16
+    isMerchant: 1
+    menuCategories:
+    - category: Buy
+      menuContents: []
+    - category: Craft
+      menuContents: []
+  - townNodeName: Food Vendor
+    townNode: 10
+    isMerchant: 1
+    menuCategories:
+    - category: Buy
+      menuContents: []
+  - townNodeName: Cafe
+    townNode: 11
+    isMerchant: 1
+    menuCategories:
+    - category: Buy
+      menuContents: []
+  - townNodeName: Restaurant
+    townNode: 12
+    isMerchant: 1
+    menuCategories:
+    - category: Buy
+      menuContents: []
+  - townNodeName: Bakery
+    townNode: 13
+    isMerchant: 1
+    menuCategories:
+    - category: Buy
+      menuContents: []
+  - townNodeName: Quest Counter
+    townNode: 17
+    isMerchant: 0
+    menuCategories:
+    - category: Quests
+      menuContents: []
+  - townNodeName: Bounty Counter
+    townNode: 18
+    isMerchant: 0
+    menuCategories:
+    - category: Bounties
+      menuContents: []
+  - townNodeName: Request Board
+    townNode: 19
+    isMerchant: 0
+    menuCategories:
+    - category: Requests
+      menuContents: []
+  - townNodeName: Dining Hall
+    townNode: 20
+    isMerchant: 0
+    menuCategories:
+    - category: Meals
+      menuContents: []
+  - townNodeName: Bar
+    townNode: 21
+    isMerchant: 0
+    menuCategories:
+    - category: Buy
+      menuContents: []
+  - townNodeName: Kitchen
+    townNode: 7
+    isMerchant: 0
+    menuCategories:
+    - category: Craft
+      menuContents: []

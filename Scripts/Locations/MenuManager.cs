@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using ButtonGame.Core;
 using ButtonGame.UI.Menus;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ButtonGame.Locations
 {
     public class MenuManager : MonoBehaviour
     {
         [SerializeField] LocationMenuDB locationMenuDB;
+        [SerializeField] FollowerMenu popupFollowerMenu;
         [SerializeField] NodeMenu popupNodeMenu;
         [SerializeField] LocationMenuSlotUI[] menuSlots;
         LocationList currentLocation;
         TownNodeList[] connectedNodes;
         bool[] isMenuNode;
+
+        private void Start() 
+        {
+            GridLayoutGroup gridLayout = GetComponent<GridLayoutGroup>();
+            RectTransform thisRect = GetComponent<RectTransform>();
+            gridLayout.cellSize = new Vector2(gridLayout.cellSize.x, thisRect.rect.height);
+        }
 
         public void MakeMainMenu(LocationList location)
         {
@@ -29,6 +39,11 @@ namespace ButtonGame.Locations
             }
             else
             {
+                if(connectedNodes[slot] == TownNodeList.ManageParty)
+                {
+                    popupFollowerMenu.OpenMenu();
+                    return;
+                }
                 LocationMenuBuilderDB menuBuilderDB = locationMenuDB.GetMenuBuilderDB(currentLocation);
                 popupNodeMenu.OpenMenu(menuBuilderDB, connectedNodes[slot]);
             }

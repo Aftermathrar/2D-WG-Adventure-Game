@@ -17,7 +17,7 @@ namespace ButtonGame.Inventories
         // CONFIG DATA
         [Tooltip("Allowed size")]
         [SerializeField] int inventorySize = 16;
-        [SerializeField] int money = 0;
+        [SerializeField] float money = 0;
 
         // STATE
         InventorySlot[] slots;
@@ -53,6 +53,15 @@ namespace ButtonGame.Inventories
         }
 
         /// <summary>
+        /// Does the player have money for this item?
+        /// </summary>
+        public bool HasMoneyFor(float cost)
+        {
+            if(money >= cost) return true;
+            return true;
+        }
+
+        /// <summary>
         /// How many slots are in the inventory?
         /// </summary>
         public int GetSize()
@@ -81,6 +90,14 @@ namespace ButtonGame.Inventories
                 inventoryUpdated();
             }
             return true;
+        }
+
+        /// <summary>
+        /// Add money to the inventory.
+        /// </summary>
+        public void AddMoney(float value)
+        {
+            money += value;
         }
 
         /// <summary>
@@ -145,6 +162,25 @@ namespace ButtonGame.Inventories
             if (inventoryUpdated != null)
             {
                 inventoryUpdated();
+            }
+        }
+
+        /// <summary>
+        /// Removes multiple items from inventory.
+        /// </summary>
+        public void RemoveItemFromInventory(InventoryItem item, int removeCount)
+        {
+            if(item.IsStackable())
+            {
+                RemoveFromSlot(FindSlot(item), removeCount);
+            }
+            else
+            {
+                int slot = -1;
+                if(HasItem(item, out slot))
+                {
+                    RemoveFromSlot(slot, 1);
+                }
             }
         }
 

@@ -14,7 +14,8 @@ namespace ButtonGame.Core
         [SerializeField] MenuManager nodeManager;
         [SerializeField] FeedeeClass[] classChoices;
         // [SerializeField] List<FeedeeInstance> feedees = null;
-        Dictionary<LocationList, Dictionary<string, FeedeeInstance>> feedeeLookup = null;
+        Dictionary<LocationList, Dictionary<string, FeedeeEntry>> feedeeLookup = null;
+        Dictionary<TownNodeList, SaveableClone> nodeFeedeeLookup = null;
         List<SaveableClone> saveableClones = null;
         FeedeeSpawner feedeeSpawner = null;
         LocationManager locationManager = null;
@@ -26,10 +27,19 @@ namespace ButtonGame.Core
             if(nodeManager == null) GetComponentInChildren<MenuManager>();
         }
 
-        private FeedeeInstance CreateNewFeedee(FeedeeClass newClass, TownNodeList node = TownNodeList.None)
+        public GameObject GetFeedeeAtNode(TownNodeList nodeQuery)
+        {
+            if(nodeFeedeeLookup.ContainsKey(nodeQuery))
+            {
+                return nodeFeedeeLookup[nodeQuery].gameObject;
+            }
+            return null;
+        }
+
+        private FeedeeEntry CreateNewFeedee(FeedeeClass newClass, TownNodeList node = TownNodeList.None)
         {
             BuildLookup();
-            FeedeeInstance newFeedee = new FeedeeInstance();
+            FeedeeEntry newFeedee = new FeedeeEntry();
             SaveableEntity saveable = GetComponent<SaveableEntity>();
 
             newFeedee.feedeeClass = newClass;
@@ -44,7 +54,7 @@ namespace ButtonGame.Core
         {
             if(feedeeLookup != null) return;
 
-            feedeeLookup = new Dictionary<LocationList, Dictionary<string, FeedeeInstance>>();
+            feedeeLookup = new Dictionary<LocationList, Dictionary<string, FeedeeEntry>>();
             LocationList currentLocation = locationManager.GetCurrentLocation();
 
             foreach (LocationList location in nodeManager.GetLocations())
@@ -58,7 +68,8 @@ namespace ButtonGame.Core
 
         private void AddNewLookupLocation(LocationList location)
         {
-            var feedeeLocationTable = new Dictionary<string, FeedeeInstance>();
+            var feedeeLocationTable = new Dictionary<string, FeedeeEntry>();
+            nodeFeedeeLookup = new Dictionary<TownNodeList, SaveableClone>();
             saveableClones = new List<SaveableClone>();
 
             foreach (TownNodeList townNode in nodeManager.GetLocationMainNodes(location))
@@ -69,7 +80,7 @@ namespace ButtonGame.Core
                     {
                         TownNodeList feedeeNode = nodeManager.GetConnectedNode(location, townNode, i);
                         FeedeeClass newFeedeeClass = ChooseFeedeeClass(feedeeNode);
-                        FeedeeInstance newFeedee = CreateNewFeedee(newFeedeeClass, feedeeNode);
+                        FeedeeEntry newFeedee = CreateNewFeedee(newFeedeeClass, feedeeNode);
                         SaveableClone feedeeSaveable = feedeeSpawner.SpawnNewNPC(newFeedee.feedeeClass, newFeedee.identifier);
 
                         NPCInfo info = feedeeSaveable.GetComponent<NPCInfo>();
@@ -78,10 +89,16 @@ namespace ButtonGame.Core
 
                         saveableClones.Add(feedeeSaveable);
                         feedeeLocationTable[newFeedee.identifier] = newFeedee;
+                        AssignNPCToNode(feedeeSaveable, feedeeNode);
                     }
                 }
                 feedeeLookup[location] = feedeeLocationTable;
             }
+        }
+
+        private void AssignNPCToNode(SaveableClone feedee, TownNodeList node)
+        {
+            nodeFeedeeLookup[node] = feedee;
         }
 
         private FeedeeClass ChooseFeedeeClass(TownNodeList nodeList)
@@ -109,6 +126,24 @@ namespace ButtonGame.Core
             }
         }
 
+        private IEnumerator RestoreNPCsToLocation()
+        {
+            yield return null;
+            LocationList currentLocation = locationManager.GetCurrentLocation();
+            nodeFeedeeLookup = new Dictionary<TownNodeList, SaveableClone>();
+            saveableClones = new List<SaveableClone>();
+
+            if(feedeeLookup.ContainsKey(currentLocation))
+            {
+                foreach (FeedeeEntry feedee in feedeeLookup[currentLocation].Values)
+                {
+                    SaveableClone clone = feedeeSpawner.SpawnNewNPC(feedee.feedeeClass, feedee.identifier, feedee.state);
+                    saveableClones.Add(clone);
+                    AssignNPCToNode(clone, feedee.activeNode);
+                }
+            }
+        }
+
         public object CaptureState()
         {
             BuildLookup();
@@ -127,12 +162,13 @@ namespace ButtonGame.Core
 
         public void RestoreState(object state)
         {
-            if(state == null) return;
-            feedeeLookup = (Dictionary<LocationList, Dictionary<string, FeedeeInstance>>)state;
+            feedeeLookup = (Dictionary<LocationList, Dictionary<string, FeedeeEntry>>)state;
+            
+            StartCoroutine(RestoreNPCsToLocation());
         }
 
         [System.Serializable]
-        private class FeedeeInstance
+        private class FeedeeEntry
         {
             public string name;
             public FeedeeClass feedeeClass;

@@ -17030,21 +17030,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c35e456b4b5ad2f44b02898e14794a5f, type: 3}
---- !u!1 &1305565623798588113 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4503482240197542385, guid: c35e456b4b5ad2f44b02898e14794a5f,
-    type: 3}
-  m_PrefabInstance: {fileID: 3198074946214994720}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2719337138058819966 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 710687482634394206, guid: c35e456b4b5ad2f44b02898e14794a5f,
     type: 3}
   m_PrefabInstance: {fileID: 3198074946214994720}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1202434669455592391 stripped
+--- !u!1 &4250590921567981555 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 4381509642090146023, guid: c35e456b4b5ad2f44b02898e14794a5f,
+  m_CorrespondingSourceObject: {fileID: 1629451854192045267, guid: c35e456b4b5ad2f44b02898e14794a5f,
     type: 3}
   m_PrefabInstance: {fileID: 3198074946214994720}
   m_PrefabAsset: {fileID: 0}
@@ -17060,9 +17054,9 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3198074946214994720}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4250590921567981555 stripped
+--- !u!1 &1202434669455592391 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1629451854192045267, guid: c35e456b4b5ad2f44b02898e14794a5f,
+  m_CorrespondingSourceObject: {fileID: 4381509642090146023, guid: c35e456b4b5ad2f44b02898e14794a5f,
     type: 3}
   m_PrefabInstance: {fileID: 3198074946214994720}
   m_PrefabAsset: {fileID: 0}
@@ -17123,6 +17117,12 @@ GameObject:
 --- !u!224 &1202434669401430570 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4381509642169219338, guid: c35e456b4b5ad2f44b02898e14794a5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3198074946214994720}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1305565623798588113 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4503482240197542385, guid: c35e456b4b5ad2f44b02898e14794a5f,
     type: 3}
   m_PrefabInstance: {fileID: 3198074946214994720}
   m_PrefabAsset: {fileID: 0}
@@ -18526,6 +18526,11 @@ PrefabInstance:
       propertyPath: popupNodeMenu
       value: 
       objectReference: {fileID: 2946552253417374952}
+    - target: {fileID: 8845666049131554233, guid: d53c6778dbdcf76449e0adede408dc35,
+        type: 3}
+      propertyPath: popupFollowerMenu
+      value: 
+      objectReference: {fileID: 5887794566586759262}
     - target: {fileID: 9133162573180035763, guid: d53c6778dbdcf76449e0adede408dc35,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -18716,6 +18721,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3537725969308781845, guid: 1a2f244e5e0cd1c4fbf9adb4be2c386e,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 5250580953577754785}
     - target: {fileID: 3890415389039129193, guid: 1a2f244e5e0cd1c4fbf9adb4be2c386e,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -18759,6 +18769,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6966262613381739851}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5887794566586759262 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3537725969308781845, guid: 1a2f244e5e0cd1c4fbf9adb4be2c386e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6966262613381739851}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32f4551e6033b349bae6189f6c82474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6973748777865726996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19209,6 +19231,11 @@ PrefabInstance:
     - target: {fileID: 5198273518047955196, guid: e6fdfc621b7d227478757a19bb3ae74f,
         type: 3}
       propertyPath: manager
+      value: 
+      objectReference: {fileID: 3411694403837644739}
+    - target: {fileID: 5198273518047955196, guid: e6fdfc621b7d227478757a19bb3ae74f,
+        type: 3}
+      propertyPath: feedeeManager
       value: 
       objectReference: {fileID: 3411694403837644739}
     - target: {fileID: 5375579729975359427, guid: e6fdfc621b7d227478757a19bb3ae74f,

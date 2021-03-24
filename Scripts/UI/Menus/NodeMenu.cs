@@ -12,13 +12,15 @@ namespace ButtonGame.UI.Menus
 {
     public class NodeMenu : MonoBehaviour
     {
-        [SerializeField] FeedeeManager manager;
+        [SerializeField] FeedeeManager feedeeManager;
         [SerializeField] Image background;
         [SerializeField] GameObject menuPanel;
         [SerializeField] RectTransform menuContent;
+        [SerializeField] NPCSlotUI npcSlotUI;
         [SerializeField] ItemMenuSlotUI slotPrefab;
         [SerializeField] RectTransform[] menuTabs;
         [SerializeField] TextMeshProUGUI[] tabTexts;
+
         //Cache
         Image[] tabImages;
         List<ItemMenuSlotUI> itemSlots;
@@ -31,8 +33,10 @@ namespace ButtonGame.UI.Menus
         int sellTab = -1;
         Coroutine slotCoroutine = null;
 
-        private void Start() 
+        private void Awake()
         {
+            if (feedeeManager == null) GetComponentInParent<FeedeeManager>();
+
             int tabCount = menuTabs.Length;
             tabImages = new Image[tabCount];
 
@@ -40,7 +44,10 @@ namespace ButtonGame.UI.Menus
             {
                 tabImages[i] = menuTabs[i].GetComponent<Image>();
             }
+        }
 
+        private void Start() 
+        {
             itemSlots = new List<ItemMenuSlotUI>();
             for (int i = 0; i < menuContent.childCount; i++)
             {
@@ -60,6 +67,8 @@ namespace ButtonGame.UI.Menus
             menuBuilderDB = locationMenuBuilder;
             node = townNode;
             currentTab = 0;
+
+            npcSlotUI.SlotSetup(feedeeManager.GetFeedeeAtNode(townNode), townNode.ToString());
             
             SetupMenuTabs();
             slotCoroutine = StartCoroutine(SetupMenuSlots(currentTab));
@@ -90,6 +99,66 @@ namespace ButtonGame.UI.Menus
             }
             FormatTabs(currentTab, tabIndex);
             currentTab = tabIndex;
+        }
+
+        public int BuyItem(InventoryItem item, int count)
+        {
+            float cost = item.GetValue() * count;
+            int purchaseCount = 0;
+            if(playerInventory.HasMoneyFor(cost))
+            {
+                if(item.IsStackable())
+                {
+                    if(playerInventory.AddToFirstEmptySlot(item, count))
+                        {
+                            playerInventory.AddMoney(-cost);
+                            purchaseCount = count;
+                        }
+                }
+                else
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        if(playerInventory.AddToFirstEmptySlot(item, 1))
+                        {
+                            playerInventory.AddMoney(-item.GetValue());
+                            purchaseCount++;
+                        }
+                    }
+                }
+            }
+
+            return purchaseCount;
+        }
+
+        public int SellItem(InventoryItem item, int tryCount)
+        {
+            int invCount = playerInventory.GetItemCount(item);
+            int sellCount = Mathf.Min(tryCount, invCount);
+            bool reloadMenu = false;
+
+            if(item.IsStackable())
+            {
+                playerInventory.RemoveItemFromInventory(item, sellCount);
+                playerInventory.AddMoney(item.GetValue() * sellCount);
+                if(invCount <= tryCount) reloadMenu = true;
+            }
+            else
+            {
+                // Loop to sell multiple single stacks at once
+                // for (int i = 0; i < sellCount; i++)
+                // {
+                    playerInventory.RemoveItemFromInventory(item, 1);
+                    playerInventory.AddMoney(item.GetValue());
+                // }
+                reloadMenu = true;
+            }
+
+            if(reloadMenu)
+            {
+                slotCoroutine = StartCoroutine(SetupSellMenuSlots());
+            }
+            return sellCount;
         }
 
         private void FormatTabs(int oldIndex, int newIndex)
@@ -136,11 +205,15 @@ namespace ButtonGame.UI.Menus
             foreach (var item in menuBuilderDB.GetInventoryItems(node, tabIndex))
             {
                 ItemMenuSlotUI slotUI = GetSlotUI(slotCount, i);
-                
-                slotUI.SlotSetup(tabTexts[tabIndex].text, item.GetIcon(), 
-                    item.GetDisplayName(), item.GetValue(), playerInventory.GetItemCount(item), 10f);
+
+                slotUI.SlotSetup(tabTexts[tabIndex].text, item, 
+                    item.GetValue(), playerInventory.GetItemCount(item), 10f, i);
                 
                 i++;
+                if ((i % 10) == 0)
+                {
+                    yield return null;
+                }
             }
 
             if(i < slotCount)
@@ -158,22 +231,38 @@ namespace ButtonGame.UI.Menus
             yield return null;
             int slotCount = itemSlots.Count;
             int currentSlot = 0;
+            bool isInventoryEmpty = true;
+
             for (int i = 0; i < playerInventory.GetSize(); i++)
             {
                 int itemCount = playerInventory.GetCountInSlot(i);
                 if (itemCount > 0)
                 {
+                    isInventoryEmpty = false;
                     InventoryItem item = playerInventory.GetItemInSlot(i);
                     ItemMenuSlotUI slotUI = GetSlotUI(slotCount, currentSlot);
+                    float sellValue = item.GetValue() / 2f;
 
-                    slotUI.SlotSetup("Sell", item.GetIcon(), item.GetDisplayName(),
-                        item.GetValue(), itemCount, 10f);
+                    slotUI.SlotSetup("Sell", item, sellValue, itemCount, 10f, currentSlot);
                     
                     currentSlot++;
                     if((currentSlot % 10) == 0)
                     {
                         yield return null;
                     }
+                }
+            }
+
+            if(isInventoryEmpty)
+            {
+                slotCoroutine = StartCoroutine(ClearSlotsAfterClose());
+            }
+            else if(currentSlot < slotCount)
+            {
+                yield return null;
+                for (int i = currentSlot; i < slotCount; i++)
+                {
+                    menuContent.GetChild(i).gameObject.SetActive(false);
                 }
             }
         }
@@ -189,8 +278,15 @@ namespace ButtonGame.UI.Menus
             else
             {
                 slotUI = Instantiate(slotPrefab, menuContent);
+                RectTransform slotRect = slotUI.GetComponent<RectTransform>();
+                slotRect.offsetMax = new Vector2(5, -(5 + currentSlot * 120));
                 itemSlots.Add(slotUI);
             }
+
+            // Resize content window
+            int contentHeight = 120 + currentSlot * 120;
+            menuContent.sizeDelta = new Vector2(menuContent.sizeDelta.x, contentHeight);
+
             return slotUI;
         }
 
