@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ButtonGame.Attributes;
 using ButtonGame.Core;
 using ButtonGame.Stats.Follower;
 using UnityEditor;
@@ -36,15 +37,27 @@ namespace ButtonGame.Dialogue
 
         public string GetText(GameObject conversantGO)
         {
+            string returnText = text;
             if(isVariableText)
             {
                 // Parse text
-                return GetDescription(conversantGO);
+                returnText = GetDescription(conversantGO);
             }
-            else
+
+            returnText = ReplaceSubstringVariables(returnText, conversantGO);
+
+            return returnText;
+        }
+
+        private string ReplaceSubstringVariables(string sInput, GameObject conversantGO)
+        {
+            string sModified = sInput;
+            if(sInput.IndexOf("[Name]") >= 0)
             {
-                return text;
+                NPCInfo npcInfo = conversantGO.GetComponent<NPCInfo>();
+                sModified = sModified.Replace("[Name]", npcInfo.GetCharacterInfo("name"));
             }
+            return sModified;
         }
 
         public string GetDescription(GameObject conversantGO)

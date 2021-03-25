@@ -360,11 +360,11 @@ MonoBehaviour:
     predicate: 4
     descParameters:
     - limit: 0
-      text: gaunt
-    - limit: 0.25
       text: slim
-    - limit: 0.5
+    - limit: 0.25
       text: pretty
+    - limit: 0.5
+      text: cherubic
     - limit: 1
       text: chubby
 --- !u!114 &5826269078826730435

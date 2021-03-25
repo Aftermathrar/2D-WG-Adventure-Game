@@ -17,6 +17,8 @@ namespace ButtonGame.UI.Menus
         [SerializeField] GameObject menuPanel;
         [SerializeField] RectTransform menuContent;
         [SerializeField] NPCSlotUI npcSlotUI;
+        [SerializeField] CharacterInfoDescription npcInfoDescription;
+        [SerializeField] ItemInfoDescription itemInfoDescription;
         [SerializeField] ItemMenuSlotUI slotPrefab;
         [SerializeField] RectTransform[] menuTabs;
         [SerializeField] TextMeshProUGUI[] tabTexts;
@@ -24,7 +26,9 @@ namespace ButtonGame.UI.Menus
         //Cache
         Image[] tabImages;
         List<ItemMenuSlotUI> itemSlots;
+        List<Button> itemSlotButtons;
         List<Button[]> slotActionButtons;
+        Button npcSlotButton;
         Inventory playerInventory;
 
         // Assigned on menu open
@@ -49,13 +53,17 @@ namespace ButtonGame.UI.Menus
 
         private void Start() 
         {
+            //Register item slots for pooling, buttons for onClick listeners
             itemSlots = new List<ItemMenuSlotUI>();
+            itemSlotButtons = new List<Button>();
             slotActionButtons = new List<Button[]>();
             for (int i = 0; i < menuContent.childCount; i++)
             {
                 itemSlots.Add(menuContent.GetChild(i).GetComponent<ItemMenuSlotUI>());
+                itemSlotButtons.Add(itemSlots[i].GetComponent<Button>());
                 slotActionButtons.Add(itemSlots[i].GetActionButtons());
             }
+            npcSlotButton = npcSlotUI.GetComponent<Button>();
 
             playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         }
@@ -71,7 +79,10 @@ namespace ButtonGame.UI.Menus
             node = townNode;
             currentTab = 0;
 
-            npcSlotUI.SlotSetup(feedeeManager.GetFeedeeAtNode(townNode), townNode.ToString());
+            GameObject _feedeeGO = feedeeManager.GetFeedeeAtNode(townNode);
+            npcSlotUI.SlotSetup(_feedeeGO, townNode.ToString());
+            npcInfoDescription.SetCharacterInfo(_feedeeGO);
+            npcSlotButton.onClick.AddListener(() => npcInfoDescription.SetCharacterInfo(_feedeeGO));
             
             SetupMenuTabs();
             slotCoroutine = StartCoroutine(SetupMenuSlots(currentTab));
@@ -85,6 +96,7 @@ namespace ButtonGame.UI.Menus
             // Reset tab indicators back to normal, disable all slot gameobjects
             FormatTabs(currentTab, 0);
             StartCoroutine(ClearSlotsAfterClose());
+            npcSlotButton.onClick.RemoveAllListeners();
         }
 
         public void SwitchTab(int tabIndex)
@@ -217,6 +229,10 @@ namespace ButtonGame.UI.Menus
                 slotUI.SlotSetup(action, item.GetIcon(), item.GetDisplayName(), 
                     item.GetValue(), playerInventory.GetItemCount(item), 10f);
                 
+                itemSlotButtons[i].onClick.RemoveAllListeners();
+                itemSlotButtons[i].onClick.AddListener(() => itemInfoDescription.SetItemInfo(item));
+
+                // Add listener for buy/craft X buttons
                 for (int j = 0; j < slotActionButtons[i].Length; j++)
                 {
                     int btnIndex = j;
@@ -278,6 +294,9 @@ namespace ButtonGame.UI.Menus
                     slotUI.SlotSetup("Sell", item.GetIcon(), item.GetDisplayName(), 
                         sellValue, itemCount, 10f);
 
+                    itemSlotButtons[currentSlot].onClick.RemoveAllListeners();
+                    itemSlotButtons[currentSlot].onClick.AddListener(() => itemInfoDescription.SetItemInfo(item));
+
                     for (int j = 0; j < slotActionButtons[currentSlot].Length; j++)
                     {
                         int inventorySlot = i;
@@ -333,6 +352,7 @@ namespace ButtonGame.UI.Menus
                 slotRect.offsetMax = new Vector2(5, -(5 + currentSlot * 120));
                 slotRect.sizeDelta = new Vector2(1193, 120);
                 itemSlots.Add(slotUI);
+                itemSlotButtons.Add(slotUI.GetComponent<Button>());
                 slotActionButtons.Add(slotUI.GetActionButtons());
             }
 

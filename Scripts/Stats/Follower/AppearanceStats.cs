@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using ButtonGame.Saving;
 using UnityEngine;
 
@@ -205,7 +206,9 @@ namespace ButtonGame.Stats.Follower
 
         public string GetHairColor()
         {
-            return baseBody.hairColor.ToString();
+            string hairText = baseBody.hairColor.ToString();
+            hairText = Regex.Replace(hairText, "(\\B[A-Z])", " $1");
+            return hairText;
         }
 
         public float GetHairLength()
