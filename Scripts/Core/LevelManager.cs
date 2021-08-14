@@ -9,19 +9,21 @@ using ButtonGame.Locations;
 using ButtonGame.Stats;
 using ButtonGame.Stats.Enums;
 using TMPro;
+using ButtonGame.Quests;
 
 namespace ButtonGame.Core
 {
     public class LevelManager : MonoBehaviour
     {
         // Pause Control
-        public static bool isPaused;
+        public bool isPaused = false;
         private bool isBattleActive = false;
         [SerializeField] GameObject pauseScreen;
         [SerializeField] GameObject introScreen;
         [SerializeField] GameObject outroScreen;
-        [SerializeField] GameObject buttonContainer;
+        [SerializeField] GameObject postFightButtons;
         [SerializeField] GameObject rewardWindow;
+        [SerializeField] GameObject questWindow;
 
         // Battle setup
         [SerializeField] protected EnemySpawnDB enemySpawnDB;
@@ -54,7 +56,8 @@ namespace ButtonGame.Core
         private void BattleSetup()
         {
             // Populate enemy list
-            location = GetComponent<LocationManager>().GetCurrentLocation();
+            LocationManager locationManager = GetComponent<LocationManager>();
+            location = locationManager.GetCurrentLocation();
             enemyPrefabs = enemySpawnDB.GetEnemyList(location);
 
             // Spawn enemy
@@ -95,6 +98,13 @@ namespace ButtonGame.Core
                 followerGO.GetComponent<CombatEffects>().SetTarget(enemyGO);
             }
 
+            // Check whether to display quest window
+            QuestList questList = playerGO.GetComponent<QuestList>();
+            if(questList.GetActiveQuestCount() > 0)
+            {
+                questWindow.SetActive(true);
+            }
+
             // Activate battle
             StartCoroutine(BeginBattle());
         }
@@ -124,8 +134,15 @@ namespace ButtonGame.Core
 
         protected IEnumerator BeginBattle()
         {
-            Time.timeScale = 1f;
             introScreen.SetActive(true);
+
+            // Dialogue from quest checker can pause game at start
+            while(isPaused)
+            {
+                yield return new WaitForSecondsRealtime(0.5f);
+            }
+
+            Time.timeScale = 1f;
             IntroFader introFader = introScreen.GetComponent<IntroFader>();
             yield return introFader.BattleIntro(1.5f);
             StartBattle();
@@ -138,7 +155,7 @@ namespace ButtonGame.Core
             Destroy(enemyGO);
             outroScreen.SetActive(false);
             rewardWindow.SetActive(false);
-            buttonContainer.SetActive(false);
+            postFightButtons.SetActive(false);
             BattleSetup();
         }
 
@@ -147,7 +164,7 @@ namespace ButtonGame.Core
             Destroy(enemyGO);
             outroScreen.SetActive(false);
             rewardWindow.SetActive(false);
-            buttonContainer.SetActive(false);
+            postFightButtons.SetActive(false);
             BattleSetup(enemyName);
         }
 
@@ -158,14 +175,19 @@ namespace ButtonGame.Core
             yield return outroScreen.GetComponent<OutroFader>().BattleOutro();
             yield return new WaitForSecondsRealtime(2f);
             rewardWindow.SetActive(true);
-            buttonContainer.SetActive(true);
+            postFightButtons.SetActive(true);
         }
 
-        private void PauseGame()
+        // PUBLIC
+
+        public void PauseGame()
         {
             Time.timeScale = 0;
-            pauseScreen.SetActive(true);
-            buttonContainer.SetActive(true);
+            if(isBattleActive)
+            {
+                pauseScreen.SetActive(true);
+                postFightButtons.SetActive(true);
+            }
             isPaused = !isPaused;
         }
 
@@ -173,7 +195,7 @@ namespace ButtonGame.Core
         {
             Time.timeScale = 1f;
             pauseScreen.SetActive(false);
-            buttonContainer.SetActive(false);
+            postFightButtons.SetActive(false);
             isPaused = !isPaused;
         }
 
@@ -204,9 +226,12 @@ namespace ButtonGame.Core
         public void EndBattle(string tag)
         {
             isBattleActive = false;
+            isPaused = false;
+            questWindow.SetActive(false);
             Time.timeScale = 0.3f;
             if (tag != "Player")
             {
+                GetComponent<LocationManager>().DecrementDistanceRemaining();
                 string s = enemyGO.GetComponent<BaseStats>().GetStatText(Stat.Name);
                 playerGO.GetComponent<PlayerBattleStats>().AddEnemyKill(s, location.ToString());
                 StartCoroutine(BattleRewards());

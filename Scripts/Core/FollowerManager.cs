@@ -13,11 +13,13 @@ namespace ButtonGame.Core
     [RequireComponent(typeof(FollowerSpawner))]
     public class FollowerManager : MonoBehaviour, ISaveable
     {
+        [SerializeField] GameObject followerEquipToggle;
         [SerializeField] int activeFollowerIndex = -1;
         [SerializeField] CharacterClass[] classChoices; 
         [SerializeField] List<FollowerEntry> followers = new List<FollowerEntry>();
         [SerializeField] List<SaveableClone> followerSaveables = new List<SaveableClone>();
         [SerializeField] GameEvent followerChangeEvent;
+        [SerializeField] GameEvent followerEffectEvent;
         FollowerSpawner followerSpawner = null;
 
         private void Awake() 
@@ -59,22 +61,6 @@ namespace ButtonGame.Core
             info.SetCharacterInfo("rank", "Rank E");
         }
 
-        public int GetFollowerCount()
-        {
-            return followers.Count;
-        }
-
-        public bool GetActiveFollower(out string followerUUID)
-        {
-            if(activeFollowerIndex >= 0)
-            {
-                followerUUID = followers[activeFollowerIndex].identifier;
-                return true;
-            }
-            followerUUID = "";
-            return false;
-        }
-
         public void ChangeActiveFollower(int index)
         {
             if (index == activeFollowerIndex) return;
@@ -93,6 +79,10 @@ namespace ButtonGame.Core
             followers[index].state = followerSaveables[index].CaptureState();
             followers[index].position = FollowerPosition.Combat;
             activeFollowerIndex = index;
+            if(activeFollowerIndex < 0)
+            {
+                followerEquipToggle.SetActive(false);
+            }
 
             // Respawn follower prefabs
             Destroy(followerSaveables[i].gameObject);
@@ -103,12 +93,52 @@ namespace ButtonGame.Core
             // Remove potential buffs from player
             if (followers[i].followerClass == CharacterClass.Priest)
             {
-                followerChangeEvent.RaiseEvent(EffectName.DivineInfusion.ToString());
+                followerEffectEvent.RaiseEvent(EffectName.DivineInfusion.ToString());
             }
             else
             {
-                followerChangeEvent.RaiseEvent(EffectName.Berserk.ToString());
+                followerEffectEvent.RaiseEvent(EffectName.Berserk.ToString());
             }
+
+            followerChangeEvent.RaiseEvent();
+        }
+
+        public int GetFollowerCount()
+        {
+            return followers.Count;
+        }
+
+        public bool GetActiveFollower(out string followerUUID)
+        {
+            if (activeFollowerIndex >= 0)
+            {
+                followerUUID = followers[activeFollowerIndex].identifier;
+                return true;
+            }
+            followerUUID = "";
+            return false;
+        }
+
+        public bool GetActiveFollowerIndex(out int returnIndex)
+        {
+            if(activeFollowerIndex >= 0)
+            {
+                returnIndex = activeFollowerIndex;
+                return true;
+            }
+            returnIndex = -1;
+            return false;
+        }
+
+        public bool GetActiveFollowerClass(out CharacterClass returnClass)
+        {
+            if(activeFollowerIndex >= 0)
+            {
+                returnClass = followers[activeFollowerIndex].followerClass;
+                return true;
+            }
+            returnClass = CharacterClass.Priest;
+            return false;
         }
 
         public string GetFollowerID(int index)
@@ -131,10 +161,23 @@ namespace ButtonGame.Core
             return followerSaveables[index].gameObject;
         }
 
+        public bool GetActiveFollowerObject(out GameObject returnFollowerObject)
+        {
+            if(activeFollowerIndex >= 0)
+            {
+                returnFollowerObject = followerSaveables[activeFollowerIndex].gameObject;
+                return true;
+            }
+            returnFollowerObject = null;
+            return false;
+        }
+
         private void RegisterActiveFollower(FollowerEntry newActiveFollower)
         {
             activeFollowerIndex = followers.Count - 1;
             followerSaveables.Add(followerSpawner.SpawnActiveFollower(newActiveFollower.followerClass, newActiveFollower.identifier));
+            followerEquipToggle.SetActive(true);
+            followerChangeEvent.RaiseEvent();
         }
 
         private void RegisterBackgroundFollower(FollowerEntry newFollower)
@@ -168,6 +211,12 @@ namespace ButtonGame.Core
                 {
                     followerSaveables.Add(followerSpawner.SpawnBackgroundFollower(followers[i].followerClass, followers[i].identifier, followers[i].state));
                 }
+            }
+            
+            if(followers.Count == 0 && followerEquipToggle != null)
+            {
+                followerEquipToggle.SetActive(false);
+                // followerChangeEvent.RaiseEvent();
             }
         }
         

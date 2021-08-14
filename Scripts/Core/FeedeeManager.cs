@@ -24,7 +24,7 @@ namespace ButtonGame.Core
         {
             feedeeSpawner = GetComponent<FeedeeSpawner>();
             locationManager = GetComponent<LocationManager>();
-            if(nodeManager == null) GetComponentInChildren<MenuManager>();
+            nodeManager ??= GetComponentInChildren<MenuManager>();
         }
 
         public GameObject GetFeedeeAtNode(TownNodeList nodeQuery)
@@ -52,12 +52,12 @@ namespace ButtonGame.Core
 
         private void BuildLookup()
         {
-            if(feedeeLookup != null) return;
+            if(nodeManager == null) return;
 
-            feedeeLookup = new Dictionary<LocationList, Dictionary<string, FeedeeEntry>>();
+            feedeeLookup ??= new Dictionary<LocationList, Dictionary<string, FeedeeEntry>>();
             LocationList currentLocation = locationManager.GetCurrentLocation();
 
-            foreach (LocationList location in nodeManager.GetLocations())
+            foreach (LocationList location in nodeManager.GetCityLocations())
             {
                 if (location == currentLocation && !feedeeLookup.ContainsKey(location))
                 {
@@ -142,18 +142,24 @@ namespace ButtonGame.Core
                     AssignNPCToNode(clone, feedee.activeNode);
                 }
             }
+            else if(nodeManager != null)
+            {
+                AddNewLookupLocation(currentLocation);
+            }
         }
 
         public object CaptureState()
         {
             BuildLookup();
 
-            LocationList currentLocation = locationManager.GetCurrentLocation();
-            if(feedeeLookup.ContainsKey(currentLocation))
+            foreach (LocationList location in feedeeLookup.Keys)
             {
                 foreach (SaveableClone saveable in saveableClones)
                 {
-                    feedeeLookup[currentLocation][saveable.GetUniqueIdentifier()].state = saveable.CaptureState();
+                    // Autosaving takes place in two locations, so need to loop through to see which NPCs are loaded
+                    if(!feedeeLookup[location].ContainsKey(saveable.GetUniqueIdentifier())) break;
+
+                    feedeeLookup[location][saveable.GetUniqueIdentifier()].state = saveable.CaptureState();
                 }
             }
 

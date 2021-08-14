@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ButtonGame.Attributes;
 using ButtonGame.Character;
+using ButtonGame.Core;
 using ButtonGame.Stats;
 using ButtonGame.Stats.Enums;
 using ButtonGame.UI;
@@ -17,6 +18,7 @@ namespace ButtonGame.Combat.Skills
 
         protected override void Awake()
         {
+            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
             thisButton = GetComponent<Button>();
             atkIcon = GetComponent<Image>().sprite;
             player = GetComponentInParent<PlayerController>();

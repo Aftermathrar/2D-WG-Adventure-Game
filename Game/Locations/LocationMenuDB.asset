@@ -190,33 +190,33 @@ MonoBehaviour:
     - townNodeName: Main
       townNode: 1
       menuInformation:
-      - titleText: 
+      - titleText: Inn
         subtitleText: 
-        sprite: {fileID: 0}
-        spriteColor: {r: 0, g: 0, b: 0, a: 0}
-        connectedNode: 0
+        sprite: {fileID: 21300000, guid: 530e7e15b4e752341848a89ab37bb557, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 2
         isMenu: 0
         hasNPCSpawn: 0
-      - titleText: 
+      - titleText: Market
         subtitleText: 
-        sprite: {fileID: 0}
-        spriteColor: {r: 0, g: 0, b: 0, a: 0}
-        connectedNode: 0
+        sprite: {fileID: 21300000, guid: cece6ab4c4c9f12489f32798fb822cdc, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 3
         isMenu: 0
         hasNPCSpawn: 0
-      - titleText: 
+      - titleText: Choiche
         subtitleText: 
-        sprite: {fileID: 0}
-        spriteColor: {r: 0, g: 0, b: 0, a: 0}
-        connectedNode: 0
+        sprite: {fileID: 21300000, guid: e8f0d9e849c582647a5563841b54427f, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 4
         isMenu: 0
         hasNPCSpawn: 0
-      - titleText: 
+      - titleText: Travel
         subtitleText: 
-        sprite: {fileID: 0}
-        spriteColor: {r: 0, g: 0, b: 0, a: 0}
-        connectedNode: 0
-        isMenu: 0
+        sprite: {fileID: 21300000, guid: 50b520ea761b294419c80f78bb8b22ea, type: 3}
+        spriteColor: {r: 1, g: 1, b: 1, a: 1}
+        connectedNode: 5
+        isMenu: 1
         hasNPCSpawn: 0
     - townNodeName: Home
       townNode: 2

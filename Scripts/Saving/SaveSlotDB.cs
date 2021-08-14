@@ -25,10 +25,7 @@ namespace ButtonGame.Saving
 
         public Dictionary<string, string> GetSaveRecord(string saveFile)
         {
-            if (saveLookup == null)
-            {
-                BuildLookup();
-            }
+            BuildLookup();
 
             if(!saveLookup.ContainsKey(saveFile))
             {
@@ -48,10 +45,7 @@ namespace ButtonGame.Saving
 
         public void AddSaveRecord(string saveFile)
         {
-            if(saveLookup == null)
-            {
-                BuildLookup();
-            }
+            BuildLookup();
 
             ISlotInfo slotInfo = GameObject.FindGameObjectWithTag("Player").GetComponent<ISlotInfo>();
             var state = (Dictionary<string, string>)slotInfo.CaptureState();
@@ -68,36 +62,59 @@ namespace ButtonGame.Saving
             saveLookup[saveFile] = newRecord;
         }
 
+        public void RemoveSaveRecord(string saveFile)
+        {
+            BuildLookup();
+
+            saveLookup.Remove(saveFile);
+        }
+
         private void BuildLookup()
         {
+            if(saveLookup != null) 
+            {
+                // Update record for autosave
+                string[] autoSavePath = Directory.GetFiles(Application.persistentDataPath, "auto.sav");
+                if(autoSavePath.Length > 0)
+                {
+                    BuildSaveRecord(autoSavePath[0]);
+                }
+                return;
+            }
+
             saveLookup = new Dictionary<string, SaveRecord>();
 
             List<string> filePaths = Directory.GetFiles(Application.persistentDataPath, "*.sav").ToList();
             foreach (var filePath in filePaths)
             {
-                string fileName = filePath.Replace(Application.persistentDataPath + "\\", "");
-                fileName = fileName.Replace(".sav", "");
-
-                var stateDict = new Dictionary<string, object>();
-                using (FileStream stream = File.Open(filePath, FileMode.Open))
-                {
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    stateDict = (Dictionary<string, object>)formatter.Deserialize(stream);
-                }
-                
-                stateDict = (Dictionary<string, object>)stateDict["player"];
-                var state = (Dictionary<string, string>)stateDict["ButtonGame.Attributes.PlayerInfo"];
-                SaveRecord saveRecord = new SaveRecord();
-
-                saveRecord.playerName = state["name"];
-                saveRecord.rank = state["rank"];
-                saveRecord.time = state["time"];
-                saveRecord.quest = state["quest"];
-                saveRecord.location = state["location"];
-                saveRecord.scene = state["scene"];
-
-                saveLookup[fileName] = saveRecord;
+                BuildSaveRecord(filePath);
             }
+        }
+
+        private void BuildSaveRecord(string filePath)
+        {
+            string fileName = filePath.Replace(Application.persistentDataPath + "\\", "");
+            fileName = fileName.Replace(".sav", "");
+
+            var stateDict = new Dictionary<string, object>();
+            using (FileStream stream = File.Open(filePath, FileMode.Open))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                stateDict = (Dictionary<string, object>)formatter.Deserialize(stream);
+            }
+
+            stateDict = (Dictionary<string, object>)stateDict["player"];
+            var state = (Dictionary<string, string>)stateDict["ButtonGame.Attributes.PlayerInfo"];
+            SaveRecord saveRecord = new SaveRecord();
+
+            saveRecord.playerName = state["name"];
+            saveRecord.rank = state["rank"];
+            saveRecord.time = state["time"];
+            saveRecord.quest = state["quest"];
+            saveRecord.location = state["location"];
+            saveRecord.scene = state["scene"];
+
+            saveLookup[fileName] = saveRecord;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ButtonGame.Core;
 using ButtonGame.Stats;
 using ButtonGame.Inventories;
 using UnityEngine.UI;
@@ -17,20 +18,55 @@ namespace ButtonGame.UI.Stats
 
         // Cache
         FollowerAttackStats attackStats;
-        string[] skillDescription;
+        string[] skillDescription = null;
 
-        private void OnEnable() 
+        private void Awake() 
         {
-            GameObject follower = GameObject.FindGameObjectWithTag("Follower");
             attackStats = attackDB.GetAttackStat(atkName);
-            if(follower.GetComponent<BaseStats>().GetClass() != attackStats.HealingClass)
-                gameObject.SetActive(false);
+        }
+
+        private void Start()
+        {
+            PopulateSkillInfo();
+        }
+
+        private void PopulateSkillInfo()
+        {
+            attackStats ??= attackDB.GetAttackStat(atkName);
             
-            skillDescription = new string[4];
-            skillDescription[0] = attackStats.Description;
-            skillDescription[1] = "Mana Cost: " + attackStats.Cost.ToString();
-            skillDescription[2] = "Cast Time: " + attackStats.CastTime.ToString();
-            skillDescription[3] = "Cooldown: " + attackStats.Cooldown.ToString();
+            FollowerManager followerManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<FollowerManager>();
+            CharacterClass followerClass;
+            if(followerManager.GetActiveFollowerClass(out followerClass))
+            {
+                if(skillDescription == null)
+                {
+                    skillDescription = new string[4];
+                    skillDescription[0] = attackStats.Description;
+                    skillDescription[1] = "Mana Cost: " + attackStats.Cost.ToString();
+                    skillDescription[2] = "Cast Time: " + attackStats.CastTime.ToString();
+                    skillDescription[3] = "Cooldown: " + attackStats.Cooldown.ToString();
+                }
+
+                ClassSkillCheck(followerClass);
+            }
+        }
+
+        public void RedrawSkillInfo()
+        {
+            PopulateSkillInfo();
+        }
+
+        public void OnFollowerChange(CharacterClass newClass)
+        {
+            ClassSkillCheck(newClass);
+        }
+
+        private void ClassSkillCheck(CharacterClass newClass)
+        {
+            if (newClass != attackStats.HealingClass)
+                gameObject.SetActive(false);
+            else
+                gameObject.SetActive(true);
         }
 
         public int GetSkillDescription()

@@ -76,5 +76,22 @@ namespace ButtonGame.UI.Inventories
                 }
             }
         }
+
+        // PUBLIC
+
+        public void OnFollowerChange()
+        {
+            ButtonGame.Core.FollowerManager followerManager = GameObject.FindWithTag("LevelManager").GetComponent<ButtonGame.Core.FollowerManager>();
+            GameObject followerGO;
+            if(followerManager.GetActiveFollowerObject(out followerGO))
+            {
+                followerEquipment = followerGO.GetComponent<Equipment>();
+                foreach (var inventorySlot in inventorySlotCache)
+                {
+                    var itemUI = inventorySlot.Value;
+                    itemUI.ChangeFollowerEquipment(followerEquipment);
+                }
+            }
+        }
     }
 }

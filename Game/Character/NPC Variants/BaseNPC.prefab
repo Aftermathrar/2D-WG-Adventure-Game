@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyTypeDB: {fileID: 11400000, guid: 771736bdff7e0944d9d0617c46c61b4b, type: 2}
-  charName: 
   baseBody:
     height: 0
     heightScale: 0

@@ -18,7 +18,7 @@ namespace ButtonGame.UI.Inventories
         [SerializeField] EquipLocation equipLocation = EquipLocation.Weapon;
 
         // CACHE
-        Equipment playerEquipment;
+        [SerializeField] Equipment playerEquipment;
         Inventory inventory;
         int index = 0;
 
@@ -26,7 +26,10 @@ namespace ButtonGame.UI.Inventories
 
         private void Start()
         {
-            RedrawUI();
+            if(playerEquipment != null)
+            {
+                RedrawUI();
+            }
         }
 
         // PUBLIC
@@ -36,7 +39,24 @@ namespace ButtonGame.UI.Inventories
             this.inventory = inventory;
             playerEquipment = equipment;
             this.index = index;
-            playerEquipment.equipmentUpdated += RedrawUI;
+            if (playerEquipment != null)
+            {
+                playerEquipment.equipmentUpdated += RedrawUI;
+            }
+        }
+
+        public void OnFollowerChange(Equipment newEquipment)
+        {
+            playerEquipment = newEquipment;
+            if (playerEquipment != null)
+            {
+                playerEquipment.equipmentUpdated += RedrawUI;
+                RedrawUI();
+            }
+            else
+            {
+                playerEquipment.equipmentUpdated -= RedrawUI;
+            }
         }
 
         public EquipLocation GetEquipLocation()

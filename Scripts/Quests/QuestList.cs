@@ -78,9 +78,25 @@ namespace ButtonGame.Quests
             return (status != null && status.IsObjectiveComplete(objective));
         }
 
+        public bool HasObjectiveCompleted(Quest quest, int objectiveIndex)
+        {
+            if(completedQuests.ContainsKey(quest.GetTitle()))
+            {
+                return true;
+            }
+            QuestStatus status = GetQuestStatus(quest);
+            string objective = quest.GetObjective(objectiveIndex);
+            return (status != null && status.IsObjectiveComplete(objective));
+        }
+
         public bool HasQuestCompleted(string questString)
         {
             return completedQuests.ContainsKey(questString);
+        }
+
+        public int GetActiveQuestCount()
+        {
+            return statuses.Count;
         }
 
         private QuestStatus GetQuestStatus(Quest quest)

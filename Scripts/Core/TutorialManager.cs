@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ButtonGame.Attributes;
 using ButtonGame.Character;
 using ButtonGame.Combat;
-using ButtonGame.Dialogue;
+using ButtonGame.Dialogues;
 using ButtonGame.Inventories;
 using ButtonGame.Locations;
 using ButtonGame.Quests;
@@ -25,7 +25,7 @@ namespace ButtonGame.Core
         [SerializeField]
         GameObject questUI;
         [SerializeField]
-        ButtonGame.Dialogue.Dialogue[] dialogues;
+        Dialogue[] dialogues;
         [SerializeField]
         List<EquipableItem> startingGear = new List<EquipableItem>();
         [SerializeField]
@@ -167,7 +167,7 @@ namespace ButtonGame.Core
             battleCounter++;
         }
 
-        public void PauseGame()
+        new public void PauseGame()
         {
             Time.timeScale = 0;
             isPaused = true;
@@ -282,7 +282,7 @@ namespace ButtonGame.Core
             }
         }
 
-        private IEnumerator DelayStartDialogue(float timeDelay, ButtonGame.Dialogue.Dialogue dialogue, int atkIndex)
+        private IEnumerator DelayStartDialogue(float timeDelay, Dialogue dialogue, int atkIndex)
         {
             yield return new WaitForSeconds(timeDelay);
             convo.StartDialogue(dialogue);

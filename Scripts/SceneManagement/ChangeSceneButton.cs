@@ -18,7 +18,7 @@ namespace ButtonGame.SceneManagement
         {
             transform.SetParent(null);
             onSceneChange?.Invoke();
-            locationChangeEvent.RaiseEvent(destination);
+            locationChangeEvent.RaiseEvent(destination);    // Event raised for Location Manager and PlayerInfo
             StartCoroutine(Transition());
         }
 
@@ -26,7 +26,7 @@ namespace ButtonGame.SceneManagement
         {
             transform.SetParent(null);
             onSceneChange?.Invoke();
-            locationChangeEvent.RaiseEvent(destination);
+            locationChangeEvent.RaiseEvent(destination);    // Event raised for Location Manager and PlayerInfo
             StartCoroutine(Transition(saveFile));
         }
 
@@ -37,7 +37,7 @@ namespace ButtonGame.SceneManagement
 
         public void SetDestination(string newDestination)
         {
-            destination = newDestination;
+            destination = newDestination.Replace(" ", "");
         }
 
         private IEnumerator Transition()

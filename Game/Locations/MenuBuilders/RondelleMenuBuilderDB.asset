@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc089fc1df05324486767912929186e, type: 3}
   m_Name: RondelleMenuBuilderDB
   m_EditorClassIdentifier: 
-  menuBuilders: []
+  menuBuilders:
+  - townNodeName: Food Vendor
+    townNode: 10
+    isMerchant: 1
+    menuCategories:
+    - category: Buy
+      menuContents: []

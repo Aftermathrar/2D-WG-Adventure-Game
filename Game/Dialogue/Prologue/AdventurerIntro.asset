@@ -398,18 +398,18 @@ MonoBehaviour:
   isPlayerSpeaking: 0
   speakerName: Mrs. Harnett
   text: '[]I wanted to ask since I had a proposal from the higher ups to go along
-    with your badge. Recently, a new dungeon appeared near Stonebanks, a village
-    a couple of days'' travel from here and within the land of an Earl who serves
-    on the board of directors here.
+    with your badge. Recently, a new dungeon appeared near Rondelle, a village a
+    couple of days'' travel from here and within the land of an Earl who serves on
+    the board of directors here.
 
-    []From his report, it''s a minor mountain
-    dungeon that doesn''t pose much of a threat or have much strategic value. Due
-    to this, the Adventurer''s Guild is hesitant to send personnel until they can
-    get more information on it.
+    []From his report, it''s a minor mountain dungeon
+    that doesn''t pose much of a threat or have much strategic value. Due to this,
+    the Adventurer''s Guild is hesitant to send personnel until they can get more
+    information on it.
 
-    []As you know, to become a member of the Guild,
-    you have to attend one of the recruitment sessions held each season... and the
-    most recent one just passed.'
+    []As you know, to become a member of the Guild, you have
+    to attend one of the recruitment sessions held each season... and the most recent
+    one just passed.'
   children:
   - f6d39eef-b685-46bc-b926-b33ee3170ae8
   - 73b94c04-7eba-4756-9d3d-ac6daab27f36
@@ -478,17 +478,17 @@ MonoBehaviour:
     is definitely a good opportunity. Let me explain what you''ll be doing.
 
     []You
-    need to head out to Stonebanks and give the chief this missive so that he''ll
-    provide you some support if you need it. Then, you just head into the dungeon
-    and defeat the boss. As with the practice dungeons here, you need to eliminate
-    enough of the spawned monsters to disperse enough mana to reveal the boss room.'
+    need to head out to Rondelle and give the chief this missive so that he''ll provide
+    you some support if you need it. Then, you simply head into the dungeon and defeat
+    the boss. As with the practice dungeons here, you need to eliminate the spawned
+    monsters to disperse enough mana to reveal the boss room.'
   children:
   - 0700d072-53d4-4967-a29f-b567b45c529f
   - f02ba797-f575-4d48-820d-1f74ba058035
   rect:
     serializedVersion: 2
-    x: 1914
-    y: 262
+    x: 1915
+    y: 280
     width: 250
     height: 300
   onEnterAction: 0
@@ -578,7 +578,7 @@ MonoBehaviour:
   text: '[]It''s mostly as it seems, although I agree there are a couple suspicious
     points. The academy regularly pulls some strings to grant exceptions to the normal
     recruitment process of the guild, but it''s strange that there hasn''t been more
-    info out of Stonebanks.
+    info out of Rondelle.
 
     []Low-ranking dungeons usually have more information
     coming out of them, it''s strange to not know what monsters have been sighted.

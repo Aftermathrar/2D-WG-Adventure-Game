@@ -13,6 +13,7 @@ namespace ButtonGame.Inventories
         Material,
         Design,
         Treasure,
-        QuestItem
+        QuestItem,
+        Meal
     }
 }

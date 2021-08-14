@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6075927860248373077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 7dad41f4-160f-44b3-8fcb-839c163d8da5
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Guild Receptionist
+  text: Hello, how may I help you today?
+  children:
+  - 807cb572-1696-43e0-adb9-5127dc694378
+  rect:
+    serializedVersion: 2
+    x: 35
+    y: 107
+    width: 250
+    height: 200
+  onEnterAction: 6
+  onEnterActionParameter: []
+  onExitAction: 9
+  onExitActionParameter:
+  - Rondelle
+  - True
+  condition:
+    and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587a94579930f974ea9763a0959d39dc, type: 3}
+  m_Name: GuildIntro
+  m_EditorClassIdentifier: 
+  defaultSpeakerName: Guild Receptionist
+  nodes:
+  - {fileID: -6075927860248373077}
+  - {fileID: 296203307381198597}
+  - {fileID: 3641089323986865407}
+  newNodeOffset: {x: 300, y: 0}
+--- !u!114 &296203307381198597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 807cb572-1696-43e0-adb9-5127dc694378
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  speakerName: Speaker
+  text: Explain quest
+  children:
+  - f2eab9d4-db51-4522-aaf8-8bc1147703f4
+  rect:
+    serializedVersion: 2
+    x: 340
+    y: 126
+    width: 250
+    height: 160
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 2
+  onExitActionParameter:
+  - Setting out
+  - Check in with the Adventurer's Guild
+  condition:
+    and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
+--- !u!114 &3641089323986865407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: f2eab9d4-db51-4522-aaf8-8bc1147703f4
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Guild Receptionist
+  text: I'll prepare the cannon for you.
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 640
+    y: 126
+    width: 250
+    height: 140
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 7
+  onExitActionParameter: []
+  condition:
+    and: []
+  enterActionIndex: 0
+  exitActionIndex: 0

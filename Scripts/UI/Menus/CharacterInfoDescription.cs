@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using ButtonGame.Dialogue;
+using ButtonGame.Dialogues;
 using UnityEngine;
 using TMPro;
+using ButtonGame.Core;
 
 namespace ButtonGame.UI.Menus
 {
@@ -36,6 +37,17 @@ namespace ButtonGame.UI.Menus
 
             string sceneToLoad = "DescriptionTest";
             PopulateDescriptionText(sceneToLoad, character);
+        }
+
+        public void OnFollowerChange()
+        {
+            FollowerManager followerManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<FollowerManager>();
+            GameObject followerGO;
+            if(followerManager.GetActiveFollowerObject(out followerGO))
+            {
+                string sceneToLoad = "DescriptionTest";
+                PopulateDescriptionText(sceneToLoad, followerGO);
+            }
         }
 
         private void PopulateDescriptionText(string sceneToLoad, GameObject character)

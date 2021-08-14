@@ -17,6 +17,7 @@ namespace ButtonGame.Combat
         [SerializeField] AttackType attackType;
         [SerializeField] KeyCode keyCode;
         [SerializeField] AttackDB attackDB = null;
+        protected LevelManager levelManager = null;
         protected BaseAttackStats attackValues = null;
         protected PlayerController player = null;
         protected GuardController guard = null;
@@ -67,6 +68,7 @@ namespace ButtonGame.Combat
 
         protected virtual void Awake()
         {
+            levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
             thisButton = GetComponent<Button>();
             atkIcon = GetComponent<Image>().sprite;
             player = GetComponentInParent<PlayerController>();
@@ -116,7 +118,7 @@ namespace ButtonGame.Combat
 
         public void OnClick()
         {
-            if (target == null || LevelManager.isPaused) return;
+            if (target == null || levelManager.isPaused) return;
 
             if (IsAttackReady() && player.CanAttack(skillPriority) && HasEnoughMana())
             {

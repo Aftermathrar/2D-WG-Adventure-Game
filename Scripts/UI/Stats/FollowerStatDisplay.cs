@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ButtonGame.Core;
 using ButtonGame.Inventories;
 using ButtonGame.Stats;
 using UnityEngine;
@@ -8,35 +9,35 @@ namespace ButtonGame.UI.Stats
 {
     public class FollowerStatDisplay : StatDisplay
     {
+        [SerializeField] FollowerManager followerManager = null;
+
         protected override void Start()
         {
-            statTextLines = GetComponentsInChildren<StatText>();
+            followerManager ??= GameObject.FindGameObjectWithTag("LevelManager").GetComponent<FollowerManager>();
             GetFollowerComponents();
-            RedrawStatDisplay();
 
             characterEquipment.equipmentUpdated += RedrawStatDisplay;
         }
 
         protected override void OnEnable()
         {
-            statTextLines = GetComponentsInChildren<StatText>();
             GetFollowerComponents();
-            RedrawStatDisplay();
         }
 
         private void GetFollowerComponents()
         {
-            GameObject followerGO = GameObject.FindGameObjectWithTag("Follower");
-
-            // disable script updating if no follower found
-            if (followerGO == null)
+            GameObject followerGO;
+            if(followerManager.GetActiveFollowerObject(out followerGO))
             {
-                gameObject.SetActive(false);
-                return;
+                characterEquipment = followerGO.GetComponent<Equipment>();
+                characterStats = followerGO.GetComponent<BaseStats>();
+                RedrawStatDisplay();
             }
+        }
 
-            characterEquipment = followerGO.GetComponent<Equipment>();
-            characterStats = followerGO.GetComponent<BaseStats>();
+        public override void OnEffectChange()
+        {
+            GetFollowerComponents();
         }
     }
 }

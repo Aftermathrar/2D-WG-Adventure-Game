@@ -14,6 +14,7 @@ namespace ButtonGame.Core
         EndBattle,
         PauseBattle,
         ResumeBattle,
-        MoveWindow
+        MoveWindow,
+        LocationAvailable
     }
 }

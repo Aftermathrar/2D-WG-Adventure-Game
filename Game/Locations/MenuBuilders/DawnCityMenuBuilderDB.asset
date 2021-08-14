@@ -91,8 +91,9 @@ MonoBehaviour:
     townNode: 20
     isMerchant: 0
     menuCategories:
-    - category: Meals
-      menuContents: []
+    - category: Buy
+      menuContents:
+      - {fileID: 11400000, guid: 8a27cf2ff22f660448e6724a7b34b84d, type: 2}
   - townNodeName: Bar
     townNode: 21
     isMerchant: 0

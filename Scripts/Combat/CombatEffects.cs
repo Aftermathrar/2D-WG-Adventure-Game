@@ -237,12 +237,23 @@ namespace ButtonGame.Combat
             }
         }
 
-        public void NonCombatBuff(string id)
+        public void BuffItemEffect(string id)
         {
             fxID = id;
             fxName = (EffectName)Enum.Parse(typeof(EffectName), id);
             BuffStat();
-            // RestoreIcons();
+            
+        }
+
+        public void BuffItemEffect(EffectName newFX)
+        {
+            fxID = fxName.ToString();
+            fxName = newFX;
+            BuffStat();
+            float fxDuration = float.Parse(effectDB.GetEffectStat(EffectStat.Duration, fxName));
+            float fillPercent = buffList[fxID][1] / fxDuration;
+            float timeRemaining = fxDuration - buffList[fxID][1];
+            fxIconSpawner.UpdateIconFill(fxID, fillPercent, timeRemaining);
         }
 
         private void RestoreIcons()

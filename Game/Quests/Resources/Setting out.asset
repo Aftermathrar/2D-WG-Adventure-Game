@@ -13,13 +13,31 @@ MonoBehaviour:
   m_Name: Setting out
   m_EditorClassIdentifier: 
   objectives:
-  - description: Travel to Rondelle
+  - description: Check in with the Adventurer's Guild
     completeObjectiveAction: 0
-    parameter: []
-  - description: 
+    parameters:
+    - Click on the Guild button to enter the guild.
+    - Talk to the NPC at the Quest counter to get your adventurer registration.
+    - Stopping by the Guild restaurant afterward will give you a free meal buff.
+  - description: Start travelling to Rondelle
     completeObjectiveAction: 0
-    parameter: []
-  - description: 
+    parameters:
+    - Click on the Travel button to bring up available locations.
+    - When visiting an area for the first time, fast travel is not available.
+    - The distance represents how many enemy encounters are on the path before reaching
+      your destination.
+  - description: Clear enemies in the Small Forest
     completeObjectiveAction: 0
-    parameter: []
-  rewards: []
+    parameters:
+    - Fight enemies consecutively to make progress to your destination.
+    - After the fight, clicking on Rest will refill your HP and MP.
+  - description: Arrive in Rondelle
+    completeObjectiveAction: 0
+    parameters:
+    - After clearing the minimum encounters, choose Reach Destination to arrive in
+      Rondelle.
+  rewards:
+  - number: 1
+    item: {fileID: 11400000, guid: 101e089fed12dc24ca3587ce07e2af10, type: 2}
+  - number: 1
+    item: {fileID: 11400000, guid: c8d7eddae96bbf84ca3b6a57a9c22263, type: 2}

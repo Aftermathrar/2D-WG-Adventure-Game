@@ -62,8 +62,12 @@ namespace ButtonGame.UI.EffectIcon
                 int fxIndex = instance.transform.GetSiblingIndex();
                 for (int i = fxIndex + 1; i < childCount; i++)
                 {
-                    EffectIconImage icon = transform.GetChild(i).GetComponent<EffectIconImage>();
-                    icon.StartCoroutine(icon.MoveHorizontal(iconOffset));
+                    GameObject fxInstance = transform.GetChild(i).gameObject;
+                    if(fxInstance.activeSelf)
+                    {
+                        EffectIconImage icon = fxInstance.GetComponent<EffectIconImage>();
+                        icon.StartCoroutine(icon.MoveHorizontal(iconOffset));
+                    }
                 }
             }
             instance.gameObject.SetActive(false);

@@ -20,26 +20,26 @@ MonoBehaviour:
     isAvailable: 0
     isCombatArea: 1
     hasTraveled: 0
-  - location: 1
+  - location: 2
     name: Dawn City
     description: A sprawling city that is connected to several profitable dungeons
       of varying sizes. Due to this, it acts as one of the main hubs for the Adventurer's
       Guild, since nearly all ranks can find work. Named for the large Magic Academy
       that sees the beginning of many Adventurer's Careers.
-    distance: 0
+    distance: 2
     isAvailable: 1
     isCombatArea: 0
     hasTraveled: 1
-  - location: 2
+  - location: 3
     name: Rondelle
     description: One of many scattered villages in the country of Gaira. Villagers
       live a mostly independent life centered around cultivating and selling plant-based
       foods and herbs not available in dungeons.
     distance: 2
-    isAvailable: 1
+    isAvailable: 0
     isCombatArea: 0
     hasTraveled: 0
-  - location: 3
+  - location: 6
     name: The Rook's Key
     description: Starter dungeon for low-ranked adventurer's. The guild staff must
       enjoy hearing newbies brag that they're heading into the Rook Key Dungeon while
@@ -48,9 +48,17 @@ MonoBehaviour:
     isAvailable: 0
     isCombatArea: 1
     hasTraveled: 0
-  - location: 4
+  - location: 7
     name: Boss Room
     description: Final chamber of the Rookie dungeon.
+    distance: 0
+    isAvailable: 0
+    isCombatArea: 1
+    hasTraveled: 0
+  - location: 8
+    name: Small Forest
+    description: One of several small forests connecting Dawn City to other cities
+      and villages. Filled with low-level monsters that sometimes attack travelers.
     distance: 0
     isAvailable: 0
     isCombatArea: 1

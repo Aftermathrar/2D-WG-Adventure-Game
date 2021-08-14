@@ -22,7 +22,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: eac04e56709acdc4f9a81de8012886b9, type: 3}
   value: 1
   stackable: 0
-  allowedEquipLocation: 15
+  allowedEquipLocation: 7
   equipmentStats:
   - stat: 2
     value: 12

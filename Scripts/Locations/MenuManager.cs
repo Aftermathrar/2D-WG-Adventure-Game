@@ -12,6 +12,7 @@ namespace ButtonGame.Locations
         [SerializeField] LocationMenuDB locationMenuDB;
         [SerializeField] FollowerMenu popupFollowerMenu;
         [SerializeField] NodeMenu popupNodeMenu;
+        [SerializeField] TravelMenu popupTravelMenu;
         [SerializeField] LocationMenuSlotUI[] menuSlots;
         LocationList currentLocation;
         TownNodeList[] connectedNodes;
@@ -44,12 +45,17 @@ namespace ButtonGame.Locations
                     popupFollowerMenu.OpenMenu();
                     return;
                 }
+                else if(connectedNodes[slot] == TownNodeList.Travel)
+                {
+                    popupTravelMenu.OpenMenu();
+                    return;
+                }
                 LocationMenuBuilderDB menuBuilderDB = locationMenuDB.GetMenuBuilderDB(currentLocation);
                 popupNodeMenu.OpenMenu(menuBuilderDB, connectedNodes[slot]);
             }
         }
 
-        public IEnumerable<LocationList> GetLocations()
+        public IEnumerable<LocationList> GetCityLocations()
         {
             foreach (var locationList in locationMenuDB.GetLocations())
             {

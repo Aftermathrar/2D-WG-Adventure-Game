@@ -10,8 +10,13 @@ namespace ButtonGame.UI.Quests
     {
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] TextMeshProUGUI progress;
+        [SerializeField] RectTransform dropdownIcon;
+        [SerializeField] GameObject objectivePrefab;
+        [SerializeField] GameObject incompletePrefab;
+        [SerializeField] Transform objectiveContainer;
 
         QuestStatus status;
+        bool isDropdownFolded = true;
 
         public void Setup(QuestStatus status)
         {
@@ -23,6 +28,47 @@ namespace ButtonGame.UI.Quests
         public QuestStatus GetQuestStatus()
         {
             return status;
+        }
+
+        public bool IsFolded()
+        {
+            return isDropdownFolded;
+        }
+
+        public void FoldoutQuestInfo()
+        {
+            if(isDropdownFolded)
+            {
+                Quest quest = status.GetQuest();
+                foreach (var objective in quest.GetObjectives())
+                {
+                    GameObject prefab = incompletePrefab;
+                    if (status.IsObjectiveComplete(objective))
+                    {
+                        prefab = objectivePrefab;
+                    }
+                    GameObject objectiveInstance = Instantiate(prefab, objectiveContainer);
+                    TextMeshProUGUI objectiveText = objectiveInstance.GetComponentInChildren<TextMeshProUGUI>();
+                    objectiveText.text = objective;
+                    objectiveText.fontSize = 24;
+                }
+            }
+            else
+            {
+                foreach (Transform item in objectiveContainer)
+                {
+                    Destroy(item.gameObject);
+                }
+            }
+
+            RotateDropdownIcon();
+        }
+
+        private void RotateDropdownIcon()
+        {
+            float z = isDropdownFolded ? -90 : 0;
+            dropdownIcon.localRotation = Quaternion.Euler(0, 0, z);
+            isDropdownFolded = !isDropdownFolded;
         }
     }
 }

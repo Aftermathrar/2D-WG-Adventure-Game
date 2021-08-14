@@ -112,15 +112,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3432660273147372359, guid: 5f755fce0f3853a4182a1f9c312f68b3,
+        type: 3}
+      propertyPath: meetingDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: ce7b593eb4777da469e36e04201ca0a8,
+        type: 2}
     - target: {fileID: 3432660273147372376, guid: 5f755fce0f3853a4182a1f9c312f68b3,
         type: 3}
       propertyPath: m_Name
-      value: BaseNPC Variant
+      value: GuildMemberNPC
       objectReference: {fileID: 0}
     - target: {fileID: 5644260934312114035, guid: 5f755fce0f3853a4182a1f9c312f68b3,
         type: 3}
       propertyPath: feedeeClass
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 5778121476511854729, guid: 5f755fce0f3853a4182a1f9c312f68b3,
+        type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: ce7b593eb4777da469e36e04201ca0a8,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f755fce0f3853a4182a1f9c312f68b3, type: 3}

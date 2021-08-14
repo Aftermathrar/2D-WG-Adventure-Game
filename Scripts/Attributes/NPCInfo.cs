@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ButtonGame.Dialogues;
 using ButtonGame.Saving;
 using UnityEngine;
 
@@ -7,13 +8,13 @@ namespace ButtonGame.Attributes
 {
     public class NPCInfo : MonoBehaviour, ISaveable
     {
-        [SerializeField]
-        string npcName;
-        [SerializeField]
-        string npcRank;
-        [SerializeField]
-        string currentQuest;
+        [SerializeField] string npcName;
+        [SerializeField] string npcRank;
+        [SerializeField] string currentQuest;
+        [SerializeField] Dialogue meetingDialogue;
         Dictionary<string, string> infoLookup = null;
+
+        bool hasMet = false;
 
         public Dictionary<string, string> GetCharacterLookup()
         {
@@ -34,6 +35,19 @@ namespace ButtonGame.Attributes
             {
                 infoLookup[key] = newInfo;
                 UpdateProperties();
+            }
+        }
+
+        public void TalkToNPC()
+        {
+            if(hasMet)
+            {
+                Debug.Log("Already met");
+            }
+            else
+            {
+                AIConversant conversant = GameObject.FindWithTag("LevelManager").GetComponent<AIConversant>();
+                conversant.StartDialogue(meetingDialogue);
             }
         }
 

@@ -353,9 +353,9 @@ MonoBehaviour:
   rect:
     serializedVersion: 2
     x: 649
-    y: 260
+    y: 259
     width: 250
-    height: 240
+    height: 280
   descCondition:
     predicate: 4
     descParameters:
@@ -365,6 +365,8 @@ MonoBehaviour:
       text: pretty
     - limit: 0.5
       text: cherubic
+    - limit: 0.75
+      text: soft
     - limit: 1
       text: chubby
 --- !u!114 &5826269078826730435

@@ -17,7 +17,7 @@ namespace ButtonGame.Core.UI.Tooltips
         [SerializeField] protected GameObject tooltipPrefab = null;
 
         // PRIVATE STATE
-        protected GameObject[] tooltips = null;
+        GameObject tooltip = null;
 
         /// <summary>
         /// Called when it is time to update the information on the tooltip
@@ -42,32 +42,29 @@ namespace ButtonGame.Core.UI.Tooltips
             ClearTooltip();
         }
 
-        // private void onDisable()
-        // {
-        //     ClearTooltip();
-        // }
+        private void onDisable()
+        {
+            ClearTooltip();
+        }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             var parentCanvas = GetComponentInParent<Canvas>();
 
-            foreach (GameObject tooltip in tooltips)
+            if (tooltip && !CanCreateTooltip())
             {
-                if (tooltip && !CanCreateTooltip())
-                {
-                    ClearTooltip();
-                }
+                ClearTooltip();
+            }
 
-                if (!tooltip && CanCreateTooltip())
-                {
-                    GameObject tooltipInstance = Instantiate(tooltipPrefab, parentCanvas.transform);
-                }
+            if (!tooltip && CanCreateTooltip())
+            {
+                tooltip = Instantiate(tooltipPrefab, parentCanvas.transform);
+            }
 
-                if (tooltip)
-                {
-                    UpdateTooltip();
-                    PositionTooltip();
-                }
+            if (tooltip)
+            {
+                UpdateTooltip(tooltip);
+                PositionTooltip();
             }
         }
 
@@ -76,21 +73,18 @@ namespace ButtonGame.Core.UI.Tooltips
             // Required to ensure corners are updated by positioning elements.
             Canvas.ForceUpdateCanvases();
 
-            foreach (GameObject tooltip in tooltips)
-            {
-                var tooltipCorners = new Vector3[4];
-                tooltip.GetComponent<RectTransform>().GetWorldCorners(tooltipCorners);
-                var slotCorners = new Vector3[4];
-                GetComponent<RectTransform>().GetWorldCorners(slotCorners);
+            var tooltipCorners = new Vector3[4];
+            tooltip.GetComponent<RectTransform>().GetWorldCorners(tooltipCorners);
+            var slotCorners = new Vector3[4];
+            GetComponent<RectTransform>().GetWorldCorners(slotCorners);
 
-                bool below = transform.position.y > Screen.height / 2;
-                bool right = transform.position.x < Screen.width / 2;
+            bool below = transform.position.y > Screen.height / 2;
+            bool right = transform.position.x < Screen.width / 2;
 
-                int slotCorner = GetCornerIndex(below, right);
-                int tooltipCorner = GetCornerIndex(!below, !right);
+            int slotCorner = GetCornerIndex(below, right);
+            int tooltipCorner = GetCornerIndex(!below, !right);
 
-                tooltip.transform.position = slotCorners[slotCorner] - tooltipCorners[tooltipCorner] + tooltip.transform.position;
-            }
+            tooltip.transform.position = slotCorners[slotCorner] - tooltipCorners[tooltipCorner] + tooltip.transform.position;
         }
 
         private int GetCornerIndex(bool below, bool right)
@@ -99,7 +93,6 @@ namespace ButtonGame.Core.UI.Tooltips
             else if (!below && !right) return 1;
             else if (!below && right) return 2;
             else return 3;
-
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
@@ -109,12 +102,9 @@ namespace ButtonGame.Core.UI.Tooltips
 
         protected virtual void ClearTooltip()
         {
-            if(tooltips.Length > 0)
+            if(tooltip)
             {
-                foreach (GameObject tooltip in tooltips)
-                {
-                    Destroy(tooltip.gameObject);
-                }
+                Destroy(tooltip.gameObject);
             }
         }
     }

@@ -27,7 +27,7 @@ namespace ButtonGame.Quests
         {
             public string description;
             public QuestAction completeObjectiveAction;
-            public List<string> parameter;
+            public List<string> parameters;
         }
 
         public int GetObjectiveCount()
@@ -41,6 +41,24 @@ namespace ButtonGame.Quests
             {
                 yield return objective.description;
             }
+        }
+
+        public string GetObjective(int i)
+        {
+            if(i >= 0 && i < objectives.Count)
+            {
+                return objectives[i].description;
+            }
+            return null;
+        }
+
+        public IEnumerable<string> GetObjectiveParameters(int i)
+        {
+            if(i >= 0 && i < objectives.Count)
+            {
+                return objectives[i].parameters;
+            }
+            return null;
         }
 
         public IEnumerable<Reward> GetRewards()

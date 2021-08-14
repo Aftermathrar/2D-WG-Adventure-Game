@@ -14,9 +14,13 @@ namespace ButtonGame.UI.Stats
         [SerializeField] protected Equipment characterEquipment = null;
         protected StatText[] statTextLines = null;
 
-        protected virtual void Start()
+        private void Awake() 
         {
             statTextLines = GetComponentsInChildren<StatText>();
+        }
+        
+        protected virtual void Start()
+        {
             RedrawStatDisplay();
 
             characterEquipment.equipmentUpdated += RedrawStatDisplay;
@@ -24,7 +28,11 @@ namespace ButtonGame.UI.Stats
 
         protected virtual void OnEnable() 
         {
-            statTextLines = GetComponentsInChildren<StatText>();
+            RedrawStatDisplay();
+        }
+
+        public virtual void OnEffectChange()
+        {
             RedrawStatDisplay();
         }
 

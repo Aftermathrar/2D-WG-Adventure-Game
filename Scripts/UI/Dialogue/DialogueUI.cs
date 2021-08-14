@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ButtonGame.Dialogue;
+using ButtonGame.Dialogues;
 using TMPro;
 using UnityEngine.UI;
 using System;

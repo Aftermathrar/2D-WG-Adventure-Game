@@ -12,7 +12,17 @@ namespace ButtonGame.UI.Menus
         [SerializeField] Image background;
         [SerializeField] GameObject savePanel;
         [SerializeField] TextMeshProUGUI titleText;
-        bool isSaving = true;
+        SaveFunction saveFunction = SaveFunction.Save;
+        bool isSaving = false;
+
+        public event Action onUpdateMenuFunction;
+
+        internal enum SaveFunction
+        {
+            Save,
+            Load,
+            Delete
+        }
 
         private void Awake() 
         {
@@ -26,6 +36,7 @@ namespace ButtonGame.UI.Menus
         {
             background.enabled = true;
             titleText.text = "Save Game";
+            saveFunction = SaveFunction.Save;
             isSaving = true;
             savePanel.SetActive(true);
         }
@@ -34,8 +45,38 @@ namespace ButtonGame.UI.Menus
         {
             background.enabled = true;
             titleText.text = "Load Game";
+            saveFunction = SaveFunction.Load;
             isSaving = false;
             savePanel.SetActive(true);
+        }
+
+        public void Delete()
+        {
+            background.enabled = true;
+            titleText.text = "Delete Saved Game";
+            saveFunction = SaveFunction.Delete;
+            savePanel.SetActive(true);
+            onUpdateMenuFunction?.Invoke();
+        }
+
+        public void CancelDelete()
+        {
+            if(isSaving)
+            {
+                titleText.text = "Save Game";
+                saveFunction = SaveFunction.Save;
+            }
+            else
+            {
+                titleText.text = "Load Game";
+                saveFunction = SaveFunction.Load;
+            }
+            onUpdateMenuFunction?.Invoke();
+        }
+
+        internal SaveFunction GetSaveFunction()
+        {
+            return saveFunction;
         }
 
         internal bool IsSaving()

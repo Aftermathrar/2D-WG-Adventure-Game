@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ButtonGame.Attributes;
 using ButtonGame.Core;
 using ButtonGame.Inventories;
 using ButtonGame.Locations;
@@ -22,6 +23,7 @@ namespace ButtonGame.UI.Menus
         [SerializeField] ItemMenuSlotUI slotPrefab;
         [SerializeField] RectTransform[] menuTabs;
         [SerializeField] TextMeshProUGUI[] tabTexts;
+        [SerializeField] Button[] choiceButtons;
 
         //Cache
         Image[] tabImages;
@@ -79,11 +81,18 @@ namespace ButtonGame.UI.Menus
             node = townNode;
             currentTab = 0;
 
+            // Pull shopkeeper data
             GameObject _feedeeGO = feedeeManager.GetFeedeeAtNode(townNode);
-            npcSlotUI.SlotSetup(_feedeeGO, townNode.ToString());
-            npcInfoDescription.SetCharacterInfo(_feedeeGO);
-            npcSlotButton.onClick.AddListener(() => npcInfoDescription.SetCharacterInfo(_feedeeGO));
+            if(_feedeeGO != null)
+            {
+                npcSlotUI.SlotSetup(_feedeeGO, townNode.ToString());
+                npcInfoDescription.SetCharacterInfo(_feedeeGO);
+                npcSlotButton.onClick.AddListener(() => npcInfoDescription.SetCharacterInfo(_feedeeGO));
+                NPCInfo npcInfo = _feedeeGO.GetComponent<NPCInfo>();
+                choiceButtons[2].onClick.AddListener(() => npcInfo.TalkToNPC());
+            }
             
+            // Label tabs and populate menu items
             SetupMenuTabs();
             slotCoroutine = StartCoroutine(SetupMenuSlots(currentTab));
         }

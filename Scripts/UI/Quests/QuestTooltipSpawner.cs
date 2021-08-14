@@ -8,9 +8,16 @@ namespace ButtonGame.UI.Quests
 {
     public class QuestTooltipSpawner : TooltipSpawner
     {
+        QuestItemUI questItemUI = null;
+
+        private void Awake() 
+        {
+            questItemUI = GetComponent<QuestItemUI>();
+        }
+
         public override bool CanCreateTooltip()
         {
-            return true;
+            return questItemUI.IsFolded();
         }
 
         public override void UpdateTooltip()
@@ -20,7 +27,7 @@ namespace ButtonGame.UI.Quests
 
         public override void UpdateTooltip(GameObject tooltip)
         {
-            QuestStatus status = GetComponent<QuestItemUI>().GetQuestStatus();
+            QuestStatus status = questItemUI.GetQuestStatus();
             tooltip.GetComponent<QuestTooltipUI>().Setup(status);
         }
     }
