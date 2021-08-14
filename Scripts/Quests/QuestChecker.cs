@@ -32,7 +32,9 @@ namespace ButtonGame.Quests
 
         private void CheckQuestTriggers()
         {
+            Debug.Log("Checking quest triggers!!");
             LocationList curLocation = locationManager.GetCurrentLocation();
+            int i = 0;
             foreach (var check in questActionChecks)
             {
                 if(!check.hasTriggered && check.location == curLocation && questList.HasQuest(check.quest)
@@ -43,7 +45,11 @@ namespace ButtonGame.Quests
                         QuestTrigger trigger = check.buttonTrigger.gameObject.AddComponent<QuestTrigger>();
                         trigger.SetQuest(check.quest);
                         trigger.SetObjectiveIndex(check.objective);
-                        check.buttonTrigger.onClick.AddListener(() => trigger.CompleteObjective());
+                        int index = i;
+                        check.buttonTrigger.onClick.AddListener(() => {
+                            trigger.CompleteObjective();
+                            MarkAsTriggered(index);
+                            });
                     }
                     else
                     {
@@ -51,6 +57,7 @@ namespace ButtonGame.Quests
                         activeCheck = check;
                     }
                 }
+                i++;
             }
         }
 
@@ -61,6 +68,11 @@ namespace ButtonGame.Quests
                 activeCheck.hasTriggered = true;
             }
             activeCheck = null;
+        }
+
+        public void MarkAsTriggered(int index)
+        {
+            questActionChecks[index].hasTriggered = true;
         }
 
         public object CaptureState()
@@ -82,7 +94,7 @@ namespace ButtonGame.Quests
                 questActionChecks[i].hasTriggered = hasTriggeredList[i];
             }
 
-            CheckQuestTriggers();
+            Invoke("CheckQuestTriggers", 0);
         }
 
         [System.Serializable]

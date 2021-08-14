@@ -89,7 +89,10 @@ namespace ButtonGame.UI.Menus
                 npcInfoDescription.SetCharacterInfo(_feedeeGO);
                 npcSlotButton.onClick.AddListener(() => npcInfoDescription.SetCharacterInfo(_feedeeGO));
                 NPCInfo npcInfo = _feedeeGO.GetComponent<NPCInfo>();
-                choiceButtons[2].onClick.AddListener(() => npcInfo.TalkToNPC());
+                choiceButtons[0].onClick.AddListener(() => npcInfo.TalkToNPC());
+                choiceButtons[1].interactable = false;
+                choiceButtons[2].interactable = false;
+                choiceButtons[3].interactable = false;
             }
             
             // Label tabs and populate menu items

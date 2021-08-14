@@ -32,6 +32,7 @@ namespace ButtonGame.Core
         protected GameObject enemyGO;
         protected BaseStats[] enemyPrefabs;
         LocationList location;
+        Coroutine introCoroutine = null;
 
         private void Start()
         {
@@ -106,7 +107,7 @@ namespace ButtonGame.Core
             }
 
             // Activate battle
-            StartCoroutine(BeginBattle());
+            introCoroutine = StartCoroutine(BeginBattle());
         }
 
         protected GameObject SpawnNewEnemy()
@@ -214,6 +215,22 @@ namespace ButtonGame.Core
         public void ResumeRestart(CharacterClass enemyName)
         {
             RestartBattle(enemyName);
+        }
+
+        public void DialoguePause()
+        {
+            // Split this function into another method. From dialogue trigger
+            if (introCoroutine != null)
+            {
+                StopCoroutine(introCoroutine);
+            }
+            PauseGame();
+        }
+
+        public void DialogueResume()
+        {
+            UnpauseGame();
+            introCoroutine = StartCoroutine(BeginBattle());
         }
 
         public void StartBattle()

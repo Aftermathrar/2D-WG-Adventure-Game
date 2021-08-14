@@ -20,6 +20,13 @@ MonoBehaviour:
     isAvailable: 0
     isCombatArea: 1
     hasTraveled: 0
+  - location: 1
+    name: Tutorial
+    description: Scripted area to teach basics
+    distance: 0
+    isAvailable: 0
+    isCombatArea: 1
+    hasTraveled: 0
   - location: 2
     name: Dawn City
     description: A sprawling city that is connected to several profitable dungeons

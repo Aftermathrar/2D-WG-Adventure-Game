@@ -18,8 +18,8 @@ namespace ButtonGame.Locations
         List<LocationList> availableLocations = new List<LocationList>();
 
         // Status for Combat ChangeSceneButtons
-        [SerializeField] LocationList previousLocation = LocationList.None;
-        [SerializeField] LocationList travelDestination = LocationList.None;
+        LocationList previousLocation = LocationList.None;
+        LocationList travelDestination = LocationList.None;
         int distanceRemaining = 0;
 
         private void OnEnable()

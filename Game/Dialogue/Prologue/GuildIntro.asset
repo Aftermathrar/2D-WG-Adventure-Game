@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7108356144121098074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: d610663e-fa18-48d8-b75c-4f179fcb5a17
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Guild Receptionist
+  text: Hello, how may I help you today?
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 353
+    y: 78
+    width: 250
+    height: 120
+  onEnterAction: 0
+  onEnterActionParameter: []
+  onExitAction: 0
+  onExitActionParameter: []
+  condition:
+    and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
 --- !u!114 &-6075927860248373077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,16 +43,19 @@ MonoBehaviour:
   m_Name: 7dad41f4-160f-44b3-8fcb-839c163d8da5
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
-  speakerName: Guild Receptionist
-  text: Hello, how may I help you today?
+  speakerName: 
+  text: '[]While the higher ups may have made an exception for you to become an adventurer,
+    it''s not like you know anyone in the guild currently. So, you approach the quest
+    counter and hope the staff will be able to confirm the details of your exchange.'
   children:
   - 807cb572-1696-43e0-adb9-5127dc694378
+  - d610663e-fa18-48d8-b75c-4f179fcb5a17
   rect:
     serializedVersion: 2
     x: 35
     y: 107
     width: 250
-    height: 200
+    height: 290
   onEnterAction: 6
   onEnterActionParameter: []
   onExitAction: 9
@@ -50,6 +83,8 @@ MonoBehaviour:
   - {fileID: -6075927860248373077}
   - {fileID: 296203307381198597}
   - {fileID: 3641089323986865407}
+  - {fileID: -7108356144121098074}
+  - {fileID: 324639516079744836}
   newNodeOffset: {x: 300, y: 0}
 --- !u!114 &296203307381198597
 MonoBehaviour:
@@ -65,21 +100,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 1
   speakerName: Speaker
-  text: Explain quest
+  text: I heard from my professor at the academy that the guild had requested assistance
+    with clearing a dungeon in Rondelle. Do you have information on the quest for
+    that?
   children:
   - f2eab9d4-db51-4522-aaf8-8bc1147703f4
   rect:
     serializedVersion: 2
-    x: 340
-    y: 126
+    x: 357
+    y: 224
     width: 250
-    height: 160
+    height: 220
   onEnterAction: 0
   onEnterActionParameter: []
   onExitAction: 2
   onExitActionParameter:
   - Setting out
   - Check in with the Adventurer's Guild
+  condition:
+    and: []
+  enterActionIndex: 0
+  exitActionIndex: 0
+--- !u!114 &324639516079744836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a091f201fc5190b428d09fd72ba53cbb, type: 3}
+  m_Name: 7609ff01-68da-4a3f-884e-093e4db52055
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  speakerName: Guild Receptionist
+  text: '[]Once you become an adventurer, basic housing and food will be provided
+    for you. While the lowest rank leaves much to be desired on both fronts, just
+    think of it as an incentive to work hard and rank up!
+
+    []To start with, here
+    are a few meals to get you through this special exam. If you need more, you can
+    buy more in the Dining Hall.'
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 949
+    y: 93
+    width: 250
+    height: 335
+  onEnterAction: 3
+  onEnterActionParameter:
+  - ccc4f42d-42a1-4d78-a8c3-4b3ca739ed3f
+  - 3
+  onExitAction: 7
+  onExitActionParameter: []
   condition:
     and: []
   enterActionIndex: 0
@@ -98,17 +173,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
   speakerName: Guild Receptionist
-  text: I'll prepare the cannon for you.
-  children: []
+  text: '[]Ah yes, there were some issues with the reward, so there hasn''t been
+    anyone willing to take the quest. You must be the graduate that volunteered for
+    it, I can set you up with a provisional adventurer''s license, which will let
+    you freely enter and exit the city. Once the dungeon has been cleared and you
+    return with subjugation proof, we can get you an official license.'
+  children:
+  - 7609ff01-68da-4a3f-884e-093e4db52055
   rect:
     serializedVersion: 2
-    x: 640
-    y: 126
+    x: 646
+    y: 130
     width: 250
-    height: 140
+    height: 255
   onEnterAction: 0
   onEnterActionParameter: []
-  onExitAction: 7
+  onExitAction: 0
   onExitActionParameter: []
   condition:
     and: []

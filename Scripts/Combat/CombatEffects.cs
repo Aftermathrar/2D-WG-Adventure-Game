@@ -191,7 +191,7 @@ namespace ButtonGame.Combat
             }
             else
             {
-                fxIconSpawner.Spawn(fxID.ToString(), fxIconCount, fxIconDB.GetSprite(fxName));
+                fxIconSpawner.Spawn(fxID, fxIconCount, fxIconDB.GetSprite(fxName));
                 fxIconCount += 1;
             }
 
@@ -247,7 +247,7 @@ namespace ButtonGame.Combat
 
         public void BuffItemEffect(EffectName newFX)
         {
-            fxID = fxName.ToString();
+            fxID = newFX.ToString();
             fxName = newFX;
             BuffStat();
             float fxDuration = float.Parse(effectDB.GetEffectStat(EffectStat.Duration, fxName));

@@ -31,7 +31,7 @@ namespace ButtonGame.Core
         [SerializeField]
         HitTimerSpawner hitTimerSpawner;
         [SerializeField]
-        EffectIconSpawner effectIconSpawner;
+        CombatEffects combatEffects;
         QuestList questList;
         Health playerHealth;
         Mana playerMana;
@@ -273,7 +273,7 @@ namespace ButtonGame.Core
                 {
                     hitTimerSpawner.ReturnToStack(item.GetComponent<HitTimer>());
                 }
-                effectIconSpawner.DeactivateAllIcons();
+                combatEffects.EndBattle();
                 playerHUD.SetActive(false);
                 playerAtkButtons.SetActive(false);
                 Destroy(enemyGO);

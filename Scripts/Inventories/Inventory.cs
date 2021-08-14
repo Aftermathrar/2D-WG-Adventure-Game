@@ -100,6 +100,16 @@ namespace ButtonGame.Inventories
             money += value;
         }
 
+        public void AddItem(string[] itemParameters)
+        {
+            InventoryItem item = InventoryItem.GetFromID(itemParameters[0]);
+            int amount;
+            if(int.TryParse(itemParameters[1], out amount))
+            {
+                AddToFirstEmptySlot(item, amount);
+            }
+        }
+
         /// <summary>
         /// Is there an instance of the item in the inventory?
         /// </summary>

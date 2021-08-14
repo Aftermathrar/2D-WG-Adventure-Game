@@ -1138,6 +1138,7 @@ MonoBehaviour:
   outroScreen: {fileID: 1836097839}
   postFightButtons: {fileID: 0}
   rewardWindow: {fileID: 1304305108}
+  questWindow: {fileID: 0}
   enemySpawnDB: {fileID: 11400000, guid: 2829bf4d82f1d3a4a954c464db4902eb, type: 2}
   battleStart:
     m_PersistentCalls:
@@ -1175,7 +1176,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b4a991c0124f23648837927b0ad08b3c, type: 2}
   - {fileID: 11400000, guid: 92068fa2faa8fd94a957135977a28eab, type: 2}
   hitTimerSpawner: {fileID: 752114130}
-  effectIconSpawner: {fileID: 3874947614827803762}
+  combatEffects: {fileID: 3874947614827803762}
 --- !u!224 &1978749230 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3874947613725895249, guid: 80d78f949e8a92641823838a2effe131,
@@ -1800,13 +1801,13 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 80d78f949e8a92641823838a2effe131, type: 3}
 --- !u!114 &3874947614827803762 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3619659672787249628, guid: 80d78f949e8a92641823838a2effe131,
+  m_CorrespondingSourceObject: {fileID: 3619659671688917173, guid: 80d78f949e8a92641823838a2effe131,
     type: 3}
   m_PrefabInstance: {fileID: 3874947614827803761}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 134ce31e048043747a34416dad5394d9, type: 3}
+  m_Script: {fileID: 11500000, guid: f6932f2a9cfba62408194fcdf7d8258d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

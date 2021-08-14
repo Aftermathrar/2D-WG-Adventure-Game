@@ -1560,7 +1560,7 @@ PrefabInstance:
     - target: {fileID: 4395956516666840254, guid: 80d78f949e8a92641823838a2effe131,
         type: 3}
       propertyPath: questActionChecks.Array.data[2].objective
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4451924682306893425, guid: 80d78f949e8a92641823838a2effe131,
         type: 3}
@@ -1811,12 +1811,12 @@ PrefabInstance:
     - target: {fileID: 8368676621361534751, guid: 80d78f949e8a92641823838a2effe131,
         type: 3}
       propertyPath: actionTriggerPairs.Array.data[0].onTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PauseGame
+      value: DialoguePause
       objectReference: {fileID: 0}
     - target: {fileID: 8368676621361534751, guid: 80d78f949e8a92641823838a2effe131,
         type: 3}
       propertyPath: actionTriggerPairs.Array.data[1].onTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UnpauseGame
+      value: DialogueResume
       objectReference: {fileID: 0}
     - target: {fileID: 8368676621361534751, guid: 80d78f949e8a92641823838a2effe131,
         type: 3}

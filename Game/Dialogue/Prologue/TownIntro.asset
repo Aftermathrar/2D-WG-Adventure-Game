@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
   speakerName: 
-  text: oi
+  text: Now that you've made it out of the academy and gotten a connection to the
+    Adventurer's Guild, it's time to confirm your task and begin your journey. Click
+    on the Guild button to head into the guild.
   children: []
   rect:
     serializedVersion: 2
-    x: 30
-    y: 192
+    x: 37
+    y: 195
     width: 250
-    height: 160
+    height: 235
   onEnterAction: 6
   onEnterActionParameter: []
   onExitAction: 7
